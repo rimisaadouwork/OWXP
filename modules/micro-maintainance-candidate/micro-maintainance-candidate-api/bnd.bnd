@@ -1,5 +1,5 @@
 Bundle-Version: 1.0.0
-Export-Package: \
+Export-Package:\
 	com.liferay.micro.maintainance.candidate.exception,\
 	com.liferay.micro.maintainance.candidate.model,\
 	com.liferay.micro.maintainance.candidate.service,\

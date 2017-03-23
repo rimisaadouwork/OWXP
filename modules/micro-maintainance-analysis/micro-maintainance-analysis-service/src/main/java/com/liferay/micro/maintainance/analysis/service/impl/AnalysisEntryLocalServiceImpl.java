@@ -14,19 +14,17 @@
 
 package com.liferay.micro.maintainance.analysis.service.impl;
 
-import java.util.Date;
+import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.micro.maintainance.analysis.exception.NoSuchEntryException;
 import com.liferay.micro.maintainance.analysis.model.AnalysisEntry;
 import com.liferay.micro.maintainance.analysis.service.base.AnalysisEntryLocalServiceBaseImpl;
 import com.liferay.micro.maintainance.analysis.service.persistence.AnalysisEntryUtil;
-import com.liferay.micro.maintainance.analysis.exception.NoSuchEntryException;
-import com.liferay.micro.maintainance.candidate.model.CandidateEntry;
-import com.liferay.micro.maintainance.candidate.service.persistence.CandidateEntryUtil;
 import com.liferay.micro.maintainance.util.VotesJSONSerializer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 
-import aQute.bnd.annotation.ProviderType;
+import java.util.Date;
 
 /**
  * The implementation of the analysis entry local service.
@@ -48,24 +46,25 @@ public class AnalysisEntryLocalServiceImpl
 
 	/**
 	 * Adds an analysis entry, which will store the votes
-	 * 
+	 *
 	 * @param userId: the id of the user who flagged the page
-	 * @param canMainId: the id of the CandidateMaintenance entry, in which the
+	 * @param candidateMaintenanceId: the id of the CandidateMaintenance entry, in which the
 	 *   assignment between a task and a candidate is stored.
 	 * @return the AnalysisEntry that was added
 	 * @throws PortalException
 	 */
 	@Override
-	public AnalysisEntry addAnalysisEntry(long userId, long canMainId) 
+	public AnalysisEntry addAnalysisEntry(
+			long userId, long candidateMaintenanceId)
 		throws PortalException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		Date now = new Date();
 
-		long analysisId = counterLocalService.increment();
+		long analysisEntryId = counterLocalService.increment();
 
 		AnalysisEntry analysisEntry = analysisEntryPersistence.create(
-			analysisId);
+			analysisEntryId);
 
 		analysisEntry.setCompanyId(user.getCompanyId());
 		analysisEntry.setUserId(userId);
@@ -74,7 +73,7 @@ public class AnalysisEntryLocalServiceImpl
 		analysisEntry.setModifiedDate(now);
 
 		analysisEntry.setAnalysisData(VotesJSONSerializer.createVotes());
-		analysisEntry.setCanMainId(canMainId);
+		analysisEntry.setCandidateMaintenanceId(candidateMaintenanceId);
 
 		analysisEntryPersistence.update(analysisEntry);
 
@@ -82,11 +81,16 @@ public class AnalysisEntryLocalServiceImpl
 	}
 
 	@Override
-	public AnalysisEntry getAnalysisByCandidateMaintenance(long canMainId) {
+	public AnalysisEntry getAnalysisByCandidateMaintenance(
+		long candidateMaintenanceId) {
+
 		try {
-			return AnalysisEntryUtil.findByCanMainId(canMainId);
-		} catch (NoSuchEntryException e) {
+			return AnalysisEntryUtil.findByCandidateMaintenanceId(
+				candidateMaintenanceId);
+		}
+		catch (NoSuchEntryException nsee) {
 			return null;
 		}
 	}
+
 }

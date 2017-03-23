@@ -3,11 +3,11 @@
 
 <service-builder package-path="com.liferay.micro.maintainance.decision">
 	<namespace>Decision</namespace>
-	<entity name="DecisionEntry" uuid="true" local-service="true" remote-service="true" trash-enabled="false">
+	<entity local-service="true" name="DecisionEntry" remote-service="true" trash-enabled="false" uuid="true">
 
 		<!-- PK fields -->
 
-		<column name="decisionId" type="long" primary="true" />
+		<column name="decisionEntryId" primary="true" type="long" />
 
 		<!-- Audit fields -->
 
@@ -33,11 +33,14 @@
 
 		<!-- Finder methods -->
 
-		<finder name="DecisionId" return-type="Collection">
-			<finder-column name="decisionId" />
-		</finder>
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
+		</finder>
+		<finder name="DecisionEntryId" return-type="Collection">
+			<finder-column name="decisionEntryId" />
+		</finder>
+		<finder name="Outcome" return-type="Collection">
+			<finder-column name="outcome" />
 		</finder>
 		<finder name="WikiPageId" return-type="Collection">
 			<finder-column name="wikiPageId" />
@@ -45,23 +48,24 @@
 		<finder name="WikiPageName" return-type="Collection">
 			<finder-column name="wikiPageName" />
 		</finder>
-		<finder name="Outcome" return-type="Collection">
-			<finder-column name="outcome" />
+		<finder name="C_H" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="handled" />
 		</finder>
 		<finder name="D_C" return-type="Collection">
-			<finder-column name="decisionId" />
+			<finder-column name="decisionEntryId" />
 			<finder-column name="companyId" />
 		</finder>
 		<finder name="D_H" return-type="Collection">
-			<finder-column name="decisionId" />
+			<finder-column name="decisionEntryId" />
 			<finder-column name="handled" />
 		</finder>
 		<finder name="D_U" return-type="Collection">
-			<finder-column name="decisionId" />
+			<finder-column name="decisionEntryId" />
 			<finder-column name="userId" />
 		</finder>
 		<finder name="D_U_C" return-type="Collection">
-			<finder-column name="decisionId" />
+			<finder-column name="decisionEntryId" />
 			<finder-column name="userId" />
 			<finder-column name="companyId" />
 		</finder>
@@ -72,15 +76,10 @@
 		<finder name="U_H_D" return-type="Collection">
 			<finder-column name="userId" />
 			<finder-column name="handled" />
-			<finder-column name="decisionId" />
+			<finder-column name="decisionEntryId" />
 		</finder>
-		<finder name="C_H" return-type="Collection">
-			<finder-column name="companyId" />
-			<finder-column name="handled" />
-		</finder>
-
 	</entity>
-	
+
 	<exceptions>
 	</exceptions>
 </service-builder>

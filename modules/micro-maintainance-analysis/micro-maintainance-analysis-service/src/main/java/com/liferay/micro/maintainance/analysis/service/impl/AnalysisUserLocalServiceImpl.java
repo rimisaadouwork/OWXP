@@ -14,14 +14,14 @@
 
 package com.liferay.micro.maintainance.analysis.service.impl;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.micro.maintainance.analysis.exception.NoSuchUserException;
 import com.liferay.micro.maintainance.analysis.model.AnalysisUser;
 import com.liferay.micro.maintainance.analysis.service.base.AnalysisUserLocalServiceBaseImpl;
 import com.liferay.micro.maintainance.analysis.service.persistence.AnalysisUserUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
-
-import aQute.bnd.annotation.ProviderType;
 
 /**
  * The implementation of the analysis user local service.
@@ -45,7 +45,8 @@ public class AnalysisUserLocalServiceImpl
 	 * Adds a user's vote to an analysis
 	 */
 	@Override
-	public AnalysisUser addAnalysisUser(long analysisId, long userId, int vote)
+	public AnalysisUser addAnalysisUser(
+			long analysisEntryId, long userId, int vote)
 		throws PortalException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -55,7 +56,7 @@ public class AnalysisUserLocalServiceImpl
 		AnalysisUser analysisUser = analysisUserPersistence.create(
 			analysisUserId);
 
-		analysisUser.setAnalysisId(analysisId);
+		analysisUser.setAnalysisEntryId(analysisEntryId);
 		analysisUser.setUserId(userId);
 		analysisUser.setUserName(user.getFullName());
 		analysisUser.setVoted(vote);
@@ -66,11 +67,13 @@ public class AnalysisUserLocalServiceImpl
 	}
 
 	@Override
-	public AnalysisUser getAnalysisUser(long analysisId, long userId) {
+	public AnalysisUser getAnalysisUser(long analysisEntryId, long userId) {
 		try {
-			return AnalysisUserUtil.findByA_U(analysisId, userId);
-		} catch (NoSuchUserException e) {
+			return AnalysisUserUtil.findByA_U(analysisEntryId, userId);
+		}
+		catch (NoSuchUserException nsue) {
 			return null;
 		}
 	}
+
 }

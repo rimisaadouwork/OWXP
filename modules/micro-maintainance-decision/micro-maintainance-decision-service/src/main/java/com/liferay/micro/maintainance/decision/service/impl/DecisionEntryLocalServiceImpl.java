@@ -14,7 +14,7 @@
 
 package com.liferay.micro.maintainance.decision.service.impl;
 
-import java.util.Date;
+import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.micro.maintainance.candidate.model.CandidateEntry;
 import com.liferay.micro.maintainance.candidate.service.CandidateEntryLocalServiceUtil;
@@ -25,7 +25,7 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.wiki.model.WikiPage;
 import com.liferay.wiki.service.WikiPageLocalServiceUtil;
 
-import aQute.bnd.annotation.ProviderType;
+import java.util.Date;
 
 /**
  * The implementation of the decision entry local service.
@@ -47,10 +47,10 @@ public class DecisionEntryLocalServiceImpl
 
 	/**
 	 * Adds the results of an analysis to the database
-	 * 
+	 *
 	 * @param userId: the id of the user who flagged the page
 	 * @param analysisData: the gathered votes
-	 * @param candidateId: the id of the candidate entry belonging to the
+	 * @param candidateEntryId: the id of the candidate entry belonging to the
 	 *   flagged wiki page
 	 * @param outcome: the actions to be taken
 	 * @param handled: indicates if the actions could be executed
@@ -59,21 +59,22 @@ public class DecisionEntryLocalServiceImpl
 	 */
 	@Override
 	public DecisionEntry addDecisionEntry(
-			long userId, String analysisData, long candidateId, String outcome,
-			boolean handled) 
+			long userId, String analysisData, long candidateEntryId,
+			String outcome, boolean handled)
 		throws PortalException {
-		
+
 		User user = userPersistence.findByPrimaryKey(userId);
-		long decisionId = counterLocalService.increment();
+		long decisionEntryId = counterLocalService.increment();
 		Date now = new Date();
 
-		DecisionEntry decision = decisionEntryPersistence.create(decisionId);
-		
-		CandidateEntry candidate = 
-			CandidateEntryLocalServiceUtil.getCandidateEntry(candidateId);
+		DecisionEntry decision = decisionEntryPersistence.create(
+			decisionEntryId);
 
-		WikiPage wikiPage = 
-			WikiPageLocalServiceUtil.getPageByPageId(candidate.getWikiPageId());
+		CandidateEntry candidate =
+			CandidateEntryLocalServiceUtil.getCandidateEntry(candidateEntryId);
+
+		WikiPage wikiPage = WikiPageLocalServiceUtil.getPageByPageId(
+			candidate.getWikiPageId());
 
 		decision.setCompanyId(user.getCompanyId());
 		decision.setUserId(userId);
@@ -89,4 +90,5 @@ public class DecisionEntryLocalServiceImpl
 
 		return decision;
 	}
+
 }

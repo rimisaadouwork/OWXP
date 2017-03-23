@@ -3,11 +3,43 @@
 
 <service-builder package-path="com.liferay.micro.maintainance.task">
 	<namespace>Task</namespace>
-	<entity name="TaskEntry" uuid="true" local-service="true" remote-service="true" trash-enabled="false">
+		<entity local-service="true" name="CandidateMaintenance" remote-service="true" trash-enabled="false" uuid="true">
 
 		<!-- PK fields -->
 
-		<column name="taskId" type="long" primary="true" />
+		<column name="candidateMaintenanceId" primary="true" type="long" />
+
+		<!-- Other fields -->
+
+		<column name="candidateEntryId" type="long" />
+		<column name="taskEntryId" type="long" />
+		<column name="createDate" type="Date" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="createDate" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="CandidateEntryIds" return-type="Collection">
+			<finder-column name="candidateEntryId" />
+		</finder>
+		<finder name="TaskEntryIds" return-type="Collection">
+			<finder-column name="taskEntryId" />
+		</finder>
+		<finder name="C_T" return-type="CandidateMaintenance">
+			<finder-column name="candidateEntryId" />
+			<finder-column name="taskEntryId" />
+		</finder>
+	</entity>
+
+	<entity local-service="true" name="TaskEntry" remote-service="true" trash-enabled="false" uuid="true">
+
+		<!-- PK fields -->
+
+		<column name="taskEntryId" primary="true" type="long" />
 
 		<!-- Audit fields -->
 
@@ -15,48 +47,21 @@
 
 		<!-- Other fields -->
 
-		<column name="taskName" type="String" />
+		<column name="taskEntryName" type="String" />
 
 		<!-- Order -->
 
 		<order by="asc">
-			<order-column name="taskName" />
+			<order-column name="taskEntryName" />
 		</order>
 
 		<!-- Finder methods -->
 
 		<finder name="TasksById" return-type="TaskEntry">
-			<finder-column name="taskId" />
+			<finder-column name="taskEntryId" />
 		</finder>
 		<finder name="TasksByName" return-type="TaskEntry">
-			<finder-column name="taskName" />
-		</finder>
-
-	</entity>
-
-	<entity name="CandidateMaintenance" uuid="true" local-service="true" remote-service="true" trash-enabled="false">
-
-		<!-- PK fields -->
-
-		<column name="candidateMaintenanceId" type="long" primary="true" />
-
-		<!-- Other fields -->
-
-		<column name="candidateId" type="long" />
-		<column name="taskId" type="long" />
-		<column name="createDate" type="Date" />
-
-		<!-- Finder methods -->
-
-		<finder name="CandidateIds" return-type="Collection">
-			<finder-column name="candidateId" />
-		</finder>
-		<finder name="TaskIds" return-type="Collection">
-			<finder-column name="taskId" />
-		</finder>
-		<finder name="C_T" return-type="CandidateMaintenance">
-			<finder-column name="candidateId" />
-			<finder-column name="taskId" />
+			<finder-column name="taskEntryName" />
 		</finder>
 	</entity>
 

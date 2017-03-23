@@ -34,7 +34,8 @@ import com.liferay.micro.maintainance.decision.service.base.DecisionEntryService
  */
 @ProviderType
 public class DecisionEntryServiceImpl extends DecisionEntryServiceBaseImpl {
-	/*
+
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this class directly. Always use {@link com.liferay.micro.maintainance.decision.service.DecisionEntryServiceUtil} to access the decision entry remote service.

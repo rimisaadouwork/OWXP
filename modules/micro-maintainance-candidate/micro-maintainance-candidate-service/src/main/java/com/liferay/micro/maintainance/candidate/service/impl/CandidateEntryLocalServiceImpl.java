@@ -14,10 +14,7 @@
 
 package com.liferay.micro.maintainance.candidate.service.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.micro.maintainance.analysis.model.AnalysisEntry;
 import com.liferay.micro.maintainance.analysis.service.AnalysisEntryLocalServiceUtil;
@@ -25,19 +22,14 @@ import com.liferay.micro.maintainance.candidate.exception.NoSuchEntryException;
 import com.liferay.micro.maintainance.candidate.model.CandidateEntry;
 import com.liferay.micro.maintainance.candidate.service.base.CandidateEntryLocalServiceBaseImpl;
 import com.liferay.micro.maintainance.candidate.service.persistence.CandidateEntryUtil;
-import com.liferay.micro.maintainance.task.Task;
-import com.liferay.micro.maintainance.task.TaskHandler;
-import com.liferay.micro.maintainance.task.exception.NoSuchCandidateMaintenanceException;
 import com.liferay.micro.maintainance.task.model.CandidateMaintenance;
 import com.liferay.micro.maintainance.task.service.CandidateMaintenanceLocalServiceUtil;
-import com.liferay.micro.maintainance.task.service.persistence.CandidateMaintenanceUtil;
-import com.liferay.micro.maintainance.task.service.persistence.TaskEntryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 
-import aQute.bnd.annotation.ProviderType;
+import java.util.Date;
 
 /**
  * The implementation of the candidate entry local service.
@@ -59,81 +51,87 @@ public class CandidateEntryLocalServiceImpl
 
 	/**
 	 * Upon flagging a wiki page for a certain maintenance task this method
-	 * creates a candidate entry, belonging to the page, in the database. 
+	 * creates a candidate entry, belonging to the page, in the database.
 	 * It also creates an AnalysisEntry element, in which the current status of
 	 * the voting is stored, and a CandidateMaintenance element, which binds the
 	 * task and the candidate together.
-	 * 
+	 *
 	 * @param userId: the id of the user who flagged the page
 	 * @param groupId: the id of the group to which the wiki page belongs
 	 * @param wikiPageId: the id of the flagged wiki page
-	 * @param taskId: the id of the maintenance task for which the page is 
-	 * flagged 
+	 * @param taskId: the id of the maintenance task for which the page is
+	 * flagged
 	 * @return the CandidateEntry that was added
 	 * @throws PortalException
 	 */
 	@Override
 	public CandidateEntry addCandidateEntry(
-			long userId, long groupId, long wikiPageId, long taskId) 
+			long userId, long groupId, long wikiPageId, long taskId)
 		throws PortalException {
-		
+
 		User user = userPersistence.findByPrimaryKey(userId);
-		long candidateId = counterLocalService.increment();
+		long candidateEntryId = counterLocalService.increment();
 		Date now = new Date();
 
-		CandidateEntry candidate = candidateEntryPersistence.create(candidateId);
+		CandidateEntry candidateEntry = candidateEntryPersistence.create(
+			candidateEntryId);
 
-		candidate.setGroupId(groupId);
+		candidateEntry.setGroupId(groupId);
 
-		candidate.setCompanyId(user.getCompanyId());
-		candidate.setUserId(userId);
-		candidate.setUserName(user.getFullName());
-		candidate.setCreateDate(now);
-		candidate.setModifiedDate(now);
+		candidateEntry.setCompanyId(user.getCompanyId());
+		candidateEntry.setUserId(userId);
+		candidateEntry.setUserName(user.getFullName());
+		candidateEntry.setCreateDate(now);
+		candidateEntry.setModifiedDate(now);
 
-		candidate.setWikiPageId(wikiPageId);
+		candidateEntry.setWikiPageId(wikiPageId);
 
-		candidateEntryPersistence.update(candidate);
+		candidateEntryPersistence.update(candidateEntry);
 
-		CandidateMaintenance canMain = CandidateMaintenanceLocalServiceUtil
-			.addCandidateMaintenance(candidateId, taskId);
+		CandidateMaintenance candidateMaintenance =
+			CandidateMaintenanceLocalServiceUtil.addCandidateMaintenance(
+				candidateEntryId, taskId);
 
-		AnalysisEntry analysisEntry = AnalysisEntryLocalServiceUtil
-			.addAnalysisEntry(userId, canMain.getCandidateMaintenanceId());
+		AnalysisEntry analysisEntry =
+			AnalysisEntryLocalServiceUtil.addAnalysisEntry(
+				userId, candidateMaintenance.getCandidateMaintenanceId());
 
-		return candidate;
+		return candidateEntry;
 	}
 
 	/**
 	 * Deletes the candidate entry, with the given primary key from the
-	 * database. 
+	 * database.
 	 *
-	 * @param entryId the primary key of the candidate entry
+	 * @param candidateEntryId the primary key of the candidate entry
 	 * @return the candidate entry that was removed
 	 * @throws PortalException if there are still votes running on the candidate
-	 * 
+	 *
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public CandidateEntry deleteCandidateEntry(long entryId)
+	public CandidateEntry deleteCandidateEntry(long candidateEntryId)
 		throws PortalException {
 
-		long canMainCount = CandidateMaintenanceLocalServiceUtil
-			.getCandidateMaintenaceTasksCount(entryId);
+		long candidateMaintenanceCount =
+			CandidateMaintenanceLocalServiceUtil
+				.getCandidateMaintenaceTasksCountByCandidate(candidateEntryId);
 
-		if (canMainCount > 0) {
+		if (candidateMaintenanceCount > 0) {
 			throw new PortalException();
 		}
 
-		return candidateEntryPersistence.remove(entryId);
+		return candidateEntryPersistence.remove(candidateEntryId);
 	}
 
 	@Override
 	public CandidateEntry getCandidateByWikiPageId(long wikiPageId) {
 		try {
 			return CandidateEntryUtil.findByWikiPageId(wikiPageId);
-		} catch (NoSuchEntryException e) {
+		}
+		catch (NoSuchEntryException nsee) {
 			return null;
 		}
 	}
+
 }

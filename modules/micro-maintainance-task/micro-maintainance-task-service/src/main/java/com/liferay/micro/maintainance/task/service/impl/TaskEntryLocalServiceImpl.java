@@ -14,8 +14,7 @@
 
 package com.liferay.micro.maintainance.task.service.impl;
 
-import java.util.Date;
-import java.util.List;
+import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.micro.maintainance.task.exception.NoSuchEntryException;
 import com.liferay.micro.maintainance.task.model.CandidateMaintenance;
@@ -26,11 +25,9 @@ import com.liferay.micro.maintainance.task.service.persistence.TaskEntryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
-import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
-import com.liferay.portal.kernel.service.UserLocalServiceUtil;
-import com.liferay.portal.kernel.util.Validator;
 
-import aQute.bnd.annotation.ProviderType;
+import java.util.Date;
+import java.util.List;
 
 /**
  * The implementation of the task entry local service.
@@ -50,23 +47,21 @@ import aQute.bnd.annotation.ProviderType;
 public class TaskEntryLocalServiceImpl extends TaskEntryLocalServiceBaseImpl {
 
 	/**
-	 * Upon deploying a task module, this method adds entry for it to the 
+	 * Upon deploying a task module, this method adds entry for it to the
 	 * database as registration.
-	 * 
-	 * @param taskName
+	 *
+	 * @param taskEntryName
 	 * @return the TaskEntry that was added
 	 * @throws PortalException
 	 */
 	@Override
-	public TaskEntry addTaskEntry(String taskName) 
-		throws PortalException {
-
-		long taskId = counterLocalService.increment();
+	public TaskEntry addTaskEntry(String taskEntryName) throws PortalException {
+		long taskEntryId = counterLocalService.increment();
 		Date now = new Date();
 
-		TaskEntry taskEntry = taskEntryPersistence.create(taskId);
+		TaskEntry taskEntry = taskEntryPersistence.create(taskEntryId);
 
-		taskEntry.setTaskName(taskName);
+		taskEntry.setTaskEntryName(taskEntryName);
 		taskEntry.setCreateDate(now);
 
 		taskEntryPersistence.update(taskEntry);
@@ -76,34 +71,37 @@ public class TaskEntryLocalServiceImpl extends TaskEntryLocalServiceBaseImpl {
 
 	/**
 	 * Deletes the task entry with the primary key from the database. Also
-	 * invokes the deletion of all the running votes for this maintenance task. 
+	 * invokes the deletion of all the running votes for this maintenance task.
 	 *
-	 * @param taskId the primary key of the task entry
+	 * @param taskEntryId the primary key of the task entry
 	 * @return the task entry that was removed
 	 * @throws PortalException
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public TaskEntry deleteTaskEntry(long taskId) throws PortalException {
-		
-		List<CandidateMaintenance> canMainTasks = 
-			CandidateMaintenanceLocalServiceUtil.getMaintenaceTasks(taskId);
-
-		for (CandidateMaintenance canMaintask : canMainTasks) {
+	public TaskEntry deleteTaskEntry(long taskEntryId) throws PortalException {
+		List<CandidateMaintenance> candidateMaintenanceTasks =
 			CandidateMaintenanceLocalServiceUtil
-				.deleteCandidateMaintenance(
-					canMaintask.getCandidateMaintenanceId());
+				.getCandidateMaintenaceTasksByTask(taskEntryId);
+
+		for (CandidateMaintenance candidateMaintenanceTask :
+				candidateMaintenanceTasks) {
+
+			CandidateMaintenanceLocalServiceUtil.deleteCandidateMaintenance(
+				candidateMaintenanceTask.getCandidateMaintenanceId());
 		}
 
-		return taskEntryPersistence.remove(taskId);
+		return taskEntryPersistence.remove(taskEntryId);
 	}
 
 	@Override
-	public TaskEntry getTaskEntryByName(String taskName) {
+	public TaskEntry getTaskEntryByName(String taskEntryName) {
 		try {
-			return TaskEntryUtil.findByTasksByName(taskName);
-		} catch (NoSuchEntryException e) {
+			return TaskEntryUtil.findByTasksByName(taskEntryName);
+		}
+		catch (NoSuchEntryException nsee) {
 			return null;
 		}
 	}
+
 }

@@ -3,11 +3,11 @@
 
 <service-builder package-path="com.liferay.micro.maintainance.analysis">
 	<namespace>Analysis</namespace>
-	<entity name="AnalysisEntry" uuid="true" local-service="true" remote-service="true" trash-enabled="false">
+	<entity local-service="true" name="AnalysisEntry" remote-service="true" trash-enabled="false" uuid="true">
 
 		<!-- PK fields -->
 
-		<column name="analysisId" type="long" primary="true" />
+		<column name="analysisEntryId" primary="true" type="long" />
 
 		<!-- Audit fields -->
 
@@ -19,7 +19,7 @@
 
 		<!-- Other fields -->
 
-		<column name="canMainId" type="long" />
+		<column name="candidateMaintenanceId" type="long" />
 		<column name="analysisData" type="String" />
 
 		<!-- Order -->
@@ -30,31 +30,31 @@
 
 		<!-- Finder methods -->
 
-		<finder name="AnalysisId" return-type="AnalysisEntry">
-			<finder-column name="analysisId" />
+		<finder name="AnalysisEntryId" return-type="AnalysisEntry">
+			<finder-column name="analysisEntryId" />
+		</finder>
+		<finder name="A_C" return-type="Collection">
+			<finder-column name="analysisEntryId" />
+			<finder-column name="companyId" />
+		</finder>
+
+		<finder name="A_CM" return-type="Collection">
+			<finder-column name="analysisEntryId" />
+			<finder-column name="candidateMaintenanceId" />
+		</finder>
+		<finder name="A_U_CM" return-type="Collection">
+			<finder-column name="analysisEntryId" />
+			<finder-column name="userId" />
+			<finder-column name="candidateMaintenanceId" />
+		</finder>
+		<finder name="CandidateMaintenanceId" return-type="AnalysisEntry">
+			<finder-column name="candidateMaintenanceId" />
 		</finder>
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
-		<finder name="CanMainId" return-type="AnalysisEntry">
-			<finder-column name="canMainId" />
-		</finder>
-		<finder name="A_C" return-type="Collection">
-			<finder-column name="analysisId" />
-			<finder-column name="companyId" />
-		</finder>
-		
-		<finder name="A_CM" return-type="Collection">
-			<finder-column name="analysisId" />
-			<finder-column name="canMainId" />
-		</finder>
-		<finder name="A_U_CM" return-type="Collection">
-			<finder-column name="analysisId" />
-			<finder-column name="userId" />
-			<finder-column name="canMainId" />
-		</finder>
 		<finder name="CM_U" return-type="Collection">
-			<finder-column name="canMainId" />
+			<finder-column name="candidateMaintenanceId" />
 			<finder-column name="userId" />
 		</finder>
 		<finder name="C_U" return-type="Collection">
@@ -65,18 +65,17 @@
 			<finder-column name="userId" />
 			<finder-column name="createDate" />
 		</finder>
-
 	</entity>
 
-	<entity name="AnalysisUser" uuid="true" local-service="true" remote-service="true" trash-enabled="false">
+	<entity local-service="true" name="AnalysisUser" remote-service="true" trash-enabled="false" uuid="true">
 
 		<!-- PK fields -->
 
-		<column name="analysisUserId" type="long" primary="true" />
+		<column name="analysisUserId" primary="true" type="long" />
 
 		<!-- Other fields -->
 
-		<column name="analysisId" type="long" />
+		<column name="analysisEntryId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="voted" type="int" />
@@ -89,8 +88,8 @@
 
 		<!-- Finder methods -->
 
-		<finder name="AnalysisId" return-type="Collection">
-			<finder-column name="analysisId" />
+		<finder name="AnalysisEntryId" return-type="Collection">
+			<finder-column name="analysisEntryId" />
 		</finder>
 		<finder name="UserId" return-type="Collection">
 			<finder-column name="userId" />
@@ -98,15 +97,15 @@
 		<finder name="UserName" return-type="Collection">
 			<finder-column name="userName" />
 		</finder>
-		<finder name="A_U" return-type="AnalysisUser">
-			<finder-column name="analysisId" />
-			<finder-column name="userId" />
-		</finder>
 		<finder name="AU" return-type="AnalysisUser">
 			<finder-column name="analysisUserId" />
 		</finder>
+		<finder name="A_U" return-type="AnalysisUser">
+			<finder-column name="analysisEntryId" />
+			<finder-column name="userId" />
+		</finder>
 		<finder name="Voted" return-type="Collection">
-			<finder-column name="analysisId" />
+			<finder-column name="analysisEntryId" />
 			<finder-column name="voted" />
 		</finder>
 	</entity>

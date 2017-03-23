@@ -1,5 +1,5 @@
 Bundle-Version: 1.0.0
-Export-Package: \
+Export-Package:\
 	com.liferay.micro.maintainance.decision.exception,\
 	com.liferay.micro.maintainance.decision.model,\
 	com.liferay.micro.maintainance.decision.service,\

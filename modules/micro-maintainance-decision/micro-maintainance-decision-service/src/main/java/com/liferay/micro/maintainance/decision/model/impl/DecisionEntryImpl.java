@@ -27,11 +27,13 @@ import aQute.bnd.annotation.ProviderType;
  */
 @ProviderType
 public class DecisionEntryImpl extends DecisionEntryBaseImpl {
-	/*
+
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this class directly. All methods that expect a decision entry model instance should use the {@link com.liferay.micro.maintainance.decision.model.DecisionEntry} interface instead.
 	 */
 	public DecisionEntryImpl() {
 	}
+
 }

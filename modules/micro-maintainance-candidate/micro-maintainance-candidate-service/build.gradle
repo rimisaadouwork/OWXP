@@ -8,15 +8,16 @@ buildscript {
 
 
 dependencies {
-	compile group: "com.liferay", name: "com.liferay.wiki.api", version: "2.2.0"
-	compile group: "com.liferay", name: "com.liferay.wiki.service", version: "1.2.0"
-	compile 'biz.aQute.bnd:biz.aQute.bndlib:3.1.0'
-	compile 'com.liferay:com.liferay.portal.spring.extender:2.0.0'
-	compile 'com.liferay:com.liferay.osgi.util:3.0.0'
-	compile project(':modules:micro-maintainance-candidate:micro-maintainance-candidate-api')
-	compile project(':modules:micro-maintainance-task:micro-maintainance-task-api')
 	compile  project(':modules:micro-maintainance-analysis:micro-maintainance-analysis-api')
 	compile  project(':modules:micro-maintainance-portlet')
+	compile 'biz.aQute.bnd:biz.aQute.bndlib:3.1.0'
+	compile 'com.liferay:com.liferay.osgi.util:3.0.0'
+	compile 'com.liferay:com.liferay.portal.spring.extender:2.0.0'
+	compile group: "com.liferay", name: "com.liferay.wiki.api", version: "2.2.0"
+	compile group: "com.liferay", name: "com.liferay.wiki.service", version: "1.2.0"
+	compile project(':modules:micro-maintainance-candidate:micro-maintainance-candidate-api')
+	compile project(':modules:micro-maintainance-task:micro-maintainance-task-api')
+
 	testCompile 'com.liferay:com.liferay.arquillian.extension.junit.bridge:1.0.0-SNAPSHOT'
 	testCompile 'junit:junit:4.+'
 }
