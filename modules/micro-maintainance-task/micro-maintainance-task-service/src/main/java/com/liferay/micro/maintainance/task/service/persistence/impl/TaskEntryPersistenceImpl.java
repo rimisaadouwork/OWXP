@@ -100,7 +100,7 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByUuid",
 			new String[] { String.class.getName() },
 			TaskEntryModelImpl.UUID_COLUMN_BITMASK |
-			TaskEntryModelImpl.TASKNAME_COLUMN_BITMASK);
+			TaskEntryModelImpl.TASKENTRYNAME_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_UUID = new FinderPath(TaskEntryModelImpl.ENTITY_CACHE_ENABLED,
 			TaskEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUuid",
@@ -392,17 +392,17 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 	/**
 	 * Returns the task entries before and after the current task entry in the ordered set where uuid = &#63;.
 	 *
-	 * @param taskId the primary key of the current task entry
+	 * @param taskEntryId the primary key of the current task entry
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next task entry
 	 * @throws NoSuchEntryException if a task entry with the primary key could not be found
 	 */
 	@Override
-	public TaskEntry[] findByUuid_PrevAndNext(long taskId, String uuid,
+	public TaskEntry[] findByUuid_PrevAndNext(long taskEntryId, String uuid,
 		OrderByComparator<TaskEntry> orderByComparator)
 		throws NoSuchEntryException {
-		TaskEntry taskEntry = findByPrimaryKey(taskId);
+		TaskEntry taskEntry = findByPrimaryKey(taskEntryId);
 
 		Session session = null;
 
@@ -634,30 +634,31 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 			TaskEntryModelImpl.FINDER_CACHE_ENABLED, TaskEntryImpl.class,
 			FINDER_CLASS_NAME_ENTITY, "fetchByTasksById",
 			new String[] { Long.class.getName() },
-			TaskEntryModelImpl.TASKID_COLUMN_BITMASK);
+			TaskEntryModelImpl.TASKENTRYID_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_TASKSBYID = new FinderPath(TaskEntryModelImpl.ENTITY_CACHE_ENABLED,
 			TaskEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByTasksById",
 			new String[] { Long.class.getName() });
 
 	/**
-	 * Returns the task entry where taskId = &#63; or throws a {@link NoSuchEntryException} if it could not be found.
+	 * Returns the task entry where taskEntryId = &#63; or throws a {@link NoSuchEntryException} if it could not be found.
 	 *
-	 * @param taskId the task ID
+	 * @param taskEntryId the task entry ID
 	 * @return the matching task entry
 	 * @throws NoSuchEntryException if a matching task entry could not be found
 	 */
 	@Override
-	public TaskEntry findByTasksById(long taskId) throws NoSuchEntryException {
-		TaskEntry taskEntry = fetchByTasksById(taskId);
+	public TaskEntry findByTasksById(long taskEntryId)
+		throws NoSuchEntryException {
+		TaskEntry taskEntry = fetchByTasksById(taskEntryId);
 
 		if (taskEntry == null) {
 			StringBundler msg = new StringBundler(4);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("taskId=");
-			msg.append(taskId);
+			msg.append("taskEntryId=");
+			msg.append(taskEntryId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -672,26 +673,27 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 	}
 
 	/**
-	 * Returns the task entry where taskId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the task entry where taskEntryId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param taskId the task ID
+	 * @param taskEntryId the task entry ID
 	 * @return the matching task entry, or <code>null</code> if a matching task entry could not be found
 	 */
 	@Override
-	public TaskEntry fetchByTasksById(long taskId) {
-		return fetchByTasksById(taskId, true);
+	public TaskEntry fetchByTasksById(long taskEntryId) {
+		return fetchByTasksById(taskEntryId, true);
 	}
 
 	/**
-	 * Returns the task entry where taskId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the task entry where taskEntryId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param taskId the task ID
+	 * @param taskEntryId the task entry ID
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching task entry, or <code>null</code> if a matching task entry could not be found
 	 */
 	@Override
-	public TaskEntry fetchByTasksById(long taskId, boolean retrieveFromCache) {
-		Object[] finderArgs = new Object[] { taskId };
+	public TaskEntry fetchByTasksById(long taskEntryId,
+		boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { taskEntryId };
 
 		Object result = null;
 
@@ -703,7 +705,7 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 		if (result instanceof TaskEntry) {
 			TaskEntry taskEntry = (TaskEntry)result;
 
-			if ((taskId != taskEntry.getTaskId())) {
+			if ((taskEntryId != taskEntry.getTaskEntryId())) {
 				result = null;
 			}
 		}
@@ -713,7 +715,7 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 
 			query.append(_SQL_SELECT_TASKENTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_TASKSBYID_TASKID_2);
+			query.append(_FINDER_COLUMN_TASKSBYID_TASKENTRYID_2);
 
 			String sql = query.toString();
 
@@ -726,7 +728,7 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(taskId);
+				qPos.add(taskEntryId);
 
 				List<TaskEntry> list = q.list();
 
@@ -748,7 +750,7 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 
 					cacheResult(taskEntry);
 
-					if ((taskEntry.getTaskId() != taskId)) {
+					if ((taskEntry.getTaskEntryId() != taskEntryId)) {
 						finderCache.putResult(FINDER_PATH_FETCH_BY_TASKSBYID,
 							finderArgs, taskEntry);
 					}
@@ -774,29 +776,30 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 	}
 
 	/**
-	 * Removes the task entry where taskId = &#63; from the database.
+	 * Removes the task entry where taskEntryId = &#63; from the database.
 	 *
-	 * @param taskId the task ID
+	 * @param taskEntryId the task entry ID
 	 * @return the task entry that was removed
 	 */
 	@Override
-	public TaskEntry removeByTasksById(long taskId) throws NoSuchEntryException {
-		TaskEntry taskEntry = findByTasksById(taskId);
+	public TaskEntry removeByTasksById(long taskEntryId)
+		throws NoSuchEntryException {
+		TaskEntry taskEntry = findByTasksById(taskEntryId);
 
 		return remove(taskEntry);
 	}
 
 	/**
-	 * Returns the number of task entries where taskId = &#63;.
+	 * Returns the number of task entries where taskEntryId = &#63;.
 	 *
-	 * @param taskId the task ID
+	 * @param taskEntryId the task entry ID
 	 * @return the number of matching task entries
 	 */
 	@Override
-	public int countByTasksById(long taskId) {
+	public int countByTasksById(long taskEntryId) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_TASKSBYID;
 
-		Object[] finderArgs = new Object[] { taskId };
+		Object[] finderArgs = new Object[] { taskEntryId };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -805,7 +808,7 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 
 			query.append(_SQL_COUNT_TASKENTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_TASKSBYID_TASKID_2);
+			query.append(_FINDER_COLUMN_TASKSBYID_TASKENTRYID_2);
 
 			String sql = query.toString();
 
@@ -818,7 +821,7 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(taskId);
+				qPos.add(taskEntryId);
 
 				count = (Long)q.uniqueResult();
 
@@ -837,36 +840,36 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_TASKSBYID_TASKID_2 = "taskEntry.taskId = ?";
+	private static final String _FINDER_COLUMN_TASKSBYID_TASKENTRYID_2 = "taskEntry.taskEntryId = ?";
 	public static final FinderPath FINDER_PATH_FETCH_BY_TASKSBYNAME = new FinderPath(TaskEntryModelImpl.ENTITY_CACHE_ENABLED,
 			TaskEntryModelImpl.FINDER_CACHE_ENABLED, TaskEntryImpl.class,
 			FINDER_CLASS_NAME_ENTITY, "fetchByTasksByName",
 			new String[] { String.class.getName() },
-			TaskEntryModelImpl.TASKNAME_COLUMN_BITMASK);
+			TaskEntryModelImpl.TASKENTRYNAME_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_TASKSBYNAME = new FinderPath(TaskEntryModelImpl.ENTITY_CACHE_ENABLED,
 			TaskEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByTasksByName",
 			new String[] { String.class.getName() });
 
 	/**
-	 * Returns the task entry where taskName = &#63; or throws a {@link NoSuchEntryException} if it could not be found.
+	 * Returns the task entry where taskEntryName = &#63; or throws a {@link NoSuchEntryException} if it could not be found.
 	 *
-	 * @param taskName the task name
+	 * @param taskEntryName the task entry name
 	 * @return the matching task entry
 	 * @throws NoSuchEntryException if a matching task entry could not be found
 	 */
 	@Override
-	public TaskEntry findByTasksByName(String taskName)
+	public TaskEntry findByTasksByName(String taskEntryName)
 		throws NoSuchEntryException {
-		TaskEntry taskEntry = fetchByTasksByName(taskName);
+		TaskEntry taskEntry = fetchByTasksByName(taskEntryName);
 
 		if (taskEntry == null) {
 			StringBundler msg = new StringBundler(4);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("taskName=");
-			msg.append(taskName);
+			msg.append("taskEntryName=");
+			msg.append(taskEntryName);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -881,27 +884,27 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 	}
 
 	/**
-	 * Returns the task entry where taskName = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the task entry where taskEntryName = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param taskName the task name
+	 * @param taskEntryName the task entry name
 	 * @return the matching task entry, or <code>null</code> if a matching task entry could not be found
 	 */
 	@Override
-	public TaskEntry fetchByTasksByName(String taskName) {
-		return fetchByTasksByName(taskName, true);
+	public TaskEntry fetchByTasksByName(String taskEntryName) {
+		return fetchByTasksByName(taskEntryName, true);
 	}
 
 	/**
-	 * Returns the task entry where taskName = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the task entry where taskEntryName = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param taskName the task name
+	 * @param taskEntryName the task entry name
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching task entry, or <code>null</code> if a matching task entry could not be found
 	 */
 	@Override
-	public TaskEntry fetchByTasksByName(String taskName,
+	public TaskEntry fetchByTasksByName(String taskEntryName,
 		boolean retrieveFromCache) {
-		Object[] finderArgs = new Object[] { taskName };
+		Object[] finderArgs = new Object[] { taskEntryName };
 
 		Object result = null;
 
@@ -913,7 +916,7 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 		if (result instanceof TaskEntry) {
 			TaskEntry taskEntry = (TaskEntry)result;
 
-			if (!Objects.equals(taskName, taskEntry.getTaskName())) {
+			if (!Objects.equals(taskEntryName, taskEntry.getTaskEntryName())) {
 				result = null;
 			}
 		}
@@ -923,18 +926,18 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 
 			query.append(_SQL_SELECT_TASKENTRY_WHERE);
 
-			boolean bindTaskName = false;
+			boolean bindTaskEntryName = false;
 
-			if (taskName == null) {
-				query.append(_FINDER_COLUMN_TASKSBYNAME_TASKNAME_1);
+			if (taskEntryName == null) {
+				query.append(_FINDER_COLUMN_TASKSBYNAME_TASKENTRYNAME_1);
 			}
-			else if (taskName.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_TASKSBYNAME_TASKNAME_3);
+			else if (taskEntryName.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_TASKSBYNAME_TASKENTRYNAME_3);
 			}
 			else {
-				bindTaskName = true;
+				bindTaskEntryName = true;
 
-				query.append(_FINDER_COLUMN_TASKSBYNAME_TASKNAME_2);
+				query.append(_FINDER_COLUMN_TASKSBYNAME_TASKENTRYNAME_2);
 			}
 
 			String sql = query.toString();
@@ -948,8 +951,8 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (bindTaskName) {
-					qPos.add(taskName);
+				if (bindTaskEntryName) {
+					qPos.add(taskEntryName);
 				}
 
 				List<TaskEntry> list = q.list();
@@ -972,8 +975,8 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 
 					cacheResult(taskEntry);
 
-					if ((taskEntry.getTaskName() == null) ||
-							!taskEntry.getTaskName().equals(taskName)) {
+					if ((taskEntry.getTaskEntryName() == null) ||
+							!taskEntry.getTaskEntryName().equals(taskEntryName)) {
 						finderCache.putResult(FINDER_PATH_FETCH_BY_TASKSBYNAME,
 							finderArgs, taskEntry);
 					}
@@ -999,30 +1002,30 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 	}
 
 	/**
-	 * Removes the task entry where taskName = &#63; from the database.
+	 * Removes the task entry where taskEntryName = &#63; from the database.
 	 *
-	 * @param taskName the task name
+	 * @param taskEntryName the task entry name
 	 * @return the task entry that was removed
 	 */
 	@Override
-	public TaskEntry removeByTasksByName(String taskName)
+	public TaskEntry removeByTasksByName(String taskEntryName)
 		throws NoSuchEntryException {
-		TaskEntry taskEntry = findByTasksByName(taskName);
+		TaskEntry taskEntry = findByTasksByName(taskEntryName);
 
 		return remove(taskEntry);
 	}
 
 	/**
-	 * Returns the number of task entries where taskName = &#63;.
+	 * Returns the number of task entries where taskEntryName = &#63;.
 	 *
-	 * @param taskName the task name
+	 * @param taskEntryName the task entry name
 	 * @return the number of matching task entries
 	 */
 	@Override
-	public int countByTasksByName(String taskName) {
+	public int countByTasksByName(String taskEntryName) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_TASKSBYNAME;
 
-		Object[] finderArgs = new Object[] { taskName };
+		Object[] finderArgs = new Object[] { taskEntryName };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1031,18 +1034,18 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 
 			query.append(_SQL_COUNT_TASKENTRY_WHERE);
 
-			boolean bindTaskName = false;
+			boolean bindTaskEntryName = false;
 
-			if (taskName == null) {
-				query.append(_FINDER_COLUMN_TASKSBYNAME_TASKNAME_1);
+			if (taskEntryName == null) {
+				query.append(_FINDER_COLUMN_TASKSBYNAME_TASKENTRYNAME_1);
 			}
-			else if (taskName.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_TASKSBYNAME_TASKNAME_3);
+			else if (taskEntryName.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_TASKSBYNAME_TASKENTRYNAME_3);
 			}
 			else {
-				bindTaskName = true;
+				bindTaskEntryName = true;
 
-				query.append(_FINDER_COLUMN_TASKSBYNAME_TASKNAME_2);
+				query.append(_FINDER_COLUMN_TASKSBYNAME_TASKENTRYNAME_2);
 			}
 
 			String sql = query.toString();
@@ -1056,8 +1059,8 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (bindTaskName) {
-					qPos.add(taskName);
+				if (bindTaskEntryName) {
+					qPos.add(taskEntryName);
 				}
 
 				count = (Long)q.uniqueResult();
@@ -1077,9 +1080,9 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_TASKSBYNAME_TASKNAME_1 = "taskEntry.taskName IS NULL";
-	private static final String _FINDER_COLUMN_TASKSBYNAME_TASKNAME_2 = "taskEntry.taskName = ?";
-	private static final String _FINDER_COLUMN_TASKSBYNAME_TASKNAME_3 = "(taskEntry.taskName IS NULL OR taskEntry.taskName = '')";
+	private static final String _FINDER_COLUMN_TASKSBYNAME_TASKENTRYNAME_1 = "taskEntry.taskEntryName IS NULL";
+	private static final String _FINDER_COLUMN_TASKSBYNAME_TASKENTRYNAME_2 = "taskEntry.taskEntryName = ?";
+	private static final String _FINDER_COLUMN_TASKSBYNAME_TASKENTRYNAME_3 = "(taskEntry.taskEntryName IS NULL OR taskEntry.taskEntryName = '')";
 
 	public TaskEntryPersistenceImpl() {
 		setModelClass(TaskEntry.class);
@@ -1096,10 +1099,10 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 			TaskEntryImpl.class, taskEntry.getPrimaryKey(), taskEntry);
 
 		finderCache.putResult(FINDER_PATH_FETCH_BY_TASKSBYID,
-			new Object[] { taskEntry.getTaskId() }, taskEntry);
+			new Object[] { taskEntry.getTaskEntryId() }, taskEntry);
 
 		finderCache.putResult(FINDER_PATH_FETCH_BY_TASKSBYNAME,
-			new Object[] { taskEntry.getTaskName() }, taskEntry);
+			new Object[] { taskEntry.getTaskEntryName() }, taskEntry);
 
 		taskEntry.resetOriginalValues();
 	}
@@ -1172,14 +1175,14 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 	protected void cacheUniqueFindersCache(
 		TaskEntryModelImpl taskEntryModelImpl, boolean isNew) {
 		if (isNew) {
-			Object[] args = new Object[] { taskEntryModelImpl.getTaskId() };
+			Object[] args = new Object[] { taskEntryModelImpl.getTaskEntryId() };
 
 			finderCache.putResult(FINDER_PATH_COUNT_BY_TASKSBYID, args,
 				Long.valueOf(1));
 			finderCache.putResult(FINDER_PATH_FETCH_BY_TASKSBYID, args,
 				taskEntryModelImpl);
 
-			args = new Object[] { taskEntryModelImpl.getTaskName() };
+			args = new Object[] { taskEntryModelImpl.getTaskEntryName() };
 
 			finderCache.putResult(FINDER_PATH_COUNT_BY_TASKSBYNAME, args,
 				Long.valueOf(1));
@@ -1189,7 +1192,7 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 		else {
 			if ((taskEntryModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_TASKSBYID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] { taskEntryModelImpl.getTaskId() };
+				Object[] args = new Object[] { taskEntryModelImpl.getTaskEntryId() };
 
 				finderCache.putResult(FINDER_PATH_COUNT_BY_TASKSBYID, args,
 					Long.valueOf(1));
@@ -1199,7 +1202,9 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 
 			if ((taskEntryModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_TASKSBYNAME.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] { taskEntryModelImpl.getTaskName() };
+				Object[] args = new Object[] {
+						taskEntryModelImpl.getTaskEntryName()
+					};
 
 				finderCache.putResult(FINDER_PATH_COUNT_BY_TASKSBYNAME, args,
 					Long.valueOf(1));
@@ -1211,27 +1216,27 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 
 	protected void clearUniqueFindersCache(
 		TaskEntryModelImpl taskEntryModelImpl) {
-		Object[] args = new Object[] { taskEntryModelImpl.getTaskId() };
+		Object[] args = new Object[] { taskEntryModelImpl.getTaskEntryId() };
 
 		finderCache.removeResult(FINDER_PATH_COUNT_BY_TASKSBYID, args);
 		finderCache.removeResult(FINDER_PATH_FETCH_BY_TASKSBYID, args);
 
 		if ((taskEntryModelImpl.getColumnBitmask() &
 				FINDER_PATH_FETCH_BY_TASKSBYID.getColumnBitmask()) != 0) {
-			args = new Object[] { taskEntryModelImpl.getOriginalTaskId() };
+			args = new Object[] { taskEntryModelImpl.getOriginalTaskEntryId() };
 
 			finderCache.removeResult(FINDER_PATH_COUNT_BY_TASKSBYID, args);
 			finderCache.removeResult(FINDER_PATH_FETCH_BY_TASKSBYID, args);
 		}
 
-		args = new Object[] { taskEntryModelImpl.getTaskName() };
+		args = new Object[] { taskEntryModelImpl.getTaskEntryName() };
 
 		finderCache.removeResult(FINDER_PATH_COUNT_BY_TASKSBYNAME, args);
 		finderCache.removeResult(FINDER_PATH_FETCH_BY_TASKSBYNAME, args);
 
 		if ((taskEntryModelImpl.getColumnBitmask() &
 				FINDER_PATH_FETCH_BY_TASKSBYNAME.getColumnBitmask()) != 0) {
-			args = new Object[] { taskEntryModelImpl.getOriginalTaskName() };
+			args = new Object[] { taskEntryModelImpl.getOriginalTaskEntryName() };
 
 			finderCache.removeResult(FINDER_PATH_COUNT_BY_TASKSBYNAME, args);
 			finderCache.removeResult(FINDER_PATH_FETCH_BY_TASKSBYNAME, args);
@@ -1241,15 +1246,15 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 	/**
 	 * Creates a new task entry with the primary key. Does not add the task entry to the database.
 	 *
-	 * @param taskId the primary key for the new task entry
+	 * @param taskEntryId the primary key for the new task entry
 	 * @return the new task entry
 	 */
 	@Override
-	public TaskEntry create(long taskId) {
+	public TaskEntry create(long taskEntryId) {
 		TaskEntry taskEntry = new TaskEntryImpl();
 
 		taskEntry.setNew(true);
-		taskEntry.setPrimaryKey(taskId);
+		taskEntry.setPrimaryKey(taskEntryId);
 
 		String uuid = PortalUUIDUtil.generate();
 
@@ -1261,13 +1266,13 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 	/**
 	 * Removes the task entry with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param taskId the primary key of the task entry
+	 * @param taskEntryId the primary key of the task entry
 	 * @return the task entry that was removed
 	 * @throws NoSuchEntryException if a task entry with the primary key could not be found
 	 */
 	@Override
-	public TaskEntry remove(long taskId) throws NoSuchEntryException {
-		return remove((Serializable)taskId);
+	public TaskEntry remove(long taskEntryId) throws NoSuchEntryException {
+		return remove((Serializable)taskEntryId);
 	}
 
 	/**
@@ -1424,9 +1429,9 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 		taskEntryImpl.setPrimaryKey(taskEntry.getPrimaryKey());
 
 		taskEntryImpl.setUuid(taskEntry.getUuid());
-		taskEntryImpl.setTaskId(taskEntry.getTaskId());
+		taskEntryImpl.setTaskEntryId(taskEntry.getTaskEntryId());
 		taskEntryImpl.setCreateDate(taskEntry.getCreateDate());
-		taskEntryImpl.setTaskName(taskEntry.getTaskName());
+		taskEntryImpl.setTaskEntryName(taskEntry.getTaskEntryName());
 
 		return taskEntryImpl;
 	}
@@ -1458,13 +1463,14 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 	/**
 	 * Returns the task entry with the primary key or throws a {@link NoSuchEntryException} if it could not be found.
 	 *
-	 * @param taskId the primary key of the task entry
+	 * @param taskEntryId the primary key of the task entry
 	 * @return the task entry
 	 * @throws NoSuchEntryException if a task entry with the primary key could not be found
 	 */
 	@Override
-	public TaskEntry findByPrimaryKey(long taskId) throws NoSuchEntryException {
-		return findByPrimaryKey((Serializable)taskId);
+	public TaskEntry findByPrimaryKey(long taskEntryId)
+		throws NoSuchEntryException {
+		return findByPrimaryKey((Serializable)taskEntryId);
 	}
 
 	/**
@@ -1518,12 +1524,12 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 	/**
 	 * Returns the task entry with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param taskId the primary key of the task entry
+	 * @param taskEntryId the primary key of the task entry
 	 * @return the task entry, or <code>null</code> if a task entry with the primary key could not be found
 	 */
 	@Override
-	public TaskEntry fetchByPrimaryKey(long taskId) {
-		return fetchByPrimaryKey((Serializable)taskId);
+	public TaskEntry fetchByPrimaryKey(long taskEntryId) {
+		return fetchByPrimaryKey((Serializable)taskEntryId);
 	}
 
 	@Override
@@ -1839,7 +1845,7 @@ public class TaskEntryPersistenceImpl extends BasePersistenceImpl<TaskEntry>
 	@ServiceReference(type = FinderCache.class)
 	protected FinderCache finderCache;
 	private static final String _SQL_SELECT_TASKENTRY = "SELECT taskEntry FROM TaskEntry taskEntry";
-	private static final String _SQL_SELECT_TASKENTRY_WHERE_PKS_IN = "SELECT taskEntry FROM TaskEntry taskEntry WHERE taskId IN (";
+	private static final String _SQL_SELECT_TASKENTRY_WHERE_PKS_IN = "SELECT taskEntry FROM TaskEntry taskEntry WHERE taskEntryId IN (";
 	private static final String _SQL_SELECT_TASKENTRY_WHERE = "SELECT taskEntry FROM TaskEntry taskEntry WHERE ";
 	private static final String _SQL_COUNT_TASKENTRY = "SELECT COUNT(taskEntry) FROM TaskEntry taskEntry";
 	private static final String _SQL_COUNT_TASKENTRY_WHERE = "SELECT COUNT(taskEntry) FROM TaskEntry taskEntry WHERE ";

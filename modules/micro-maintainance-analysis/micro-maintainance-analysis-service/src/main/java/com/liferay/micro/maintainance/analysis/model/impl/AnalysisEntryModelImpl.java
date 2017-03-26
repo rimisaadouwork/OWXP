@@ -75,30 +75,30 @@ public class AnalysisEntryModelImpl extends BaseModelImpl<AnalysisEntry>
 	public static final String TABLE_NAME = "Analysis_AnalysisEntry";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", Types.VARCHAR },
-			{ "analysisId", Types.BIGINT },
+			{ "analysisEntryId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
-			{ "canMainId", Types.BIGINT },
+			{ "candidateMaintenanceId", Types.BIGINT },
 			{ "analysisData", Types.VARCHAR }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
 	static {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("analysisId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("analysisEntryId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
-		TABLE_COLUMNS_MAP.put("canMainId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("candidateMaintenanceId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("analysisData", Types.VARCHAR);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table Analysis_AnalysisEntry (uuid_ VARCHAR(75) null,analysisId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,canMainId LONG,analysisData VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table Analysis_AnalysisEntry (uuid_ VARCHAR(75) null,analysisEntryId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,candidateMaintenanceId LONG,analysisData VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Analysis_AnalysisEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY analysisEntry.createDate ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Analysis_AnalysisEntry.createDate ASC";
@@ -114,8 +114,8 @@ public class AnalysisEntryModelImpl extends BaseModelImpl<AnalysisEntry>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.micro.maintainance.analysis.service.util.PropsUtil.get(
 				"value.object.column.bitmask.enabled.com.liferay.micro.maintainance.analysis.model.AnalysisEntry"),
 			true);
-	public static final long ANALYSISID_COLUMN_BITMASK = 1L;
-	public static final long CANMAINID_COLUMN_BITMASK = 2L;
+	public static final long ANALYSISENTRYID_COLUMN_BITMASK = 1L;
+	public static final long CANDIDATEMAINTENANCEID_COLUMN_BITMASK = 2L;
 	public static final long COMPANYID_COLUMN_BITMASK = 4L;
 	public static final long CREATEDATE_COLUMN_BITMASK = 8L;
 	public static final long USERID_COLUMN_BITMASK = 16L;
@@ -135,13 +135,13 @@ public class AnalysisEntryModelImpl extends BaseModelImpl<AnalysisEntry>
 		AnalysisEntry model = new AnalysisEntryImpl();
 
 		model.setUuid(soapModel.getUuid());
-		model.setAnalysisId(soapModel.getAnalysisId());
+		model.setAnalysisEntryId(soapModel.getAnalysisEntryId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setCanMainId(soapModel.getCanMainId());
+		model.setCandidateMaintenanceId(soapModel.getCandidateMaintenanceId());
 		model.setAnalysisData(soapModel.getAnalysisData());
 
 		return model;
@@ -175,17 +175,17 @@ public class AnalysisEntryModelImpl extends BaseModelImpl<AnalysisEntry>
 
 	@Override
 	public long getPrimaryKey() {
-		return _analysisId;
+		return _analysisEntryId;
 	}
 
 	@Override
 	public void setPrimaryKey(long primaryKey) {
-		setAnalysisId(primaryKey);
+		setAnalysisEntryId(primaryKey);
 	}
 
 	@Override
 	public Serializable getPrimaryKeyObj() {
-		return _analysisId;
+		return _analysisEntryId;
 	}
 
 	@Override
@@ -208,13 +208,13 @@ public class AnalysisEntryModelImpl extends BaseModelImpl<AnalysisEntry>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
-		attributes.put("analysisId", getAnalysisId());
+		attributes.put("analysisEntryId", getAnalysisEntryId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("canMainId", getCanMainId());
+		attributes.put("candidateMaintenanceId", getCandidateMaintenanceId());
 		attributes.put("analysisData", getAnalysisData());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
@@ -231,10 +231,10 @@ public class AnalysisEntryModelImpl extends BaseModelImpl<AnalysisEntry>
 			setUuid(uuid);
 		}
 
-		Long analysisId = (Long)attributes.get("analysisId");
+		Long analysisEntryId = (Long)attributes.get("analysisEntryId");
 
-		if (analysisId != null) {
-			setAnalysisId(analysisId);
+		if (analysisEntryId != null) {
+			setAnalysisEntryId(analysisEntryId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -267,10 +267,11 @@ public class AnalysisEntryModelImpl extends BaseModelImpl<AnalysisEntry>
 			setModifiedDate(modifiedDate);
 		}
 
-		Long canMainId = (Long)attributes.get("canMainId");
+		Long candidateMaintenanceId = (Long)attributes.get(
+				"candidateMaintenanceId");
 
-		if (canMainId != null) {
-			setCanMainId(canMainId);
+		if (candidateMaintenanceId != null) {
+			setCandidateMaintenanceId(candidateMaintenanceId);
 		}
 
 		String analysisData = (String)attributes.get("analysisData");
@@ -306,25 +307,25 @@ public class AnalysisEntryModelImpl extends BaseModelImpl<AnalysisEntry>
 
 	@JSON
 	@Override
-	public long getAnalysisId() {
-		return _analysisId;
+	public long getAnalysisEntryId() {
+		return _analysisEntryId;
 	}
 
 	@Override
-	public void setAnalysisId(long analysisId) {
-		_columnBitmask |= ANALYSISID_COLUMN_BITMASK;
+	public void setAnalysisEntryId(long analysisEntryId) {
+		_columnBitmask |= ANALYSISENTRYID_COLUMN_BITMASK;
 
-		if (!_setOriginalAnalysisId) {
-			_setOriginalAnalysisId = true;
+		if (!_setOriginalAnalysisEntryId) {
+			_setOriginalAnalysisEntryId = true;
 
-			_originalAnalysisId = _analysisId;
+			_originalAnalysisEntryId = _analysisEntryId;
 		}
 
-		_analysisId = analysisId;
+		_analysisEntryId = analysisEntryId;
 	}
 
-	public long getOriginalAnalysisId() {
-		return _originalAnalysisId;
+	public long getOriginalAnalysisEntryId() {
+		return _originalAnalysisEntryId;
 	}
 
 	@JSON
@@ -445,25 +446,25 @@ public class AnalysisEntryModelImpl extends BaseModelImpl<AnalysisEntry>
 
 	@JSON
 	@Override
-	public long getCanMainId() {
-		return _canMainId;
+	public long getCandidateMaintenanceId() {
+		return _candidateMaintenanceId;
 	}
 
 	@Override
-	public void setCanMainId(long canMainId) {
-		_columnBitmask |= CANMAINID_COLUMN_BITMASK;
+	public void setCandidateMaintenanceId(long candidateMaintenanceId) {
+		_columnBitmask |= CANDIDATEMAINTENANCEID_COLUMN_BITMASK;
 
-		if (!_setOriginalCanMainId) {
-			_setOriginalCanMainId = true;
+		if (!_setOriginalCandidateMaintenanceId) {
+			_setOriginalCandidateMaintenanceId = true;
 
-			_originalCanMainId = _canMainId;
+			_originalCandidateMaintenanceId = _candidateMaintenanceId;
 		}
 
-		_canMainId = canMainId;
+		_candidateMaintenanceId = candidateMaintenanceId;
 	}
 
-	public long getOriginalCanMainId() {
-		return _originalCanMainId;
+	public long getOriginalCandidateMaintenanceId() {
+		return _originalCandidateMaintenanceId;
 	}
 
 	@JSON
@@ -520,13 +521,13 @@ public class AnalysisEntryModelImpl extends BaseModelImpl<AnalysisEntry>
 		AnalysisEntryImpl analysisEntryImpl = new AnalysisEntryImpl();
 
 		analysisEntryImpl.setUuid(getUuid());
-		analysisEntryImpl.setAnalysisId(getAnalysisId());
+		analysisEntryImpl.setAnalysisEntryId(getAnalysisEntryId());
 		analysisEntryImpl.setCompanyId(getCompanyId());
 		analysisEntryImpl.setUserId(getUserId());
 		analysisEntryImpl.setUserName(getUserName());
 		analysisEntryImpl.setCreateDate(getCreateDate());
 		analysisEntryImpl.setModifiedDate(getModifiedDate());
-		analysisEntryImpl.setCanMainId(getCanMainId());
+		analysisEntryImpl.setCandidateMaintenanceId(getCandidateMaintenanceId());
 		analysisEntryImpl.setAnalysisData(getAnalysisData());
 
 		analysisEntryImpl.resetOriginalValues();
@@ -591,9 +592,9 @@ public class AnalysisEntryModelImpl extends BaseModelImpl<AnalysisEntry>
 
 		analysisEntryModelImpl._originalUuid = analysisEntryModelImpl._uuid;
 
-		analysisEntryModelImpl._originalAnalysisId = analysisEntryModelImpl._analysisId;
+		analysisEntryModelImpl._originalAnalysisEntryId = analysisEntryModelImpl._analysisEntryId;
 
-		analysisEntryModelImpl._setOriginalAnalysisId = false;
+		analysisEntryModelImpl._setOriginalAnalysisEntryId = false;
 
 		analysisEntryModelImpl._originalCompanyId = analysisEntryModelImpl._companyId;
 
@@ -607,9 +608,9 @@ public class AnalysisEntryModelImpl extends BaseModelImpl<AnalysisEntry>
 
 		analysisEntryModelImpl._setModifiedDate = false;
 
-		analysisEntryModelImpl._originalCanMainId = analysisEntryModelImpl._canMainId;
+		analysisEntryModelImpl._originalCandidateMaintenanceId = analysisEntryModelImpl._candidateMaintenanceId;
 
-		analysisEntryModelImpl._setOriginalCanMainId = false;
+		analysisEntryModelImpl._setOriginalCandidateMaintenanceId = false;
 
 		analysisEntryModelImpl._columnBitmask = 0;
 	}
@@ -626,7 +627,7 @@ public class AnalysisEntryModelImpl extends BaseModelImpl<AnalysisEntry>
 			analysisEntryCacheModel.uuid = null;
 		}
 
-		analysisEntryCacheModel.analysisId = getAnalysisId();
+		analysisEntryCacheModel.analysisEntryId = getAnalysisEntryId();
 
 		analysisEntryCacheModel.companyId = getCompanyId();
 
@@ -658,7 +659,7 @@ public class AnalysisEntryModelImpl extends BaseModelImpl<AnalysisEntry>
 			analysisEntryCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
-		analysisEntryCacheModel.canMainId = getCanMainId();
+		analysisEntryCacheModel.candidateMaintenanceId = getCandidateMaintenanceId();
 
 		analysisEntryCacheModel.analysisData = getAnalysisData();
 
@@ -677,8 +678,8 @@ public class AnalysisEntryModelImpl extends BaseModelImpl<AnalysisEntry>
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
-		sb.append(", analysisId=");
-		sb.append(getAnalysisId());
+		sb.append(", analysisEntryId=");
+		sb.append(getAnalysisEntryId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -689,8 +690,8 @@ public class AnalysisEntryModelImpl extends BaseModelImpl<AnalysisEntry>
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", canMainId=");
-		sb.append(getCanMainId());
+		sb.append(", candidateMaintenanceId=");
+		sb.append(getCandidateMaintenanceId());
 		sb.append(", analysisData=");
 		sb.append(getAnalysisData());
 		sb.append("}");
@@ -711,8 +712,8 @@ public class AnalysisEntryModelImpl extends BaseModelImpl<AnalysisEntry>
 		sb.append(getUuid());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>analysisId</column-name><column-value><![CDATA[");
-		sb.append(getAnalysisId());
+			"<column><column-name>analysisEntryId</column-name><column-value><![CDATA[");
+		sb.append(getAnalysisEntryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -735,8 +736,8 @@ public class AnalysisEntryModelImpl extends BaseModelImpl<AnalysisEntry>
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>canMainId</column-name><column-value><![CDATA[");
-		sb.append(getCanMainId());
+			"<column><column-name>candidateMaintenanceId</column-name><column-value><![CDATA[");
+		sb.append(getCandidateMaintenanceId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>analysisData</column-name><column-value><![CDATA[");
@@ -754,9 +755,9 @@ public class AnalysisEntryModelImpl extends BaseModelImpl<AnalysisEntry>
 		};
 	private String _uuid;
 	private String _originalUuid;
-	private long _analysisId;
-	private long _originalAnalysisId;
-	private boolean _setOriginalAnalysisId;
+	private long _analysisEntryId;
+	private long _originalAnalysisEntryId;
+	private boolean _setOriginalAnalysisEntryId;
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;
@@ -768,9 +769,9 @@ public class AnalysisEntryModelImpl extends BaseModelImpl<AnalysisEntry>
 	private Date _originalCreateDate;
 	private Date _modifiedDate;
 	private boolean _setModifiedDate;
-	private long _canMainId;
-	private long _originalCanMainId;
-	private boolean _setOriginalCanMainId;
+	private long _candidateMaintenanceId;
+	private long _originalCandidateMaintenanceId;
+	private boolean _setOriginalCandidateMaintenanceId;
 	private String _analysisData;
 	private long _columnBitmask;
 	private AnalysisEntry _escapedModel;

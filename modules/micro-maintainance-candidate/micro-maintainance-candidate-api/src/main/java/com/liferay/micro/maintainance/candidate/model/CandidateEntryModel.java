@@ -84,18 +84,18 @@ public interface CandidateEntryModel extends BaseModel<CandidateEntry>,
 	public void setUuid(String uuid);
 
 	/**
-	 * Returns the entry ID of this candidate entry.
+	 * Returns the candidate entry ID of this candidate entry.
 	 *
-	 * @return the entry ID of this candidate entry
+	 * @return the candidate entry ID of this candidate entry
 	 */
-	public long getEntryId();
+	public long getCandidateEntryId();
 
 	/**
-	 * Sets the entry ID of this candidate entry.
+	 * Sets the candidate entry ID of this candidate entry.
 	 *
-	 * @param entryId the entry ID of this candidate entry
+	 * @param candidateEntryId the candidate entry ID of this candidate entry
 	 */
-	public void setEntryId(long entryId);
+	public void setCandidateEntryId(long candidateEntryId);
 
 	/**
 	 * Returns the group ID of this candidate entry.

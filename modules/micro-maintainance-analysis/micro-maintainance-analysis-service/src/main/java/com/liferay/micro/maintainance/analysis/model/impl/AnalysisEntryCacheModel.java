@@ -52,7 +52,7 @@ public class AnalysisEntryCacheModel implements CacheModel<AnalysisEntry>,
 
 		AnalysisEntryCacheModel analysisEntryCacheModel = (AnalysisEntryCacheModel)obj;
 
-		if (analysisId == analysisEntryCacheModel.analysisId) {
+		if (analysisEntryId == analysisEntryCacheModel.analysisEntryId) {
 			return true;
 		}
 
@@ -61,7 +61,7 @@ public class AnalysisEntryCacheModel implements CacheModel<AnalysisEntry>,
 
 	@Override
 	public int hashCode() {
-		return HashUtil.hash(0, analysisId);
+		return HashUtil.hash(0, analysisEntryId);
 	}
 
 	@Override
@@ -70,8 +70,8 @@ public class AnalysisEntryCacheModel implements CacheModel<AnalysisEntry>,
 
 		sb.append("{uuid=");
 		sb.append(uuid);
-		sb.append(", analysisId=");
-		sb.append(analysisId);
+		sb.append(", analysisEntryId=");
+		sb.append(analysisEntryId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", userId=");
@@ -82,8 +82,8 @@ public class AnalysisEntryCacheModel implements CacheModel<AnalysisEntry>,
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", canMainId=");
-		sb.append(canMainId);
+		sb.append(", candidateMaintenanceId=");
+		sb.append(candidateMaintenanceId);
 		sb.append(", analysisData=");
 		sb.append(analysisData);
 		sb.append("}");
@@ -102,7 +102,7 @@ public class AnalysisEntryCacheModel implements CacheModel<AnalysisEntry>,
 			analysisEntryImpl.setUuid(uuid);
 		}
 
-		analysisEntryImpl.setAnalysisId(analysisId);
+		analysisEntryImpl.setAnalysisEntryId(analysisEntryId);
 		analysisEntryImpl.setCompanyId(companyId);
 		analysisEntryImpl.setUserId(userId);
 
@@ -127,7 +127,7 @@ public class AnalysisEntryCacheModel implements CacheModel<AnalysisEntry>,
 			analysisEntryImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
-		analysisEntryImpl.setCanMainId(canMainId);
+		analysisEntryImpl.setCandidateMaintenanceId(candidateMaintenanceId);
 
 		if (analysisData == null) {
 			analysisEntryImpl.setAnalysisData(StringPool.BLANK);
@@ -145,7 +145,7 @@ public class AnalysisEntryCacheModel implements CacheModel<AnalysisEntry>,
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 
-		analysisId = objectInput.readLong();
+		analysisEntryId = objectInput.readLong();
 
 		companyId = objectInput.readLong();
 
@@ -154,7 +154,7 @@ public class AnalysisEntryCacheModel implements CacheModel<AnalysisEntry>,
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 
-		canMainId = objectInput.readLong();
+		candidateMaintenanceId = objectInput.readLong();
 		analysisData = objectInput.readUTF();
 	}
 
@@ -168,7 +168,7 @@ public class AnalysisEntryCacheModel implements CacheModel<AnalysisEntry>,
 			objectOutput.writeUTF(uuid);
 		}
 
-		objectOutput.writeLong(analysisId);
+		objectOutput.writeLong(analysisEntryId);
 
 		objectOutput.writeLong(companyId);
 
@@ -184,7 +184,7 @@ public class AnalysisEntryCacheModel implements CacheModel<AnalysisEntry>,
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
-		objectOutput.writeLong(canMainId);
+		objectOutput.writeLong(candidateMaintenanceId);
 
 		if (analysisData == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -195,12 +195,12 @@ public class AnalysisEntryCacheModel implements CacheModel<AnalysisEntry>,
 	}
 
 	public String uuid;
-	public long analysisId;
+	public long analysisEntryId;
 	public long companyId;
 	public long userId;
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public long canMainId;
+	public long candidateMaintenanceId;
 	public String analysisData;
 }

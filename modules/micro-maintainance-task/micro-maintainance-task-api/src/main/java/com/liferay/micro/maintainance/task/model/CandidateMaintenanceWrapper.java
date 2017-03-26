@@ -61,8 +61,8 @@ public class CandidateMaintenanceWrapper implements CandidateMaintenance,
 
 		attributes.put("uuid", getUuid());
 		attributes.put("candidateMaintenanceId", getCandidateMaintenanceId());
-		attributes.put("candidateId", getCandidateId());
-		attributes.put("taskId", getTaskId());
+		attributes.put("candidateEntryId", getCandidateEntryId());
+		attributes.put("taskEntryId", getTaskEntryId());
 		attributes.put("createDate", getCreateDate());
 
 		return attributes;
@@ -83,16 +83,16 @@ public class CandidateMaintenanceWrapper implements CandidateMaintenance,
 			setCandidateMaintenanceId(candidateMaintenanceId);
 		}
 
-		Long candidateId = (Long)attributes.get("candidateId");
+		Long candidateEntryId = (Long)attributes.get("candidateEntryId");
 
-		if (candidateId != null) {
-			setCandidateId(candidateId);
+		if (candidateEntryId != null) {
+			setCandidateEntryId(candidateEntryId);
 		}
 
-		Long taskId = (Long)attributes.get("taskId");
+		Long taskEntryId = (Long)attributes.get("taskEntryId");
 
-		if (taskId != null) {
-			setTaskId(taskId);
+		if (taskEntryId != null) {
+			setTaskEntryId(taskEntryId);
 		}
 
 		Date createDate = (Date)attributes.get("createDate");
@@ -188,13 +188,13 @@ public class CandidateMaintenanceWrapper implements CandidateMaintenance,
 	}
 
 	/**
-	* Returns the candidate ID of this candidate maintenance.
+	* Returns the candidate entry ID of this candidate maintenance.
 	*
-	* @return the candidate ID of this candidate maintenance
+	* @return the candidate entry ID of this candidate maintenance
 	*/
 	@Override
-	public long getCandidateId() {
-		return _candidateMaintenance.getCandidateId();
+	public long getCandidateEntryId() {
+		return _candidateMaintenance.getCandidateEntryId();
 	}
 
 	/**
@@ -218,13 +218,13 @@ public class CandidateMaintenanceWrapper implements CandidateMaintenance,
 	}
 
 	/**
-	* Returns the task ID of this candidate maintenance.
+	* Returns the task entry ID of this candidate maintenance.
 	*
-	* @return the task ID of this candidate maintenance
+	* @return the task entry ID of this candidate maintenance
 	*/
 	@Override
-	public long getTaskId() {
-		return _candidateMaintenance.getTaskId();
+	public long getTaskEntryId() {
+		return _candidateMaintenance.getTaskEntryId();
 	}
 
 	@Override
@@ -238,13 +238,13 @@ public class CandidateMaintenanceWrapper implements CandidateMaintenance,
 	}
 
 	/**
-	* Sets the candidate ID of this candidate maintenance.
+	* Sets the candidate entry ID of this candidate maintenance.
 	*
-	* @param candidateId the candidate ID of this candidate maintenance
+	* @param candidateEntryId the candidate entry ID of this candidate maintenance
 	*/
 	@Override
-	public void setCandidateId(long candidateId) {
-		_candidateMaintenance.setCandidateId(candidateId);
+	public void setCandidateEntryId(long candidateEntryId) {
+		_candidateMaintenance.setCandidateEntryId(candidateEntryId);
 	}
 
 	/**
@@ -304,13 +304,13 @@ public class CandidateMaintenanceWrapper implements CandidateMaintenance,
 	}
 
 	/**
-	* Sets the task ID of this candidate maintenance.
+	* Sets the task entry ID of this candidate maintenance.
 	*
-	* @param taskId the task ID of this candidate maintenance
+	* @param taskEntryId the task entry ID of this candidate maintenance
 	*/
 	@Override
-	public void setTaskId(long taskId) {
-		_candidateMaintenance.setTaskId(taskId);
+	public void setTaskEntryId(long taskEntryId) {
+		_candidateMaintenance.setTaskEntryId(taskEntryId);
 	}
 
 	/**

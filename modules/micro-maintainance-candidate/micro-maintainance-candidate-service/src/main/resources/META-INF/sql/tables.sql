@@ -1,6 +1,6 @@
 create table Candidate_CandidateEntry (
 	uuid_ VARCHAR(75) null,
-	entryId LONG not null primary key,
+	candidateEntryId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,

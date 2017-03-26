@@ -70,8 +70,8 @@ public class AnalysisUserCacheModel implements CacheModel<AnalysisUser>,
 		sb.append(uuid);
 		sb.append(", analysisUserId=");
 		sb.append(analysisUserId);
-		sb.append(", analysisId=");
-		sb.append(analysisId);
+		sb.append(", analysisEntryId=");
+		sb.append(analysisEntryId);
 		sb.append(", userId=");
 		sb.append(userId);
 		sb.append(", userName=");
@@ -95,7 +95,7 @@ public class AnalysisUserCacheModel implements CacheModel<AnalysisUser>,
 		}
 
 		analysisUserImpl.setAnalysisUserId(analysisUserId);
-		analysisUserImpl.setAnalysisId(analysisId);
+		analysisUserImpl.setAnalysisEntryId(analysisEntryId);
 		analysisUserImpl.setUserId(userId);
 
 		if (userName == null) {
@@ -118,7 +118,7 @@ public class AnalysisUserCacheModel implements CacheModel<AnalysisUser>,
 
 		analysisUserId = objectInput.readLong();
 
-		analysisId = objectInput.readLong();
+		analysisEntryId = objectInput.readLong();
 
 		userId = objectInput.readLong();
 		userName = objectInput.readUTF();
@@ -138,7 +138,7 @@ public class AnalysisUserCacheModel implements CacheModel<AnalysisUser>,
 
 		objectOutput.writeLong(analysisUserId);
 
-		objectOutput.writeLong(analysisId);
+		objectOutput.writeLong(analysisEntryId);
 
 		objectOutput.writeLong(userId);
 
@@ -154,7 +154,7 @@ public class AnalysisUserCacheModel implements CacheModel<AnalysisUser>,
 
 	public String uuid;
 	public long analysisUserId;
-	public long analysisId;
+	public long analysisEntryId;
 	public long userId;
 	public String userName;
 	public int voted;

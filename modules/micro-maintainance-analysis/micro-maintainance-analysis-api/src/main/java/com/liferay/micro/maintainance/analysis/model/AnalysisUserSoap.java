@@ -35,7 +35,7 @@ public class AnalysisUserSoap implements Serializable {
 
 		soapModel.setUuid(model.getUuid());
 		soapModel.setAnalysisUserId(model.getAnalysisUserId());
-		soapModel.setAnalysisId(model.getAnalysisId());
+		soapModel.setAnalysisEntryId(model.getAnalysisEntryId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setVoted(model.getVoted());
@@ -107,12 +107,12 @@ public class AnalysisUserSoap implements Serializable {
 		_analysisUserId = analysisUserId;
 	}
 
-	public long getAnalysisId() {
-		return _analysisId;
+	public long getAnalysisEntryId() {
+		return _analysisEntryId;
 	}
 
-	public void setAnalysisId(long analysisId) {
-		_analysisId = analysisId;
+	public void setAnalysisEntryId(long analysisEntryId) {
+		_analysisEntryId = analysisEntryId;
 	}
 
 	public long getUserId() {
@@ -141,7 +141,7 @@ public class AnalysisUserSoap implements Serializable {
 
 	private String _uuid;
 	private long _analysisUserId;
-	private long _analysisId;
+	private long _analysisEntryId;
 	private long _userId;
 	private String _userName;
 	private int _voted;

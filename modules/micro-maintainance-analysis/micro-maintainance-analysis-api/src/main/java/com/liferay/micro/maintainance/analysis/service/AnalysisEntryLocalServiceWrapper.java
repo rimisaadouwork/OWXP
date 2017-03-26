@@ -50,28 +50,29 @@ public class AnalysisEntryLocalServiceWrapper
 	* Adds an analysis entry, which will store the votes
 	*
 	* @param userId: the id of the user who flagged the page
-	* @param canMainId: the id of the CandidateMaintenance entry, in which the
+	* @param candidateMaintenanceId: the id of the CandidateMaintenance entry, in which the
 	assignment between a task and a candidate is stored.
 	* @return the AnalysisEntry that was added
 	* @throws PortalException
 	*/
 	@Override
 	public com.liferay.micro.maintainance.analysis.model.AnalysisEntry addAnalysisEntry(
-		long userId, long canMainId)
+		long userId, long candidateMaintenanceId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _analysisEntryLocalService.addAnalysisEntry(userId, canMainId);
+		return _analysisEntryLocalService.addAnalysisEntry(userId,
+			candidateMaintenanceId);
 	}
 
 	/**
 	* Creates a new analysis entry with the primary key. Does not add the analysis entry to the database.
 	*
-	* @param analysisId the primary key for the new analysis entry
+	* @param analysisEntryId the primary key for the new analysis entry
 	* @return the new analysis entry
 	*/
 	@Override
 	public com.liferay.micro.maintainance.analysis.model.AnalysisEntry createAnalysisEntry(
-		long analysisId) {
-		return _analysisEntryLocalService.createAnalysisEntry(analysisId);
+		long analysisEntryId) {
+		return _analysisEntryLocalService.createAnalysisEntry(analysisEntryId);
 	}
 
 	/**
@@ -89,21 +90,21 @@ public class AnalysisEntryLocalServiceWrapper
 	/**
 	* Deletes the analysis entry with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param analysisId the primary key of the analysis entry
+	* @param analysisEntryId the primary key of the analysis entry
 	* @return the analysis entry that was removed
 	* @throws PortalException if a analysis entry with the primary key could not be found
 	*/
 	@Override
 	public com.liferay.micro.maintainance.analysis.model.AnalysisEntry deleteAnalysisEntry(
-		long analysisId)
+		long analysisEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _analysisEntryLocalService.deleteAnalysisEntry(analysisId);
+		return _analysisEntryLocalService.deleteAnalysisEntry(analysisEntryId);
 	}
 
 	@Override
 	public com.liferay.micro.maintainance.analysis.model.AnalysisEntry fetchAnalysisEntry(
-		long analysisId) {
-		return _analysisEntryLocalService.fetchAnalysisEntry(analysisId);
+		long analysisEntryId) {
+		return _analysisEntryLocalService.fetchAnalysisEntry(analysisEntryId);
 	}
 
 	/**
@@ -122,22 +123,22 @@ public class AnalysisEntryLocalServiceWrapper
 
 	@Override
 	public com.liferay.micro.maintainance.analysis.model.AnalysisEntry getAnalysisByCandidateMaintenance(
-		long canMainId) {
-		return _analysisEntryLocalService.getAnalysisByCandidateMaintenance(canMainId);
+		long candidateMaintenanceId) {
+		return _analysisEntryLocalService.getAnalysisByCandidateMaintenance(candidateMaintenanceId);
 	}
 
 	/**
 	* Returns the analysis entry with the primary key.
 	*
-	* @param analysisId the primary key of the analysis entry
+	* @param analysisEntryId the primary key of the analysis entry
 	* @return the analysis entry
 	* @throws PortalException if a analysis entry with the primary key could not be found
 	*/
 	@Override
 	public com.liferay.micro.maintainance.analysis.model.AnalysisEntry getAnalysisEntry(
-		long analysisId)
+		long analysisEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _analysisEntryLocalService.getAnalysisEntry(analysisId);
+		return _analysisEntryLocalService.getAnalysisEntry(analysisEntryId);
 	}
 
 	/**

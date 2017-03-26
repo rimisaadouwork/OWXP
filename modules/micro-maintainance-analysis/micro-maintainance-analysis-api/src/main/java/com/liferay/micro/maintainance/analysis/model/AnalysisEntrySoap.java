@@ -35,13 +35,13 @@ public class AnalysisEntrySoap implements Serializable {
 		AnalysisEntrySoap soapModel = new AnalysisEntrySoap();
 
 		soapModel.setUuid(model.getUuid());
-		soapModel.setAnalysisId(model.getAnalysisId());
+		soapModel.setAnalysisEntryId(model.getAnalysisEntryId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setCanMainId(model.getCanMainId());
+		soapModel.setCandidateMaintenanceId(model.getCandidateMaintenanceId());
 		soapModel.setAnalysisData(model.getAnalysisData());
 
 		return soapModel;
@@ -88,11 +88,11 @@ public class AnalysisEntrySoap implements Serializable {
 	}
 
 	public long getPrimaryKey() {
-		return _analysisId;
+		return _analysisEntryId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setAnalysisId(pk);
+		setAnalysisEntryId(pk);
 	}
 
 	public String getUuid() {
@@ -103,12 +103,12 @@ public class AnalysisEntrySoap implements Serializable {
 		_uuid = uuid;
 	}
 
-	public long getAnalysisId() {
-		return _analysisId;
+	public long getAnalysisEntryId() {
+		return _analysisEntryId;
 	}
 
-	public void setAnalysisId(long analysisId) {
-		_analysisId = analysisId;
+	public void setAnalysisEntryId(long analysisEntryId) {
+		_analysisEntryId = analysisEntryId;
 	}
 
 	public long getCompanyId() {
@@ -151,12 +151,12 @@ public class AnalysisEntrySoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public long getCanMainId() {
-		return _canMainId;
+	public long getCandidateMaintenanceId() {
+		return _candidateMaintenanceId;
 	}
 
-	public void setCanMainId(long canMainId) {
-		_canMainId = canMainId;
+	public void setCandidateMaintenanceId(long candidateMaintenanceId) {
+		_candidateMaintenanceId = candidateMaintenanceId;
 	}
 
 	public String getAnalysisData() {
@@ -168,12 +168,12 @@ public class AnalysisEntrySoap implements Serializable {
 	}
 
 	private String _uuid;
-	private long _analysisId;
+	private long _analysisEntryId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _canMainId;
+	private long _candidateMaintenanceId;
 	private String _analysisData;
 }

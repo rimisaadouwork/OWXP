@@ -51,7 +51,7 @@ public class DecisionEntryLocalServiceWrapper
 	*
 	* @param userId: the id of the user who flagged the page
 	* @param analysisData: the gathered votes
-	* @param candidateId: the id of the candidate entry belonging to the
+	* @param candidateEntryId: the id of the candidate entry belonging to the
 	flagged wiki page
 	* @param outcome: the actions to be taken
 	* @param handled: indicates if the actions could be executed
@@ -60,23 +60,23 @@ public class DecisionEntryLocalServiceWrapper
 	*/
 	@Override
 	public com.liferay.micro.maintainance.decision.model.DecisionEntry addDecisionEntry(
-		long userId, java.lang.String analysisData, long candidateId,
+		long userId, java.lang.String analysisData, long candidateEntryId,
 		java.lang.String outcome, boolean handled)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _decisionEntryLocalService.addDecisionEntry(userId,
-			analysisData, candidateId, outcome, handled);
+			analysisData, candidateEntryId, outcome, handled);
 	}
 
 	/**
 	* Creates a new decision entry with the primary key. Does not add the decision entry to the database.
 	*
-	* @param decisionId the primary key for the new decision entry
+	* @param decisionEntryId the primary key for the new decision entry
 	* @return the new decision entry
 	*/
 	@Override
 	public com.liferay.micro.maintainance.decision.model.DecisionEntry createDecisionEntry(
-		long decisionId) {
-		return _decisionEntryLocalService.createDecisionEntry(decisionId);
+		long decisionEntryId) {
+		return _decisionEntryLocalService.createDecisionEntry(decisionEntryId);
 	}
 
 	/**
@@ -94,21 +94,21 @@ public class DecisionEntryLocalServiceWrapper
 	/**
 	* Deletes the decision entry with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param decisionId the primary key of the decision entry
+	* @param decisionEntryId the primary key of the decision entry
 	* @return the decision entry that was removed
 	* @throws PortalException if a decision entry with the primary key could not be found
 	*/
 	@Override
 	public com.liferay.micro.maintainance.decision.model.DecisionEntry deleteDecisionEntry(
-		long decisionId)
+		long decisionEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _decisionEntryLocalService.deleteDecisionEntry(decisionId);
+		return _decisionEntryLocalService.deleteDecisionEntry(decisionEntryId);
 	}
 
 	@Override
 	public com.liferay.micro.maintainance.decision.model.DecisionEntry fetchDecisionEntry(
-		long decisionId) {
-		return _decisionEntryLocalService.fetchDecisionEntry(decisionId);
+		long decisionEntryId) {
+		return _decisionEntryLocalService.fetchDecisionEntry(decisionEntryId);
 	}
 
 	/**
@@ -128,15 +128,15 @@ public class DecisionEntryLocalServiceWrapper
 	/**
 	* Returns the decision entry with the primary key.
 	*
-	* @param decisionId the primary key of the decision entry
+	* @param decisionEntryId the primary key of the decision entry
 	* @return the decision entry
 	* @throws PortalException if a decision entry with the primary key could not be found
 	*/
 	@Override
 	public com.liferay.micro.maintainance.decision.model.DecisionEntry getDecisionEntry(
-		long decisionId)
+		long decisionEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _decisionEntryLocalService.getDecisionEntry(decisionId);
+		return _decisionEntryLocalService.getDecisionEntry(decisionEntryId);
 	}
 
 	/**

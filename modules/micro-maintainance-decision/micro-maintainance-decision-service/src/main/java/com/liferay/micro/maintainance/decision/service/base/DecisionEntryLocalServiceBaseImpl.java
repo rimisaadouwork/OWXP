@@ -97,26 +97,26 @@ public abstract class DecisionEntryLocalServiceBaseImpl
 	/**
 	 * Creates a new decision entry with the primary key. Does not add the decision entry to the database.
 	 *
-	 * @param decisionId the primary key for the new decision entry
+	 * @param decisionEntryId the primary key for the new decision entry
 	 * @return the new decision entry
 	 */
 	@Override
-	public DecisionEntry createDecisionEntry(long decisionId) {
-		return decisionEntryPersistence.create(decisionId);
+	public DecisionEntry createDecisionEntry(long decisionEntryId) {
+		return decisionEntryPersistence.create(decisionEntryId);
 	}
 
 	/**
 	 * Deletes the decision entry with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param decisionId the primary key of the decision entry
+	 * @param decisionEntryId the primary key of the decision entry
 	 * @return the decision entry that was removed
 	 * @throws PortalException if a decision entry with the primary key could not be found
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public DecisionEntry deleteDecisionEntry(long decisionId)
+	public DecisionEntry deleteDecisionEntry(long decisionEntryId)
 		throws PortalException {
-		return decisionEntryPersistence.remove(decisionId);
+		return decisionEntryPersistence.remove(decisionEntryId);
 	}
 
 	/**
@@ -215,8 +215,8 @@ public abstract class DecisionEntryLocalServiceBaseImpl
 	}
 
 	@Override
-	public DecisionEntry fetchDecisionEntry(long decisionId) {
-		return decisionEntryPersistence.fetchByPrimaryKey(decisionId);
+	public DecisionEntry fetchDecisionEntry(long decisionEntryId) {
+		return decisionEntryPersistence.fetchByPrimaryKey(decisionEntryId);
 	}
 
 	/**
@@ -236,14 +236,14 @@ public abstract class DecisionEntryLocalServiceBaseImpl
 	/**
 	 * Returns the decision entry with the primary key.
 	 *
-	 * @param decisionId the primary key of the decision entry
+	 * @param decisionEntryId the primary key of the decision entry
 	 * @return the decision entry
 	 * @throws PortalException if a decision entry with the primary key could not be found
 	 */
 	@Override
-	public DecisionEntry getDecisionEntry(long decisionId)
+	public DecisionEntry getDecisionEntry(long decisionEntryId)
 		throws PortalException {
-		return decisionEntryPersistence.findByPrimaryKey(decisionId);
+		return decisionEntryPersistence.findByPrimaryKey(decisionEntryId);
 	}
 
 	@Override
@@ -254,7 +254,7 @@ public abstract class DecisionEntryLocalServiceBaseImpl
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(DecisionEntry.class);
 
-		actionableDynamicQuery.setPrimaryKeyPropertyName("decisionId");
+		actionableDynamicQuery.setPrimaryKeyPropertyName("decisionEntryId");
 
 		return actionableDynamicQuery;
 	}
@@ -267,7 +267,8 @@ public abstract class DecisionEntryLocalServiceBaseImpl
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
 		indexableActionableDynamicQuery.setModelClass(DecisionEntry.class);
 
-		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("decisionId");
+		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
+			"decisionEntryId");
 
 		return indexableActionableDynamicQuery;
 	}
@@ -278,7 +279,7 @@ public abstract class DecisionEntryLocalServiceBaseImpl
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(DecisionEntry.class);
 
-		actionableDynamicQuery.setPrimaryKeyPropertyName("decisionId");
+		actionableDynamicQuery.setPrimaryKeyPropertyName("decisionEntryId");
 	}
 
 	@Override

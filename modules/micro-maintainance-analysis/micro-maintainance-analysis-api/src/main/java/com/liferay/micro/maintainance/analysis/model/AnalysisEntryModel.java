@@ -83,18 +83,18 @@ public interface AnalysisEntryModel extends BaseModel<AnalysisEntry>,
 	public void setUuid(String uuid);
 
 	/**
-	 * Returns the analysis ID of this analysis entry.
+	 * Returns the analysis entry ID of this analysis entry.
 	 *
-	 * @return the analysis ID of this analysis entry
+	 * @return the analysis entry ID of this analysis entry
 	 */
-	public long getAnalysisId();
+	public long getAnalysisEntryId();
 
 	/**
-	 * Sets the analysis ID of this analysis entry.
+	 * Sets the analysis entry ID of this analysis entry.
 	 *
-	 * @param analysisId the analysis ID of this analysis entry
+	 * @param analysisEntryId the analysis entry ID of this analysis entry
 	 */
-	public void setAnalysisId(long analysisId);
+	public void setAnalysisEntryId(long analysisEntryId);
 
 	/**
 	 * Returns the company ID of this analysis entry.
@@ -194,18 +194,18 @@ public interface AnalysisEntryModel extends BaseModel<AnalysisEntry>,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Returns the can main ID of this analysis entry.
+	 * Returns the candidate maintenance ID of this analysis entry.
 	 *
-	 * @return the can main ID of this analysis entry
+	 * @return the candidate maintenance ID of this analysis entry
 	 */
-	public long getCanMainId();
+	public long getCandidateMaintenanceId();
 
 	/**
-	 * Sets the can main ID of this analysis entry.
+	 * Sets the candidate maintenance ID of this analysis entry.
 	 *
-	 * @param canMainId the can main ID of this analysis entry
+	 * @param candidateMaintenanceId the candidate maintenance ID of this analysis entry
 	 */
-	public void setCanMainId(long canMainId);
+	public void setCandidateMaintenanceId(long candidateMaintenanceId);
 
 	/**
 	 * Returns the analysis data of this analysis entry.

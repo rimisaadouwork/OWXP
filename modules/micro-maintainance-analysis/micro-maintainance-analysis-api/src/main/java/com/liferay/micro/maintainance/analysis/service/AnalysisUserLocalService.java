@@ -73,8 +73,8 @@ public interface AnalysisUserLocalService extends BaseLocalService,
 	/**
 	* Adds a user's vote to an analysis
 	*/
-	public AnalysisUser addAnalysisUser(long analysisId, long userId, int vote)
-		throws PortalException;
+	public AnalysisUser addAnalysisUser(long analysisEntryId, long userId,
+		int vote) throws PortalException;
 
 	/**
 	* Creates a new analysis user with the primary key. Does not add the analysis user to the database.
@@ -108,7 +108,7 @@ public interface AnalysisUserLocalService extends BaseLocalService,
 	public AnalysisUser fetchAnalysisUser(long analysisUserId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public AnalysisUser getAnalysisUser(long analysisId, long userId);
+	public AnalysisUser getAnalysisUser(long analysisEntryId, long userId);
 
 	/**
 	* Returns the analysis user with the primary key.

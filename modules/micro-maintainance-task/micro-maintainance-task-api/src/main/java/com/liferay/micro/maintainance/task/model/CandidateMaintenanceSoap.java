@@ -37,8 +37,8 @@ public class CandidateMaintenanceSoap implements Serializable {
 
 		soapModel.setUuid(model.getUuid());
 		soapModel.setCandidateMaintenanceId(model.getCandidateMaintenanceId());
-		soapModel.setCandidateId(model.getCandidateId());
-		soapModel.setTaskId(model.getTaskId());
+		soapModel.setCandidateEntryId(model.getCandidateEntryId());
+		soapModel.setTaskEntryId(model.getTaskEntryId());
 		soapModel.setCreateDate(model.getCreateDate());
 
 		return soapModel;
@@ -111,20 +111,20 @@ public class CandidateMaintenanceSoap implements Serializable {
 		_candidateMaintenanceId = candidateMaintenanceId;
 	}
 
-	public long getCandidateId() {
-		return _candidateId;
+	public long getCandidateEntryId() {
+		return _candidateEntryId;
 	}
 
-	public void setCandidateId(long candidateId) {
-		_candidateId = candidateId;
+	public void setCandidateEntryId(long candidateEntryId) {
+		_candidateEntryId = candidateEntryId;
 	}
 
-	public long getTaskId() {
-		return _taskId;
+	public long getTaskEntryId() {
+		return _taskEntryId;
 	}
 
-	public void setTaskId(long taskId) {
-		_taskId = taskId;
+	public void setTaskEntryId(long taskEntryId) {
+		_taskEntryId = taskEntryId;
 	}
 
 	public Date getCreateDate() {
@@ -137,7 +137,7 @@ public class CandidateMaintenanceSoap implements Serializable {
 
 	private String _uuid;
 	private long _candidateMaintenanceId;
-	private long _candidateId;
-	private long _taskId;
+	private long _candidateEntryId;
+	private long _taskEntryId;
 	private Date _createDate;
 }

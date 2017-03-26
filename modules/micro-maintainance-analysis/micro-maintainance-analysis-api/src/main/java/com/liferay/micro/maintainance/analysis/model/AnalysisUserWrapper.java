@@ -59,7 +59,7 @@ public class AnalysisUserWrapper implements AnalysisUser,
 
 		attributes.put("uuid", getUuid());
 		attributes.put("analysisUserId", getAnalysisUserId());
-		attributes.put("analysisId", getAnalysisId());
+		attributes.put("analysisEntryId", getAnalysisEntryId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("voted", getVoted());
@@ -81,10 +81,10 @@ public class AnalysisUserWrapper implements AnalysisUser,
 			setAnalysisUserId(analysisUserId);
 		}
 
-		Long analysisId = (Long)attributes.get("analysisId");
+		Long analysisEntryId = (Long)attributes.get("analysisEntryId");
 
-		if (analysisId != null) {
-			setAnalysisId(analysisId);
+		if (analysisEntryId != null) {
+			setAnalysisEntryId(analysisEntryId);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -222,13 +222,13 @@ public class AnalysisUserWrapper implements AnalysisUser,
 	}
 
 	/**
-	* Returns the analysis ID of this analysis user.
+	* Returns the analysis entry ID of this analysis user.
 	*
-	* @return the analysis ID of this analysis user
+	* @return the analysis entry ID of this analysis user
 	*/
 	@Override
-	public long getAnalysisId() {
-		return _analysisUser.getAnalysisId();
+	public long getAnalysisEntryId() {
+		return _analysisUser.getAnalysisEntryId();
 	}
 
 	/**
@@ -267,13 +267,13 @@ public class AnalysisUserWrapper implements AnalysisUser,
 	}
 
 	/**
-	* Sets the analysis ID of this analysis user.
+	* Sets the analysis entry ID of this analysis user.
 	*
-	* @param analysisId the analysis ID of this analysis user
+	* @param analysisEntryId the analysis entry ID of this analysis user
 	*/
 	@Override
-	public void setAnalysisId(long analysisId) {
-		_analysisUser.setAnalysisId(analysisId);
+	public void setAnalysisEntryId(long analysisEntryId) {
+		_analysisUser.setAnalysisEntryId(analysisEntryId);
 	}
 
 	/**

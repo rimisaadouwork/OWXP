@@ -3,7 +3,7 @@
 <model-hints>
 	<model name="com.liferay.micro.maintainance.candidate.model.CandidateEntry">
 		<field name="uuid" type="String" />
-		<field name="entryId" type="long" />
+		<field name="candidateEntryId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />

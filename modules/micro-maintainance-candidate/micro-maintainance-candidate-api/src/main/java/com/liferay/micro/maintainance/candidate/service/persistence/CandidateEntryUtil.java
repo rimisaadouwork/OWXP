@@ -235,18 +235,19 @@ public class CandidateEntryUtil {
 	/**
 	* Returns the candidate entries before and after the current candidate entry in the ordered set where uuid = &#63;.
 	*
-	* @param entryId the primary key of the current candidate entry
+	* @param candidateEntryId the primary key of the current candidate entry
 	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next candidate entry
 	* @throws NoSuchEntryException if a candidate entry with the primary key could not be found
 	*/
-	public static CandidateEntry[] findByUuid_PrevAndNext(long entryId,
-		java.lang.String uuid,
+	public static CandidateEntry[] findByUuid_PrevAndNext(
+		long candidateEntryId, java.lang.String uuid,
 		OrderByComparator<CandidateEntry> orderByComparator)
 		throws com.liferay.micro.maintainance.candidate.exception.NoSuchEntryException {
 		return getPersistence()
-				   .findByUuid_PrevAndNext(entryId, uuid, orderByComparator);
+				   .findByUuid_PrevAndNext(candidateEntryId, uuid,
+			orderByComparator);
 	}
 
 	/**
@@ -469,19 +470,19 @@ public class CandidateEntryUtil {
 	/**
 	* Returns the candidate entries before and after the current candidate entry in the ordered set where uuid = &#63; and companyId = &#63;.
 	*
-	* @param entryId the primary key of the current candidate entry
+	* @param candidateEntryId the primary key of the current candidate entry
 	* @param uuid the uuid
 	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next candidate entry
 	* @throws NoSuchEntryException if a candidate entry with the primary key could not be found
 	*/
-	public static CandidateEntry[] findByUuid_C_PrevAndNext(long entryId,
-		java.lang.String uuid, long companyId,
+	public static CandidateEntry[] findByUuid_C_PrevAndNext(
+		long candidateEntryId, java.lang.String uuid, long companyId,
 		OrderByComparator<CandidateEntry> orderByComparator)
 		throws com.liferay.micro.maintainance.candidate.exception.NoSuchEntryException {
 		return getPersistence()
-				   .findByUuid_C_PrevAndNext(entryId, uuid, companyId,
+				   .findByUuid_C_PrevAndNext(candidateEntryId, uuid, companyId,
 			orderByComparator);
 	}
 
@@ -629,17 +630,18 @@ public class CandidateEntryUtil {
 	/**
 	* Returns the candidate entries before and after the current candidate entry in the ordered set where groupId = &#63;.
 	*
-	* @param entryId the primary key of the current candidate entry
+	* @param candidateEntryId the primary key of the current candidate entry
 	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next candidate entry
 	* @throws NoSuchEntryException if a candidate entry with the primary key could not be found
 	*/
-	public static CandidateEntry[] findByGroupId_PrevAndNext(long entryId,
-		long groupId, OrderByComparator<CandidateEntry> orderByComparator)
+	public static CandidateEntry[] findByGroupId_PrevAndNext(
+		long candidateEntryId, long groupId,
+		OrderByComparator<CandidateEntry> orderByComparator)
 		throws com.liferay.micro.maintainance.candidate.exception.NoSuchEntryException {
 		return getPersistence()
-				   .findByGroupId_PrevAndNext(entryId, groupId,
+				   .findByGroupId_PrevAndNext(candidateEntryId, groupId,
 			orderByComparator);
 	}
 
@@ -790,17 +792,18 @@ public class CandidateEntryUtil {
 	/**
 	* Returns the candidate entries before and after the current candidate entry in the ordered set where companyId = &#63;.
 	*
-	* @param entryId the primary key of the current candidate entry
+	* @param candidateEntryId the primary key of the current candidate entry
 	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next candidate entry
 	* @throws NoSuchEntryException if a candidate entry with the primary key could not be found
 	*/
-	public static CandidateEntry[] findByCompanyId_PrevAndNext(long entryId,
-		long companyId, OrderByComparator<CandidateEntry> orderByComparator)
+	public static CandidateEntry[] findByCompanyId_PrevAndNext(
+		long candidateEntryId, long companyId,
+		OrderByComparator<CandidateEntry> orderByComparator)
 		throws com.liferay.micro.maintainance.candidate.exception.NoSuchEntryException {
 		return getPersistence()
-				   .findByCompanyId_PrevAndNext(entryId, companyId,
+				   .findByCompanyId_PrevAndNext(candidateEntryId, companyId,
 			orderByComparator);
 	}
 
@@ -821,179 +824,6 @@ public class CandidateEntryUtil {
 	*/
 	public static int countByCompanyId(long companyId) {
 		return getPersistence().countByCompanyId(companyId);
-	}
-
-	/**
-	* Returns all the candidate entries where companyId = &#63; and userId = &#63;.
-	*
-	* @param companyId the company ID
-	* @param userId the user ID
-	* @return the matching candidate entries
-	*/
-	public static List<CandidateEntry> findByC_U(long companyId, long userId) {
-		return getPersistence().findByC_U(companyId, userId);
-	}
-
-	/**
-	* Returns a range of all the candidate entries where companyId = &#63; and userId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param companyId the company ID
-	* @param userId the user ID
-	* @param start the lower bound of the range of candidate entries
-	* @param end the upper bound of the range of candidate entries (not inclusive)
-	* @return the range of matching candidate entries
-	*/
-	public static List<CandidateEntry> findByC_U(long companyId, long userId,
-		int start, int end) {
-		return getPersistence().findByC_U(companyId, userId, start, end);
-	}
-
-	/**
-	* Returns an ordered range of all the candidate entries where companyId = &#63; and userId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param companyId the company ID
-	* @param userId the user ID
-	* @param start the lower bound of the range of candidate entries
-	* @param end the upper bound of the range of candidate entries (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching candidate entries
-	*/
-	public static List<CandidateEntry> findByC_U(long companyId, long userId,
-		int start, int end, OrderByComparator<CandidateEntry> orderByComparator) {
-		return getPersistence()
-				   .findByC_U(companyId, userId, start, end, orderByComparator);
-	}
-
-	/**
-	* Returns an ordered range of all the candidate entries where companyId = &#63; and userId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param companyId the company ID
-	* @param userId the user ID
-	* @param start the lower bound of the range of candidate entries
-	* @param end the upper bound of the range of candidate entries (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching candidate entries
-	*/
-	public static List<CandidateEntry> findByC_U(long companyId, long userId,
-		int start, int end,
-		OrderByComparator<CandidateEntry> orderByComparator,
-		boolean retrieveFromCache) {
-		return getPersistence()
-				   .findByC_U(companyId, userId, start, end, orderByComparator,
-			retrieveFromCache);
-	}
-
-	/**
-	* Returns the first candidate entry in the ordered set where companyId = &#63; and userId = &#63;.
-	*
-	* @param companyId the company ID
-	* @param userId the user ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching candidate entry
-	* @throws NoSuchEntryException if a matching candidate entry could not be found
-	*/
-	public static CandidateEntry findByC_U_First(long companyId, long userId,
-		OrderByComparator<CandidateEntry> orderByComparator)
-		throws com.liferay.micro.maintainance.candidate.exception.NoSuchEntryException {
-		return getPersistence()
-				   .findByC_U_First(companyId, userId, orderByComparator);
-	}
-
-	/**
-	* Returns the first candidate entry in the ordered set where companyId = &#63; and userId = &#63;.
-	*
-	* @param companyId the company ID
-	* @param userId the user ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching candidate entry, or <code>null</code> if a matching candidate entry could not be found
-	*/
-	public static CandidateEntry fetchByC_U_First(long companyId, long userId,
-		OrderByComparator<CandidateEntry> orderByComparator) {
-		return getPersistence()
-				   .fetchByC_U_First(companyId, userId, orderByComparator);
-	}
-
-	/**
-	* Returns the last candidate entry in the ordered set where companyId = &#63; and userId = &#63;.
-	*
-	* @param companyId the company ID
-	* @param userId the user ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching candidate entry
-	* @throws NoSuchEntryException if a matching candidate entry could not be found
-	*/
-	public static CandidateEntry findByC_U_Last(long companyId, long userId,
-		OrderByComparator<CandidateEntry> orderByComparator)
-		throws com.liferay.micro.maintainance.candidate.exception.NoSuchEntryException {
-		return getPersistence()
-				   .findByC_U_Last(companyId, userId, orderByComparator);
-	}
-
-	/**
-	* Returns the last candidate entry in the ordered set where companyId = &#63; and userId = &#63;.
-	*
-	* @param companyId the company ID
-	* @param userId the user ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching candidate entry, or <code>null</code> if a matching candidate entry could not be found
-	*/
-	public static CandidateEntry fetchByC_U_Last(long companyId, long userId,
-		OrderByComparator<CandidateEntry> orderByComparator) {
-		return getPersistence()
-				   .fetchByC_U_Last(companyId, userId, orderByComparator);
-	}
-
-	/**
-	* Returns the candidate entries before and after the current candidate entry in the ordered set where companyId = &#63; and userId = &#63;.
-	*
-	* @param entryId the primary key of the current candidate entry
-	* @param companyId the company ID
-	* @param userId the user ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next candidate entry
-	* @throws NoSuchEntryException if a candidate entry with the primary key could not be found
-	*/
-	public static CandidateEntry[] findByC_U_PrevAndNext(long entryId,
-		long companyId, long userId,
-		OrderByComparator<CandidateEntry> orderByComparator)
-		throws com.liferay.micro.maintainance.candidate.exception.NoSuchEntryException {
-		return getPersistence()
-				   .findByC_U_PrevAndNext(entryId, companyId, userId,
-			orderByComparator);
-	}
-
-	/**
-	* Removes all the candidate entries where companyId = &#63; and userId = &#63; from the database.
-	*
-	* @param companyId the company ID
-	* @param userId the user ID
-	*/
-	public static void removeByC_U(long companyId, long userId) {
-		getPersistence().removeByC_U(companyId, userId);
-	}
-
-	/**
-	* Returns the number of candidate entries where companyId = &#63; and userId = &#63;.
-	*
-	* @param companyId the company ID
-	* @param userId the user ID
-	* @return the number of matching candidate entries
-	*/
-	public static int countByC_U(long companyId, long userId) {
-		return getPersistence().countByC_U(companyId, userId);
 	}
 
 	/**
@@ -1135,20 +965,20 @@ public class CandidateEntryUtil {
 	/**
 	* Returns the candidate entries before and after the current candidate entry in the ordered set where companyId = &#63; and createDate &lt; &#63;.
 	*
-	* @param entryId the primary key of the current candidate entry
+	* @param candidateEntryId the primary key of the current candidate entry
 	* @param companyId the company ID
 	* @param createDate the create date
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next candidate entry
 	* @throws NoSuchEntryException if a candidate entry with the primary key could not be found
 	*/
-	public static CandidateEntry[] findByC_ctD_PrevAndNext(long entryId,
-		long companyId, Date createDate,
+	public static CandidateEntry[] findByC_ctD_PrevAndNext(
+		long candidateEntryId, long companyId, Date createDate,
 		OrderByComparator<CandidateEntry> orderByComparator)
 		throws com.liferay.micro.maintainance.candidate.exception.NoSuchEntryException {
 		return getPersistence()
-				   .findByC_ctD_PrevAndNext(entryId, companyId, createDate,
-			orderByComparator);
+				   .findByC_ctD_PrevAndNext(candidateEntryId, companyId,
+			createDate, orderByComparator);
 	}
 
 	/**
@@ -1170,6 +1000,179 @@ public class CandidateEntryUtil {
 	*/
 	public static int countByC_ctD(long companyId, Date createDate) {
 		return getPersistence().countByC_ctD(companyId, createDate);
+	}
+
+	/**
+	* Returns all the candidate entries where companyId = &#63; and userId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param userId the user ID
+	* @return the matching candidate entries
+	*/
+	public static List<CandidateEntry> findByC_U(long companyId, long userId) {
+		return getPersistence().findByC_U(companyId, userId);
+	}
+
+	/**
+	* Returns a range of all the candidate entries where companyId = &#63; and userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param userId the user ID
+	* @param start the lower bound of the range of candidate entries
+	* @param end the upper bound of the range of candidate entries (not inclusive)
+	* @return the range of matching candidate entries
+	*/
+	public static List<CandidateEntry> findByC_U(long companyId, long userId,
+		int start, int end) {
+		return getPersistence().findByC_U(companyId, userId, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the candidate entries where companyId = &#63; and userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param userId the user ID
+	* @param start the lower bound of the range of candidate entries
+	* @param end the upper bound of the range of candidate entries (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching candidate entries
+	*/
+	public static List<CandidateEntry> findByC_U(long companyId, long userId,
+		int start, int end, OrderByComparator<CandidateEntry> orderByComparator) {
+		return getPersistence()
+				   .findByC_U(companyId, userId, start, end, orderByComparator);
+	}
+
+	/**
+	* Returns an ordered range of all the candidate entries where companyId = &#63; and userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param userId the user ID
+	* @param start the lower bound of the range of candidate entries
+	* @param end the upper bound of the range of candidate entries (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching candidate entries
+	*/
+	public static List<CandidateEntry> findByC_U(long companyId, long userId,
+		int start, int end,
+		OrderByComparator<CandidateEntry> orderByComparator,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .findByC_U(companyId, userId, start, end, orderByComparator,
+			retrieveFromCache);
+	}
+
+	/**
+	* Returns the first candidate entry in the ordered set where companyId = &#63; and userId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching candidate entry
+	* @throws NoSuchEntryException if a matching candidate entry could not be found
+	*/
+	public static CandidateEntry findByC_U_First(long companyId, long userId,
+		OrderByComparator<CandidateEntry> orderByComparator)
+		throws com.liferay.micro.maintainance.candidate.exception.NoSuchEntryException {
+		return getPersistence()
+				   .findByC_U_First(companyId, userId, orderByComparator);
+	}
+
+	/**
+	* Returns the first candidate entry in the ordered set where companyId = &#63; and userId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching candidate entry, or <code>null</code> if a matching candidate entry could not be found
+	*/
+	public static CandidateEntry fetchByC_U_First(long companyId, long userId,
+		OrderByComparator<CandidateEntry> orderByComparator) {
+		return getPersistence()
+				   .fetchByC_U_First(companyId, userId, orderByComparator);
+	}
+
+	/**
+	* Returns the last candidate entry in the ordered set where companyId = &#63; and userId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching candidate entry
+	* @throws NoSuchEntryException if a matching candidate entry could not be found
+	*/
+	public static CandidateEntry findByC_U_Last(long companyId, long userId,
+		OrderByComparator<CandidateEntry> orderByComparator)
+		throws com.liferay.micro.maintainance.candidate.exception.NoSuchEntryException {
+		return getPersistence()
+				   .findByC_U_Last(companyId, userId, orderByComparator);
+	}
+
+	/**
+	* Returns the last candidate entry in the ordered set where companyId = &#63; and userId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching candidate entry, or <code>null</code> if a matching candidate entry could not be found
+	*/
+	public static CandidateEntry fetchByC_U_Last(long companyId, long userId,
+		OrderByComparator<CandidateEntry> orderByComparator) {
+		return getPersistence()
+				   .fetchByC_U_Last(companyId, userId, orderByComparator);
+	}
+
+	/**
+	* Returns the candidate entries before and after the current candidate entry in the ordered set where companyId = &#63; and userId = &#63;.
+	*
+	* @param candidateEntryId the primary key of the current candidate entry
+	* @param companyId the company ID
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next candidate entry
+	* @throws NoSuchEntryException if a candidate entry with the primary key could not be found
+	*/
+	public static CandidateEntry[] findByC_U_PrevAndNext(
+		long candidateEntryId, long companyId, long userId,
+		OrderByComparator<CandidateEntry> orderByComparator)
+		throws com.liferay.micro.maintainance.candidate.exception.NoSuchEntryException {
+		return getPersistence()
+				   .findByC_U_PrevAndNext(candidateEntryId, companyId, userId,
+			orderByComparator);
+	}
+
+	/**
+	* Removes all the candidate entries where companyId = &#63; and userId = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param userId the user ID
+	*/
+	public static void removeByC_U(long companyId, long userId) {
+		getPersistence().removeByC_U(companyId, userId);
+	}
+
+	/**
+	* Returns the number of candidate entries where companyId = &#63; and userId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param userId the user ID
+	* @return the number of matching candidate entries
+	*/
+	public static int countByC_U(long companyId, long userId) {
+		return getPersistence().countByC_U(companyId, userId);
 	}
 
 	/**
@@ -1231,234 +1234,6 @@ public class CandidateEntryUtil {
 	*/
 	public static int countByG_P(long groupId, long wikiPageId) {
 		return getPersistence().countByG_P(groupId, wikiPageId);
-	}
-
-	/**
-	* Returns the candidate entry where wikiPageId = &#63; or throws a {@link NoSuchEntryException} if it could not be found.
-	*
-	* @param wikiPageId the wiki page ID
-	* @return the matching candidate entry
-	* @throws NoSuchEntryException if a matching candidate entry could not be found
-	*/
-	public static CandidateEntry findByWikiPageId(long wikiPageId)
-		throws com.liferay.micro.maintainance.candidate.exception.NoSuchEntryException {
-		return getPersistence().findByWikiPageId(wikiPageId);
-	}
-
-	/**
-	* Returns the candidate entry where wikiPageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param wikiPageId the wiki page ID
-	* @return the matching candidate entry, or <code>null</code> if a matching candidate entry could not be found
-	*/
-	public static CandidateEntry fetchByWikiPageId(long wikiPageId) {
-		return getPersistence().fetchByWikiPageId(wikiPageId);
-	}
-
-	/**
-	* Returns the candidate entry where wikiPageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param wikiPageId the wiki page ID
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the matching candidate entry, or <code>null</code> if a matching candidate entry could not be found
-	*/
-	public static CandidateEntry fetchByWikiPageId(long wikiPageId,
-		boolean retrieveFromCache) {
-		return getPersistence().fetchByWikiPageId(wikiPageId, retrieveFromCache);
-	}
-
-	/**
-	* Removes the candidate entry where wikiPageId = &#63; from the database.
-	*
-	* @param wikiPageId the wiki page ID
-	* @return the candidate entry that was removed
-	*/
-	public static CandidateEntry removeByWikiPageId(long wikiPageId)
-		throws com.liferay.micro.maintainance.candidate.exception.NoSuchEntryException {
-		return getPersistence().removeByWikiPageId(wikiPageId);
-	}
-
-	/**
-	* Returns the number of candidate entries where wikiPageId = &#63;.
-	*
-	* @param wikiPageId the wiki page ID
-	* @return the number of matching candidate entries
-	*/
-	public static int countByWikiPageId(long wikiPageId) {
-		return getPersistence().countByWikiPageId(wikiPageId);
-	}
-
-	/**
-	* Returns all the candidate entries where userId = &#63; and wikiPageId = &#63;.
-	*
-	* @param userId the user ID
-	* @param wikiPageId the wiki page ID
-	* @return the matching candidate entries
-	*/
-	public static List<CandidateEntry> findByU_P(long userId, long wikiPageId) {
-		return getPersistence().findByU_P(userId, wikiPageId);
-	}
-
-	/**
-	* Returns a range of all the candidate entries where userId = &#63; and wikiPageId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param userId the user ID
-	* @param wikiPageId the wiki page ID
-	* @param start the lower bound of the range of candidate entries
-	* @param end the upper bound of the range of candidate entries (not inclusive)
-	* @return the range of matching candidate entries
-	*/
-	public static List<CandidateEntry> findByU_P(long userId, long wikiPageId,
-		int start, int end) {
-		return getPersistence().findByU_P(userId, wikiPageId, start, end);
-	}
-
-	/**
-	* Returns an ordered range of all the candidate entries where userId = &#63; and wikiPageId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param userId the user ID
-	* @param wikiPageId the wiki page ID
-	* @param start the lower bound of the range of candidate entries
-	* @param end the upper bound of the range of candidate entries (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching candidate entries
-	*/
-	public static List<CandidateEntry> findByU_P(long userId, long wikiPageId,
-		int start, int end, OrderByComparator<CandidateEntry> orderByComparator) {
-		return getPersistence()
-				   .findByU_P(userId, wikiPageId, start, end, orderByComparator);
-	}
-
-	/**
-	* Returns an ordered range of all the candidate entries where userId = &#63; and wikiPageId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param userId the user ID
-	* @param wikiPageId the wiki page ID
-	* @param start the lower bound of the range of candidate entries
-	* @param end the upper bound of the range of candidate entries (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching candidate entries
-	*/
-	public static List<CandidateEntry> findByU_P(long userId, long wikiPageId,
-		int start, int end,
-		OrderByComparator<CandidateEntry> orderByComparator,
-		boolean retrieveFromCache) {
-		return getPersistence()
-				   .findByU_P(userId, wikiPageId, start, end,
-			orderByComparator, retrieveFromCache);
-	}
-
-	/**
-	* Returns the first candidate entry in the ordered set where userId = &#63; and wikiPageId = &#63;.
-	*
-	* @param userId the user ID
-	* @param wikiPageId the wiki page ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching candidate entry
-	* @throws NoSuchEntryException if a matching candidate entry could not be found
-	*/
-	public static CandidateEntry findByU_P_First(long userId, long wikiPageId,
-		OrderByComparator<CandidateEntry> orderByComparator)
-		throws com.liferay.micro.maintainance.candidate.exception.NoSuchEntryException {
-		return getPersistence()
-				   .findByU_P_First(userId, wikiPageId, orderByComparator);
-	}
-
-	/**
-	* Returns the first candidate entry in the ordered set where userId = &#63; and wikiPageId = &#63;.
-	*
-	* @param userId the user ID
-	* @param wikiPageId the wiki page ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching candidate entry, or <code>null</code> if a matching candidate entry could not be found
-	*/
-	public static CandidateEntry fetchByU_P_First(long userId, long wikiPageId,
-		OrderByComparator<CandidateEntry> orderByComparator) {
-		return getPersistence()
-				   .fetchByU_P_First(userId, wikiPageId, orderByComparator);
-	}
-
-	/**
-	* Returns the last candidate entry in the ordered set where userId = &#63; and wikiPageId = &#63;.
-	*
-	* @param userId the user ID
-	* @param wikiPageId the wiki page ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching candidate entry
-	* @throws NoSuchEntryException if a matching candidate entry could not be found
-	*/
-	public static CandidateEntry findByU_P_Last(long userId, long wikiPageId,
-		OrderByComparator<CandidateEntry> orderByComparator)
-		throws com.liferay.micro.maintainance.candidate.exception.NoSuchEntryException {
-		return getPersistence()
-				   .findByU_P_Last(userId, wikiPageId, orderByComparator);
-	}
-
-	/**
-	* Returns the last candidate entry in the ordered set where userId = &#63; and wikiPageId = &#63;.
-	*
-	* @param userId the user ID
-	* @param wikiPageId the wiki page ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching candidate entry, or <code>null</code> if a matching candidate entry could not be found
-	*/
-	public static CandidateEntry fetchByU_P_Last(long userId, long wikiPageId,
-		OrderByComparator<CandidateEntry> orderByComparator) {
-		return getPersistence()
-				   .fetchByU_P_Last(userId, wikiPageId, orderByComparator);
-	}
-
-	/**
-	* Returns the candidate entries before and after the current candidate entry in the ordered set where userId = &#63; and wikiPageId = &#63;.
-	*
-	* @param entryId the primary key of the current candidate entry
-	* @param userId the user ID
-	* @param wikiPageId the wiki page ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next candidate entry
-	* @throws NoSuchEntryException if a candidate entry with the primary key could not be found
-	*/
-	public static CandidateEntry[] findByU_P_PrevAndNext(long entryId,
-		long userId, long wikiPageId,
-		OrderByComparator<CandidateEntry> orderByComparator)
-		throws com.liferay.micro.maintainance.candidate.exception.NoSuchEntryException {
-		return getPersistence()
-				   .findByU_P_PrevAndNext(entryId, userId, wikiPageId,
-			orderByComparator);
-	}
-
-	/**
-	* Removes all the candidate entries where userId = &#63; and wikiPageId = &#63; from the database.
-	*
-	* @param userId the user ID
-	* @param wikiPageId the wiki page ID
-	*/
-	public static void removeByU_P(long userId, long wikiPageId) {
-		getPersistence().removeByU_P(userId, wikiPageId);
-	}
-
-	/**
-	* Returns the number of candidate entries where userId = &#63; and wikiPageId = &#63;.
-	*
-	* @param userId the user ID
-	* @param wikiPageId the wiki page ID
-	* @return the number of matching candidate entries
-	*/
-	public static int countByU_P(long userId, long wikiPageId) {
-		return getPersistence().countByU_P(userId, wikiPageId);
 	}
 
 	/**
@@ -1613,7 +1388,7 @@ public class CandidateEntryUtil {
 	/**
 	* Returns the candidate entries before and after the current candidate entry in the ordered set where groupId = &#63; and userId = &#63; and wikiPageId = &#63;.
 	*
-	* @param entryId the primary key of the current candidate entry
+	* @param candidateEntryId the primary key of the current candidate entry
 	* @param groupId the group ID
 	* @param userId the user ID
 	* @param wikiPageId the wiki page ID
@@ -1621,12 +1396,12 @@ public class CandidateEntryUtil {
 	* @return the previous, current, and next candidate entry
 	* @throws NoSuchEntryException if a candidate entry with the primary key could not be found
 	*/
-	public static CandidateEntry[] findByG_U_P_PrevAndNext(long entryId,
-		long groupId, long userId, long wikiPageId,
+	public static CandidateEntry[] findByG_U_P_PrevAndNext(
+		long candidateEntryId, long groupId, long userId, long wikiPageId,
 		OrderByComparator<CandidateEntry> orderByComparator)
 		throws com.liferay.micro.maintainance.candidate.exception.NoSuchEntryException {
 		return getPersistence()
-				   .findByG_U_P_PrevAndNext(entryId, groupId, userId,
+				   .findByG_U_P_PrevAndNext(candidateEntryId, groupId, userId,
 			wikiPageId, orderByComparator);
 	}
 
@@ -1789,20 +1564,20 @@ public class CandidateEntryUtil {
 	/**
 	* Returns the candidate entries before and after the current candidate entry in the ordered set where userId = &#63; and createDate = &#63;.
 	*
-	* @param entryId the primary key of the current candidate entry
+	* @param candidateEntryId the primary key of the current candidate entry
 	* @param userId the user ID
 	* @param createDate the create date
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next candidate entry
 	* @throws NoSuchEntryException if a candidate entry with the primary key could not be found
 	*/
-	public static CandidateEntry[] findByU_cD_PrevAndNext(long entryId,
-		long userId, Date createDate,
+	public static CandidateEntry[] findByU_cD_PrevAndNext(
+		long candidateEntryId, long userId, Date createDate,
 		OrderByComparator<CandidateEntry> orderByComparator)
 		throws com.liferay.micro.maintainance.candidate.exception.NoSuchEntryException {
 		return getPersistence()
-				   .findByU_cD_PrevAndNext(entryId, userId, createDate,
-			orderByComparator);
+				   .findByU_cD_PrevAndNext(candidateEntryId, userId,
+			createDate, orderByComparator);
 	}
 
 	/**
@@ -1827,6 +1602,234 @@ public class CandidateEntryUtil {
 	}
 
 	/**
+	* Returns all the candidate entries where userId = &#63; and wikiPageId = &#63;.
+	*
+	* @param userId the user ID
+	* @param wikiPageId the wiki page ID
+	* @return the matching candidate entries
+	*/
+	public static List<CandidateEntry> findByU_P(long userId, long wikiPageId) {
+		return getPersistence().findByU_P(userId, wikiPageId);
+	}
+
+	/**
+	* Returns a range of all the candidate entries where userId = &#63; and wikiPageId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param wikiPageId the wiki page ID
+	* @param start the lower bound of the range of candidate entries
+	* @param end the upper bound of the range of candidate entries (not inclusive)
+	* @return the range of matching candidate entries
+	*/
+	public static List<CandidateEntry> findByU_P(long userId, long wikiPageId,
+		int start, int end) {
+		return getPersistence().findByU_P(userId, wikiPageId, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the candidate entries where userId = &#63; and wikiPageId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param wikiPageId the wiki page ID
+	* @param start the lower bound of the range of candidate entries
+	* @param end the upper bound of the range of candidate entries (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching candidate entries
+	*/
+	public static List<CandidateEntry> findByU_P(long userId, long wikiPageId,
+		int start, int end, OrderByComparator<CandidateEntry> orderByComparator) {
+		return getPersistence()
+				   .findByU_P(userId, wikiPageId, start, end, orderByComparator);
+	}
+
+	/**
+	* Returns an ordered range of all the candidate entries where userId = &#63; and wikiPageId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param wikiPageId the wiki page ID
+	* @param start the lower bound of the range of candidate entries
+	* @param end the upper bound of the range of candidate entries (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching candidate entries
+	*/
+	public static List<CandidateEntry> findByU_P(long userId, long wikiPageId,
+		int start, int end,
+		OrderByComparator<CandidateEntry> orderByComparator,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .findByU_P(userId, wikiPageId, start, end,
+			orderByComparator, retrieveFromCache);
+	}
+
+	/**
+	* Returns the first candidate entry in the ordered set where userId = &#63; and wikiPageId = &#63;.
+	*
+	* @param userId the user ID
+	* @param wikiPageId the wiki page ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching candidate entry
+	* @throws NoSuchEntryException if a matching candidate entry could not be found
+	*/
+	public static CandidateEntry findByU_P_First(long userId, long wikiPageId,
+		OrderByComparator<CandidateEntry> orderByComparator)
+		throws com.liferay.micro.maintainance.candidate.exception.NoSuchEntryException {
+		return getPersistence()
+				   .findByU_P_First(userId, wikiPageId, orderByComparator);
+	}
+
+	/**
+	* Returns the first candidate entry in the ordered set where userId = &#63; and wikiPageId = &#63;.
+	*
+	* @param userId the user ID
+	* @param wikiPageId the wiki page ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching candidate entry, or <code>null</code> if a matching candidate entry could not be found
+	*/
+	public static CandidateEntry fetchByU_P_First(long userId, long wikiPageId,
+		OrderByComparator<CandidateEntry> orderByComparator) {
+		return getPersistence()
+				   .fetchByU_P_First(userId, wikiPageId, orderByComparator);
+	}
+
+	/**
+	* Returns the last candidate entry in the ordered set where userId = &#63; and wikiPageId = &#63;.
+	*
+	* @param userId the user ID
+	* @param wikiPageId the wiki page ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching candidate entry
+	* @throws NoSuchEntryException if a matching candidate entry could not be found
+	*/
+	public static CandidateEntry findByU_P_Last(long userId, long wikiPageId,
+		OrderByComparator<CandidateEntry> orderByComparator)
+		throws com.liferay.micro.maintainance.candidate.exception.NoSuchEntryException {
+		return getPersistence()
+				   .findByU_P_Last(userId, wikiPageId, orderByComparator);
+	}
+
+	/**
+	* Returns the last candidate entry in the ordered set where userId = &#63; and wikiPageId = &#63;.
+	*
+	* @param userId the user ID
+	* @param wikiPageId the wiki page ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching candidate entry, or <code>null</code> if a matching candidate entry could not be found
+	*/
+	public static CandidateEntry fetchByU_P_Last(long userId, long wikiPageId,
+		OrderByComparator<CandidateEntry> orderByComparator) {
+		return getPersistence()
+				   .fetchByU_P_Last(userId, wikiPageId, orderByComparator);
+	}
+
+	/**
+	* Returns the candidate entries before and after the current candidate entry in the ordered set where userId = &#63; and wikiPageId = &#63;.
+	*
+	* @param candidateEntryId the primary key of the current candidate entry
+	* @param userId the user ID
+	* @param wikiPageId the wiki page ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next candidate entry
+	* @throws NoSuchEntryException if a candidate entry with the primary key could not be found
+	*/
+	public static CandidateEntry[] findByU_P_PrevAndNext(
+		long candidateEntryId, long userId, long wikiPageId,
+		OrderByComparator<CandidateEntry> orderByComparator)
+		throws com.liferay.micro.maintainance.candidate.exception.NoSuchEntryException {
+		return getPersistence()
+				   .findByU_P_PrevAndNext(candidateEntryId, userId, wikiPageId,
+			orderByComparator);
+	}
+
+	/**
+	* Removes all the candidate entries where userId = &#63; and wikiPageId = &#63; from the database.
+	*
+	* @param userId the user ID
+	* @param wikiPageId the wiki page ID
+	*/
+	public static void removeByU_P(long userId, long wikiPageId) {
+		getPersistence().removeByU_P(userId, wikiPageId);
+	}
+
+	/**
+	* Returns the number of candidate entries where userId = &#63; and wikiPageId = &#63;.
+	*
+	* @param userId the user ID
+	* @param wikiPageId the wiki page ID
+	* @return the number of matching candidate entries
+	*/
+	public static int countByU_P(long userId, long wikiPageId) {
+		return getPersistence().countByU_P(userId, wikiPageId);
+	}
+
+	/**
+	* Returns the candidate entry where wikiPageId = &#63; or throws a {@link NoSuchEntryException} if it could not be found.
+	*
+	* @param wikiPageId the wiki page ID
+	* @return the matching candidate entry
+	* @throws NoSuchEntryException if a matching candidate entry could not be found
+	*/
+	public static CandidateEntry findByWikiPageId(long wikiPageId)
+		throws com.liferay.micro.maintainance.candidate.exception.NoSuchEntryException {
+		return getPersistence().findByWikiPageId(wikiPageId);
+	}
+
+	/**
+	* Returns the candidate entry where wikiPageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param wikiPageId the wiki page ID
+	* @return the matching candidate entry, or <code>null</code> if a matching candidate entry could not be found
+	*/
+	public static CandidateEntry fetchByWikiPageId(long wikiPageId) {
+		return getPersistence().fetchByWikiPageId(wikiPageId);
+	}
+
+	/**
+	* Returns the candidate entry where wikiPageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param wikiPageId the wiki page ID
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching candidate entry, or <code>null</code> if a matching candidate entry could not be found
+	*/
+	public static CandidateEntry fetchByWikiPageId(long wikiPageId,
+		boolean retrieveFromCache) {
+		return getPersistence().fetchByWikiPageId(wikiPageId, retrieveFromCache);
+	}
+
+	/**
+	* Removes the candidate entry where wikiPageId = &#63; from the database.
+	*
+	* @param wikiPageId the wiki page ID
+	* @return the candidate entry that was removed
+	*/
+	public static CandidateEntry removeByWikiPageId(long wikiPageId)
+		throws com.liferay.micro.maintainance.candidate.exception.NoSuchEntryException {
+		return getPersistence().removeByWikiPageId(wikiPageId);
+	}
+
+	/**
+	* Returns the number of candidate entries where wikiPageId = &#63;.
+	*
+	* @param wikiPageId the wiki page ID
+	* @return the number of matching candidate entries
+	*/
+	public static int countByWikiPageId(long wikiPageId) {
+		return getPersistence().countByWikiPageId(wikiPageId);
+	}
+
+	/**
 	* Caches the candidate entry in the entity cache if it is enabled.
 	*
 	* @param candidateEntry the candidate entry
@@ -1847,23 +1850,23 @@ public class CandidateEntryUtil {
 	/**
 	* Creates a new candidate entry with the primary key. Does not add the candidate entry to the database.
 	*
-	* @param entryId the primary key for the new candidate entry
+	* @param candidateEntryId the primary key for the new candidate entry
 	* @return the new candidate entry
 	*/
-	public static CandidateEntry create(long entryId) {
-		return getPersistence().create(entryId);
+	public static CandidateEntry create(long candidateEntryId) {
+		return getPersistence().create(candidateEntryId);
 	}
 
 	/**
 	* Removes the candidate entry with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param entryId the primary key of the candidate entry
+	* @param candidateEntryId the primary key of the candidate entry
 	* @return the candidate entry that was removed
 	* @throws NoSuchEntryException if a candidate entry with the primary key could not be found
 	*/
-	public static CandidateEntry remove(long entryId)
+	public static CandidateEntry remove(long candidateEntryId)
 		throws com.liferay.micro.maintainance.candidate.exception.NoSuchEntryException {
-		return getPersistence().remove(entryId);
+		return getPersistence().remove(candidateEntryId);
 	}
 
 	public static CandidateEntry updateImpl(CandidateEntry candidateEntry) {
@@ -1873,23 +1876,23 @@ public class CandidateEntryUtil {
 	/**
 	* Returns the candidate entry with the primary key or throws a {@link NoSuchEntryException} if it could not be found.
 	*
-	* @param entryId the primary key of the candidate entry
+	* @param candidateEntryId the primary key of the candidate entry
 	* @return the candidate entry
 	* @throws NoSuchEntryException if a candidate entry with the primary key could not be found
 	*/
-	public static CandidateEntry findByPrimaryKey(long entryId)
+	public static CandidateEntry findByPrimaryKey(long candidateEntryId)
 		throws com.liferay.micro.maintainance.candidate.exception.NoSuchEntryException {
-		return getPersistence().findByPrimaryKey(entryId);
+		return getPersistence().findByPrimaryKey(candidateEntryId);
 	}
 
 	/**
 	* Returns the candidate entry with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param entryId the primary key of the candidate entry
+	* @param candidateEntryId the primary key of the candidate entry
 	* @return the candidate entry, or <code>null</code> if a candidate entry with the primary key could not be found
 	*/
-	public static CandidateEntry fetchByPrimaryKey(long entryId) {
-		return getPersistence().fetchByPrimaryKey(entryId);
+	public static CandidateEntry fetchByPrimaryKey(long candidateEntryId) {
+		return getPersistence().fetchByPrimaryKey(candidateEntryId);
 	}
 
 	public static java.util.Map<java.io.Serializable, CandidateEntry> fetchByPrimaryKeys(

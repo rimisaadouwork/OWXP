@@ -75,7 +75,7 @@ public class CandidateEntryModelImpl extends BaseModelImpl<CandidateEntry>
 	public static final String TABLE_NAME = "Candidate_CandidateEntry";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", Types.VARCHAR },
-			{ "entryId", Types.BIGINT },
+			{ "candidateEntryId", Types.BIGINT },
 			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
@@ -88,7 +88,7 @@ public class CandidateEntryModelImpl extends BaseModelImpl<CandidateEntry>
 
 	static {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("entryId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("candidateEntryId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
@@ -98,7 +98,7 @@ public class CandidateEntryModelImpl extends BaseModelImpl<CandidateEntry>
 		TABLE_COLUMNS_MAP.put("wikiPageId", Types.BIGINT);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table Candidate_CandidateEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,wikiPageId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table Candidate_CandidateEntry (uuid_ VARCHAR(75) null,candidateEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,wikiPageId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table Candidate_CandidateEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY candidateEntry.createDate ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Candidate_CandidateEntry.createDate ASC";
@@ -135,7 +135,7 @@ public class CandidateEntryModelImpl extends BaseModelImpl<CandidateEntry>
 		CandidateEntry model = new CandidateEntryImpl();
 
 		model.setUuid(soapModel.getUuid());
-		model.setEntryId(soapModel.getEntryId());
+		model.setCandidateEntryId(soapModel.getCandidateEntryId());
 		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
@@ -175,17 +175,17 @@ public class CandidateEntryModelImpl extends BaseModelImpl<CandidateEntry>
 
 	@Override
 	public long getPrimaryKey() {
-		return _entryId;
+		return _candidateEntryId;
 	}
 
 	@Override
 	public void setPrimaryKey(long primaryKey) {
-		setEntryId(primaryKey);
+		setCandidateEntryId(primaryKey);
 	}
 
 	@Override
 	public Serializable getPrimaryKeyObj() {
-		return _entryId;
+		return _candidateEntryId;
 	}
 
 	@Override
@@ -208,7 +208,7 @@ public class CandidateEntryModelImpl extends BaseModelImpl<CandidateEntry>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
-		attributes.put("entryId", getEntryId());
+		attributes.put("candidateEntryId", getCandidateEntryId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
@@ -231,10 +231,10 @@ public class CandidateEntryModelImpl extends BaseModelImpl<CandidateEntry>
 			setUuid(uuid);
 		}
 
-		Long entryId = (Long)attributes.get("entryId");
+		Long candidateEntryId = (Long)attributes.get("candidateEntryId");
 
-		if (entryId != null) {
-			setEntryId(entryId);
+		if (candidateEntryId != null) {
+			setCandidateEntryId(candidateEntryId);
 		}
 
 		Long groupId = (Long)attributes.get("groupId");
@@ -306,13 +306,13 @@ public class CandidateEntryModelImpl extends BaseModelImpl<CandidateEntry>
 
 	@JSON
 	@Override
-	public long getEntryId() {
-		return _entryId;
+	public long getCandidateEntryId() {
+		return _candidateEntryId;
 	}
 
 	@Override
-	public void setEntryId(long entryId) {
-		_entryId = entryId;
+	public void setCandidateEntryId(long candidateEntryId) {
+		_candidateEntryId = candidateEntryId;
 	}
 
 	@JSON
@@ -515,7 +515,7 @@ public class CandidateEntryModelImpl extends BaseModelImpl<CandidateEntry>
 		CandidateEntryImpl candidateEntryImpl = new CandidateEntryImpl();
 
 		candidateEntryImpl.setUuid(getUuid());
-		candidateEntryImpl.setEntryId(getEntryId());
+		candidateEntryImpl.setCandidateEntryId(getCandidateEntryId());
 		candidateEntryImpl.setGroupId(getGroupId());
 		candidateEntryImpl.setCompanyId(getCompanyId());
 		candidateEntryImpl.setUserId(getUserId());
@@ -621,7 +621,7 @@ public class CandidateEntryModelImpl extends BaseModelImpl<CandidateEntry>
 			candidateEntryCacheModel.uuid = null;
 		}
 
-		candidateEntryCacheModel.entryId = getEntryId();
+		candidateEntryCacheModel.candidateEntryId = getCandidateEntryId();
 
 		candidateEntryCacheModel.groupId = getGroupId();
 
@@ -666,8 +666,8 @@ public class CandidateEntryModelImpl extends BaseModelImpl<CandidateEntry>
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
-		sb.append(", entryId=");
-		sb.append(getEntryId());
+		sb.append(", candidateEntryId=");
+		sb.append(getCandidateEntryId());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
 		sb.append(", companyId=");
@@ -701,8 +701,8 @@ public class CandidateEntryModelImpl extends BaseModelImpl<CandidateEntry>
 		sb.append(getUuid());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>entryId</column-name><column-value><![CDATA[");
-		sb.append(getEntryId());
+			"<column><column-name>candidateEntryId</column-name><column-value><![CDATA[");
+		sb.append(getCandidateEntryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
@@ -744,7 +744,7 @@ public class CandidateEntryModelImpl extends BaseModelImpl<CandidateEntry>
 		};
 	private String _uuid;
 	private String _originalUuid;
-	private long _entryId;
+	private long _candidateEntryId;
 	private long _groupId;
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;

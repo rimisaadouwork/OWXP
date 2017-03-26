@@ -37,10 +37,11 @@ public interface CandidateEntry extends CandidateEntryModel, PersistedModel {
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.liferay.micro.maintainance.candidate.model.impl.CandidateEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CandidateEntry, Long> ENTRY_ID_ACCESSOR = new Accessor<CandidateEntry, Long>() {
+	public static final Accessor<CandidateEntry, Long> CANDIDATE_ENTRY_ID_ACCESSOR =
+		new Accessor<CandidateEntry, Long>() {
 			@Override
 			public Long get(CandidateEntry candidateEntry) {
-				return candidateEntry.getEntryId();
+				return candidateEntry.getCandidateEntryId();
 			}
 
 			@Override

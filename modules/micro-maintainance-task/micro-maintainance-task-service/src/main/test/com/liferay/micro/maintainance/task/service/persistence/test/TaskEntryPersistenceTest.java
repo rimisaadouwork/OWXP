@@ -128,20 +128,20 @@ public class TaskEntryPersistenceTest {
 
 		newTaskEntry.setCreateDate(RandomTestUtil.nextDate());
 
-		newTaskEntry.setTaskName(RandomTestUtil.randomString());
+		newTaskEntry.setTaskEntryName(RandomTestUtil.randomString());
 
 		_taskEntries.add(_persistence.update(newTaskEntry));
 
 		TaskEntry existingTaskEntry = _persistence.findByPrimaryKey(newTaskEntry.getPrimaryKey());
 
 		Assert.assertEquals(existingTaskEntry.getUuid(), newTaskEntry.getUuid());
-		Assert.assertEquals(existingTaskEntry.getTaskId(),
-			newTaskEntry.getTaskId());
+		Assert.assertEquals(existingTaskEntry.getTaskEntryId(),
+			newTaskEntry.getTaskEntryId());
 		Assert.assertEquals(Time.getShortTimestamp(
 				existingTaskEntry.getCreateDate()),
 			Time.getShortTimestamp(newTaskEntry.getCreateDate()));
-		Assert.assertEquals(existingTaskEntry.getTaskName(),
-			newTaskEntry.getTaskName());
+		Assert.assertEquals(existingTaskEntry.getTaskEntryName(),
+			newTaskEntry.getTaskEntryName());
 	}
 
 	@Test
@@ -193,7 +193,7 @@ public class TaskEntryPersistenceTest {
 
 	protected OrderByComparator<TaskEntry> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("Task_TaskEntry", "uuid",
-			true, "taskId", true, "createDate", true, "taskName", true);
+			true, "taskEntryId", true, "createDate", true, "taskEntryName", true);
 	}
 
 	@Test
@@ -324,8 +324,8 @@ public class TaskEntryPersistenceTest {
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(TaskEntry.class,
 				_dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("taskId",
-				newTaskEntry.getTaskId()));
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("taskEntryId",
+				newTaskEntry.getTaskEntryId()));
 
 		List<TaskEntry> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -341,7 +341,7 @@ public class TaskEntryPersistenceTest {
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(TaskEntry.class,
 				_dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("taskId",
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("taskEntryId",
 				RandomTestUtil.nextLong()));
 
 		List<TaskEntry> result = _persistence.findWithDynamicQuery(dynamicQuery);
@@ -357,20 +357,20 @@ public class TaskEntryPersistenceTest {
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(TaskEntry.class,
 				_dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property("taskId"));
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("taskEntryId"));
 
-		Object newTaskId = newTaskEntry.getTaskId();
+		Object newTaskEntryId = newTaskEntry.getTaskEntryId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("taskId",
-				new Object[] { newTaskId }));
+		dynamicQuery.add(RestrictionsFactoryUtil.in("taskEntryId",
+				new Object[] { newTaskEntryId }));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
-		Object existingTaskId = result.get(0);
+		Object existingTaskEntryId = result.get(0);
 
-		Assert.assertEquals(existingTaskId, newTaskId);
+		Assert.assertEquals(existingTaskEntryId, newTaskEntryId);
 	}
 
 	@Test
@@ -378,9 +378,9 @@ public class TaskEntryPersistenceTest {
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(TaskEntry.class,
 				_dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property("taskId"));
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("taskEntryId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("taskId",
+		dynamicQuery.add(RestrictionsFactoryUtil.in("taskEntryId",
 				new Object[] { RandomTestUtil.nextLong() }));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
@@ -396,13 +396,13 @@ public class TaskEntryPersistenceTest {
 
 		TaskEntry existingTaskEntry = _persistence.findByPrimaryKey(newTaskEntry.getPrimaryKey());
 
-		Assert.assertEquals(Long.valueOf(existingTaskEntry.getTaskId()),
+		Assert.assertEquals(Long.valueOf(existingTaskEntry.getTaskEntryId()),
 			ReflectionTestUtil.<Long>invoke(existingTaskEntry,
-				"getOriginalTaskId", new Class<?>[0]));
+				"getOriginalTaskEntryId", new Class<?>[0]));
 
-		Assert.assertTrue(Objects.equals(existingTaskEntry.getTaskName(),
+		Assert.assertTrue(Objects.equals(existingTaskEntry.getTaskEntryName(),
 				ReflectionTestUtil.invoke(existingTaskEntry,
-					"getOriginalTaskName", new Class<?>[0])));
+					"getOriginalTaskEntryName", new Class<?>[0])));
 	}
 
 	protected TaskEntry addTaskEntry() throws Exception {
@@ -414,7 +414,7 @@ public class TaskEntryPersistenceTest {
 
 		taskEntry.setCreateDate(RandomTestUtil.nextDate());
 
-		taskEntry.setTaskName(RandomTestUtil.randomString());
+		taskEntry.setTaskEntryName(RandomTestUtil.randomString());
 
 		_taskEntries.add(_persistence.update(taskEntry));
 

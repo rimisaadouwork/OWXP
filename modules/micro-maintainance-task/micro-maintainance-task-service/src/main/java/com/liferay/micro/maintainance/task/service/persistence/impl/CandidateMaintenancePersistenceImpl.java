@@ -103,7 +103,8 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 			CandidateMaintenanceImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByUuid",
 			new String[] { String.class.getName() },
-			CandidateMaintenanceModelImpl.UUID_COLUMN_BITMASK);
+			CandidateMaintenanceModelImpl.UUID_COLUMN_BITMASK |
+			CandidateMaintenanceModelImpl.CREATEDATE_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_UUID = new FinderPath(CandidateMaintenanceModelImpl.ENTITY_CACHE_ENABLED,
 			CandidateMaintenanceModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUuid",
@@ -638,88 +639,90 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 	private static final String _FINDER_COLUMN_UUID_UUID_1 = "candidateMaintenance.uuid IS NULL";
 	private static final String _FINDER_COLUMN_UUID_UUID_2 = "candidateMaintenance.uuid = ?";
 	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(candidateMaintenance.uuid IS NULL OR candidateMaintenance.uuid = '')";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_CANDIDATEIDS =
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_CANDIDATEENTRYIDS =
 		new FinderPath(CandidateMaintenanceModelImpl.ENTITY_CACHE_ENABLED,
 			CandidateMaintenanceModelImpl.FINDER_CACHE_ENABLED,
 			CandidateMaintenanceImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCandidateIds",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCandidateEntryIds",
 			new String[] {
 				Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CANDIDATEIDS =
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CANDIDATEENTRYIDS =
 		new FinderPath(CandidateMaintenanceModelImpl.ENTITY_CACHE_ENABLED,
 			CandidateMaintenanceModelImpl.FINDER_CACHE_ENABLED,
 			CandidateMaintenanceImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCandidateIds",
-			new String[] { Long.class.getName() },
-			CandidateMaintenanceModelImpl.CANDIDATEID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_CANDIDATEIDS = new FinderPath(CandidateMaintenanceModelImpl.ENTITY_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByCandidateEntryIds", new String[] { Long.class.getName() },
+			CandidateMaintenanceModelImpl.CANDIDATEENTRYID_COLUMN_BITMASK |
+			CandidateMaintenanceModelImpl.CREATEDATE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_CANDIDATEENTRYIDS = new FinderPath(CandidateMaintenanceModelImpl.ENTITY_CACHE_ENABLED,
 			CandidateMaintenanceModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCandidateIds",
-			new String[] { Long.class.getName() });
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByCandidateEntryIds", new String[] { Long.class.getName() });
 
 	/**
-	 * Returns all the candidate maintenances where candidateId = &#63;.
+	 * Returns all the candidate maintenances where candidateEntryId = &#63;.
 	 *
-	 * @param candidateId the candidate ID
+	 * @param candidateEntryId the candidate entry ID
 	 * @return the matching candidate maintenances
 	 */
 	@Override
-	public List<CandidateMaintenance> findByCandidateIds(long candidateId) {
-		return findByCandidateIds(candidateId, QueryUtil.ALL_POS,
+	public List<CandidateMaintenance> findByCandidateEntryIds(
+		long candidateEntryId) {
+		return findByCandidateEntryIds(candidateEntryId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the candidate maintenances where candidateId = &#63;.
+	 * Returns a range of all the candidate maintenances where candidateEntryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateMaintenanceModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param candidateId the candidate ID
+	 * @param candidateEntryId the candidate entry ID
 	 * @param start the lower bound of the range of candidate maintenances
 	 * @param end the upper bound of the range of candidate maintenances (not inclusive)
 	 * @return the range of matching candidate maintenances
 	 */
 	@Override
-	public List<CandidateMaintenance> findByCandidateIds(long candidateId,
-		int start, int end) {
-		return findByCandidateIds(candidateId, start, end, null);
+	public List<CandidateMaintenance> findByCandidateEntryIds(
+		long candidateEntryId, int start, int end) {
+		return findByCandidateEntryIds(candidateEntryId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the candidate maintenances where candidateId = &#63;.
+	 * Returns an ordered range of all the candidate maintenances where candidateEntryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateMaintenanceModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param candidateId the candidate ID
+	 * @param candidateEntryId the candidate entry ID
 	 * @param start the lower bound of the range of candidate maintenances
 	 * @param end the upper bound of the range of candidate maintenances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching candidate maintenances
 	 */
 	@Override
-	public List<CandidateMaintenance> findByCandidateIds(long candidateId,
-		int start, int end,
+	public List<CandidateMaintenance> findByCandidateEntryIds(
+		long candidateEntryId, int start, int end,
 		OrderByComparator<CandidateMaintenance> orderByComparator) {
-		return findByCandidateIds(candidateId, start, end, orderByComparator,
-			true);
+		return findByCandidateEntryIds(candidateEntryId, start, end,
+			orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the candidate maintenances where candidateId = &#63;.
+	 * Returns an ordered range of all the candidate maintenances where candidateEntryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateMaintenanceModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param candidateId the candidate ID
+	 * @param candidateEntryId the candidate entry ID
 	 * @param start the lower bound of the range of candidate maintenances
 	 * @param end the upper bound of the range of candidate maintenances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -727,8 +730,8 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 	 * @return the ordered range of matching candidate maintenances
 	 */
 	@Override
-	public List<CandidateMaintenance> findByCandidateIds(long candidateId,
-		int start, int end,
+	public List<CandidateMaintenance> findByCandidateEntryIds(
+		long candidateEntryId, int start, int end,
 		OrderByComparator<CandidateMaintenance> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
@@ -738,12 +741,16 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CANDIDATEIDS;
-			finderArgs = new Object[] { candidateId };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CANDIDATEENTRYIDS;
+			finderArgs = new Object[] { candidateEntryId };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_CANDIDATEIDS;
-			finderArgs = new Object[] { candidateId, start, end, orderByComparator };
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_CANDIDATEENTRYIDS;
+			finderArgs = new Object[] {
+					candidateEntryId,
+					
+					start, end, orderByComparator
+				};
 		}
 
 		List<CandidateMaintenance> list = null;
@@ -754,7 +761,7 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CandidateMaintenance candidateMaintenance : list) {
-					if ((candidateId != candidateMaintenance.getCandidateId())) {
+					if ((candidateEntryId != candidateMaintenance.getCandidateEntryId())) {
 						list = null;
 
 						break;
@@ -776,7 +783,7 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 
 			query.append(_SQL_SELECT_CANDIDATEMAINTENANCE_WHERE);
 
-			query.append(_FINDER_COLUMN_CANDIDATEIDS_CANDIDATEID_2);
+			query.append(_FINDER_COLUMN_CANDIDATEENTRYIDS_CANDIDATEENTRYID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -798,7 +805,7 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(candidateId);
+				qPos.add(candidateEntryId);
 
 				if (!pagination) {
 					list = (List<CandidateMaintenance>)QueryUtil.list(q,
@@ -831,18 +838,19 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 	}
 
 	/**
-	 * Returns the first candidate maintenance in the ordered set where candidateId = &#63;.
+	 * Returns the first candidate maintenance in the ordered set where candidateEntryId = &#63;.
 	 *
-	 * @param candidateId the candidate ID
+	 * @param candidateEntryId the candidate entry ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching candidate maintenance
 	 * @throws NoSuchCandidateMaintenanceException if a matching candidate maintenance could not be found
 	 */
 	@Override
-	public CandidateMaintenance findByCandidateIds_First(long candidateId,
+	public CandidateMaintenance findByCandidateEntryIds_First(
+		long candidateEntryId,
 		OrderByComparator<CandidateMaintenance> orderByComparator)
 		throws NoSuchCandidateMaintenanceException {
-		CandidateMaintenance candidateMaintenance = fetchByCandidateIds_First(candidateId,
+		CandidateMaintenance candidateMaintenance = fetchByCandidateEntryIds_First(candidateEntryId,
 				orderByComparator);
 
 		if (candidateMaintenance != null) {
@@ -853,8 +861,8 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("candidateId=");
-		msg.append(candidateId);
+		msg.append("candidateEntryId=");
+		msg.append(candidateEntryId);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -862,17 +870,18 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 	}
 
 	/**
-	 * Returns the first candidate maintenance in the ordered set where candidateId = &#63;.
+	 * Returns the first candidate maintenance in the ordered set where candidateEntryId = &#63;.
 	 *
-	 * @param candidateId the candidate ID
+	 * @param candidateEntryId the candidate entry ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching candidate maintenance, or <code>null</code> if a matching candidate maintenance could not be found
 	 */
 	@Override
-	public CandidateMaintenance fetchByCandidateIds_First(long candidateId,
+	public CandidateMaintenance fetchByCandidateEntryIds_First(
+		long candidateEntryId,
 		OrderByComparator<CandidateMaintenance> orderByComparator) {
-		List<CandidateMaintenance> list = findByCandidateIds(candidateId, 0, 1,
-				orderByComparator);
+		List<CandidateMaintenance> list = findByCandidateEntryIds(candidateEntryId,
+				0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -882,18 +891,19 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 	}
 
 	/**
-	 * Returns the last candidate maintenance in the ordered set where candidateId = &#63;.
+	 * Returns the last candidate maintenance in the ordered set where candidateEntryId = &#63;.
 	 *
-	 * @param candidateId the candidate ID
+	 * @param candidateEntryId the candidate entry ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching candidate maintenance
 	 * @throws NoSuchCandidateMaintenanceException if a matching candidate maintenance could not be found
 	 */
 	@Override
-	public CandidateMaintenance findByCandidateIds_Last(long candidateId,
+	public CandidateMaintenance findByCandidateEntryIds_Last(
+		long candidateEntryId,
 		OrderByComparator<CandidateMaintenance> orderByComparator)
 		throws NoSuchCandidateMaintenanceException {
-		CandidateMaintenance candidateMaintenance = fetchByCandidateIds_Last(candidateId,
+		CandidateMaintenance candidateMaintenance = fetchByCandidateEntryIds_Last(candidateEntryId,
 				orderByComparator);
 
 		if (candidateMaintenance != null) {
@@ -904,8 +914,8 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("candidateId=");
-		msg.append(candidateId);
+		msg.append("candidateEntryId=");
+		msg.append(candidateEntryId);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -913,22 +923,23 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 	}
 
 	/**
-	 * Returns the last candidate maintenance in the ordered set where candidateId = &#63;.
+	 * Returns the last candidate maintenance in the ordered set where candidateEntryId = &#63;.
 	 *
-	 * @param candidateId the candidate ID
+	 * @param candidateEntryId the candidate entry ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching candidate maintenance, or <code>null</code> if a matching candidate maintenance could not be found
 	 */
 	@Override
-	public CandidateMaintenance fetchByCandidateIds_Last(long candidateId,
+	public CandidateMaintenance fetchByCandidateEntryIds_Last(
+		long candidateEntryId,
 		OrderByComparator<CandidateMaintenance> orderByComparator) {
-		int count = countByCandidateIds(candidateId);
+		int count = countByCandidateEntryIds(candidateEntryId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CandidateMaintenance> list = findByCandidateIds(candidateId,
+		List<CandidateMaintenance> list = findByCandidateEntryIds(candidateEntryId,
 				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -939,17 +950,17 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 	}
 
 	/**
-	 * Returns the candidate maintenances before and after the current candidate maintenance in the ordered set where candidateId = &#63;.
+	 * Returns the candidate maintenances before and after the current candidate maintenance in the ordered set where candidateEntryId = &#63;.
 	 *
 	 * @param candidateMaintenanceId the primary key of the current candidate maintenance
-	 * @param candidateId the candidate ID
+	 * @param candidateEntryId the candidate entry ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next candidate maintenance
 	 * @throws NoSuchCandidateMaintenanceException if a candidate maintenance with the primary key could not be found
 	 */
 	@Override
-	public CandidateMaintenance[] findByCandidateIds_PrevAndNext(
-		long candidateMaintenanceId, long candidateId,
+	public CandidateMaintenance[] findByCandidateEntryIds_PrevAndNext(
+		long candidateMaintenanceId, long candidateEntryId,
 		OrderByComparator<CandidateMaintenance> orderByComparator)
 		throws NoSuchCandidateMaintenanceException {
 		CandidateMaintenance candidateMaintenance = findByPrimaryKey(candidateMaintenanceId);
@@ -961,13 +972,15 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 
 			CandidateMaintenance[] array = new CandidateMaintenanceImpl[3];
 
-			array[0] = getByCandidateIds_PrevAndNext(session,
-					candidateMaintenance, candidateId, orderByComparator, true);
+			array[0] = getByCandidateEntryIds_PrevAndNext(session,
+					candidateMaintenance, candidateEntryId, orderByComparator,
+					true);
 
 			array[1] = candidateMaintenance;
 
-			array[2] = getByCandidateIds_PrevAndNext(session,
-					candidateMaintenance, candidateId, orderByComparator, false);
+			array[2] = getByCandidateEntryIds_PrevAndNext(session,
+					candidateMaintenance, candidateEntryId, orderByComparator,
+					false);
 
 			return array;
 		}
@@ -979,9 +992,9 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 		}
 	}
 
-	protected CandidateMaintenance getByCandidateIds_PrevAndNext(
+	protected CandidateMaintenance getByCandidateEntryIds_PrevAndNext(
 		Session session, CandidateMaintenance candidateMaintenance,
-		long candidateId,
+		long candidateEntryId,
 		OrderByComparator<CandidateMaintenance> orderByComparator,
 		boolean previous) {
 		StringBundler query = null;
@@ -997,7 +1010,7 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 
 		query.append(_SQL_SELECT_CANDIDATEMAINTENANCE_WHERE);
 
-		query.append(_FINDER_COLUMN_CANDIDATEIDS_CANDIDATEID_2);
+		query.append(_FINDER_COLUMN_CANDIDATEENTRYIDS_CANDIDATEENTRYID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -1067,7 +1080,7 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(candidateId);
+		qPos.add(candidateEntryId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(candidateMaintenance);
@@ -1088,29 +1101,29 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 	}
 
 	/**
-	 * Removes all the candidate maintenances where candidateId = &#63; from the database.
+	 * Removes all the candidate maintenances where candidateEntryId = &#63; from the database.
 	 *
-	 * @param candidateId the candidate ID
+	 * @param candidateEntryId the candidate entry ID
 	 */
 	@Override
-	public void removeByCandidateIds(long candidateId) {
-		for (CandidateMaintenance candidateMaintenance : findByCandidateIds(
-				candidateId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+	public void removeByCandidateEntryIds(long candidateEntryId) {
+		for (CandidateMaintenance candidateMaintenance : findByCandidateEntryIds(
+				candidateEntryId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(candidateMaintenance);
 		}
 	}
 
 	/**
-	 * Returns the number of candidate maintenances where candidateId = &#63;.
+	 * Returns the number of candidate maintenances where candidateEntryId = &#63;.
 	 *
-	 * @param candidateId the candidate ID
+	 * @param candidateEntryId the candidate entry ID
 	 * @return the number of matching candidate maintenances
 	 */
 	@Override
-	public int countByCandidateIds(long candidateId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_CANDIDATEIDS;
+	public int countByCandidateEntryIds(long candidateEntryId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_CANDIDATEENTRYIDS;
 
-		Object[] finderArgs = new Object[] { candidateId };
+		Object[] finderArgs = new Object[] { candidateEntryId };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1119,7 +1132,7 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 
 			query.append(_SQL_COUNT_CANDIDATEMAINTENANCE_WHERE);
 
-			query.append(_FINDER_COLUMN_CANDIDATEIDS_CANDIDATEID_2);
+			query.append(_FINDER_COLUMN_CANDIDATEENTRYIDS_CANDIDATEENTRYID_2);
 
 			String sql = query.toString();
 
@@ -1132,7 +1145,7 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(candidateId);
+				qPos.add(candidateEntryId);
 
 				count = (Long)q.uniqueResult();
 
@@ -1151,85 +1164,91 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_CANDIDATEIDS_CANDIDATEID_2 = "candidateMaintenance.candidateId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_TASKIDS = new FinderPath(CandidateMaintenanceModelImpl.ENTITY_CACHE_ENABLED,
+	private static final String _FINDER_COLUMN_CANDIDATEENTRYIDS_CANDIDATEENTRYID_2 =
+		"candidateMaintenance.candidateEntryId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_TASKENTRYIDS =
+		new FinderPath(CandidateMaintenanceModelImpl.ENTITY_CACHE_ENABLED,
 			CandidateMaintenanceModelImpl.FINDER_CACHE_ENABLED,
 			CandidateMaintenanceImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByTaskIds",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByTaskEntryIds",
 			new String[] {
 				Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TASKIDS =
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TASKENTRYIDS =
 		new FinderPath(CandidateMaintenanceModelImpl.ENTITY_CACHE_ENABLED,
 			CandidateMaintenanceModelImpl.FINDER_CACHE_ENABLED,
 			CandidateMaintenanceImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByTaskIds",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByTaskEntryIds",
 			new String[] { Long.class.getName() },
-			CandidateMaintenanceModelImpl.TASKID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_TASKIDS = new FinderPath(CandidateMaintenanceModelImpl.ENTITY_CACHE_ENABLED,
+			CandidateMaintenanceModelImpl.TASKENTRYID_COLUMN_BITMASK |
+			CandidateMaintenanceModelImpl.CREATEDATE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_TASKENTRYIDS = new FinderPath(CandidateMaintenanceModelImpl.ENTITY_CACHE_ENABLED,
 			CandidateMaintenanceModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByTaskIds",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByTaskEntryIds",
 			new String[] { Long.class.getName() });
 
 	/**
-	 * Returns all the candidate maintenances where taskId = &#63;.
+	 * Returns all the candidate maintenances where taskEntryId = &#63;.
 	 *
-	 * @param taskId the task ID
+	 * @param taskEntryId the task entry ID
 	 * @return the matching candidate maintenances
 	 */
 	@Override
-	public List<CandidateMaintenance> findByTaskIds(long taskId) {
-		return findByTaskIds(taskId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<CandidateMaintenance> findByTaskEntryIds(long taskEntryId) {
+		return findByTaskEntryIds(taskEntryId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the candidate maintenances where taskId = &#63;.
+	 * Returns a range of all the candidate maintenances where taskEntryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateMaintenanceModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param taskId the task ID
+	 * @param taskEntryId the task entry ID
 	 * @param start the lower bound of the range of candidate maintenances
 	 * @param end the upper bound of the range of candidate maintenances (not inclusive)
 	 * @return the range of matching candidate maintenances
 	 */
 	@Override
-	public List<CandidateMaintenance> findByTaskIds(long taskId, int start,
-		int end) {
-		return findByTaskIds(taskId, start, end, null);
+	public List<CandidateMaintenance> findByTaskEntryIds(long taskEntryId,
+		int start, int end) {
+		return findByTaskEntryIds(taskEntryId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the candidate maintenances where taskId = &#63;.
+	 * Returns an ordered range of all the candidate maintenances where taskEntryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateMaintenanceModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param taskId the task ID
+	 * @param taskEntryId the task entry ID
 	 * @param start the lower bound of the range of candidate maintenances
 	 * @param end the upper bound of the range of candidate maintenances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching candidate maintenances
 	 */
 	@Override
-	public List<CandidateMaintenance> findByTaskIds(long taskId, int start,
-		int end, OrderByComparator<CandidateMaintenance> orderByComparator) {
-		return findByTaskIds(taskId, start, end, orderByComparator, true);
+	public List<CandidateMaintenance> findByTaskEntryIds(long taskEntryId,
+		int start, int end,
+		OrderByComparator<CandidateMaintenance> orderByComparator) {
+		return findByTaskEntryIds(taskEntryId, start, end, orderByComparator,
+			true);
 	}
 
 	/**
-	 * Returns an ordered range of all the candidate maintenances where taskId = &#63;.
+	 * Returns an ordered range of all the candidate maintenances where taskEntryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateMaintenanceModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param taskId the task ID
+	 * @param taskEntryId the task entry ID
 	 * @param start the lower bound of the range of candidate maintenances
 	 * @param end the upper bound of the range of candidate maintenances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -1237,8 +1256,9 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 	 * @return the ordered range of matching candidate maintenances
 	 */
 	@Override
-	public List<CandidateMaintenance> findByTaskIds(long taskId, int start,
-		int end, OrderByComparator<CandidateMaintenance> orderByComparator,
+	public List<CandidateMaintenance> findByTaskEntryIds(long taskEntryId,
+		int start, int end,
+		OrderByComparator<CandidateMaintenance> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -1247,12 +1267,12 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TASKIDS;
-			finderArgs = new Object[] { taskId };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TASKENTRYIDS;
+			finderArgs = new Object[] { taskEntryId };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_TASKIDS;
-			finderArgs = new Object[] { taskId, start, end, orderByComparator };
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_TASKENTRYIDS;
+			finderArgs = new Object[] { taskEntryId, start, end, orderByComparator };
 		}
 
 		List<CandidateMaintenance> list = null;
@@ -1263,7 +1283,7 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CandidateMaintenance candidateMaintenance : list) {
-					if ((taskId != candidateMaintenance.getTaskId())) {
+					if ((taskEntryId != candidateMaintenance.getTaskEntryId())) {
 						list = null;
 
 						break;
@@ -1285,7 +1305,7 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 
 			query.append(_SQL_SELECT_CANDIDATEMAINTENANCE_WHERE);
 
-			query.append(_FINDER_COLUMN_TASKIDS_TASKID_2);
+			query.append(_FINDER_COLUMN_TASKENTRYIDS_TASKENTRYID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -1307,7 +1327,7 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(taskId);
+				qPos.add(taskEntryId);
 
 				if (!pagination) {
 					list = (List<CandidateMaintenance>)QueryUtil.list(q,
@@ -1340,18 +1360,18 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 	}
 
 	/**
-	 * Returns the first candidate maintenance in the ordered set where taskId = &#63;.
+	 * Returns the first candidate maintenance in the ordered set where taskEntryId = &#63;.
 	 *
-	 * @param taskId the task ID
+	 * @param taskEntryId the task entry ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching candidate maintenance
 	 * @throws NoSuchCandidateMaintenanceException if a matching candidate maintenance could not be found
 	 */
 	@Override
-	public CandidateMaintenance findByTaskIds_First(long taskId,
+	public CandidateMaintenance findByTaskEntryIds_First(long taskEntryId,
 		OrderByComparator<CandidateMaintenance> orderByComparator)
 		throws NoSuchCandidateMaintenanceException {
-		CandidateMaintenance candidateMaintenance = fetchByTaskIds_First(taskId,
+		CandidateMaintenance candidateMaintenance = fetchByTaskEntryIds_First(taskEntryId,
 				orderByComparator);
 
 		if (candidateMaintenance != null) {
@@ -1362,8 +1382,8 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("taskId=");
-		msg.append(taskId);
+		msg.append("taskEntryId=");
+		msg.append(taskEntryId);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1371,16 +1391,16 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 	}
 
 	/**
-	 * Returns the first candidate maintenance in the ordered set where taskId = &#63;.
+	 * Returns the first candidate maintenance in the ordered set where taskEntryId = &#63;.
 	 *
-	 * @param taskId the task ID
+	 * @param taskEntryId the task entry ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching candidate maintenance, or <code>null</code> if a matching candidate maintenance could not be found
 	 */
 	@Override
-	public CandidateMaintenance fetchByTaskIds_First(long taskId,
+	public CandidateMaintenance fetchByTaskEntryIds_First(long taskEntryId,
 		OrderByComparator<CandidateMaintenance> orderByComparator) {
-		List<CandidateMaintenance> list = findByTaskIds(taskId, 0, 1,
+		List<CandidateMaintenance> list = findByTaskEntryIds(taskEntryId, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -1391,18 +1411,18 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 	}
 
 	/**
-	 * Returns the last candidate maintenance in the ordered set where taskId = &#63;.
+	 * Returns the last candidate maintenance in the ordered set where taskEntryId = &#63;.
 	 *
-	 * @param taskId the task ID
+	 * @param taskEntryId the task entry ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching candidate maintenance
 	 * @throws NoSuchCandidateMaintenanceException if a matching candidate maintenance could not be found
 	 */
 	@Override
-	public CandidateMaintenance findByTaskIds_Last(long taskId,
+	public CandidateMaintenance findByTaskEntryIds_Last(long taskEntryId,
 		OrderByComparator<CandidateMaintenance> orderByComparator)
 		throws NoSuchCandidateMaintenanceException {
-		CandidateMaintenance candidateMaintenance = fetchByTaskIds_Last(taskId,
+		CandidateMaintenance candidateMaintenance = fetchByTaskEntryIds_Last(taskEntryId,
 				orderByComparator);
 
 		if (candidateMaintenance != null) {
@@ -1413,8 +1433,8 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("taskId=");
-		msg.append(taskId);
+		msg.append("taskEntryId=");
+		msg.append(taskEntryId);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1422,23 +1442,23 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 	}
 
 	/**
-	 * Returns the last candidate maintenance in the ordered set where taskId = &#63;.
+	 * Returns the last candidate maintenance in the ordered set where taskEntryId = &#63;.
 	 *
-	 * @param taskId the task ID
+	 * @param taskEntryId the task entry ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching candidate maintenance, or <code>null</code> if a matching candidate maintenance could not be found
 	 */
 	@Override
-	public CandidateMaintenance fetchByTaskIds_Last(long taskId,
+	public CandidateMaintenance fetchByTaskEntryIds_Last(long taskEntryId,
 		OrderByComparator<CandidateMaintenance> orderByComparator) {
-		int count = countByTaskIds(taskId);
+		int count = countByTaskEntryIds(taskEntryId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CandidateMaintenance> list = findByTaskIds(taskId, count - 1,
-				count, orderByComparator);
+		List<CandidateMaintenance> list = findByTaskEntryIds(taskEntryId,
+				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1448,17 +1468,17 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 	}
 
 	/**
-	 * Returns the candidate maintenances before and after the current candidate maintenance in the ordered set where taskId = &#63;.
+	 * Returns the candidate maintenances before and after the current candidate maintenance in the ordered set where taskEntryId = &#63;.
 	 *
 	 * @param candidateMaintenanceId the primary key of the current candidate maintenance
-	 * @param taskId the task ID
+	 * @param taskEntryId the task entry ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next candidate maintenance
 	 * @throws NoSuchCandidateMaintenanceException if a candidate maintenance with the primary key could not be found
 	 */
 	@Override
-	public CandidateMaintenance[] findByTaskIds_PrevAndNext(
-		long candidateMaintenanceId, long taskId,
+	public CandidateMaintenance[] findByTaskEntryIds_PrevAndNext(
+		long candidateMaintenanceId, long taskEntryId,
 		OrderByComparator<CandidateMaintenance> orderByComparator)
 		throws NoSuchCandidateMaintenanceException {
 		CandidateMaintenance candidateMaintenance = findByPrimaryKey(candidateMaintenanceId);
@@ -1470,13 +1490,13 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 
 			CandidateMaintenance[] array = new CandidateMaintenanceImpl[3];
 
-			array[0] = getByTaskIds_PrevAndNext(session, candidateMaintenance,
-					taskId, orderByComparator, true);
+			array[0] = getByTaskEntryIds_PrevAndNext(session,
+					candidateMaintenance, taskEntryId, orderByComparator, true);
 
 			array[1] = candidateMaintenance;
 
-			array[2] = getByTaskIds_PrevAndNext(session, candidateMaintenance,
-					taskId, orderByComparator, false);
+			array[2] = getByTaskEntryIds_PrevAndNext(session,
+					candidateMaintenance, taskEntryId, orderByComparator, false);
 
 			return array;
 		}
@@ -1488,8 +1508,9 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 		}
 	}
 
-	protected CandidateMaintenance getByTaskIds_PrevAndNext(Session session,
-		CandidateMaintenance candidateMaintenance, long taskId,
+	protected CandidateMaintenance getByTaskEntryIds_PrevAndNext(
+		Session session, CandidateMaintenance candidateMaintenance,
+		long taskEntryId,
 		OrderByComparator<CandidateMaintenance> orderByComparator,
 		boolean previous) {
 		StringBundler query = null;
@@ -1505,7 +1526,7 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 
 		query.append(_SQL_SELECT_CANDIDATEMAINTENANCE_WHERE);
 
-		query.append(_FINDER_COLUMN_TASKIDS_TASKID_2);
+		query.append(_FINDER_COLUMN_TASKENTRYIDS_TASKENTRYID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -1575,7 +1596,7 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(taskId);
+		qPos.add(taskEntryId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(candidateMaintenance);
@@ -1596,29 +1617,29 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 	}
 
 	/**
-	 * Removes all the candidate maintenances where taskId = &#63; from the database.
+	 * Removes all the candidate maintenances where taskEntryId = &#63; from the database.
 	 *
-	 * @param taskId the task ID
+	 * @param taskEntryId the task entry ID
 	 */
 	@Override
-	public void removeByTaskIds(long taskId) {
-		for (CandidateMaintenance candidateMaintenance : findByTaskIds(taskId,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+	public void removeByTaskEntryIds(long taskEntryId) {
+		for (CandidateMaintenance candidateMaintenance : findByTaskEntryIds(
+				taskEntryId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(candidateMaintenance);
 		}
 	}
 
 	/**
-	 * Returns the number of candidate maintenances where taskId = &#63;.
+	 * Returns the number of candidate maintenances where taskEntryId = &#63;.
 	 *
-	 * @param taskId the task ID
+	 * @param taskEntryId the task entry ID
 	 * @return the number of matching candidate maintenances
 	 */
 	@Override
-	public int countByTaskIds(long taskId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_TASKIDS;
+	public int countByTaskEntryIds(long taskEntryId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_TASKENTRYIDS;
 
-		Object[] finderArgs = new Object[] { taskId };
+		Object[] finderArgs = new Object[] { taskEntryId };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1627,7 +1648,7 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 
 			query.append(_SQL_COUNT_CANDIDATEMAINTENANCE_WHERE);
 
-			query.append(_FINDER_COLUMN_TASKIDS_TASKID_2);
+			query.append(_FINDER_COLUMN_TASKENTRYIDS_TASKENTRYID_2);
 
 			String sql = query.toString();
 
@@ -1640,7 +1661,7 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(taskId);
+				qPos.add(taskEntryId);
 
 				count = (Long)q.uniqueResult();
 
@@ -1659,43 +1680,43 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_TASKIDS_TASKID_2 = "candidateMaintenance.taskId = ?";
+	private static final String _FINDER_COLUMN_TASKENTRYIDS_TASKENTRYID_2 = "candidateMaintenance.taskEntryId = ?";
 	public static final FinderPath FINDER_PATH_FETCH_BY_C_T = new FinderPath(CandidateMaintenanceModelImpl.ENTITY_CACHE_ENABLED,
 			CandidateMaintenanceModelImpl.FINDER_CACHE_ENABLED,
 			CandidateMaintenanceImpl.class, FINDER_CLASS_NAME_ENTITY,
 			"fetchByC_T",
 			new String[] { Long.class.getName(), Long.class.getName() },
-			CandidateMaintenanceModelImpl.CANDIDATEID_COLUMN_BITMASK |
-			CandidateMaintenanceModelImpl.TASKID_COLUMN_BITMASK);
+			CandidateMaintenanceModelImpl.CANDIDATEENTRYID_COLUMN_BITMASK |
+			CandidateMaintenanceModelImpl.TASKENTRYID_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_C_T = new FinderPath(CandidateMaintenanceModelImpl.ENTITY_CACHE_ENABLED,
 			CandidateMaintenanceModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_T",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	/**
-	 * Returns the candidate maintenance where candidateId = &#63; and taskId = &#63; or throws a {@link NoSuchCandidateMaintenanceException} if it could not be found.
+	 * Returns the candidate maintenance where candidateEntryId = &#63; and taskEntryId = &#63; or throws a {@link NoSuchCandidateMaintenanceException} if it could not be found.
 	 *
-	 * @param candidateId the candidate ID
-	 * @param taskId the task ID
+	 * @param candidateEntryId the candidate entry ID
+	 * @param taskEntryId the task entry ID
 	 * @return the matching candidate maintenance
 	 * @throws NoSuchCandidateMaintenanceException if a matching candidate maintenance could not be found
 	 */
 	@Override
-	public CandidateMaintenance findByC_T(long candidateId, long taskId)
-		throws NoSuchCandidateMaintenanceException {
-		CandidateMaintenance candidateMaintenance = fetchByC_T(candidateId,
-				taskId);
+	public CandidateMaintenance findByC_T(long candidateEntryId,
+		long taskEntryId) throws NoSuchCandidateMaintenanceException {
+		CandidateMaintenance candidateMaintenance = fetchByC_T(candidateEntryId,
+				taskEntryId);
 
 		if (candidateMaintenance == null) {
 			StringBundler msg = new StringBundler(6);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("candidateId=");
-			msg.append(candidateId);
+			msg.append("candidateEntryId=");
+			msg.append(candidateEntryId);
 
-			msg.append(", taskId=");
-			msg.append(taskId);
+			msg.append(", taskEntryId=");
+			msg.append(taskEntryId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1710,29 +1731,30 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 	}
 
 	/**
-	 * Returns the candidate maintenance where candidateId = &#63; and taskId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the candidate maintenance where candidateEntryId = &#63; and taskEntryId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param candidateId the candidate ID
-	 * @param taskId the task ID
+	 * @param candidateEntryId the candidate entry ID
+	 * @param taskEntryId the task entry ID
 	 * @return the matching candidate maintenance, or <code>null</code> if a matching candidate maintenance could not be found
 	 */
 	@Override
-	public CandidateMaintenance fetchByC_T(long candidateId, long taskId) {
-		return fetchByC_T(candidateId, taskId, true);
+	public CandidateMaintenance fetchByC_T(long candidateEntryId,
+		long taskEntryId) {
+		return fetchByC_T(candidateEntryId, taskEntryId, true);
 	}
 
 	/**
-	 * Returns the candidate maintenance where candidateId = &#63; and taskId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the candidate maintenance where candidateEntryId = &#63; and taskEntryId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param candidateId the candidate ID
-	 * @param taskId the task ID
+	 * @param candidateEntryId the candidate entry ID
+	 * @param taskEntryId the task entry ID
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching candidate maintenance, or <code>null</code> if a matching candidate maintenance could not be found
 	 */
 	@Override
-	public CandidateMaintenance fetchByC_T(long candidateId, long taskId,
-		boolean retrieveFromCache) {
-		Object[] finderArgs = new Object[] { candidateId, taskId };
+	public CandidateMaintenance fetchByC_T(long candidateEntryId,
+		long taskEntryId, boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { candidateEntryId, taskEntryId };
 
 		Object result = null;
 
@@ -1744,8 +1766,8 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 		if (result instanceof CandidateMaintenance) {
 			CandidateMaintenance candidateMaintenance = (CandidateMaintenance)result;
 
-			if ((candidateId != candidateMaintenance.getCandidateId()) ||
-					(taskId != candidateMaintenance.getTaskId())) {
+			if ((candidateEntryId != candidateMaintenance.getCandidateEntryId()) ||
+					(taskEntryId != candidateMaintenance.getTaskEntryId())) {
 				result = null;
 			}
 		}
@@ -1755,9 +1777,9 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 
 			query.append(_SQL_SELECT_CANDIDATEMAINTENANCE_WHERE);
 
-			query.append(_FINDER_COLUMN_C_T_CANDIDATEID_2);
+			query.append(_FINDER_COLUMN_C_T_CANDIDATEENTRYID_2);
 
-			query.append(_FINDER_COLUMN_C_T_TASKID_2);
+			query.append(_FINDER_COLUMN_C_T_TASKENTRYID_2);
 
 			String sql = query.toString();
 
@@ -1770,9 +1792,9 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(candidateId);
+				qPos.add(candidateEntryId);
 
-				qPos.add(taskId);
+				qPos.add(taskEntryId);
 
 				List<CandidateMaintenance> list = q.list();
 
@@ -1794,8 +1816,8 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 
 					cacheResult(candidateMaintenance);
 
-					if ((candidateMaintenance.getCandidateId() != candidateId) ||
-							(candidateMaintenance.getTaskId() != taskId)) {
+					if ((candidateMaintenance.getCandidateEntryId() != candidateEntryId) ||
+							(candidateMaintenance.getTaskEntryId() != taskEntryId)) {
 						finderCache.putResult(FINDER_PATH_FETCH_BY_C_T,
 							finderArgs, candidateMaintenance);
 					}
@@ -1820,33 +1842,33 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 	}
 
 	/**
-	 * Removes the candidate maintenance where candidateId = &#63; and taskId = &#63; from the database.
+	 * Removes the candidate maintenance where candidateEntryId = &#63; and taskEntryId = &#63; from the database.
 	 *
-	 * @param candidateId the candidate ID
-	 * @param taskId the task ID
+	 * @param candidateEntryId the candidate entry ID
+	 * @param taskEntryId the task entry ID
 	 * @return the candidate maintenance that was removed
 	 */
 	@Override
-	public CandidateMaintenance removeByC_T(long candidateId, long taskId)
-		throws NoSuchCandidateMaintenanceException {
-		CandidateMaintenance candidateMaintenance = findByC_T(candidateId,
-				taskId);
+	public CandidateMaintenance removeByC_T(long candidateEntryId,
+		long taskEntryId) throws NoSuchCandidateMaintenanceException {
+		CandidateMaintenance candidateMaintenance = findByC_T(candidateEntryId,
+				taskEntryId);
 
 		return remove(candidateMaintenance);
 	}
 
 	/**
-	 * Returns the number of candidate maintenances where candidateId = &#63; and taskId = &#63;.
+	 * Returns the number of candidate maintenances where candidateEntryId = &#63; and taskEntryId = &#63;.
 	 *
-	 * @param candidateId the candidate ID
-	 * @param taskId the task ID
+	 * @param candidateEntryId the candidate entry ID
+	 * @param taskEntryId the task entry ID
 	 * @return the number of matching candidate maintenances
 	 */
 	@Override
-	public int countByC_T(long candidateId, long taskId) {
+	public int countByC_T(long candidateEntryId, long taskEntryId) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_T;
 
-		Object[] finderArgs = new Object[] { candidateId, taskId };
+		Object[] finderArgs = new Object[] { candidateEntryId, taskEntryId };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1855,9 +1877,9 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 
 			query.append(_SQL_COUNT_CANDIDATEMAINTENANCE_WHERE);
 
-			query.append(_FINDER_COLUMN_C_T_CANDIDATEID_2);
+			query.append(_FINDER_COLUMN_C_T_CANDIDATEENTRYID_2);
 
-			query.append(_FINDER_COLUMN_C_T_TASKID_2);
+			query.append(_FINDER_COLUMN_C_T_TASKENTRYID_2);
 
 			String sql = query.toString();
 
@@ -1870,9 +1892,9 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(candidateId);
+				qPos.add(candidateEntryId);
 
-				qPos.add(taskId);
+				qPos.add(taskEntryId);
 
 				count = (Long)q.uniqueResult();
 
@@ -1891,8 +1913,8 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_C_T_CANDIDATEID_2 = "candidateMaintenance.candidateId = ? AND ";
-	private static final String _FINDER_COLUMN_C_T_TASKID_2 = "candidateMaintenance.taskId = ?";
+	private static final String _FINDER_COLUMN_C_T_CANDIDATEENTRYID_2 = "candidateMaintenance.candidateEntryId = ? AND ";
+	private static final String _FINDER_COLUMN_C_T_TASKENTRYID_2 = "candidateMaintenance.taskEntryId = ?";
 
 	public CandidateMaintenancePersistenceImpl() {
 		setModelClass(CandidateMaintenance.class);
@@ -1911,8 +1933,8 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 
 		finderCache.putResult(FINDER_PATH_FETCH_BY_C_T,
 			new Object[] {
-				candidateMaintenance.getCandidateId(),
-				candidateMaintenance.getTaskId()
+				candidateMaintenance.getCandidateEntryId(),
+				candidateMaintenance.getTaskEntryId()
 			}, candidateMaintenance);
 
 		candidateMaintenance.resetOriginalValues();
@@ -1991,8 +2013,8 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 		boolean isNew) {
 		if (isNew) {
 			Object[] args = new Object[] {
-					candidateMaintenanceModelImpl.getCandidateId(),
-					candidateMaintenanceModelImpl.getTaskId()
+					candidateMaintenanceModelImpl.getCandidateEntryId(),
+					candidateMaintenanceModelImpl.getTaskEntryId()
 				};
 
 			finderCache.putResult(FINDER_PATH_COUNT_BY_C_T, args,
@@ -2004,8 +2026,8 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 			if ((candidateMaintenanceModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_C_T.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						candidateMaintenanceModelImpl.getCandidateId(),
-						candidateMaintenanceModelImpl.getTaskId()
+						candidateMaintenanceModelImpl.getCandidateEntryId(),
+						candidateMaintenanceModelImpl.getTaskEntryId()
 					};
 
 				finderCache.putResult(FINDER_PATH_COUNT_BY_C_T, args,
@@ -2019,8 +2041,8 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 	protected void clearUniqueFindersCache(
 		CandidateMaintenanceModelImpl candidateMaintenanceModelImpl) {
 		Object[] args = new Object[] {
-				candidateMaintenanceModelImpl.getCandidateId(),
-				candidateMaintenanceModelImpl.getTaskId()
+				candidateMaintenanceModelImpl.getCandidateEntryId(),
+				candidateMaintenanceModelImpl.getTaskEntryId()
 			};
 
 		finderCache.removeResult(FINDER_PATH_COUNT_BY_C_T, args);
@@ -2029,8 +2051,8 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 		if ((candidateMaintenanceModelImpl.getColumnBitmask() &
 				FINDER_PATH_FETCH_BY_C_T.getColumnBitmask()) != 0) {
 			args = new Object[] {
-					candidateMaintenanceModelImpl.getOriginalCandidateId(),
-					candidateMaintenanceModelImpl.getOriginalTaskId()
+					candidateMaintenanceModelImpl.getOriginalCandidateEntryId(),
+					candidateMaintenanceModelImpl.getOriginalTaskEntryId()
 				};
 
 			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_T, args);
@@ -2205,38 +2227,42 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 			}
 
 			if ((candidateMaintenanceModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CANDIDATEIDS.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CANDIDATEENTRYIDS.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						candidateMaintenanceModelImpl.getOriginalCandidateId()
+						candidateMaintenanceModelImpl.getOriginalCandidateEntryId()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_CANDIDATEIDS, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CANDIDATEIDS,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_CANDIDATEENTRYIDS,
+					args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CANDIDATEENTRYIDS,
 					args);
 
 				args = new Object[] {
-						candidateMaintenanceModelImpl.getCandidateId()
+						candidateMaintenanceModelImpl.getCandidateEntryId()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_CANDIDATEIDS, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CANDIDATEIDS,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_CANDIDATEENTRYIDS,
+					args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CANDIDATEENTRYIDS,
 					args);
 			}
 
 			if ((candidateMaintenanceModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TASKIDS.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TASKENTRYIDS.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						candidateMaintenanceModelImpl.getOriginalTaskId()
+						candidateMaintenanceModelImpl.getOriginalTaskEntryId()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_TASKIDS, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TASKIDS,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_TASKENTRYIDS, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TASKENTRYIDS,
 					args);
 
-				args = new Object[] { candidateMaintenanceModelImpl.getTaskId() };
+				args = new Object[] {
+						candidateMaintenanceModelImpl.getTaskEntryId()
+					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_TASKIDS, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TASKIDS,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_TASKENTRYIDS, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TASKENTRYIDS,
 					args);
 			}
 		}
@@ -2266,8 +2292,8 @@ public class CandidateMaintenancePersistenceImpl extends BasePersistenceImpl<Can
 
 		candidateMaintenanceImpl.setUuid(candidateMaintenance.getUuid());
 		candidateMaintenanceImpl.setCandidateMaintenanceId(candidateMaintenance.getCandidateMaintenanceId());
-		candidateMaintenanceImpl.setCandidateId(candidateMaintenance.getCandidateId());
-		candidateMaintenanceImpl.setTaskId(candidateMaintenance.getTaskId());
+		candidateMaintenanceImpl.setCandidateEntryId(candidateMaintenance.getCandidateEntryId());
+		candidateMaintenanceImpl.setTaskEntryId(candidateMaintenance.getTaskEntryId());
 		candidateMaintenanceImpl.setCreateDate(candidateMaintenance.getCreateDate());
 
 		return candidateMaintenanceImpl;

@@ -74,20 +74,20 @@ public interface TaskEntryLocalService extends BaseLocalService,
 	* Upon deploying a task module, this method adds entry for it to the
 	* database as registration.
 	*
-	* @param taskName
+	* @param taskEntryName
 	* @return the TaskEntry that was added
 	* @throws PortalException
 	*/
-	public TaskEntry addTaskEntry(java.lang.String taskName)
+	public TaskEntry addTaskEntry(java.lang.String taskEntryName)
 		throws PortalException;
 
 	/**
 	* Creates a new task entry with the primary key. Does not add the task entry to the database.
 	*
-	* @param taskId the primary key for the new task entry
+	* @param taskEntryId the primary key for the new task entry
 	* @return the new task entry
 	*/
-	public TaskEntry createTaskEntry(long taskId);
+	public TaskEntry createTaskEntry(long taskEntryId);
 
 	/**
 	* Deletes the task entry from the database. Also notifies the appropriate model listeners.
@@ -101,28 +101,29 @@ public interface TaskEntryLocalService extends BaseLocalService,
 	/**
 	* Deletes the task entry with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param taskId the primary key of the task entry
+	* @param taskEntryId the primary key of the task entry
 	* @return the task entry that was removed
 	* @throws PortalException if a task entry with the primary key could not be found
 	*/
 	@Indexable(type = IndexableType.DELETE)
-	public TaskEntry deleteTaskEntry(long taskId) throws PortalException;
+	public TaskEntry deleteTaskEntry(long taskEntryId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public TaskEntry fetchTaskEntry(long taskId);
+	public TaskEntry fetchTaskEntry(long taskEntryId);
 
 	/**
 	* Returns the task entry with the primary key.
 	*
-	* @param taskId the primary key of the task entry
+	* @param taskEntryId the primary key of the task entry
 	* @return the task entry
 	* @throws PortalException if a task entry with the primary key could not be found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public TaskEntry getTaskEntry(long taskId) throws PortalException;
+	public TaskEntry getTaskEntry(long taskEntryId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public TaskEntry getTaskEntryByName(java.lang.String taskName);
+	public TaskEntry getTaskEntryByName(java.lang.String taskEntryName);
 
 	/**
 	* Updates the task entry in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.

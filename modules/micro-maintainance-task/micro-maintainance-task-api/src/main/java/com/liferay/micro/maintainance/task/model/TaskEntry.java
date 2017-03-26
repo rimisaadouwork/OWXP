@@ -37,10 +37,10 @@ public interface TaskEntry extends TaskEntryModel, PersistedModel {
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.liferay.micro.maintainance.task.model.impl.TaskEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<TaskEntry, Long> TASK_ID_ACCESSOR = new Accessor<TaskEntry, Long>() {
+	public static final Accessor<TaskEntry, Long> TASK_ENTRY_ID_ACCESSOR = new Accessor<TaskEntry, Long>() {
 			@Override
 			public Long get(TaskEntry taskEntry) {
-				return taskEntry.getTaskId();
+				return taskEntry.getTaskEntryId();
 			}
 
 			@Override

@@ -90,25 +90,26 @@ public abstract class TaskEntryLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * Creates a new task entry with the primary key. Does not add the task entry to the database.
 	 *
-	 * @param taskId the primary key for the new task entry
+	 * @param taskEntryId the primary key for the new task entry
 	 * @return the new task entry
 	 */
 	@Override
-	public TaskEntry createTaskEntry(long taskId) {
-		return taskEntryPersistence.create(taskId);
+	public TaskEntry createTaskEntry(long taskEntryId) {
+		return taskEntryPersistence.create(taskEntryId);
 	}
 
 	/**
 	 * Deletes the task entry with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param taskId the primary key of the task entry
+	 * @param taskEntryId the primary key of the task entry
 	 * @return the task entry that was removed
 	 * @throws PortalException if a task entry with the primary key could not be found
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public TaskEntry deleteTaskEntry(long taskId) throws PortalException {
-		return taskEntryPersistence.remove(taskId);
+	public TaskEntry deleteTaskEntry(long taskEntryId)
+		throws PortalException {
+		return taskEntryPersistence.remove(taskEntryId);
 	}
 
 	/**
@@ -207,20 +208,20 @@ public abstract class TaskEntryLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	@Override
-	public TaskEntry fetchTaskEntry(long taskId) {
-		return taskEntryPersistence.fetchByPrimaryKey(taskId);
+	public TaskEntry fetchTaskEntry(long taskEntryId) {
+		return taskEntryPersistence.fetchByPrimaryKey(taskEntryId);
 	}
 
 	/**
 	 * Returns the task entry with the primary key.
 	 *
-	 * @param taskId the primary key of the task entry
+	 * @param taskEntryId the primary key of the task entry
 	 * @return the task entry
 	 * @throws PortalException if a task entry with the primary key could not be found
 	 */
 	@Override
-	public TaskEntry getTaskEntry(long taskId) throws PortalException {
-		return taskEntryPersistence.findByPrimaryKey(taskId);
+	public TaskEntry getTaskEntry(long taskEntryId) throws PortalException {
+		return taskEntryPersistence.findByPrimaryKey(taskEntryId);
 	}
 
 	@Override
@@ -231,7 +232,7 @@ public abstract class TaskEntryLocalServiceBaseImpl extends BaseLocalServiceImpl
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(TaskEntry.class);
 
-		actionableDynamicQuery.setPrimaryKeyPropertyName("taskId");
+		actionableDynamicQuery.setPrimaryKeyPropertyName("taskEntryId");
 
 		return actionableDynamicQuery;
 	}
@@ -244,7 +245,7 @@ public abstract class TaskEntryLocalServiceBaseImpl extends BaseLocalServiceImpl
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
 		indexableActionableDynamicQuery.setModelClass(TaskEntry.class);
 
-		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("taskId");
+		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("taskEntryId");
 
 		return indexableActionableDynamicQuery;
 	}
@@ -255,7 +256,7 @@ public abstract class TaskEntryLocalServiceBaseImpl extends BaseLocalServiceImpl
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(TaskEntry.class);
 
-		actionableDynamicQuery.setPrimaryKeyPropertyName("taskId");
+		actionableDynamicQuery.setPrimaryKeyPropertyName("taskEntryId");
 	}
 
 	/**

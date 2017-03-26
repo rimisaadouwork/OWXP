@@ -98,26 +98,26 @@ public abstract class AnalysisEntryLocalServiceBaseImpl
 	/**
 	 * Creates a new analysis entry with the primary key. Does not add the analysis entry to the database.
 	 *
-	 * @param analysisId the primary key for the new analysis entry
+	 * @param analysisEntryId the primary key for the new analysis entry
 	 * @return the new analysis entry
 	 */
 	@Override
-	public AnalysisEntry createAnalysisEntry(long analysisId) {
-		return analysisEntryPersistence.create(analysisId);
+	public AnalysisEntry createAnalysisEntry(long analysisEntryId) {
+		return analysisEntryPersistence.create(analysisEntryId);
 	}
 
 	/**
 	 * Deletes the analysis entry with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param analysisId the primary key of the analysis entry
+	 * @param analysisEntryId the primary key of the analysis entry
 	 * @return the analysis entry that was removed
 	 * @throws PortalException if a analysis entry with the primary key could not be found
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public AnalysisEntry deleteAnalysisEntry(long analysisId)
+	public AnalysisEntry deleteAnalysisEntry(long analysisEntryId)
 		throws PortalException {
-		return analysisEntryPersistence.remove(analysisId);
+		return analysisEntryPersistence.remove(analysisEntryId);
 	}
 
 	/**
@@ -216,8 +216,8 @@ public abstract class AnalysisEntryLocalServiceBaseImpl
 	}
 
 	@Override
-	public AnalysisEntry fetchAnalysisEntry(long analysisId) {
-		return analysisEntryPersistence.fetchByPrimaryKey(analysisId);
+	public AnalysisEntry fetchAnalysisEntry(long analysisEntryId) {
+		return analysisEntryPersistence.fetchByPrimaryKey(analysisEntryId);
 	}
 
 	/**
@@ -237,14 +237,14 @@ public abstract class AnalysisEntryLocalServiceBaseImpl
 	/**
 	 * Returns the analysis entry with the primary key.
 	 *
-	 * @param analysisId the primary key of the analysis entry
+	 * @param analysisEntryId the primary key of the analysis entry
 	 * @return the analysis entry
 	 * @throws PortalException if a analysis entry with the primary key could not be found
 	 */
 	@Override
-	public AnalysisEntry getAnalysisEntry(long analysisId)
+	public AnalysisEntry getAnalysisEntry(long analysisEntryId)
 		throws PortalException {
-		return analysisEntryPersistence.findByPrimaryKey(analysisId);
+		return analysisEntryPersistence.findByPrimaryKey(analysisEntryId);
 	}
 
 	@Override
@@ -255,7 +255,7 @@ public abstract class AnalysisEntryLocalServiceBaseImpl
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(AnalysisEntry.class);
 
-		actionableDynamicQuery.setPrimaryKeyPropertyName("analysisId");
+		actionableDynamicQuery.setPrimaryKeyPropertyName("analysisEntryId");
 
 		return actionableDynamicQuery;
 	}
@@ -268,7 +268,8 @@ public abstract class AnalysisEntryLocalServiceBaseImpl
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
 		indexableActionableDynamicQuery.setModelClass(AnalysisEntry.class);
 
-		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("analysisId");
+		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
+			"analysisEntryId");
 
 		return indexableActionableDynamicQuery;
 	}
@@ -279,7 +280,7 @@ public abstract class AnalysisEntryLocalServiceBaseImpl
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(AnalysisEntry.class);
 
-		actionableDynamicQuery.setPrimaryKeyPropertyName("analysisId");
+		actionableDynamicQuery.setPrimaryKeyPropertyName("analysisEntryId");
 	}
 
 	@Override

@@ -57,25 +57,25 @@ public class TaskEntryLocalServiceUtil {
 	* Upon deploying a task module, this method adds entry for it to the
 	* database as registration.
 	*
-	* @param taskName
+	* @param taskEntryName
 	* @return the TaskEntry that was added
 	* @throws PortalException
 	*/
 	public static com.liferay.micro.maintainance.task.model.TaskEntry addTaskEntry(
-		java.lang.String taskName)
+		java.lang.String taskEntryName)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().addTaskEntry(taskName);
+		return getService().addTaskEntry(taskEntryName);
 	}
 
 	/**
 	* Creates a new task entry with the primary key. Does not add the task entry to the database.
 	*
-	* @param taskId the primary key for the new task entry
+	* @param taskEntryId the primary key for the new task entry
 	* @return the new task entry
 	*/
 	public static com.liferay.micro.maintainance.task.model.TaskEntry createTaskEntry(
-		long taskId) {
-		return getService().createTaskEntry(taskId);
+		long taskEntryId) {
+		return getService().createTaskEntry(taskEntryId);
 	}
 
 	/**
@@ -92,35 +92,37 @@ public class TaskEntryLocalServiceUtil {
 	/**
 	* Deletes the task entry with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param taskId the primary key of the task entry
+	* @param taskEntryId the primary key of the task entry
 	* @return the task entry that was removed
 	* @throws PortalException if a task entry with the primary key could not be found
 	*/
 	public static com.liferay.micro.maintainance.task.model.TaskEntry deleteTaskEntry(
-		long taskId) throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().deleteTaskEntry(taskId);
+		long taskEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().deleteTaskEntry(taskEntryId);
 	}
 
 	public static com.liferay.micro.maintainance.task.model.TaskEntry fetchTaskEntry(
-		long taskId) {
-		return getService().fetchTaskEntry(taskId);
+		long taskEntryId) {
+		return getService().fetchTaskEntry(taskEntryId);
 	}
 
 	/**
 	* Returns the task entry with the primary key.
 	*
-	* @param taskId the primary key of the task entry
+	* @param taskEntryId the primary key of the task entry
 	* @return the task entry
 	* @throws PortalException if a task entry with the primary key could not be found
 	*/
 	public static com.liferay.micro.maintainance.task.model.TaskEntry getTaskEntry(
-		long taskId) throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getTaskEntry(taskId);
+		long taskEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getTaskEntry(taskEntryId);
 	}
 
 	public static com.liferay.micro.maintainance.task.model.TaskEntry getTaskEntryByName(
-		java.lang.String taskName) {
-		return getService().getTaskEntryByName(taskName);
+		java.lang.String taskEntryName) {
+		return getService().getTaskEntryByName(taskEntryName);
 	}
 
 	/**

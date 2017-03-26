@@ -402,17 +402,17 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 	/**
 	 * Returns the analysis entries before and after the current analysis entry in the ordered set where uuid = &#63;.
 	 *
-	 * @param analysisId the primary key of the current analysis entry
+	 * @param analysisEntryId the primary key of the current analysis entry
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next analysis entry
 	 * @throws NoSuchEntryException if a analysis entry with the primary key could not be found
 	 */
 	@Override
-	public AnalysisEntry[] findByUuid_PrevAndNext(long analysisId, String uuid,
-		OrderByComparator<AnalysisEntry> orderByComparator)
+	public AnalysisEntry[] findByUuid_PrevAndNext(long analysisEntryId,
+		String uuid, OrderByComparator<AnalysisEntry> orderByComparator)
 		throws NoSuchEntryException {
-		AnalysisEntry analysisEntry = findByPrimaryKey(analysisId);
+		AnalysisEntry analysisEntry = findByPrimaryKey(analysisEntryId);
 
 		Session session = null;
 
@@ -978,7 +978,7 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 	/**
 	 * Returns the analysis entries before and after the current analysis entry in the ordered set where uuid = &#63; and companyId = &#63;.
 	 *
-	 * @param analysisId the primary key of the current analysis entry
+	 * @param analysisEntryId the primary key of the current analysis entry
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -986,11 +986,11 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 	 * @throws NoSuchEntryException if a analysis entry with the primary key could not be found
 	 */
 	@Override
-	public AnalysisEntry[] findByUuid_C_PrevAndNext(long analysisId,
+	public AnalysisEntry[] findByUuid_C_PrevAndNext(long analysisEntryId,
 		String uuid, long companyId,
 		OrderByComparator<AnalysisEntry> orderByComparator)
 		throws NoSuchEntryException {
-		AnalysisEntry analysisEntry = findByPrimaryKey(analysisId);
+		AnalysisEntry analysisEntry = findByPrimaryKey(analysisEntryId);
 
 		Session session = null;
 
@@ -1229,35 +1229,35 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 	private static final String _FINDER_COLUMN_UUID_C_UUID_2 = "analysisEntry.uuid = ? AND ";
 	private static final String _FINDER_COLUMN_UUID_C_UUID_3 = "(analysisEntry.uuid IS NULL OR analysisEntry.uuid = '') AND ";
 	private static final String _FINDER_COLUMN_UUID_C_COMPANYID_2 = "analysisEntry.companyId = ?";
-	public static final FinderPath FINDER_PATH_FETCH_BY_ANALYSISID = new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FETCH_BY_ANALYSISENTRYID = new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
 			AnalysisEntryModelImpl.FINDER_CACHE_ENABLED,
 			AnalysisEntryImpl.class, FINDER_CLASS_NAME_ENTITY,
-			"fetchByAnalysisId", new String[] { Long.class.getName() },
-			AnalysisEntryModelImpl.ANALYSISID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_ANALYSISID = new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
+			"fetchByAnalysisEntryId", new String[] { Long.class.getName() },
+			AnalysisEntryModelImpl.ANALYSISENTRYID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_ANALYSISENTRYID = new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
 			AnalysisEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByAnalysisId",
-			new String[] { Long.class.getName() });
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByAnalysisEntryId", new String[] { Long.class.getName() });
 
 	/**
-	 * Returns the analysis entry where analysisId = &#63; or throws a {@link NoSuchEntryException} if it could not be found.
+	 * Returns the analysis entry where analysisEntryId = &#63; or throws a {@link NoSuchEntryException} if it could not be found.
 	 *
-	 * @param analysisId the analysis ID
+	 * @param analysisEntryId the analysis entry ID
 	 * @return the matching analysis entry
 	 * @throws NoSuchEntryException if a matching analysis entry could not be found
 	 */
 	@Override
-	public AnalysisEntry findByAnalysisId(long analysisId)
+	public AnalysisEntry findByAnalysisEntryId(long analysisEntryId)
 		throws NoSuchEntryException {
-		AnalysisEntry analysisEntry = fetchByAnalysisId(analysisId);
+		AnalysisEntry analysisEntry = fetchByAnalysisEntryId(analysisEntryId);
 
 		if (analysisEntry == null) {
 			StringBundler msg = new StringBundler(4);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("analysisId=");
-			msg.append(analysisId);
+			msg.append("analysisEntryId=");
+			msg.append(analysisEntryId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1272,39 +1272,39 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 	}
 
 	/**
-	 * Returns the analysis entry where analysisId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the analysis entry where analysisEntryId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param analysisId the analysis ID
+	 * @param analysisEntryId the analysis entry ID
 	 * @return the matching analysis entry, or <code>null</code> if a matching analysis entry could not be found
 	 */
 	@Override
-	public AnalysisEntry fetchByAnalysisId(long analysisId) {
-		return fetchByAnalysisId(analysisId, true);
+	public AnalysisEntry fetchByAnalysisEntryId(long analysisEntryId) {
+		return fetchByAnalysisEntryId(analysisEntryId, true);
 	}
 
 	/**
-	 * Returns the analysis entry where analysisId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the analysis entry where analysisEntryId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param analysisId the analysis ID
+	 * @param analysisEntryId the analysis entry ID
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching analysis entry, or <code>null</code> if a matching analysis entry could not be found
 	 */
 	@Override
-	public AnalysisEntry fetchByAnalysisId(long analysisId,
+	public AnalysisEntry fetchByAnalysisEntryId(long analysisEntryId,
 		boolean retrieveFromCache) {
-		Object[] finderArgs = new Object[] { analysisId };
+		Object[] finderArgs = new Object[] { analysisEntryId };
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = finderCache.getResult(FINDER_PATH_FETCH_BY_ANALYSISID,
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_ANALYSISENTRYID,
 					finderArgs, this);
 		}
 
 		if (result instanceof AnalysisEntry) {
 			AnalysisEntry analysisEntry = (AnalysisEntry)result;
 
-			if ((analysisId != analysisEntry.getAnalysisId())) {
+			if ((analysisEntryId != analysisEntry.getAnalysisEntryId())) {
 				result = null;
 			}
 		}
@@ -1314,7 +1314,7 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 
 			query.append(_SQL_SELECT_ANALYSISENTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_ANALYSISID_ANALYSISID_2);
+			query.append(_FINDER_COLUMN_ANALYSISENTRYID_ANALYSISENTRYID_2);
 
 			String sql = query.toString();
 
@@ -1327,18 +1327,18 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(analysisId);
+				qPos.add(analysisEntryId);
 
 				List<AnalysisEntry> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(FINDER_PATH_FETCH_BY_ANALYSISID,
+					finderCache.putResult(FINDER_PATH_FETCH_BY_ANALYSISENTRYID,
 						finderArgs, list);
 				}
 				else {
 					if ((list.size() > 1) && _log.isWarnEnabled()) {
 						_log.warn(
-							"AnalysisEntryPersistenceImpl.fetchByAnalysisId(long, boolean) with parameters (" +
+							"AnalysisEntryPersistenceImpl.fetchByAnalysisEntryId(long, boolean) with parameters (" +
 							StringUtil.merge(finderArgs) +
 							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
 					}
@@ -1349,14 +1349,14 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 
 					cacheResult(analysisEntry);
 
-					if ((analysisEntry.getAnalysisId() != analysisId)) {
-						finderCache.putResult(FINDER_PATH_FETCH_BY_ANALYSISID,
+					if ((analysisEntry.getAnalysisEntryId() != analysisEntryId)) {
+						finderCache.putResult(FINDER_PATH_FETCH_BY_ANALYSISENTRYID,
 							finderArgs, analysisEntry);
 					}
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_FETCH_BY_ANALYSISID,
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_ANALYSISENTRYID,
 					finderArgs);
 
 				throw processException(e);
@@ -1375,30 +1375,30 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 	}
 
 	/**
-	 * Removes the analysis entry where analysisId = &#63; from the database.
+	 * Removes the analysis entry where analysisEntryId = &#63; from the database.
 	 *
-	 * @param analysisId the analysis ID
+	 * @param analysisEntryId the analysis entry ID
 	 * @return the analysis entry that was removed
 	 */
 	@Override
-	public AnalysisEntry removeByAnalysisId(long analysisId)
+	public AnalysisEntry removeByAnalysisEntryId(long analysisEntryId)
 		throws NoSuchEntryException {
-		AnalysisEntry analysisEntry = findByAnalysisId(analysisId);
+		AnalysisEntry analysisEntry = findByAnalysisEntryId(analysisEntryId);
 
 		return remove(analysisEntry);
 	}
 
 	/**
-	 * Returns the number of analysis entries where analysisId = &#63;.
+	 * Returns the number of analysis entries where analysisEntryId = &#63;.
 	 *
-	 * @param analysisId the analysis ID
+	 * @param analysisEntryId the analysis entry ID
 	 * @return the number of matching analysis entries
 	 */
 	@Override
-	public int countByAnalysisId(long analysisId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_ANALYSISID;
+	public int countByAnalysisEntryId(long analysisEntryId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_ANALYSISENTRYID;
 
-		Object[] finderArgs = new Object[] { analysisId };
+		Object[] finderArgs = new Object[] { analysisEntryId };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1407,7 +1407,7 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 
 			query.append(_SQL_COUNT_ANALYSISENTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_ANALYSISID_ANALYSISID_2);
+			query.append(_FINDER_COLUMN_ANALYSISENTRYID_ANALYSISENTRYID_2);
 
 			String sql = query.toString();
 
@@ -1420,7 +1420,7 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(analysisId);
+				qPos.add(analysisEntryId);
 
 				count = (Long)q.uniqueResult();
 
@@ -1439,7 +1439,1461 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_ANALYSISID_ANALYSISID_2 = "analysisEntry.analysisId = ?";
+	private static final String _FINDER_COLUMN_ANALYSISENTRYID_ANALYSISENTRYID_2 =
+		"analysisEntry.analysisEntryId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_A_C = new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
+			AnalysisEntryModelImpl.FINDER_CACHE_ENABLED,
+			AnalysisEntryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByA_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_C = new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
+			AnalysisEntryModelImpl.FINDER_CACHE_ENABLED,
+			AnalysisEntryImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByA_C",
+			new String[] { Long.class.getName(), Long.class.getName() },
+			AnalysisEntryModelImpl.ANALYSISENTRYID_COLUMN_BITMASK |
+			AnalysisEntryModelImpl.COMPANYID_COLUMN_BITMASK |
+			AnalysisEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_A_C = new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
+			AnalysisEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByA_C",
+			new String[] { Long.class.getName(), Long.class.getName() });
+
+	/**
+	 * Returns all the analysis entries where analysisEntryId = &#63; and companyId = &#63;.
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param companyId the company ID
+	 * @return the matching analysis entries
+	 */
+	@Override
+	public List<AnalysisEntry> findByA_C(long analysisEntryId, long companyId) {
+		return findByA_C(analysisEntryId, companyId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the analysis entries where analysisEntryId = &#63; and companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of analysis entries
+	 * @param end the upper bound of the range of analysis entries (not inclusive)
+	 * @return the range of matching analysis entries
+	 */
+	@Override
+	public List<AnalysisEntry> findByA_C(long analysisEntryId, long companyId,
+		int start, int end) {
+		return findByA_C(analysisEntryId, companyId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the analysis entries where analysisEntryId = &#63; and companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of analysis entries
+	 * @param end the upper bound of the range of analysis entries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching analysis entries
+	 */
+	@Override
+	public List<AnalysisEntry> findByA_C(long analysisEntryId, long companyId,
+		int start, int end, OrderByComparator<AnalysisEntry> orderByComparator) {
+		return findByA_C(analysisEntryId, companyId, start, end,
+			orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the analysis entries where analysisEntryId = &#63; and companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of analysis entries
+	 * @param end the upper bound of the range of analysis entries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching analysis entries
+	 */
+	@Override
+	public List<AnalysisEntry> findByA_C(long analysisEntryId, long companyId,
+		int start, int end, OrderByComparator<AnalysisEntry> orderByComparator,
+		boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_C;
+			finderArgs = new Object[] { analysisEntryId, companyId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_A_C;
+			finderArgs = new Object[] {
+					analysisEntryId, companyId,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<AnalysisEntry> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<AnalysisEntry>)finderCache.getResult(finderPath,
+					finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (AnalysisEntry analysisEntry : list) {
+					if ((analysisEntryId != analysisEntry.getAnalysisEntryId()) ||
+							(companyId != analysisEntry.getCompanyId())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_ANALYSISENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_A_C_ANALYSISENTRYID_2);
+
+			query.append(_FINDER_COLUMN_A_C_COMPANYID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(AnalysisEntryModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(analysisEntryId);
+
+				qPos.add(companyId);
+
+				if (!pagination) {
+					list = (List<AnalysisEntry>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<AnalysisEntry>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first analysis entry in the ordered set where analysisEntryId = &#63; and companyId = &#63;.
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param companyId the company ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching analysis entry
+	 * @throws NoSuchEntryException if a matching analysis entry could not be found
+	 */
+	@Override
+	public AnalysisEntry findByA_C_First(long analysisEntryId, long companyId,
+		OrderByComparator<AnalysisEntry> orderByComparator)
+		throws NoSuchEntryException {
+		AnalysisEntry analysisEntry = fetchByA_C_First(analysisEntryId,
+				companyId, orderByComparator);
+
+		if (analysisEntry != null) {
+			return analysisEntry;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("analysisEntryId=");
+		msg.append(analysisEntryId);
+
+		msg.append(", companyId=");
+		msg.append(companyId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchEntryException(msg.toString());
+	}
+
+	/**
+	 * Returns the first analysis entry in the ordered set where analysisEntryId = &#63; and companyId = &#63;.
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param companyId the company ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching analysis entry, or <code>null</code> if a matching analysis entry could not be found
+	 */
+	@Override
+	public AnalysisEntry fetchByA_C_First(long analysisEntryId, long companyId,
+		OrderByComparator<AnalysisEntry> orderByComparator) {
+		List<AnalysisEntry> list = findByA_C(analysisEntryId, companyId, 0, 1,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last analysis entry in the ordered set where analysisEntryId = &#63; and companyId = &#63;.
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param companyId the company ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching analysis entry
+	 * @throws NoSuchEntryException if a matching analysis entry could not be found
+	 */
+	@Override
+	public AnalysisEntry findByA_C_Last(long analysisEntryId, long companyId,
+		OrderByComparator<AnalysisEntry> orderByComparator)
+		throws NoSuchEntryException {
+		AnalysisEntry analysisEntry = fetchByA_C_Last(analysisEntryId,
+				companyId, orderByComparator);
+
+		if (analysisEntry != null) {
+			return analysisEntry;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("analysisEntryId=");
+		msg.append(analysisEntryId);
+
+		msg.append(", companyId=");
+		msg.append(companyId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchEntryException(msg.toString());
+	}
+
+	/**
+	 * Returns the last analysis entry in the ordered set where analysisEntryId = &#63; and companyId = &#63;.
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param companyId the company ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching analysis entry, or <code>null</code> if a matching analysis entry could not be found
+	 */
+	@Override
+	public AnalysisEntry fetchByA_C_Last(long analysisEntryId, long companyId,
+		OrderByComparator<AnalysisEntry> orderByComparator) {
+		int count = countByA_C(analysisEntryId, companyId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<AnalysisEntry> list = findByA_C(analysisEntryId, companyId,
+				count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Removes all the analysis entries where analysisEntryId = &#63; and companyId = &#63; from the database.
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param companyId the company ID
+	 */
+	@Override
+	public void removeByA_C(long analysisEntryId, long companyId) {
+		for (AnalysisEntry analysisEntry : findByA_C(analysisEntryId,
+				companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(analysisEntry);
+		}
+	}
+
+	/**
+	 * Returns the number of analysis entries where analysisEntryId = &#63; and companyId = &#63;.
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param companyId the company ID
+	 * @return the number of matching analysis entries
+	 */
+	@Override
+	public int countByA_C(long analysisEntryId, long companyId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_A_C;
+
+		Object[] finderArgs = new Object[] { analysisEntryId, companyId };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_ANALYSISENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_A_C_ANALYSISENTRYID_2);
+
+			query.append(_FINDER_COLUMN_A_C_COMPANYID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(analysisEntryId);
+
+				qPos.add(companyId);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_A_C_ANALYSISENTRYID_2 = "analysisEntry.analysisEntryId = ? AND ";
+	private static final String _FINDER_COLUMN_A_C_COMPANYID_2 = "analysisEntry.companyId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_A_CM = new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
+			AnalysisEntryModelImpl.FINDER_CACHE_ENABLED,
+			AnalysisEntryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByA_CM",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_CM = new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
+			AnalysisEntryModelImpl.FINDER_CACHE_ENABLED,
+			AnalysisEntryImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByA_CM",
+			new String[] { Long.class.getName(), Long.class.getName() },
+			AnalysisEntryModelImpl.ANALYSISENTRYID_COLUMN_BITMASK |
+			AnalysisEntryModelImpl.CANDIDATEMAINTENANCEID_COLUMN_BITMASK |
+			AnalysisEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_A_CM = new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
+			AnalysisEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByA_CM",
+			new String[] { Long.class.getName(), Long.class.getName() });
+
+	/**
+	 * Returns all the analysis entries where analysisEntryId = &#63; and candidateMaintenanceId = &#63;.
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
+	 * @return the matching analysis entries
+	 */
+	@Override
+	public List<AnalysisEntry> findByA_CM(long analysisEntryId,
+		long candidateMaintenanceId) {
+		return findByA_CM(analysisEntryId, candidateMaintenanceId,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the analysis entries where analysisEntryId = &#63; and candidateMaintenanceId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
+	 * @param start the lower bound of the range of analysis entries
+	 * @param end the upper bound of the range of analysis entries (not inclusive)
+	 * @return the range of matching analysis entries
+	 */
+	@Override
+	public List<AnalysisEntry> findByA_CM(long analysisEntryId,
+		long candidateMaintenanceId, int start, int end) {
+		return findByA_CM(analysisEntryId, candidateMaintenanceId, start, end,
+			null);
+	}
+
+	/**
+	 * Returns an ordered range of all the analysis entries where analysisEntryId = &#63; and candidateMaintenanceId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
+	 * @param start the lower bound of the range of analysis entries
+	 * @param end the upper bound of the range of analysis entries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching analysis entries
+	 */
+	@Override
+	public List<AnalysisEntry> findByA_CM(long analysisEntryId,
+		long candidateMaintenanceId, int start, int end,
+		OrderByComparator<AnalysisEntry> orderByComparator) {
+		return findByA_CM(analysisEntryId, candidateMaintenanceId, start, end,
+			orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the analysis entries where analysisEntryId = &#63; and candidateMaintenanceId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
+	 * @param start the lower bound of the range of analysis entries
+	 * @param end the upper bound of the range of analysis entries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching analysis entries
+	 */
+	@Override
+	public List<AnalysisEntry> findByA_CM(long analysisEntryId,
+		long candidateMaintenanceId, int start, int end,
+		OrderByComparator<AnalysisEntry> orderByComparator,
+		boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_CM;
+			finderArgs = new Object[] { analysisEntryId, candidateMaintenanceId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_A_CM;
+			finderArgs = new Object[] {
+					analysisEntryId, candidateMaintenanceId,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<AnalysisEntry> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<AnalysisEntry>)finderCache.getResult(finderPath,
+					finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (AnalysisEntry analysisEntry : list) {
+					if ((analysisEntryId != analysisEntry.getAnalysisEntryId()) ||
+							(candidateMaintenanceId != analysisEntry.getCandidateMaintenanceId())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_ANALYSISENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_A_CM_ANALYSISENTRYID_2);
+
+			query.append(_FINDER_COLUMN_A_CM_CANDIDATEMAINTENANCEID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(AnalysisEntryModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(analysisEntryId);
+
+				qPos.add(candidateMaintenanceId);
+
+				if (!pagination) {
+					list = (List<AnalysisEntry>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<AnalysisEntry>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first analysis entry in the ordered set where analysisEntryId = &#63; and candidateMaintenanceId = &#63;.
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching analysis entry
+	 * @throws NoSuchEntryException if a matching analysis entry could not be found
+	 */
+	@Override
+	public AnalysisEntry findByA_CM_First(long analysisEntryId,
+		long candidateMaintenanceId,
+		OrderByComparator<AnalysisEntry> orderByComparator)
+		throws NoSuchEntryException {
+		AnalysisEntry analysisEntry = fetchByA_CM_First(analysisEntryId,
+				candidateMaintenanceId, orderByComparator);
+
+		if (analysisEntry != null) {
+			return analysisEntry;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("analysisEntryId=");
+		msg.append(analysisEntryId);
+
+		msg.append(", candidateMaintenanceId=");
+		msg.append(candidateMaintenanceId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchEntryException(msg.toString());
+	}
+
+	/**
+	 * Returns the first analysis entry in the ordered set where analysisEntryId = &#63; and candidateMaintenanceId = &#63;.
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching analysis entry, or <code>null</code> if a matching analysis entry could not be found
+	 */
+	@Override
+	public AnalysisEntry fetchByA_CM_First(long analysisEntryId,
+		long candidateMaintenanceId,
+		OrderByComparator<AnalysisEntry> orderByComparator) {
+		List<AnalysisEntry> list = findByA_CM(analysisEntryId,
+				candidateMaintenanceId, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last analysis entry in the ordered set where analysisEntryId = &#63; and candidateMaintenanceId = &#63;.
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching analysis entry
+	 * @throws NoSuchEntryException if a matching analysis entry could not be found
+	 */
+	@Override
+	public AnalysisEntry findByA_CM_Last(long analysisEntryId,
+		long candidateMaintenanceId,
+		OrderByComparator<AnalysisEntry> orderByComparator)
+		throws NoSuchEntryException {
+		AnalysisEntry analysisEntry = fetchByA_CM_Last(analysisEntryId,
+				candidateMaintenanceId, orderByComparator);
+
+		if (analysisEntry != null) {
+			return analysisEntry;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("analysisEntryId=");
+		msg.append(analysisEntryId);
+
+		msg.append(", candidateMaintenanceId=");
+		msg.append(candidateMaintenanceId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchEntryException(msg.toString());
+	}
+
+	/**
+	 * Returns the last analysis entry in the ordered set where analysisEntryId = &#63; and candidateMaintenanceId = &#63;.
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching analysis entry, or <code>null</code> if a matching analysis entry could not be found
+	 */
+	@Override
+	public AnalysisEntry fetchByA_CM_Last(long analysisEntryId,
+		long candidateMaintenanceId,
+		OrderByComparator<AnalysisEntry> orderByComparator) {
+		int count = countByA_CM(analysisEntryId, candidateMaintenanceId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<AnalysisEntry> list = findByA_CM(analysisEntryId,
+				candidateMaintenanceId, count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Removes all the analysis entries where analysisEntryId = &#63; and candidateMaintenanceId = &#63; from the database.
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
+	 */
+	@Override
+	public void removeByA_CM(long analysisEntryId, long candidateMaintenanceId) {
+		for (AnalysisEntry analysisEntry : findByA_CM(analysisEntryId,
+				candidateMaintenanceId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+				null)) {
+			remove(analysisEntry);
+		}
+	}
+
+	/**
+	 * Returns the number of analysis entries where analysisEntryId = &#63; and candidateMaintenanceId = &#63;.
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
+	 * @return the number of matching analysis entries
+	 */
+	@Override
+	public int countByA_CM(long analysisEntryId, long candidateMaintenanceId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_A_CM;
+
+		Object[] finderArgs = new Object[] {
+				analysisEntryId, candidateMaintenanceId
+			};
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_ANALYSISENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_A_CM_ANALYSISENTRYID_2);
+
+			query.append(_FINDER_COLUMN_A_CM_CANDIDATEMAINTENANCEID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(analysisEntryId);
+
+				qPos.add(candidateMaintenanceId);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_A_CM_ANALYSISENTRYID_2 = "analysisEntry.analysisEntryId = ? AND ";
+	private static final String _FINDER_COLUMN_A_CM_CANDIDATEMAINTENANCEID_2 = "analysisEntry.candidateMaintenanceId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_A_U_CM = new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
+			AnalysisEntryModelImpl.FINDER_CACHE_ENABLED,
+			AnalysisEntryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByA_U_CM",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_U_CM =
+		new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
+			AnalysisEntryModelImpl.FINDER_CACHE_ENABLED,
+			AnalysisEntryImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByA_U_CM",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
+			},
+			AnalysisEntryModelImpl.ANALYSISENTRYID_COLUMN_BITMASK |
+			AnalysisEntryModelImpl.USERID_COLUMN_BITMASK |
+			AnalysisEntryModelImpl.CANDIDATEMAINTENANCEID_COLUMN_BITMASK |
+			AnalysisEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_A_U_CM = new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
+			AnalysisEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByA_U_CM",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
+			});
+
+	/**
+	 * Returns all the analysis entries where analysisEntryId = &#63; and userId = &#63; and candidateMaintenanceId = &#63;.
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param userId the user ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
+	 * @return the matching analysis entries
+	 */
+	@Override
+	public List<AnalysisEntry> findByA_U_CM(long analysisEntryId, long userId,
+		long candidateMaintenanceId) {
+		return findByA_U_CM(analysisEntryId, userId, candidateMaintenanceId,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the analysis entries where analysisEntryId = &#63; and userId = &#63; and candidateMaintenanceId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param userId the user ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
+	 * @param start the lower bound of the range of analysis entries
+	 * @param end the upper bound of the range of analysis entries (not inclusive)
+	 * @return the range of matching analysis entries
+	 */
+	@Override
+	public List<AnalysisEntry> findByA_U_CM(long analysisEntryId, long userId,
+		long candidateMaintenanceId, int start, int end) {
+		return findByA_U_CM(analysisEntryId, userId, candidateMaintenanceId,
+			start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the analysis entries where analysisEntryId = &#63; and userId = &#63; and candidateMaintenanceId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param userId the user ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
+	 * @param start the lower bound of the range of analysis entries
+	 * @param end the upper bound of the range of analysis entries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching analysis entries
+	 */
+	@Override
+	public List<AnalysisEntry> findByA_U_CM(long analysisEntryId, long userId,
+		long candidateMaintenanceId, int start, int end,
+		OrderByComparator<AnalysisEntry> orderByComparator) {
+		return findByA_U_CM(analysisEntryId, userId, candidateMaintenanceId,
+			start, end, orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the analysis entries where analysisEntryId = &#63; and userId = &#63; and candidateMaintenanceId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param userId the user ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
+	 * @param start the lower bound of the range of analysis entries
+	 * @param end the upper bound of the range of analysis entries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching analysis entries
+	 */
+	@Override
+	public List<AnalysisEntry> findByA_U_CM(long analysisEntryId, long userId,
+		long candidateMaintenanceId, int start, int end,
+		OrderByComparator<AnalysisEntry> orderByComparator,
+		boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_U_CM;
+			finderArgs = new Object[] {
+					analysisEntryId, userId, candidateMaintenanceId
+				};
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_A_U_CM;
+			finderArgs = new Object[] {
+					analysisEntryId, userId, candidateMaintenanceId,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<AnalysisEntry> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<AnalysisEntry>)finderCache.getResult(finderPath,
+					finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (AnalysisEntry analysisEntry : list) {
+					if ((analysisEntryId != analysisEntry.getAnalysisEntryId()) ||
+							(userId != analysisEntry.getUserId()) ||
+							(candidateMaintenanceId != analysisEntry.getCandidateMaintenanceId())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(5 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(5);
+			}
+
+			query.append(_SQL_SELECT_ANALYSISENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_A_U_CM_ANALYSISENTRYID_2);
+
+			query.append(_FINDER_COLUMN_A_U_CM_USERID_2);
+
+			query.append(_FINDER_COLUMN_A_U_CM_CANDIDATEMAINTENANCEID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(AnalysisEntryModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(analysisEntryId);
+
+				qPos.add(userId);
+
+				qPos.add(candidateMaintenanceId);
+
+				if (!pagination) {
+					list = (List<AnalysisEntry>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<AnalysisEntry>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first analysis entry in the ordered set where analysisEntryId = &#63; and userId = &#63; and candidateMaintenanceId = &#63;.
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param userId the user ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching analysis entry
+	 * @throws NoSuchEntryException if a matching analysis entry could not be found
+	 */
+	@Override
+	public AnalysisEntry findByA_U_CM_First(long analysisEntryId, long userId,
+		long candidateMaintenanceId,
+		OrderByComparator<AnalysisEntry> orderByComparator)
+		throws NoSuchEntryException {
+		AnalysisEntry analysisEntry = fetchByA_U_CM_First(analysisEntryId,
+				userId, candidateMaintenanceId, orderByComparator);
+
+		if (analysisEntry != null) {
+			return analysisEntry;
+		}
+
+		StringBundler msg = new StringBundler(8);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("analysisEntryId=");
+		msg.append(analysisEntryId);
+
+		msg.append(", userId=");
+		msg.append(userId);
+
+		msg.append(", candidateMaintenanceId=");
+		msg.append(candidateMaintenanceId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchEntryException(msg.toString());
+	}
+
+	/**
+	 * Returns the first analysis entry in the ordered set where analysisEntryId = &#63; and userId = &#63; and candidateMaintenanceId = &#63;.
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param userId the user ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching analysis entry, or <code>null</code> if a matching analysis entry could not be found
+	 */
+	@Override
+	public AnalysisEntry fetchByA_U_CM_First(long analysisEntryId, long userId,
+		long candidateMaintenanceId,
+		OrderByComparator<AnalysisEntry> orderByComparator) {
+		List<AnalysisEntry> list = findByA_U_CM(analysisEntryId, userId,
+				candidateMaintenanceId, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last analysis entry in the ordered set where analysisEntryId = &#63; and userId = &#63; and candidateMaintenanceId = &#63;.
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param userId the user ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching analysis entry
+	 * @throws NoSuchEntryException if a matching analysis entry could not be found
+	 */
+	@Override
+	public AnalysisEntry findByA_U_CM_Last(long analysisEntryId, long userId,
+		long candidateMaintenanceId,
+		OrderByComparator<AnalysisEntry> orderByComparator)
+		throws NoSuchEntryException {
+		AnalysisEntry analysisEntry = fetchByA_U_CM_Last(analysisEntryId,
+				userId, candidateMaintenanceId, orderByComparator);
+
+		if (analysisEntry != null) {
+			return analysisEntry;
+		}
+
+		StringBundler msg = new StringBundler(8);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("analysisEntryId=");
+		msg.append(analysisEntryId);
+
+		msg.append(", userId=");
+		msg.append(userId);
+
+		msg.append(", candidateMaintenanceId=");
+		msg.append(candidateMaintenanceId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchEntryException(msg.toString());
+	}
+
+	/**
+	 * Returns the last analysis entry in the ordered set where analysisEntryId = &#63; and userId = &#63; and candidateMaintenanceId = &#63;.
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param userId the user ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching analysis entry, or <code>null</code> if a matching analysis entry could not be found
+	 */
+	@Override
+	public AnalysisEntry fetchByA_U_CM_Last(long analysisEntryId, long userId,
+		long candidateMaintenanceId,
+		OrderByComparator<AnalysisEntry> orderByComparator) {
+		int count = countByA_U_CM(analysisEntryId, userId,
+				candidateMaintenanceId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<AnalysisEntry> list = findByA_U_CM(analysisEntryId, userId,
+				candidateMaintenanceId, count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Removes all the analysis entries where analysisEntryId = &#63; and userId = &#63; and candidateMaintenanceId = &#63; from the database.
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param userId the user ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
+	 */
+	@Override
+	public void removeByA_U_CM(long analysisEntryId, long userId,
+		long candidateMaintenanceId) {
+		for (AnalysisEntry analysisEntry : findByA_U_CM(analysisEntryId,
+				userId, candidateMaintenanceId, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null)) {
+			remove(analysisEntry);
+		}
+	}
+
+	/**
+	 * Returns the number of analysis entries where analysisEntryId = &#63; and userId = &#63; and candidateMaintenanceId = &#63;.
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param userId the user ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
+	 * @return the number of matching analysis entries
+	 */
+	@Override
+	public int countByA_U_CM(long analysisEntryId, long userId,
+		long candidateMaintenanceId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_A_U_CM;
+
+		Object[] finderArgs = new Object[] {
+				analysisEntryId, userId, candidateMaintenanceId
+			};
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_COUNT_ANALYSISENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_A_U_CM_ANALYSISENTRYID_2);
+
+			query.append(_FINDER_COLUMN_A_U_CM_USERID_2);
+
+			query.append(_FINDER_COLUMN_A_U_CM_CANDIDATEMAINTENANCEID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(analysisEntryId);
+
+				qPos.add(userId);
+
+				qPos.add(candidateMaintenanceId);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_A_U_CM_ANALYSISENTRYID_2 = "analysisEntry.analysisEntryId = ? AND ";
+	private static final String _FINDER_COLUMN_A_U_CM_USERID_2 = "analysisEntry.userId = ? AND ";
+	private static final String _FINDER_COLUMN_A_U_CM_CANDIDATEMAINTENANCEID_2 = "analysisEntry.candidateMaintenanceId = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_CANDIDATEMAINTENANCEID = new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
+			AnalysisEntryModelImpl.FINDER_CACHE_ENABLED,
+			AnalysisEntryImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByCandidateMaintenanceId",
+			new String[] { Long.class.getName() },
+			AnalysisEntryModelImpl.CANDIDATEMAINTENANCEID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_CANDIDATEMAINTENANCEID = new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
+			AnalysisEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByCandidateMaintenanceId",
+			new String[] { Long.class.getName() });
+
+	/**
+	 * Returns the analysis entry where candidateMaintenanceId = &#63; or throws a {@link NoSuchEntryException} if it could not be found.
+	 *
+	 * @param candidateMaintenanceId the candidate maintenance ID
+	 * @return the matching analysis entry
+	 * @throws NoSuchEntryException if a matching analysis entry could not be found
+	 */
+	@Override
+	public AnalysisEntry findByCandidateMaintenanceId(
+		long candidateMaintenanceId) throws NoSuchEntryException {
+		AnalysisEntry analysisEntry = fetchByCandidateMaintenanceId(candidateMaintenanceId);
+
+		if (analysisEntry == null) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("candidateMaintenanceId=");
+			msg.append(candidateMaintenanceId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+
+		return analysisEntry;
+	}
+
+	/**
+	 * Returns the analysis entry where candidateMaintenanceId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param candidateMaintenanceId the candidate maintenance ID
+	 * @return the matching analysis entry, or <code>null</code> if a matching analysis entry could not be found
+	 */
+	@Override
+	public AnalysisEntry fetchByCandidateMaintenanceId(
+		long candidateMaintenanceId) {
+		return fetchByCandidateMaintenanceId(candidateMaintenanceId, true);
+	}
+
+	/**
+	 * Returns the analysis entry where candidateMaintenanceId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param candidateMaintenanceId the candidate maintenance ID
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching analysis entry, or <code>null</code> if a matching analysis entry could not be found
+	 */
+	@Override
+	public AnalysisEntry fetchByCandidateMaintenanceId(
+		long candidateMaintenanceId, boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { candidateMaintenanceId };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_CANDIDATEMAINTENANCEID,
+					finderArgs, this);
+		}
+
+		if (result instanceof AnalysisEntry) {
+			AnalysisEntry analysisEntry = (AnalysisEntry)result;
+
+			if ((candidateMaintenanceId != analysisEntry.getCandidateMaintenanceId())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_ANALYSISENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_CANDIDATEMAINTENANCEID_CANDIDATEMAINTENANCEID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(candidateMaintenanceId);
+
+				List<AnalysisEntry> list = q.list();
+
+				if (list.isEmpty()) {
+					finderCache.putResult(FINDER_PATH_FETCH_BY_CANDIDATEMAINTENANCEID,
+						finderArgs, list);
+				}
+				else {
+					if ((list.size() > 1) && _log.isWarnEnabled()) {
+						_log.warn(
+							"AnalysisEntryPersistenceImpl.fetchByCandidateMaintenanceId(long, boolean) with parameters (" +
+							StringUtil.merge(finderArgs) +
+							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+					}
+
+					AnalysisEntry analysisEntry = list.get(0);
+
+					result = analysisEntry;
+
+					cacheResult(analysisEntry);
+
+					if ((analysisEntry.getCandidateMaintenanceId() != candidateMaintenanceId)) {
+						finderCache.putResult(FINDER_PATH_FETCH_BY_CANDIDATEMAINTENANCEID,
+							finderArgs, analysisEntry);
+					}
+				}
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_CANDIDATEMAINTENANCEID,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (AnalysisEntry)result;
+		}
+	}
+
+	/**
+	 * Removes the analysis entry where candidateMaintenanceId = &#63; from the database.
+	 *
+	 * @param candidateMaintenanceId the candidate maintenance ID
+	 * @return the analysis entry that was removed
+	 */
+	@Override
+	public AnalysisEntry removeByCandidateMaintenanceId(
+		long candidateMaintenanceId) throws NoSuchEntryException {
+		AnalysisEntry analysisEntry = findByCandidateMaintenanceId(candidateMaintenanceId);
+
+		return remove(analysisEntry);
+	}
+
+	/**
+	 * Returns the number of analysis entries where candidateMaintenanceId = &#63;.
+	 *
+	 * @param candidateMaintenanceId the candidate maintenance ID
+	 * @return the number of matching analysis entries
+	 */
+	@Override
+	public int countByCandidateMaintenanceId(long candidateMaintenanceId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_CANDIDATEMAINTENANCEID;
+
+		Object[] finderArgs = new Object[] { candidateMaintenanceId };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_ANALYSISENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_CANDIDATEMAINTENANCEID_CANDIDATEMAINTENANCEID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(candidateMaintenanceId);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_CANDIDATEMAINTENANCEID_CANDIDATEMAINTENANCEID_2 =
+		"analysisEntry.candidateMaintenanceId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID =
 		new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
 			AnalysisEntryModelImpl.FINDER_CACHE_ENABLED,
@@ -1740,17 +3194,17 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 	/**
 	 * Returns the analysis entries before and after the current analysis entry in the ordered set where companyId = &#63;.
 	 *
-	 * @param analysisId the primary key of the current analysis entry
+	 * @param analysisEntryId the primary key of the current analysis entry
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next analysis entry
 	 * @throws NoSuchEntryException if a analysis entry with the primary key could not be found
 	 */
 	@Override
-	public AnalysisEntry[] findByCompanyId_PrevAndNext(long analysisId,
+	public AnalysisEntry[] findByCompanyId_PrevAndNext(long analysisEntryId,
 		long companyId, OrderByComparator<AnalysisEntry> orderByComparator)
 		throws NoSuchEntryException {
-		AnalysisEntry analysisEntry = findByPrimaryKey(analysisId);
+		AnalysisEntry analysisEntry = findByPrimaryKey(analysisEntryId);
 
 		Session session = null;
 
@@ -1948,1431 +3402,6 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 	}
 
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "analysisEntry.companyId = ?";
-	public static final FinderPath FINDER_PATH_FETCH_BY_CANMAINID = new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
-			AnalysisEntryModelImpl.FINDER_CACHE_ENABLED,
-			AnalysisEntryImpl.class, FINDER_CLASS_NAME_ENTITY,
-			"fetchByCanMainId", new String[] { Long.class.getName() },
-			AnalysisEntryModelImpl.CANMAINID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_CANMAINID = new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
-			AnalysisEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCanMainId",
-			new String[] { Long.class.getName() });
-
-	/**
-	 * Returns the analysis entry where canMainId = &#63; or throws a {@link NoSuchEntryException} if it could not be found.
-	 *
-	 * @param canMainId the can main ID
-	 * @return the matching analysis entry
-	 * @throws NoSuchEntryException if a matching analysis entry could not be found
-	 */
-	@Override
-	public AnalysisEntry findByCanMainId(long canMainId)
-		throws NoSuchEntryException {
-		AnalysisEntry analysisEntry = fetchByCanMainId(canMainId);
-
-		if (analysisEntry == null) {
-			StringBundler msg = new StringBundler(4);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("canMainId=");
-			msg.append(canMainId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(msg.toString());
-			}
-
-			throw new NoSuchEntryException(msg.toString());
-		}
-
-		return analysisEntry;
-	}
-
-	/**
-	 * Returns the analysis entry where canMainId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param canMainId the can main ID
-	 * @return the matching analysis entry, or <code>null</code> if a matching analysis entry could not be found
-	 */
-	@Override
-	public AnalysisEntry fetchByCanMainId(long canMainId) {
-		return fetchByCanMainId(canMainId, true);
-	}
-
-	/**
-	 * Returns the analysis entry where canMainId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param canMainId the can main ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the matching analysis entry, or <code>null</code> if a matching analysis entry could not be found
-	 */
-	@Override
-	public AnalysisEntry fetchByCanMainId(long canMainId,
-		boolean retrieveFromCache) {
-		Object[] finderArgs = new Object[] { canMainId };
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = finderCache.getResult(FINDER_PATH_FETCH_BY_CANMAINID,
-					finderArgs, this);
-		}
-
-		if (result instanceof AnalysisEntry) {
-			AnalysisEntry analysisEntry = (AnalysisEntry)result;
-
-			if ((canMainId != analysisEntry.getCanMainId())) {
-				result = null;
-			}
-		}
-
-		if (result == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_SELECT_ANALYSISENTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_CANMAINID_CANMAINID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(canMainId);
-
-				List<AnalysisEntry> list = q.list();
-
-				if (list.isEmpty()) {
-					finderCache.putResult(FINDER_PATH_FETCH_BY_CANMAINID,
-						finderArgs, list);
-				}
-				else {
-					if ((list.size() > 1) && _log.isWarnEnabled()) {
-						_log.warn(
-							"AnalysisEntryPersistenceImpl.fetchByCanMainId(long, boolean) with parameters (" +
-							StringUtil.merge(finderArgs) +
-							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
-					}
-
-					AnalysisEntry analysisEntry = list.get(0);
-
-					result = analysisEntry;
-
-					cacheResult(analysisEntry);
-
-					if ((analysisEntry.getCanMainId() != canMainId)) {
-						finderCache.putResult(FINDER_PATH_FETCH_BY_CANMAINID,
-							finderArgs, analysisEntry);
-					}
-				}
-			}
-			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_FETCH_BY_CANMAINID,
-					finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		if (result instanceof List<?>) {
-			return null;
-		}
-		else {
-			return (AnalysisEntry)result;
-		}
-	}
-
-	/**
-	 * Removes the analysis entry where canMainId = &#63; from the database.
-	 *
-	 * @param canMainId the can main ID
-	 * @return the analysis entry that was removed
-	 */
-	@Override
-	public AnalysisEntry removeByCanMainId(long canMainId)
-		throws NoSuchEntryException {
-		AnalysisEntry analysisEntry = findByCanMainId(canMainId);
-
-		return remove(analysisEntry);
-	}
-
-	/**
-	 * Returns the number of analysis entries where canMainId = &#63;.
-	 *
-	 * @param canMainId the can main ID
-	 * @return the number of matching analysis entries
-	 */
-	@Override
-	public int countByCanMainId(long canMainId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_CANMAINID;
-
-		Object[] finderArgs = new Object[] { canMainId };
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(2);
-
-			query.append(_SQL_COUNT_ANALYSISENTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_CANMAINID_CANMAINID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(canMainId);
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_CANMAINID_CANMAINID_2 = "analysisEntry.canMainId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_A_C = new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
-			AnalysisEntryModelImpl.FINDER_CACHE_ENABLED,
-			AnalysisEntryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByA_C",
-			new String[] {
-				Long.class.getName(), Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_C = new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
-			AnalysisEntryModelImpl.FINDER_CACHE_ENABLED,
-			AnalysisEntryImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByA_C",
-			new String[] { Long.class.getName(), Long.class.getName() },
-			AnalysisEntryModelImpl.ANALYSISID_COLUMN_BITMASK |
-			AnalysisEntryModelImpl.COMPANYID_COLUMN_BITMASK |
-			AnalysisEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_A_C = new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
-			AnalysisEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByA_C",
-			new String[] { Long.class.getName(), Long.class.getName() });
-
-	/**
-	 * Returns all the analysis entries where analysisId = &#63; and companyId = &#63;.
-	 *
-	 * @param analysisId the analysis ID
-	 * @param companyId the company ID
-	 * @return the matching analysis entries
-	 */
-	@Override
-	public List<AnalysisEntry> findByA_C(long analysisId, long companyId) {
-		return findByA_C(analysisId, companyId, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
-	}
-
-	/**
-	 * Returns a range of all the analysis entries where analysisId = &#63; and companyId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param analysisId the analysis ID
-	 * @param companyId the company ID
-	 * @param start the lower bound of the range of analysis entries
-	 * @param end the upper bound of the range of analysis entries (not inclusive)
-	 * @return the range of matching analysis entries
-	 */
-	@Override
-	public List<AnalysisEntry> findByA_C(long analysisId, long companyId,
-		int start, int end) {
-		return findByA_C(analysisId, companyId, start, end, null);
-	}
-
-	/**
-	 * Returns an ordered range of all the analysis entries where analysisId = &#63; and companyId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param analysisId the analysis ID
-	 * @param companyId the company ID
-	 * @param start the lower bound of the range of analysis entries
-	 * @param end the upper bound of the range of analysis entries (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching analysis entries
-	 */
-	@Override
-	public List<AnalysisEntry> findByA_C(long analysisId, long companyId,
-		int start, int end, OrderByComparator<AnalysisEntry> orderByComparator) {
-		return findByA_C(analysisId, companyId, start, end, orderByComparator,
-			true);
-	}
-
-	/**
-	 * Returns an ordered range of all the analysis entries where analysisId = &#63; and companyId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param analysisId the analysis ID
-	 * @param companyId the company ID
-	 * @param start the lower bound of the range of analysis entries
-	 * @param end the upper bound of the range of analysis entries (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of matching analysis entries
-	 */
-	@Override
-	public List<AnalysisEntry> findByA_C(long analysisId, long companyId,
-		int start, int end, OrderByComparator<AnalysisEntry> orderByComparator,
-		boolean retrieveFromCache) {
-		boolean pagination = true;
-		FinderPath finderPath = null;
-		Object[] finderArgs = null;
-
-		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
-			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_C;
-			finderArgs = new Object[] { analysisId, companyId };
-		}
-		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_A_C;
-			finderArgs = new Object[] {
-					analysisId, companyId,
-					
-					start, end, orderByComparator
-				};
-		}
-
-		List<AnalysisEntry> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<AnalysisEntry>)finderCache.getResult(finderPath,
-					finderArgs, this);
-
-			if ((list != null) && !list.isEmpty()) {
-				for (AnalysisEntry analysisEntry : list) {
-					if ((analysisId != analysisEntry.getAnalysisId()) ||
-							(companyId != analysisEntry.getCompanyId())) {
-						list = null;
-
-						break;
-					}
-				}
-			}
-		}
-
-		if (list == null) {
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 2));
-			}
-			else {
-				query = new StringBundler(4);
-			}
-
-			query.append(_SQL_SELECT_ANALYSISENTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_A_C_ANALYSISID_2);
-
-			query.append(_FINDER_COLUMN_A_C_COMPANYID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-			else
-			 if (pagination) {
-				query.append(AnalysisEntryModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(analysisId);
-
-				qPos.add(companyId);
-
-				if (!pagination) {
-					list = (List<AnalysisEntry>)QueryUtil.list(q, getDialect(),
-							start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<AnalysisEntry>)QueryUtil.list(q, getDialect(),
-							start, end);
-				}
-
-				cacheResult(list);
-
-				finderCache.putResult(finderPath, finderArgs, list);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	/**
-	 * Returns the first analysis entry in the ordered set where analysisId = &#63; and companyId = &#63;.
-	 *
-	 * @param analysisId the analysis ID
-	 * @param companyId the company ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching analysis entry
-	 * @throws NoSuchEntryException if a matching analysis entry could not be found
-	 */
-	@Override
-	public AnalysisEntry findByA_C_First(long analysisId, long companyId,
-		OrderByComparator<AnalysisEntry> orderByComparator)
-		throws NoSuchEntryException {
-		AnalysisEntry analysisEntry = fetchByA_C_First(analysisId, companyId,
-				orderByComparator);
-
-		if (analysisEntry != null) {
-			return analysisEntry;
-		}
-
-		StringBundler msg = new StringBundler(6);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("analysisId=");
-		msg.append(analysisId);
-
-		msg.append(", companyId=");
-		msg.append(companyId);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchEntryException(msg.toString());
-	}
-
-	/**
-	 * Returns the first analysis entry in the ordered set where analysisId = &#63; and companyId = &#63;.
-	 *
-	 * @param analysisId the analysis ID
-	 * @param companyId the company ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching analysis entry, or <code>null</code> if a matching analysis entry could not be found
-	 */
-	@Override
-	public AnalysisEntry fetchByA_C_First(long analysisId, long companyId,
-		OrderByComparator<AnalysisEntry> orderByComparator) {
-		List<AnalysisEntry> list = findByA_C(analysisId, companyId, 0, 1,
-				orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last analysis entry in the ordered set where analysisId = &#63; and companyId = &#63;.
-	 *
-	 * @param analysisId the analysis ID
-	 * @param companyId the company ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching analysis entry
-	 * @throws NoSuchEntryException if a matching analysis entry could not be found
-	 */
-	@Override
-	public AnalysisEntry findByA_C_Last(long analysisId, long companyId,
-		OrderByComparator<AnalysisEntry> orderByComparator)
-		throws NoSuchEntryException {
-		AnalysisEntry analysisEntry = fetchByA_C_Last(analysisId, companyId,
-				orderByComparator);
-
-		if (analysisEntry != null) {
-			return analysisEntry;
-		}
-
-		StringBundler msg = new StringBundler(6);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("analysisId=");
-		msg.append(analysisId);
-
-		msg.append(", companyId=");
-		msg.append(companyId);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchEntryException(msg.toString());
-	}
-
-	/**
-	 * Returns the last analysis entry in the ordered set where analysisId = &#63; and companyId = &#63;.
-	 *
-	 * @param analysisId the analysis ID
-	 * @param companyId the company ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching analysis entry, or <code>null</code> if a matching analysis entry could not be found
-	 */
-	@Override
-	public AnalysisEntry fetchByA_C_Last(long analysisId, long companyId,
-		OrderByComparator<AnalysisEntry> orderByComparator) {
-		int count = countByA_C(analysisId, companyId);
-
-		if (count == 0) {
-			return null;
-		}
-
-		List<AnalysisEntry> list = findByA_C(analysisId, companyId, count - 1,
-				count, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Removes all the analysis entries where analysisId = &#63; and companyId = &#63; from the database.
-	 *
-	 * @param analysisId the analysis ID
-	 * @param companyId the company ID
-	 */
-	@Override
-	public void removeByA_C(long analysisId, long companyId) {
-		for (AnalysisEntry analysisEntry : findByA_C(analysisId, companyId,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
-			remove(analysisEntry);
-		}
-	}
-
-	/**
-	 * Returns the number of analysis entries where analysisId = &#63; and companyId = &#63;.
-	 *
-	 * @param analysisId the analysis ID
-	 * @param companyId the company ID
-	 * @return the number of matching analysis entries
-	 */
-	@Override
-	public int countByA_C(long analysisId, long companyId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_A_C;
-
-		Object[] finderArgs = new Object[] { analysisId, companyId };
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_COUNT_ANALYSISENTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_A_C_ANALYSISID_2);
-
-			query.append(_FINDER_COLUMN_A_C_COMPANYID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(analysisId);
-
-				qPos.add(companyId);
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_A_C_ANALYSISID_2 = "analysisEntry.analysisId = ? AND ";
-	private static final String _FINDER_COLUMN_A_C_COMPANYID_2 = "analysisEntry.companyId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_A_CM = new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
-			AnalysisEntryModelImpl.FINDER_CACHE_ENABLED,
-			AnalysisEntryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByA_CM",
-			new String[] {
-				Long.class.getName(), Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_CM = new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
-			AnalysisEntryModelImpl.FINDER_CACHE_ENABLED,
-			AnalysisEntryImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByA_CM",
-			new String[] { Long.class.getName(), Long.class.getName() },
-			AnalysisEntryModelImpl.ANALYSISID_COLUMN_BITMASK |
-			AnalysisEntryModelImpl.CANMAINID_COLUMN_BITMASK |
-			AnalysisEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_A_CM = new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
-			AnalysisEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByA_CM",
-			new String[] { Long.class.getName(), Long.class.getName() });
-
-	/**
-	 * Returns all the analysis entries where analysisId = &#63; and canMainId = &#63;.
-	 *
-	 * @param analysisId the analysis ID
-	 * @param canMainId the can main ID
-	 * @return the matching analysis entries
-	 */
-	@Override
-	public List<AnalysisEntry> findByA_CM(long analysisId, long canMainId) {
-		return findByA_CM(analysisId, canMainId, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
-	}
-
-	/**
-	 * Returns a range of all the analysis entries where analysisId = &#63; and canMainId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param analysisId the analysis ID
-	 * @param canMainId the can main ID
-	 * @param start the lower bound of the range of analysis entries
-	 * @param end the upper bound of the range of analysis entries (not inclusive)
-	 * @return the range of matching analysis entries
-	 */
-	@Override
-	public List<AnalysisEntry> findByA_CM(long analysisId, long canMainId,
-		int start, int end) {
-		return findByA_CM(analysisId, canMainId, start, end, null);
-	}
-
-	/**
-	 * Returns an ordered range of all the analysis entries where analysisId = &#63; and canMainId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param analysisId the analysis ID
-	 * @param canMainId the can main ID
-	 * @param start the lower bound of the range of analysis entries
-	 * @param end the upper bound of the range of analysis entries (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching analysis entries
-	 */
-	@Override
-	public List<AnalysisEntry> findByA_CM(long analysisId, long canMainId,
-		int start, int end, OrderByComparator<AnalysisEntry> orderByComparator) {
-		return findByA_CM(analysisId, canMainId, start, end, orderByComparator,
-			true);
-	}
-
-	/**
-	 * Returns an ordered range of all the analysis entries where analysisId = &#63; and canMainId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param analysisId the analysis ID
-	 * @param canMainId the can main ID
-	 * @param start the lower bound of the range of analysis entries
-	 * @param end the upper bound of the range of analysis entries (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of matching analysis entries
-	 */
-	@Override
-	public List<AnalysisEntry> findByA_CM(long analysisId, long canMainId,
-		int start, int end, OrderByComparator<AnalysisEntry> orderByComparator,
-		boolean retrieveFromCache) {
-		boolean pagination = true;
-		FinderPath finderPath = null;
-		Object[] finderArgs = null;
-
-		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
-			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_CM;
-			finderArgs = new Object[] { analysisId, canMainId };
-		}
-		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_A_CM;
-			finderArgs = new Object[] {
-					analysisId, canMainId,
-					
-					start, end, orderByComparator
-				};
-		}
-
-		List<AnalysisEntry> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<AnalysisEntry>)finderCache.getResult(finderPath,
-					finderArgs, this);
-
-			if ((list != null) && !list.isEmpty()) {
-				for (AnalysisEntry analysisEntry : list) {
-					if ((analysisId != analysisEntry.getAnalysisId()) ||
-							(canMainId != analysisEntry.getCanMainId())) {
-						list = null;
-
-						break;
-					}
-				}
-			}
-		}
-
-		if (list == null) {
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 2));
-			}
-			else {
-				query = new StringBundler(4);
-			}
-
-			query.append(_SQL_SELECT_ANALYSISENTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_A_CM_ANALYSISID_2);
-
-			query.append(_FINDER_COLUMN_A_CM_CANMAINID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-			else
-			 if (pagination) {
-				query.append(AnalysisEntryModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(analysisId);
-
-				qPos.add(canMainId);
-
-				if (!pagination) {
-					list = (List<AnalysisEntry>)QueryUtil.list(q, getDialect(),
-							start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<AnalysisEntry>)QueryUtil.list(q, getDialect(),
-							start, end);
-				}
-
-				cacheResult(list);
-
-				finderCache.putResult(finderPath, finderArgs, list);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	/**
-	 * Returns the first analysis entry in the ordered set where analysisId = &#63; and canMainId = &#63;.
-	 *
-	 * @param analysisId the analysis ID
-	 * @param canMainId the can main ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching analysis entry
-	 * @throws NoSuchEntryException if a matching analysis entry could not be found
-	 */
-	@Override
-	public AnalysisEntry findByA_CM_First(long analysisId, long canMainId,
-		OrderByComparator<AnalysisEntry> orderByComparator)
-		throws NoSuchEntryException {
-		AnalysisEntry analysisEntry = fetchByA_CM_First(analysisId, canMainId,
-				orderByComparator);
-
-		if (analysisEntry != null) {
-			return analysisEntry;
-		}
-
-		StringBundler msg = new StringBundler(6);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("analysisId=");
-		msg.append(analysisId);
-
-		msg.append(", canMainId=");
-		msg.append(canMainId);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchEntryException(msg.toString());
-	}
-
-	/**
-	 * Returns the first analysis entry in the ordered set where analysisId = &#63; and canMainId = &#63;.
-	 *
-	 * @param analysisId the analysis ID
-	 * @param canMainId the can main ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching analysis entry, or <code>null</code> if a matching analysis entry could not be found
-	 */
-	@Override
-	public AnalysisEntry fetchByA_CM_First(long analysisId, long canMainId,
-		OrderByComparator<AnalysisEntry> orderByComparator) {
-		List<AnalysisEntry> list = findByA_CM(analysisId, canMainId, 0, 1,
-				orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last analysis entry in the ordered set where analysisId = &#63; and canMainId = &#63;.
-	 *
-	 * @param analysisId the analysis ID
-	 * @param canMainId the can main ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching analysis entry
-	 * @throws NoSuchEntryException if a matching analysis entry could not be found
-	 */
-	@Override
-	public AnalysisEntry findByA_CM_Last(long analysisId, long canMainId,
-		OrderByComparator<AnalysisEntry> orderByComparator)
-		throws NoSuchEntryException {
-		AnalysisEntry analysisEntry = fetchByA_CM_Last(analysisId, canMainId,
-				orderByComparator);
-
-		if (analysisEntry != null) {
-			return analysisEntry;
-		}
-
-		StringBundler msg = new StringBundler(6);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("analysisId=");
-		msg.append(analysisId);
-
-		msg.append(", canMainId=");
-		msg.append(canMainId);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchEntryException(msg.toString());
-	}
-
-	/**
-	 * Returns the last analysis entry in the ordered set where analysisId = &#63; and canMainId = &#63;.
-	 *
-	 * @param analysisId the analysis ID
-	 * @param canMainId the can main ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching analysis entry, or <code>null</code> if a matching analysis entry could not be found
-	 */
-	@Override
-	public AnalysisEntry fetchByA_CM_Last(long analysisId, long canMainId,
-		OrderByComparator<AnalysisEntry> orderByComparator) {
-		int count = countByA_CM(analysisId, canMainId);
-
-		if (count == 0) {
-			return null;
-		}
-
-		List<AnalysisEntry> list = findByA_CM(analysisId, canMainId, count - 1,
-				count, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Removes all the analysis entries where analysisId = &#63; and canMainId = &#63; from the database.
-	 *
-	 * @param analysisId the analysis ID
-	 * @param canMainId the can main ID
-	 */
-	@Override
-	public void removeByA_CM(long analysisId, long canMainId) {
-		for (AnalysisEntry analysisEntry : findByA_CM(analysisId, canMainId,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
-			remove(analysisEntry);
-		}
-	}
-
-	/**
-	 * Returns the number of analysis entries where analysisId = &#63; and canMainId = &#63;.
-	 *
-	 * @param analysisId the analysis ID
-	 * @param canMainId the can main ID
-	 * @return the number of matching analysis entries
-	 */
-	@Override
-	public int countByA_CM(long analysisId, long canMainId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_A_CM;
-
-		Object[] finderArgs = new Object[] { analysisId, canMainId };
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_COUNT_ANALYSISENTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_A_CM_ANALYSISID_2);
-
-			query.append(_FINDER_COLUMN_A_CM_CANMAINID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(analysisId);
-
-				qPos.add(canMainId);
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_A_CM_ANALYSISID_2 = "analysisEntry.analysisId = ? AND ";
-	private static final String _FINDER_COLUMN_A_CM_CANMAINID_2 = "analysisEntry.canMainId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_A_U_CM = new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
-			AnalysisEntryModelImpl.FINDER_CACHE_ENABLED,
-			AnalysisEntryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByA_U_CM",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_U_CM =
-		new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
-			AnalysisEntryModelImpl.FINDER_CACHE_ENABLED,
-			AnalysisEntryImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByA_U_CM",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName()
-			},
-			AnalysisEntryModelImpl.ANALYSISID_COLUMN_BITMASK |
-			AnalysisEntryModelImpl.USERID_COLUMN_BITMASK |
-			AnalysisEntryModelImpl.CANMAINID_COLUMN_BITMASK |
-			AnalysisEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_A_U_CM = new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
-			AnalysisEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByA_U_CM",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName()
-			});
-
-	/**
-	 * Returns all the analysis entries where analysisId = &#63; and userId = &#63; and canMainId = &#63;.
-	 *
-	 * @param analysisId the analysis ID
-	 * @param userId the user ID
-	 * @param canMainId the can main ID
-	 * @return the matching analysis entries
-	 */
-	@Override
-	public List<AnalysisEntry> findByA_U_CM(long analysisId, long userId,
-		long canMainId) {
-		return findByA_U_CM(analysisId, userId, canMainId, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
-	}
-
-	/**
-	 * Returns a range of all the analysis entries where analysisId = &#63; and userId = &#63; and canMainId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param analysisId the analysis ID
-	 * @param userId the user ID
-	 * @param canMainId the can main ID
-	 * @param start the lower bound of the range of analysis entries
-	 * @param end the upper bound of the range of analysis entries (not inclusive)
-	 * @return the range of matching analysis entries
-	 */
-	@Override
-	public List<AnalysisEntry> findByA_U_CM(long analysisId, long userId,
-		long canMainId, int start, int end) {
-		return findByA_U_CM(analysisId, userId, canMainId, start, end, null);
-	}
-
-	/**
-	 * Returns an ordered range of all the analysis entries where analysisId = &#63; and userId = &#63; and canMainId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param analysisId the analysis ID
-	 * @param userId the user ID
-	 * @param canMainId the can main ID
-	 * @param start the lower bound of the range of analysis entries
-	 * @param end the upper bound of the range of analysis entries (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching analysis entries
-	 */
-	@Override
-	public List<AnalysisEntry> findByA_U_CM(long analysisId, long userId,
-		long canMainId, int start, int end,
-		OrderByComparator<AnalysisEntry> orderByComparator) {
-		return findByA_U_CM(analysisId, userId, canMainId, start, end,
-			orderByComparator, true);
-	}
-
-	/**
-	 * Returns an ordered range of all the analysis entries where analysisId = &#63; and userId = &#63; and canMainId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param analysisId the analysis ID
-	 * @param userId the user ID
-	 * @param canMainId the can main ID
-	 * @param start the lower bound of the range of analysis entries
-	 * @param end the upper bound of the range of analysis entries (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of matching analysis entries
-	 */
-	@Override
-	public List<AnalysisEntry> findByA_U_CM(long analysisId, long userId,
-		long canMainId, int start, int end,
-		OrderByComparator<AnalysisEntry> orderByComparator,
-		boolean retrieveFromCache) {
-		boolean pagination = true;
-		FinderPath finderPath = null;
-		Object[] finderArgs = null;
-
-		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
-			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_U_CM;
-			finderArgs = new Object[] { analysisId, userId, canMainId };
-		}
-		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_A_U_CM;
-			finderArgs = new Object[] {
-					analysisId, userId, canMainId,
-					
-					start, end, orderByComparator
-				};
-		}
-
-		List<AnalysisEntry> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<AnalysisEntry>)finderCache.getResult(finderPath,
-					finderArgs, this);
-
-			if ((list != null) && !list.isEmpty()) {
-				for (AnalysisEntry analysisEntry : list) {
-					if ((analysisId != analysisEntry.getAnalysisId()) ||
-							(userId != analysisEntry.getUserId()) ||
-							(canMainId != analysisEntry.getCanMainId())) {
-						list = null;
-
-						break;
-					}
-				}
-			}
-		}
-
-		if (list == null) {
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(5 +
-						(orderByComparator.getOrderByFields().length * 2));
-			}
-			else {
-				query = new StringBundler(5);
-			}
-
-			query.append(_SQL_SELECT_ANALYSISENTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_A_U_CM_ANALYSISID_2);
-
-			query.append(_FINDER_COLUMN_A_U_CM_USERID_2);
-
-			query.append(_FINDER_COLUMN_A_U_CM_CANMAINID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-			else
-			 if (pagination) {
-				query.append(AnalysisEntryModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(analysisId);
-
-				qPos.add(userId);
-
-				qPos.add(canMainId);
-
-				if (!pagination) {
-					list = (List<AnalysisEntry>)QueryUtil.list(q, getDialect(),
-							start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<AnalysisEntry>)QueryUtil.list(q, getDialect(),
-							start, end);
-				}
-
-				cacheResult(list);
-
-				finderCache.putResult(finderPath, finderArgs, list);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	/**
-	 * Returns the first analysis entry in the ordered set where analysisId = &#63; and userId = &#63; and canMainId = &#63;.
-	 *
-	 * @param analysisId the analysis ID
-	 * @param userId the user ID
-	 * @param canMainId the can main ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching analysis entry
-	 * @throws NoSuchEntryException if a matching analysis entry could not be found
-	 */
-	@Override
-	public AnalysisEntry findByA_U_CM_First(long analysisId, long userId,
-		long canMainId, OrderByComparator<AnalysisEntry> orderByComparator)
-		throws NoSuchEntryException {
-		AnalysisEntry analysisEntry = fetchByA_U_CM_First(analysisId, userId,
-				canMainId, orderByComparator);
-
-		if (analysisEntry != null) {
-			return analysisEntry;
-		}
-
-		StringBundler msg = new StringBundler(8);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("analysisId=");
-		msg.append(analysisId);
-
-		msg.append(", userId=");
-		msg.append(userId);
-
-		msg.append(", canMainId=");
-		msg.append(canMainId);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchEntryException(msg.toString());
-	}
-
-	/**
-	 * Returns the first analysis entry in the ordered set where analysisId = &#63; and userId = &#63; and canMainId = &#63;.
-	 *
-	 * @param analysisId the analysis ID
-	 * @param userId the user ID
-	 * @param canMainId the can main ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching analysis entry, or <code>null</code> if a matching analysis entry could not be found
-	 */
-	@Override
-	public AnalysisEntry fetchByA_U_CM_First(long analysisId, long userId,
-		long canMainId, OrderByComparator<AnalysisEntry> orderByComparator) {
-		List<AnalysisEntry> list = findByA_U_CM(analysisId, userId, canMainId,
-				0, 1, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last analysis entry in the ordered set where analysisId = &#63; and userId = &#63; and canMainId = &#63;.
-	 *
-	 * @param analysisId the analysis ID
-	 * @param userId the user ID
-	 * @param canMainId the can main ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching analysis entry
-	 * @throws NoSuchEntryException if a matching analysis entry could not be found
-	 */
-	@Override
-	public AnalysisEntry findByA_U_CM_Last(long analysisId, long userId,
-		long canMainId, OrderByComparator<AnalysisEntry> orderByComparator)
-		throws NoSuchEntryException {
-		AnalysisEntry analysisEntry = fetchByA_U_CM_Last(analysisId, userId,
-				canMainId, orderByComparator);
-
-		if (analysisEntry != null) {
-			return analysisEntry;
-		}
-
-		StringBundler msg = new StringBundler(8);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("analysisId=");
-		msg.append(analysisId);
-
-		msg.append(", userId=");
-		msg.append(userId);
-
-		msg.append(", canMainId=");
-		msg.append(canMainId);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchEntryException(msg.toString());
-	}
-
-	/**
-	 * Returns the last analysis entry in the ordered set where analysisId = &#63; and userId = &#63; and canMainId = &#63;.
-	 *
-	 * @param analysisId the analysis ID
-	 * @param userId the user ID
-	 * @param canMainId the can main ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching analysis entry, or <code>null</code> if a matching analysis entry could not be found
-	 */
-	@Override
-	public AnalysisEntry fetchByA_U_CM_Last(long analysisId, long userId,
-		long canMainId, OrderByComparator<AnalysisEntry> orderByComparator) {
-		int count = countByA_U_CM(analysisId, userId, canMainId);
-
-		if (count == 0) {
-			return null;
-		}
-
-		List<AnalysisEntry> list = findByA_U_CM(analysisId, userId, canMainId,
-				count - 1, count, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Removes all the analysis entries where analysisId = &#63; and userId = &#63; and canMainId = &#63; from the database.
-	 *
-	 * @param analysisId the analysis ID
-	 * @param userId the user ID
-	 * @param canMainId the can main ID
-	 */
-	@Override
-	public void removeByA_U_CM(long analysisId, long userId, long canMainId) {
-		for (AnalysisEntry analysisEntry : findByA_U_CM(analysisId, userId,
-				canMainId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
-			remove(analysisEntry);
-		}
-	}
-
-	/**
-	 * Returns the number of analysis entries where analysisId = &#63; and userId = &#63; and canMainId = &#63;.
-	 *
-	 * @param analysisId the analysis ID
-	 * @param userId the user ID
-	 * @param canMainId the can main ID
-	 * @return the number of matching analysis entries
-	 */
-	@Override
-	public int countByA_U_CM(long analysisId, long userId, long canMainId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_A_U_CM;
-
-		Object[] finderArgs = new Object[] { analysisId, userId, canMainId };
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(4);
-
-			query.append(_SQL_COUNT_ANALYSISENTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_A_U_CM_ANALYSISID_2);
-
-			query.append(_FINDER_COLUMN_A_U_CM_USERID_2);
-
-			query.append(_FINDER_COLUMN_A_U_CM_CANMAINID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(analysisId);
-
-				qPos.add(userId);
-
-				qPos.add(canMainId);
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_A_U_CM_ANALYSISID_2 = "analysisEntry.analysisId = ? AND ";
-	private static final String _FINDER_COLUMN_A_U_CM_USERID_2 = "analysisEntry.userId = ? AND ";
-	private static final String _FINDER_COLUMN_A_U_CM_CANMAINID_2 = "analysisEntry.canMainId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_CM_U = new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
 			AnalysisEntryModelImpl.FINDER_CACHE_ENABLED,
 			AnalysisEntryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
@@ -3388,7 +3417,7 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 			AnalysisEntryImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
 			"findByCM_U",
 			new String[] { Long.class.getName(), Long.class.getName() },
-			AnalysisEntryModelImpl.CANMAINID_COLUMN_BITMASK |
+			AnalysisEntryModelImpl.CANDIDATEMAINTENANCEID_COLUMN_BITMASK |
 			AnalysisEntryModelImpl.USERID_COLUMN_BITMASK |
 			AnalysisEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_CM_U = new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
@@ -3397,45 +3426,46 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	/**
-	 * Returns all the analysis entries where canMainId = &#63; and userId = &#63;.
+	 * Returns all the analysis entries where candidateMaintenanceId = &#63; and userId = &#63;.
 	 *
-	 * @param canMainId the can main ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
 	 * @param userId the user ID
 	 * @return the matching analysis entries
 	 */
 	@Override
-	public List<AnalysisEntry> findByCM_U(long canMainId, long userId) {
-		return findByCM_U(canMainId, userId, QueryUtil.ALL_POS,
+	public List<AnalysisEntry> findByCM_U(long candidateMaintenanceId,
+		long userId) {
+		return findByCM_U(candidateMaintenanceId, userId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the analysis entries where canMainId = &#63; and userId = &#63;.
+	 * Returns a range of all the analysis entries where candidateMaintenanceId = &#63; and userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param canMainId the can main ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
 	 * @param userId the user ID
 	 * @param start the lower bound of the range of analysis entries
 	 * @param end the upper bound of the range of analysis entries (not inclusive)
 	 * @return the range of matching analysis entries
 	 */
 	@Override
-	public List<AnalysisEntry> findByCM_U(long canMainId, long userId,
-		int start, int end) {
-		return findByCM_U(canMainId, userId, start, end, null);
+	public List<AnalysisEntry> findByCM_U(long candidateMaintenanceId,
+		long userId, int start, int end) {
+		return findByCM_U(candidateMaintenanceId, userId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the analysis entries where canMainId = &#63; and userId = &#63;.
+	 * Returns an ordered range of all the analysis entries where candidateMaintenanceId = &#63; and userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param canMainId the can main ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
 	 * @param userId the user ID
 	 * @param start the lower bound of the range of analysis entries
 	 * @param end the upper bound of the range of analysis entries (not inclusive)
@@ -3443,19 +3473,21 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 	 * @return the ordered range of matching analysis entries
 	 */
 	@Override
-	public List<AnalysisEntry> findByCM_U(long canMainId, long userId,
-		int start, int end, OrderByComparator<AnalysisEntry> orderByComparator) {
-		return findByCM_U(canMainId, userId, start, end, orderByComparator, true);
+	public List<AnalysisEntry> findByCM_U(long candidateMaintenanceId,
+		long userId, int start, int end,
+		OrderByComparator<AnalysisEntry> orderByComparator) {
+		return findByCM_U(candidateMaintenanceId, userId, start, end,
+			orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the analysis entries where canMainId = &#63; and userId = &#63;.
+	 * Returns an ordered range of all the analysis entries where candidateMaintenanceId = &#63; and userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param canMainId the can main ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
 	 * @param userId the user ID
 	 * @param start the lower bound of the range of analysis entries
 	 * @param end the upper bound of the range of analysis entries (not inclusive)
@@ -3464,8 +3496,9 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 	 * @return the ordered range of matching analysis entries
 	 */
 	@Override
-	public List<AnalysisEntry> findByCM_U(long canMainId, long userId,
-		int start, int end, OrderByComparator<AnalysisEntry> orderByComparator,
+	public List<AnalysisEntry> findByCM_U(long candidateMaintenanceId,
+		long userId, int start, int end,
+		OrderByComparator<AnalysisEntry> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -3475,12 +3508,12 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 				(orderByComparator == null)) {
 			pagination = false;
 			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CM_U;
-			finderArgs = new Object[] { canMainId, userId };
+			finderArgs = new Object[] { candidateMaintenanceId, userId };
 		}
 		else {
 			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_CM_U;
 			finderArgs = new Object[] {
-					canMainId, userId,
+					candidateMaintenanceId, userId,
 					
 					start, end, orderByComparator
 				};
@@ -3494,7 +3527,7 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 
 			if ((list != null) && !list.isEmpty()) {
 				for (AnalysisEntry analysisEntry : list) {
-					if ((canMainId != analysisEntry.getCanMainId()) ||
+					if ((candidateMaintenanceId != analysisEntry.getCandidateMaintenanceId()) ||
 							(userId != analysisEntry.getUserId())) {
 						list = null;
 
@@ -3517,7 +3550,7 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 
 			query.append(_SQL_SELECT_ANALYSISENTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_CM_U_CANMAINID_2);
+			query.append(_FINDER_COLUMN_CM_U_CANDIDATEMAINTENANCEID_2);
 
 			query.append(_FINDER_COLUMN_CM_U_USERID_2);
 
@@ -3541,7 +3574,7 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(canMainId);
+				qPos.add(candidateMaintenanceId);
 
 				qPos.add(userId);
 
@@ -3576,20 +3609,20 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 	}
 
 	/**
-	 * Returns the first analysis entry in the ordered set where canMainId = &#63; and userId = &#63;.
+	 * Returns the first analysis entry in the ordered set where candidateMaintenanceId = &#63; and userId = &#63;.
 	 *
-	 * @param canMainId the can main ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
 	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching analysis entry
 	 * @throws NoSuchEntryException if a matching analysis entry could not be found
 	 */
 	@Override
-	public AnalysisEntry findByCM_U_First(long canMainId, long userId,
-		OrderByComparator<AnalysisEntry> orderByComparator)
+	public AnalysisEntry findByCM_U_First(long candidateMaintenanceId,
+		long userId, OrderByComparator<AnalysisEntry> orderByComparator)
 		throws NoSuchEntryException {
-		AnalysisEntry analysisEntry = fetchByCM_U_First(canMainId, userId,
-				orderByComparator);
+		AnalysisEntry analysisEntry = fetchByCM_U_First(candidateMaintenanceId,
+				userId, orderByComparator);
 
 		if (analysisEntry != null) {
 			return analysisEntry;
@@ -3599,8 +3632,8 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("canMainId=");
-		msg.append(canMainId);
+		msg.append("candidateMaintenanceId=");
+		msg.append(candidateMaintenanceId);
 
 		msg.append(", userId=");
 		msg.append(userId);
@@ -3611,18 +3644,18 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 	}
 
 	/**
-	 * Returns the first analysis entry in the ordered set where canMainId = &#63; and userId = &#63;.
+	 * Returns the first analysis entry in the ordered set where candidateMaintenanceId = &#63; and userId = &#63;.
 	 *
-	 * @param canMainId the can main ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
 	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching analysis entry, or <code>null</code> if a matching analysis entry could not be found
 	 */
 	@Override
-	public AnalysisEntry fetchByCM_U_First(long canMainId, long userId,
-		OrderByComparator<AnalysisEntry> orderByComparator) {
-		List<AnalysisEntry> list = findByCM_U(canMainId, userId, 0, 1,
-				orderByComparator);
+	public AnalysisEntry fetchByCM_U_First(long candidateMaintenanceId,
+		long userId, OrderByComparator<AnalysisEntry> orderByComparator) {
+		List<AnalysisEntry> list = findByCM_U(candidateMaintenanceId, userId,
+				0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -3632,20 +3665,20 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 	}
 
 	/**
-	 * Returns the last analysis entry in the ordered set where canMainId = &#63; and userId = &#63;.
+	 * Returns the last analysis entry in the ordered set where candidateMaintenanceId = &#63; and userId = &#63;.
 	 *
-	 * @param canMainId the can main ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
 	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching analysis entry
 	 * @throws NoSuchEntryException if a matching analysis entry could not be found
 	 */
 	@Override
-	public AnalysisEntry findByCM_U_Last(long canMainId, long userId,
-		OrderByComparator<AnalysisEntry> orderByComparator)
+	public AnalysisEntry findByCM_U_Last(long candidateMaintenanceId,
+		long userId, OrderByComparator<AnalysisEntry> orderByComparator)
 		throws NoSuchEntryException {
-		AnalysisEntry analysisEntry = fetchByCM_U_Last(canMainId, userId,
-				orderByComparator);
+		AnalysisEntry analysisEntry = fetchByCM_U_Last(candidateMaintenanceId,
+				userId, orderByComparator);
 
 		if (analysisEntry != null) {
 			return analysisEntry;
@@ -3655,8 +3688,8 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("canMainId=");
-		msg.append(canMainId);
+		msg.append("candidateMaintenanceId=");
+		msg.append(candidateMaintenanceId);
 
 		msg.append(", userId=");
 		msg.append(userId);
@@ -3667,24 +3700,24 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 	}
 
 	/**
-	 * Returns the last analysis entry in the ordered set where canMainId = &#63; and userId = &#63;.
+	 * Returns the last analysis entry in the ordered set where candidateMaintenanceId = &#63; and userId = &#63;.
 	 *
-	 * @param canMainId the can main ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
 	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching analysis entry, or <code>null</code> if a matching analysis entry could not be found
 	 */
 	@Override
-	public AnalysisEntry fetchByCM_U_Last(long canMainId, long userId,
-		OrderByComparator<AnalysisEntry> orderByComparator) {
-		int count = countByCM_U(canMainId, userId);
+	public AnalysisEntry fetchByCM_U_Last(long candidateMaintenanceId,
+		long userId, OrderByComparator<AnalysisEntry> orderByComparator) {
+		int count = countByCM_U(candidateMaintenanceId, userId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<AnalysisEntry> list = findByCM_U(canMainId, userId, count - 1,
-				count, orderByComparator);
+		List<AnalysisEntry> list = findByCM_U(candidateMaintenanceId, userId,
+				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -3694,21 +3727,21 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 	}
 
 	/**
-	 * Returns the analysis entries before and after the current analysis entry in the ordered set where canMainId = &#63; and userId = &#63;.
+	 * Returns the analysis entries before and after the current analysis entry in the ordered set where candidateMaintenanceId = &#63; and userId = &#63;.
 	 *
-	 * @param analysisId the primary key of the current analysis entry
-	 * @param canMainId the can main ID
+	 * @param analysisEntryId the primary key of the current analysis entry
+	 * @param candidateMaintenanceId the candidate maintenance ID
 	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next analysis entry
 	 * @throws NoSuchEntryException if a analysis entry with the primary key could not be found
 	 */
 	@Override
-	public AnalysisEntry[] findByCM_U_PrevAndNext(long analysisId,
-		long canMainId, long userId,
+	public AnalysisEntry[] findByCM_U_PrevAndNext(long analysisEntryId,
+		long candidateMaintenanceId, long userId,
 		OrderByComparator<AnalysisEntry> orderByComparator)
 		throws NoSuchEntryException {
-		AnalysisEntry analysisEntry = findByPrimaryKey(analysisId);
+		AnalysisEntry analysisEntry = findByPrimaryKey(analysisEntryId);
 
 		Session session = null;
 
@@ -3717,13 +3750,13 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 
 			AnalysisEntry[] array = new AnalysisEntryImpl[3];
 
-			array[0] = getByCM_U_PrevAndNext(session, analysisEntry, canMainId,
-					userId, orderByComparator, true);
+			array[0] = getByCM_U_PrevAndNext(session, analysisEntry,
+					candidateMaintenanceId, userId, orderByComparator, true);
 
 			array[1] = analysisEntry;
 
-			array[2] = getByCM_U_PrevAndNext(session, analysisEntry, canMainId,
-					userId, orderByComparator, false);
+			array[2] = getByCM_U_PrevAndNext(session, analysisEntry,
+					candidateMaintenanceId, userId, orderByComparator, false);
 
 			return array;
 		}
@@ -3736,7 +3769,7 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 	}
 
 	protected AnalysisEntry getByCM_U_PrevAndNext(Session session,
-		AnalysisEntry analysisEntry, long canMainId, long userId,
+		AnalysisEntry analysisEntry, long candidateMaintenanceId, long userId,
 		OrderByComparator<AnalysisEntry> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -3751,7 +3784,7 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 
 		query.append(_SQL_SELECT_ANALYSISENTRY_WHERE);
 
-		query.append(_FINDER_COLUMN_CM_U_CANMAINID_2);
+		query.append(_FINDER_COLUMN_CM_U_CANDIDATEMAINTENANCEID_2);
 
 		query.append(_FINDER_COLUMN_CM_U_USERID_2);
 
@@ -3823,7 +3856,7 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(canMainId);
+		qPos.add(candidateMaintenanceId);
 
 		qPos.add(userId);
 
@@ -3846,31 +3879,31 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 	}
 
 	/**
-	 * Removes all the analysis entries where canMainId = &#63; and userId = &#63; from the database.
+	 * Removes all the analysis entries where candidateMaintenanceId = &#63; and userId = &#63; from the database.
 	 *
-	 * @param canMainId the can main ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
 	 * @param userId the user ID
 	 */
 	@Override
-	public void removeByCM_U(long canMainId, long userId) {
-		for (AnalysisEntry analysisEntry : findByCM_U(canMainId, userId,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+	public void removeByCM_U(long candidateMaintenanceId, long userId) {
+		for (AnalysisEntry analysisEntry : findByCM_U(candidateMaintenanceId,
+				userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(analysisEntry);
 		}
 	}
 
 	/**
-	 * Returns the number of analysis entries where canMainId = &#63; and userId = &#63;.
+	 * Returns the number of analysis entries where candidateMaintenanceId = &#63; and userId = &#63;.
 	 *
-	 * @param canMainId the can main ID
+	 * @param candidateMaintenanceId the candidate maintenance ID
 	 * @param userId the user ID
 	 * @return the number of matching analysis entries
 	 */
 	@Override
-	public int countByCM_U(long canMainId, long userId) {
+	public int countByCM_U(long candidateMaintenanceId, long userId) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_CM_U;
 
-		Object[] finderArgs = new Object[] { canMainId, userId };
+		Object[] finderArgs = new Object[] { candidateMaintenanceId, userId };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -3879,7 +3912,7 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 
 			query.append(_SQL_COUNT_ANALYSISENTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_CM_U_CANMAINID_2);
+			query.append(_FINDER_COLUMN_CM_U_CANDIDATEMAINTENANCEID_2);
 
 			query.append(_FINDER_COLUMN_CM_U_USERID_2);
 
@@ -3894,7 +3927,7 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(canMainId);
+				qPos.add(candidateMaintenanceId);
 
 				qPos.add(userId);
 
@@ -3915,7 +3948,7 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_CM_U_CANMAINID_2 = "analysisEntry.canMainId = ? AND ";
+	private static final String _FINDER_COLUMN_CM_U_CANDIDATEMAINTENANCEID_2 = "analysisEntry.candidateMaintenanceId = ? AND ";
 	private static final String _FINDER_COLUMN_CM_U_USERID_2 = "analysisEntry.userId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_C_U = new FinderPath(AnalysisEntryModelImpl.ENTITY_CACHE_ENABLED,
 			AnalysisEntryModelImpl.FINDER_CACHE_ENABLED,
@@ -4240,7 +4273,7 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 	/**
 	 * Returns the analysis entries before and after the current analysis entry in the ordered set where companyId = &#63; and userId = &#63;.
 	 *
-	 * @param analysisId the primary key of the current analysis entry
+	 * @param analysisEntryId the primary key of the current analysis entry
 	 * @param companyId the company ID
 	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -4248,11 +4281,11 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 	 * @throws NoSuchEntryException if a analysis entry with the primary key could not be found
 	 */
 	@Override
-	public AnalysisEntry[] findByC_U_PrevAndNext(long analysisId,
+	public AnalysisEntry[] findByC_U_PrevAndNext(long analysisEntryId,
 		long companyId, long userId,
 		OrderByComparator<AnalysisEntry> orderByComparator)
 		throws NoSuchEntryException {
-		AnalysisEntry analysisEntry = findByPrimaryKey(analysisId);
+		AnalysisEntry analysisEntry = findByPrimaryKey(analysisEntryId);
 
 		Session session = null;
 
@@ -4796,7 +4829,7 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 	/**
 	 * Returns the analysis entries before and after the current analysis entry in the ordered set where userId = &#63; and createDate = &#63;.
 	 *
-	 * @param analysisId the primary key of the current analysis entry
+	 * @param analysisEntryId the primary key of the current analysis entry
 	 * @param userId the user ID
 	 * @param createDate the create date
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -4804,10 +4837,11 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 	 * @throws NoSuchEntryException if a analysis entry with the primary key could not be found
 	 */
 	@Override
-	public AnalysisEntry[] findByU_cD_PrevAndNext(long analysisId, long userId,
-		Date createDate, OrderByComparator<AnalysisEntry> orderByComparator)
+	public AnalysisEntry[] findByU_cD_PrevAndNext(long analysisEntryId,
+		long userId, Date createDate,
+		OrderByComparator<AnalysisEntry> orderByComparator)
 		throws NoSuchEntryException {
-		AnalysisEntry analysisEntry = findByPrimaryKey(analysisId);
+		AnalysisEntry analysisEntry = findByPrimaryKey(analysisEntryId);
 
 		Session session = null;
 
@@ -5055,11 +5089,12 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 			AnalysisEntryImpl.class, analysisEntry.getPrimaryKey(),
 			analysisEntry);
 
-		finderCache.putResult(FINDER_PATH_FETCH_BY_ANALYSISID,
-			new Object[] { analysisEntry.getAnalysisId() }, analysisEntry);
+		finderCache.putResult(FINDER_PATH_FETCH_BY_ANALYSISENTRYID,
+			new Object[] { analysisEntry.getAnalysisEntryId() }, analysisEntry);
 
-		finderCache.putResult(FINDER_PATH_FETCH_BY_CANMAINID,
-			new Object[] { analysisEntry.getCanMainId() }, analysisEntry);
+		finderCache.putResult(FINDER_PATH_FETCH_BY_CANDIDATEMAINTENANCEID,
+			new Object[] { analysisEntry.getCandidateMaintenanceId() },
+			analysisEntry);
 
 		analysisEntry.resetOriginalValues();
 	}
@@ -5133,88 +5168,100 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 	protected void cacheUniqueFindersCache(
 		AnalysisEntryModelImpl analysisEntryModelImpl, boolean isNew) {
 		if (isNew) {
-			Object[] args = new Object[] { analysisEntryModelImpl.getAnalysisId() };
+			Object[] args = new Object[] {
+					analysisEntryModelImpl.getAnalysisEntryId()
+				};
 
-			finderCache.putResult(FINDER_PATH_COUNT_BY_ANALYSISID, args,
+			finderCache.putResult(FINDER_PATH_COUNT_BY_ANALYSISENTRYID, args,
 				Long.valueOf(1));
-			finderCache.putResult(FINDER_PATH_FETCH_BY_ANALYSISID, args,
+			finderCache.putResult(FINDER_PATH_FETCH_BY_ANALYSISENTRYID, args,
 				analysisEntryModelImpl);
 
-			args = new Object[] { analysisEntryModelImpl.getCanMainId() };
+			args = new Object[] {
+					analysisEntryModelImpl.getCandidateMaintenanceId()
+				};
 
-			finderCache.putResult(FINDER_PATH_COUNT_BY_CANMAINID, args,
-				Long.valueOf(1));
-			finderCache.putResult(FINDER_PATH_FETCH_BY_CANMAINID, args,
-				analysisEntryModelImpl);
+			finderCache.putResult(FINDER_PATH_COUNT_BY_CANDIDATEMAINTENANCEID,
+				args, Long.valueOf(1));
+			finderCache.putResult(FINDER_PATH_FETCH_BY_CANDIDATEMAINTENANCEID,
+				args, analysisEntryModelImpl);
 		}
 		else {
 			if ((analysisEntryModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_ANALYSISID.getColumnBitmask()) != 0) {
+					FINDER_PATH_FETCH_BY_ANALYSISENTRYID.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						analysisEntryModelImpl.getAnalysisId()
+						analysisEntryModelImpl.getAnalysisEntryId()
 					};
 
-				finderCache.putResult(FINDER_PATH_COUNT_BY_ANALYSISID, args,
-					Long.valueOf(1));
-				finderCache.putResult(FINDER_PATH_FETCH_BY_ANALYSISID, args,
-					analysisEntryModelImpl);
+				finderCache.putResult(FINDER_PATH_COUNT_BY_ANALYSISENTRYID,
+					args, Long.valueOf(1));
+				finderCache.putResult(FINDER_PATH_FETCH_BY_ANALYSISENTRYID,
+					args, analysisEntryModelImpl);
 			}
 
 			if ((analysisEntryModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_CANMAINID.getColumnBitmask()) != 0) {
+					FINDER_PATH_FETCH_BY_CANDIDATEMAINTENANCEID.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						analysisEntryModelImpl.getCanMainId()
+						analysisEntryModelImpl.getCandidateMaintenanceId()
 					};
 
-				finderCache.putResult(FINDER_PATH_COUNT_BY_CANMAINID, args,
-					Long.valueOf(1));
-				finderCache.putResult(FINDER_PATH_FETCH_BY_CANMAINID, args,
-					analysisEntryModelImpl);
+				finderCache.putResult(FINDER_PATH_COUNT_BY_CANDIDATEMAINTENANCEID,
+					args, Long.valueOf(1));
+				finderCache.putResult(FINDER_PATH_FETCH_BY_CANDIDATEMAINTENANCEID,
+					args, analysisEntryModelImpl);
 			}
 		}
 	}
 
 	protected void clearUniqueFindersCache(
 		AnalysisEntryModelImpl analysisEntryModelImpl) {
-		Object[] args = new Object[] { analysisEntryModelImpl.getAnalysisId() };
+		Object[] args = new Object[] { analysisEntryModelImpl.getAnalysisEntryId() };
 
-		finderCache.removeResult(FINDER_PATH_COUNT_BY_ANALYSISID, args);
-		finderCache.removeResult(FINDER_PATH_FETCH_BY_ANALYSISID, args);
+		finderCache.removeResult(FINDER_PATH_COUNT_BY_ANALYSISENTRYID, args);
+		finderCache.removeResult(FINDER_PATH_FETCH_BY_ANALYSISENTRYID, args);
 
 		if ((analysisEntryModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_ANALYSISID.getColumnBitmask()) != 0) {
-			args = new Object[] { analysisEntryModelImpl.getOriginalAnalysisId() };
+				FINDER_PATH_FETCH_BY_ANALYSISENTRYID.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					analysisEntryModelImpl.getOriginalAnalysisEntryId()
+				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_ANALYSISID, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_ANALYSISID, args);
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_ANALYSISENTRYID, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_ANALYSISENTRYID, args);
 		}
 
-		args = new Object[] { analysisEntryModelImpl.getCanMainId() };
+		args = new Object[] { analysisEntryModelImpl.getCandidateMaintenanceId() };
 
-		finderCache.removeResult(FINDER_PATH_COUNT_BY_CANMAINID, args);
-		finderCache.removeResult(FINDER_PATH_FETCH_BY_CANMAINID, args);
+		finderCache.removeResult(FINDER_PATH_COUNT_BY_CANDIDATEMAINTENANCEID,
+			args);
+		finderCache.removeResult(FINDER_PATH_FETCH_BY_CANDIDATEMAINTENANCEID,
+			args);
 
 		if ((analysisEntryModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_CANMAINID.getColumnBitmask()) != 0) {
-			args = new Object[] { analysisEntryModelImpl.getOriginalCanMainId() };
+				FINDER_PATH_FETCH_BY_CANDIDATEMAINTENANCEID.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					analysisEntryModelImpl.getOriginalCandidateMaintenanceId()
+				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_CANMAINID, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_CANMAINID, args);
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_CANDIDATEMAINTENANCEID,
+				args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_CANDIDATEMAINTENANCEID,
+				args);
 		}
 	}
 
 	/**
 	 * Creates a new analysis entry with the primary key. Does not add the analysis entry to the database.
 	 *
-	 * @param analysisId the primary key for the new analysis entry
+	 * @param analysisEntryId the primary key for the new analysis entry
 	 * @return the new analysis entry
 	 */
 	@Override
-	public AnalysisEntry create(long analysisId) {
+	public AnalysisEntry create(long analysisEntryId) {
 		AnalysisEntry analysisEntry = new AnalysisEntryImpl();
 
 		analysisEntry.setNew(true);
-		analysisEntry.setPrimaryKey(analysisId);
+		analysisEntry.setPrimaryKey(analysisEntryId);
 
 		String uuid = PortalUUIDUtil.generate();
 
@@ -5228,13 +5275,14 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 	/**
 	 * Removes the analysis entry with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param analysisId the primary key of the analysis entry
+	 * @param analysisEntryId the primary key of the analysis entry
 	 * @return the analysis entry that was removed
 	 * @throws NoSuchEntryException if a analysis entry with the primary key could not be found
 	 */
 	@Override
-	public AnalysisEntry remove(long analysisId) throws NoSuchEntryException {
-		return remove((Serializable)analysisId);
+	public AnalysisEntry remove(long analysisEntryId)
+		throws NoSuchEntryException {
+		return remove((Serializable)analysisEntryId);
 	}
 
 	/**
@@ -5413,6 +5461,71 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 			}
 
 			if ((analysisEntryModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_C.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						analysisEntryModelImpl.getOriginalAnalysisEntryId(),
+						analysisEntryModelImpl.getOriginalCompanyId()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_A_C, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_C,
+					args);
+
+				args = new Object[] {
+						analysisEntryModelImpl.getAnalysisEntryId(),
+						analysisEntryModelImpl.getCompanyId()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_A_C, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_C,
+					args);
+			}
+
+			if ((analysisEntryModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_CM.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						analysisEntryModelImpl.getOriginalAnalysisEntryId(),
+						analysisEntryModelImpl.getOriginalCandidateMaintenanceId()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_A_CM, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_CM,
+					args);
+
+				args = new Object[] {
+						analysisEntryModelImpl.getAnalysisEntryId(),
+						analysisEntryModelImpl.getCandidateMaintenanceId()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_A_CM, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_CM,
+					args);
+			}
+
+			if ((analysisEntryModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_U_CM.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						analysisEntryModelImpl.getOriginalAnalysisEntryId(),
+						analysisEntryModelImpl.getOriginalUserId(),
+						analysisEntryModelImpl.getOriginalCandidateMaintenanceId()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_A_U_CM, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_U_CM,
+					args);
+
+				args = new Object[] {
+						analysisEntryModelImpl.getAnalysisEntryId(),
+						analysisEntryModelImpl.getUserId(),
+						analysisEntryModelImpl.getCandidateMaintenanceId()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_A_U_CM, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_U_CM,
+					args);
+			}
+
+			if ((analysisEntryModelImpl.getColumnBitmask() &
 					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
 						analysisEntryModelImpl.getOriginalCompanyId()
@@ -5430,74 +5543,9 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 			}
 
 			if ((analysisEntryModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_C.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						analysisEntryModelImpl.getOriginalAnalysisId(),
-						analysisEntryModelImpl.getOriginalCompanyId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_A_C, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_C,
-					args);
-
-				args = new Object[] {
-						analysisEntryModelImpl.getAnalysisId(),
-						analysisEntryModelImpl.getCompanyId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_A_C, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_C,
-					args);
-			}
-
-			if ((analysisEntryModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_CM.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						analysisEntryModelImpl.getOriginalAnalysisId(),
-						analysisEntryModelImpl.getOriginalCanMainId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_A_CM, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_CM,
-					args);
-
-				args = new Object[] {
-						analysisEntryModelImpl.getAnalysisId(),
-						analysisEntryModelImpl.getCanMainId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_A_CM, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_CM,
-					args);
-			}
-
-			if ((analysisEntryModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_U_CM.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						analysisEntryModelImpl.getOriginalAnalysisId(),
-						analysisEntryModelImpl.getOriginalUserId(),
-						analysisEntryModelImpl.getOriginalCanMainId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_A_U_CM, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_U_CM,
-					args);
-
-				args = new Object[] {
-						analysisEntryModelImpl.getAnalysisId(),
-						analysisEntryModelImpl.getUserId(),
-						analysisEntryModelImpl.getCanMainId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_A_U_CM, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_U_CM,
-					args);
-			}
-
-			if ((analysisEntryModelImpl.getColumnBitmask() &
 					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CM_U.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						analysisEntryModelImpl.getOriginalCanMainId(),
+						analysisEntryModelImpl.getOriginalCandidateMaintenanceId(),
 						analysisEntryModelImpl.getOriginalUserId()
 					};
 
@@ -5506,7 +5554,7 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 					args);
 
 				args = new Object[] {
-						analysisEntryModelImpl.getCanMainId(),
+						analysisEntryModelImpl.getCandidateMaintenanceId(),
 						analysisEntryModelImpl.getUserId()
 					};
 
@@ -5581,13 +5629,13 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 		analysisEntryImpl.setPrimaryKey(analysisEntry.getPrimaryKey());
 
 		analysisEntryImpl.setUuid(analysisEntry.getUuid());
-		analysisEntryImpl.setAnalysisId(analysisEntry.getAnalysisId());
+		analysisEntryImpl.setAnalysisEntryId(analysisEntry.getAnalysisEntryId());
 		analysisEntryImpl.setCompanyId(analysisEntry.getCompanyId());
 		analysisEntryImpl.setUserId(analysisEntry.getUserId());
 		analysisEntryImpl.setUserName(analysisEntry.getUserName());
 		analysisEntryImpl.setCreateDate(analysisEntry.getCreateDate());
 		analysisEntryImpl.setModifiedDate(analysisEntry.getModifiedDate());
-		analysisEntryImpl.setCanMainId(analysisEntry.getCanMainId());
+		analysisEntryImpl.setCandidateMaintenanceId(analysisEntry.getCandidateMaintenanceId());
 		analysisEntryImpl.setAnalysisData(analysisEntry.getAnalysisData());
 
 		return analysisEntryImpl;
@@ -5620,14 +5668,14 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 	/**
 	 * Returns the analysis entry with the primary key or throws a {@link NoSuchEntryException} if it could not be found.
 	 *
-	 * @param analysisId the primary key of the analysis entry
+	 * @param analysisEntryId the primary key of the analysis entry
 	 * @return the analysis entry
 	 * @throws NoSuchEntryException if a analysis entry with the primary key could not be found
 	 */
 	@Override
-	public AnalysisEntry findByPrimaryKey(long analysisId)
+	public AnalysisEntry findByPrimaryKey(long analysisEntryId)
 		throws NoSuchEntryException {
-		return findByPrimaryKey((Serializable)analysisId);
+		return findByPrimaryKey((Serializable)analysisEntryId);
 	}
 
 	/**
@@ -5681,12 +5729,12 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 	/**
 	 * Returns the analysis entry with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param analysisId the primary key of the analysis entry
+	 * @param analysisEntryId the primary key of the analysis entry
 	 * @return the analysis entry, or <code>null</code> if a analysis entry with the primary key could not be found
 	 */
 	@Override
-	public AnalysisEntry fetchByPrimaryKey(long analysisId) {
-		return fetchByPrimaryKey((Serializable)analysisId);
+	public AnalysisEntry fetchByPrimaryKey(long analysisEntryId) {
+		return fetchByPrimaryKey((Serializable)analysisEntryId);
 	}
 
 	@Override
@@ -6004,7 +6052,7 @@ public class AnalysisEntryPersistenceImpl extends BasePersistenceImpl<AnalysisEn
 	@ServiceReference(type = FinderCache.class)
 	protected FinderCache finderCache;
 	private static final String _SQL_SELECT_ANALYSISENTRY = "SELECT analysisEntry FROM AnalysisEntry analysisEntry";
-	private static final String _SQL_SELECT_ANALYSISENTRY_WHERE_PKS_IN = "SELECT analysisEntry FROM AnalysisEntry analysisEntry WHERE analysisId IN (";
+	private static final String _SQL_SELECT_ANALYSISENTRY_WHERE_PKS_IN = "SELECT analysisEntry FROM AnalysisEntry analysisEntry WHERE analysisEntryId IN (";
 	private static final String _SQL_SELECT_ANALYSISENTRY_WHERE = "SELECT analysisEntry FROM AnalysisEntry analysisEntry WHERE ";
 	private static final String _SQL_COUNT_ANALYSISENTRY = "SELECT COUNT(analysisEntry) FROM AnalysisEntry analysisEntry";
 	private static final String _SQL_COUNT_ANALYSISENTRY_WHERE = "SELECT COUNT(analysisEntry) FROM AnalysisEntry analysisEntry WHERE ";

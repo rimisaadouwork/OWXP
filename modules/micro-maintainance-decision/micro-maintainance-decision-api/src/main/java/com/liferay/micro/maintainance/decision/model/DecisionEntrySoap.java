@@ -35,7 +35,7 @@ public class DecisionEntrySoap implements Serializable {
 		DecisionEntrySoap soapModel = new DecisionEntrySoap();
 
 		soapModel.setUuid(model.getUuid());
-		soapModel.setDecisionId(model.getDecisionId());
+		soapModel.setDecisionEntryId(model.getDecisionEntryId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
@@ -91,11 +91,11 @@ public class DecisionEntrySoap implements Serializable {
 	}
 
 	public long getPrimaryKey() {
-		return _decisionId;
+		return _decisionEntryId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setDecisionId(pk);
+		setDecisionEntryId(pk);
 	}
 
 	public String getUuid() {
@@ -106,12 +106,12 @@ public class DecisionEntrySoap implements Serializable {
 		_uuid = uuid;
 	}
 
-	public long getDecisionId() {
-		return _decisionId;
+	public long getDecisionEntryId() {
+		return _decisionEntryId;
 	}
 
-	public void setDecisionId(long decisionId) {
-		_decisionId = decisionId;
+	public void setDecisionEntryId(long decisionEntryId) {
+		_decisionEntryId = decisionEntryId;
 	}
 
 	public long getCompanyId() {
@@ -199,7 +199,7 @@ public class DecisionEntrySoap implements Serializable {
 	}
 
 	private String _uuid;
-	private long _decisionId;
+	private long _decisionEntryId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

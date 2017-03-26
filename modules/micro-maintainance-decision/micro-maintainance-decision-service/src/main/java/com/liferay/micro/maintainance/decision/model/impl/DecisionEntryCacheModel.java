@@ -52,7 +52,7 @@ public class DecisionEntryCacheModel implements CacheModel<DecisionEntry>,
 
 		DecisionEntryCacheModel decisionEntryCacheModel = (DecisionEntryCacheModel)obj;
 
-		if (decisionId == decisionEntryCacheModel.decisionId) {
+		if (decisionEntryId == decisionEntryCacheModel.decisionEntryId) {
 			return true;
 		}
 
@@ -61,7 +61,7 @@ public class DecisionEntryCacheModel implements CacheModel<DecisionEntry>,
 
 	@Override
 	public int hashCode() {
-		return HashUtil.hash(0, decisionId);
+		return HashUtil.hash(0, decisionEntryId);
 	}
 
 	@Override
@@ -70,8 +70,8 @@ public class DecisionEntryCacheModel implements CacheModel<DecisionEntry>,
 
 		sb.append("{uuid=");
 		sb.append(uuid);
-		sb.append(", decisionId=");
-		sb.append(decisionId);
+		sb.append(", decisionEntryId=");
+		sb.append(decisionEntryId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", userId=");
@@ -108,7 +108,7 @@ public class DecisionEntryCacheModel implements CacheModel<DecisionEntry>,
 			decisionEntryImpl.setUuid(uuid);
 		}
 
-		decisionEntryImpl.setDecisionId(decisionId);
+		decisionEntryImpl.setDecisionEntryId(decisionEntryId);
 		decisionEntryImpl.setCompanyId(companyId);
 		decisionEntryImpl.setUserId(userId);
 
@@ -167,7 +167,7 @@ public class DecisionEntryCacheModel implements CacheModel<DecisionEntry>,
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 
-		decisionId = objectInput.readLong();
+		decisionEntryId = objectInput.readLong();
 
 		companyId = objectInput.readLong();
 
@@ -194,7 +194,7 @@ public class DecisionEntryCacheModel implements CacheModel<DecisionEntry>,
 			objectOutput.writeUTF(uuid);
 		}
 
-		objectOutput.writeLong(decisionId);
+		objectOutput.writeLong(decisionEntryId);
 
 		objectOutput.writeLong(companyId);
 
@@ -237,7 +237,7 @@ public class DecisionEntryCacheModel implements CacheModel<DecisionEntry>,
 	}
 
 	public String uuid;
-	public long decisionId;
+	public long decisionEntryId;
 	public long companyId;
 	public long userId;
 	public String userName;

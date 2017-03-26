@@ -68,23 +68,23 @@ public class TaskEntryModelImpl extends BaseModelImpl<TaskEntry>
 	public static final String TABLE_NAME = "Task_TaskEntry";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", Types.VARCHAR },
-			{ "taskId", Types.BIGINT },
+			{ "taskEntryId", Types.BIGINT },
 			{ "createDate", Types.TIMESTAMP },
-			{ "taskName", Types.VARCHAR }
+			{ "taskEntryName", Types.VARCHAR }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
 	static {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("taskId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("taskEntryId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
-		TABLE_COLUMNS_MAP.put("taskName", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("taskEntryName", Types.VARCHAR);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table Task_TaskEntry (uuid_ VARCHAR(75) null,taskId LONG not null primary key,createDate DATE null,taskName VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table Task_TaskEntry (uuid_ VARCHAR(75) null,taskEntryId LONG not null primary key,createDate DATE null,taskEntryName VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Task_TaskEntry";
-	public static final String ORDER_BY_JPQL = " ORDER BY taskEntry.taskName ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY Task_TaskEntry.taskName ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY taskEntry.taskEntryName ASC";
+	public static final String ORDER_BY_SQL = " ORDER BY Task_TaskEntry.taskEntryName ASC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -97,8 +97,8 @@ public class TaskEntryModelImpl extends BaseModelImpl<TaskEntry>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.micro.maintainance.task.service.util.PropsUtil.get(
 				"value.object.column.bitmask.enabled.com.liferay.micro.maintainance.task.model.TaskEntry"),
 			true);
-	public static final long TASKID_COLUMN_BITMASK = 1L;
-	public static final long TASKNAME_COLUMN_BITMASK = 2L;
+	public static final long TASKENTRYID_COLUMN_BITMASK = 1L;
+	public static final long TASKENTRYNAME_COLUMN_BITMASK = 2L;
 	public static final long UUID_COLUMN_BITMASK = 4L;
 
 	/**
@@ -115,9 +115,9 @@ public class TaskEntryModelImpl extends BaseModelImpl<TaskEntry>
 		TaskEntry model = new TaskEntryImpl();
 
 		model.setUuid(soapModel.getUuid());
-		model.setTaskId(soapModel.getTaskId());
+		model.setTaskEntryId(soapModel.getTaskEntryId());
 		model.setCreateDate(soapModel.getCreateDate());
-		model.setTaskName(soapModel.getTaskName());
+		model.setTaskEntryName(soapModel.getTaskEntryName());
 
 		return model;
 	}
@@ -150,17 +150,17 @@ public class TaskEntryModelImpl extends BaseModelImpl<TaskEntry>
 
 	@Override
 	public long getPrimaryKey() {
-		return _taskId;
+		return _taskEntryId;
 	}
 
 	@Override
 	public void setPrimaryKey(long primaryKey) {
-		setTaskId(primaryKey);
+		setTaskEntryId(primaryKey);
 	}
 
 	@Override
 	public Serializable getPrimaryKeyObj() {
-		return _taskId;
+		return _taskEntryId;
 	}
 
 	@Override
@@ -183,9 +183,9 @@ public class TaskEntryModelImpl extends BaseModelImpl<TaskEntry>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
-		attributes.put("taskId", getTaskId());
+		attributes.put("taskEntryId", getTaskEntryId());
 		attributes.put("createDate", getCreateDate());
-		attributes.put("taskName", getTaskName());
+		attributes.put("taskEntryName", getTaskEntryName());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -201,10 +201,10 @@ public class TaskEntryModelImpl extends BaseModelImpl<TaskEntry>
 			setUuid(uuid);
 		}
 
-		Long taskId = (Long)attributes.get("taskId");
+		Long taskEntryId = (Long)attributes.get("taskEntryId");
 
-		if (taskId != null) {
-			setTaskId(taskId);
+		if (taskEntryId != null) {
+			setTaskEntryId(taskEntryId);
 		}
 
 		Date createDate = (Date)attributes.get("createDate");
@@ -213,10 +213,10 @@ public class TaskEntryModelImpl extends BaseModelImpl<TaskEntry>
 			setCreateDate(createDate);
 		}
 
-		String taskName = (String)attributes.get("taskName");
+		String taskEntryName = (String)attributes.get("taskEntryName");
 
-		if (taskName != null) {
-			setTaskName(taskName);
+		if (taskEntryName != null) {
+			setTaskEntryName(taskEntryName);
 		}
 	}
 
@@ -246,25 +246,25 @@ public class TaskEntryModelImpl extends BaseModelImpl<TaskEntry>
 
 	@JSON
 	@Override
-	public long getTaskId() {
-		return _taskId;
+	public long getTaskEntryId() {
+		return _taskEntryId;
 	}
 
 	@Override
-	public void setTaskId(long taskId) {
-		_columnBitmask |= TASKID_COLUMN_BITMASK;
+	public void setTaskEntryId(long taskEntryId) {
+		_columnBitmask |= TASKENTRYID_COLUMN_BITMASK;
 
-		if (!_setOriginalTaskId) {
-			_setOriginalTaskId = true;
+		if (!_setOriginalTaskEntryId) {
+			_setOriginalTaskEntryId = true;
 
-			_originalTaskId = _taskId;
+			_originalTaskEntryId = _taskEntryId;
 		}
 
-		_taskId = taskId;
+		_taskEntryId = taskEntryId;
 	}
 
-	public long getOriginalTaskId() {
-		return _originalTaskId;
+	public long getOriginalTaskEntryId() {
+		return _originalTaskEntryId;
 	}
 
 	@JSON
@@ -280,28 +280,28 @@ public class TaskEntryModelImpl extends BaseModelImpl<TaskEntry>
 
 	@JSON
 	@Override
-	public String getTaskName() {
-		if (_taskName == null) {
+	public String getTaskEntryName() {
+		if (_taskEntryName == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _taskName;
+			return _taskEntryName;
 		}
 	}
 
 	@Override
-	public void setTaskName(String taskName) {
+	public void setTaskEntryName(String taskEntryName) {
 		_columnBitmask = -1L;
 
-		if (_originalTaskName == null) {
-			_originalTaskName = _taskName;
+		if (_originalTaskEntryName == null) {
+			_originalTaskEntryName = _taskEntryName;
 		}
 
-		_taskName = taskName;
+		_taskEntryName = taskEntryName;
 	}
 
-	public String getOriginalTaskName() {
-		return GetterUtil.getString(_originalTaskName);
+	public String getOriginalTaskEntryName() {
+		return GetterUtil.getString(_originalTaskEntryName);
 	}
 
 	public long getColumnBitmask() {
@@ -336,9 +336,9 @@ public class TaskEntryModelImpl extends BaseModelImpl<TaskEntry>
 		TaskEntryImpl taskEntryImpl = new TaskEntryImpl();
 
 		taskEntryImpl.setUuid(getUuid());
-		taskEntryImpl.setTaskId(getTaskId());
+		taskEntryImpl.setTaskEntryId(getTaskEntryId());
 		taskEntryImpl.setCreateDate(getCreateDate());
-		taskEntryImpl.setTaskName(getTaskName());
+		taskEntryImpl.setTaskEntryName(getTaskEntryName());
 
 		taskEntryImpl.resetOriginalValues();
 
@@ -349,7 +349,7 @@ public class TaskEntryModelImpl extends BaseModelImpl<TaskEntry>
 	public int compareTo(TaskEntry taskEntry) {
 		int value = 0;
 
-		value = getTaskName().compareTo(taskEntry.getTaskName());
+		value = getTaskEntryName().compareTo(taskEntry.getTaskEntryName());
 
 		if (value != 0) {
 			return value;
@@ -401,11 +401,11 @@ public class TaskEntryModelImpl extends BaseModelImpl<TaskEntry>
 
 		taskEntryModelImpl._originalUuid = taskEntryModelImpl._uuid;
 
-		taskEntryModelImpl._originalTaskId = taskEntryModelImpl._taskId;
+		taskEntryModelImpl._originalTaskEntryId = taskEntryModelImpl._taskEntryId;
 
-		taskEntryModelImpl._setOriginalTaskId = false;
+		taskEntryModelImpl._setOriginalTaskEntryId = false;
 
-		taskEntryModelImpl._originalTaskName = taskEntryModelImpl._taskName;
+		taskEntryModelImpl._originalTaskEntryName = taskEntryModelImpl._taskEntryName;
 
 		taskEntryModelImpl._columnBitmask = 0;
 	}
@@ -422,7 +422,7 @@ public class TaskEntryModelImpl extends BaseModelImpl<TaskEntry>
 			taskEntryCacheModel.uuid = null;
 		}
 
-		taskEntryCacheModel.taskId = getTaskId();
+		taskEntryCacheModel.taskEntryId = getTaskEntryId();
 
 		Date createDate = getCreateDate();
 
@@ -433,12 +433,12 @@ public class TaskEntryModelImpl extends BaseModelImpl<TaskEntry>
 			taskEntryCacheModel.createDate = Long.MIN_VALUE;
 		}
 
-		taskEntryCacheModel.taskName = getTaskName();
+		taskEntryCacheModel.taskEntryName = getTaskEntryName();
 
-		String taskName = taskEntryCacheModel.taskName;
+		String taskEntryName = taskEntryCacheModel.taskEntryName;
 
-		if ((taskName != null) && (taskName.length() == 0)) {
-			taskEntryCacheModel.taskName = null;
+		if ((taskEntryName != null) && (taskEntryName.length() == 0)) {
+			taskEntryCacheModel.taskEntryName = null;
 		}
 
 		return taskEntryCacheModel;
@@ -450,12 +450,12 @@ public class TaskEntryModelImpl extends BaseModelImpl<TaskEntry>
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
-		sb.append(", taskId=");
-		sb.append(getTaskId());
+		sb.append(", taskEntryId=");
+		sb.append(getTaskEntryId());
 		sb.append(", createDate=");
 		sb.append(getCreateDate());
-		sb.append(", taskName=");
-		sb.append(getTaskName());
+		sb.append(", taskEntryName=");
+		sb.append(getTaskEntryName());
 		sb.append("}");
 
 		return sb.toString();
@@ -474,16 +474,16 @@ public class TaskEntryModelImpl extends BaseModelImpl<TaskEntry>
 		sb.append(getUuid());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>taskId</column-name><column-value><![CDATA[");
-		sb.append(getTaskId());
+			"<column><column-name>taskEntryId</column-name><column-value><![CDATA[");
+		sb.append(getTaskEntryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
 		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>taskName</column-name><column-value><![CDATA[");
-		sb.append(getTaskName());
+			"<column><column-name>taskEntryName</column-name><column-value><![CDATA[");
+		sb.append(getTaskEntryName());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -497,12 +497,12 @@ public class TaskEntryModelImpl extends BaseModelImpl<TaskEntry>
 		};
 	private String _uuid;
 	private String _originalUuid;
-	private long _taskId;
-	private long _originalTaskId;
-	private boolean _setOriginalTaskId;
+	private long _taskEntryId;
+	private long _originalTaskEntryId;
+	private boolean _setOriginalTaskEntryId;
 	private Date _createDate;
-	private String _taskName;
-	private String _originalTaskName;
+	private String _taskEntryName;
+	private String _originalTaskEntryName;
 	private long _columnBitmask;
 	private TaskEntry _escapedModel;
 }

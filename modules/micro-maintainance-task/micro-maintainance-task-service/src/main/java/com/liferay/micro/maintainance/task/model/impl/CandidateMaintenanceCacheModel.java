@@ -72,10 +72,10 @@ public class CandidateMaintenanceCacheModel implements CacheModel<CandidateMaint
 		sb.append(uuid);
 		sb.append(", candidateMaintenanceId=");
 		sb.append(candidateMaintenanceId);
-		sb.append(", candidateId=");
-		sb.append(candidateId);
-		sb.append(", taskId=");
-		sb.append(taskId);
+		sb.append(", candidateEntryId=");
+		sb.append(candidateEntryId);
+		sb.append(", taskEntryId=");
+		sb.append(taskEntryId);
 		sb.append(", createDate=");
 		sb.append(createDate);
 		sb.append("}");
@@ -95,8 +95,8 @@ public class CandidateMaintenanceCacheModel implements CacheModel<CandidateMaint
 		}
 
 		candidateMaintenanceImpl.setCandidateMaintenanceId(candidateMaintenanceId);
-		candidateMaintenanceImpl.setCandidateId(candidateId);
-		candidateMaintenanceImpl.setTaskId(taskId);
+		candidateMaintenanceImpl.setCandidateEntryId(candidateEntryId);
+		candidateMaintenanceImpl.setTaskEntryId(taskEntryId);
 
 		if (createDate == Long.MIN_VALUE) {
 			candidateMaintenanceImpl.setCreateDate(null);
@@ -116,9 +116,9 @@ public class CandidateMaintenanceCacheModel implements CacheModel<CandidateMaint
 
 		candidateMaintenanceId = objectInput.readLong();
 
-		candidateId = objectInput.readLong();
+		candidateEntryId = objectInput.readLong();
 
-		taskId = objectInput.readLong();
+		taskEntryId = objectInput.readLong();
 		createDate = objectInput.readLong();
 	}
 
@@ -134,15 +134,15 @@ public class CandidateMaintenanceCacheModel implements CacheModel<CandidateMaint
 
 		objectOutput.writeLong(candidateMaintenanceId);
 
-		objectOutput.writeLong(candidateId);
+		objectOutput.writeLong(candidateEntryId);
 
-		objectOutput.writeLong(taskId);
+		objectOutput.writeLong(taskEntryId);
 		objectOutput.writeLong(createDate);
 	}
 
 	public String uuid;
 	public long candidateMaintenanceId;
-	public long candidateId;
-	public long taskId;
+	public long candidateEntryId;
+	public long taskEntryId;
 	public long createDate;
 }

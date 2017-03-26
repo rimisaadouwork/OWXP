@@ -51,19 +51,19 @@ public class CandidateMaintenanceLocalServiceWrapper
 	* wiki page to a maintenance task. The users can vote, while this entry is
 	* in the database.
 	*
-	* @param candidateId: the id of the candidate entry belonging to the
+	* @param candidateEntryId: the id of the candidate entry belonging to the
 	flagged wiki page
-	* @param taskId: the id of the maintenance task for which the page is
+	* @param taskEntryId: the id of the maintenance task for which the page is
 	flagged
 	* @return the CandidateMaintenance entry that was added
 	* @throws PortalException
 	*/
 	@Override
 	public com.liferay.micro.maintainance.task.model.CandidateMaintenance addCandidateMaintenance(
-		long candidateId, long taskId)
+		long candidateEntryId, long taskEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _candidateMaintenanceLocalService.addCandidateMaintenance(candidateId,
-			taskId);
+		return _candidateMaintenanceLocalService.addCandidateMaintenance(candidateEntryId,
+			taskEntryId);
 	}
 
 	/**
@@ -112,10 +112,10 @@ public class CandidateMaintenanceLocalServiceWrapper
 
 	@Override
 	public com.liferay.micro.maintainance.task.model.CandidateMaintenance getCandidateMaintenaceTask(
-		long candidateId, long taskId)
+		long candidateEntryId, long taskEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _candidateMaintenanceLocalService.getCandidateMaintenaceTask(candidateId,
-			taskId);
+		return _candidateMaintenanceLocalService.getCandidateMaintenaceTask(candidateEntryId,
+			taskEntryId);
 	}
 
 	/**
@@ -254,13 +254,26 @@ public class CandidateMaintenanceLocalServiceWrapper
 	* Returns the task assignments belonging to the given candidate.
 	*
 	* @param candidatId
-	* @return List of CandidateMaintenance entries with the given candidateId
+	* @return List of CandidateMaintenance entries with the given candidateEntryId
 	*/
 	@Override
-	public java.util.List<com.liferay.micro.maintainance.task.model.CandidateMaintenance> getCandidateMaintenaceTasks(
-		long candidateId)
+	public java.util.List<com.liferay.micro.maintainance.task.model.CandidateMaintenance> getCandidateMaintenaceTasksByCandidate(
+		long candidateEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _candidateMaintenanceLocalService.getCandidateMaintenaceTasks(candidateId);
+		return _candidateMaintenanceLocalService.getCandidateMaintenaceTasksByCandidate(candidateEntryId);
+	}
+
+	/**
+	* Returns the candidate assignments belonging to the given task.
+	*
+	* @param taskEntryId
+	* @return List of CandidateMaintenance entries with the given taskEntryId
+	*/
+	@Override
+	public java.util.List<com.liferay.micro.maintainance.task.model.CandidateMaintenance> getCandidateMaintenaceTasksByTask(
+		long taskEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _candidateMaintenanceLocalService.getCandidateMaintenaceTasksByTask(taskEntryId);
 	}
 
 	/**
@@ -279,18 +292,6 @@ public class CandidateMaintenanceLocalServiceWrapper
 		int start, int end) {
 		return _candidateMaintenanceLocalService.getCandidateMaintenances(start,
 			end);
-	}
-
-	/**
-	* Returns the candidate assignments belonging to the given task.
-	*
-	* @param taskId
-	* @return List of CandidateMaintenance entries with the given taskId
-	*/
-	@Override
-	public java.util.List<com.liferay.micro.maintainance.task.model.CandidateMaintenance> getMaintenaceTasks(
-		long taskId) throws com.liferay.portal.kernel.exception.PortalException {
-		return _candidateMaintenanceLocalService.getMaintenaceTasks(taskId);
 	}
 
 	/**
@@ -324,24 +325,25 @@ public class CandidateMaintenanceLocalServiceWrapper
 	* Returns number of the task assignments belonging to the given candidate.
 	*
 	* @param candidatId
-	* @return Number of CandidateMaintenance entries with the given candidateId
+	* @return Number of CandidateMaintenance entries with the given candidateEntryId
 	*/
 	@Override
-	public long getCandidateMaintenaceTasksCount(long candidateId)
+	public long getCandidateMaintenaceTasksCountByCandidate(
+		long candidateEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _candidateMaintenanceLocalService.getCandidateMaintenaceTasksCount(candidateId);
+		return _candidateMaintenanceLocalService.getCandidateMaintenaceTasksCountByCandidate(candidateEntryId);
 	}
 
 	/**
 	* Returns the number of the candidate assignments belonging to the given task.
 	*
-	* @param taskId
-	* @return Number of CandidateMaintenance entries with the given taskId
+	* @param taskEntryId
+	* @return Number of CandidateMaintenance entries with the given taskEntryId
 	*/
 	@Override
-	public long getMaintenaceTasksCount(long taskId)
+	public long getCandidateMaintenaceTasksCountByTask(long taskEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _candidateMaintenanceLocalService.getMaintenaceTasksCount(taskId);
+		return _candidateMaintenanceLocalService.getCandidateMaintenaceTasksCountByTask(taskEntryId);
 	}
 
 	@Override

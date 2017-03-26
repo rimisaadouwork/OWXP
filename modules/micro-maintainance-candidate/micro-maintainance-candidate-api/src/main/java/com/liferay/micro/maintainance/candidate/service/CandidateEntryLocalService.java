@@ -94,10 +94,10 @@ public interface CandidateEntryLocalService extends BaseLocalService,
 	/**
 	* Creates a new candidate entry with the primary key. Does not add the candidate entry to the database.
 	*
-	* @param entryId the primary key for the new candidate entry
+	* @param candidateEntryId the primary key for the new candidate entry
 	* @return the new candidate entry
 	*/
-	public CandidateEntry createCandidateEntry(long entryId);
+	public CandidateEntry createCandidateEntry(long candidateEntryId);
 
 	/**
 	* Deletes the candidate entry from the database. Also notifies the appropriate model listeners.
@@ -111,16 +111,16 @@ public interface CandidateEntryLocalService extends BaseLocalService,
 	/**
 	* Deletes the candidate entry with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param entryId the primary key of the candidate entry
+	* @param candidateEntryId the primary key of the candidate entry
 	* @return the candidate entry that was removed
 	* @throws PortalException if a candidate entry with the primary key could not be found
 	*/
 	@Indexable(type = IndexableType.DELETE)
-	public CandidateEntry deleteCandidateEntry(long entryId)
+	public CandidateEntry deleteCandidateEntry(long candidateEntryId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CandidateEntry fetchCandidateEntry(long entryId);
+	public CandidateEntry fetchCandidateEntry(long candidateEntryId);
 
 	/**
 	* Returns the candidate entry matching the UUID and group.
@@ -139,12 +139,12 @@ public interface CandidateEntryLocalService extends BaseLocalService,
 	/**
 	* Returns the candidate entry with the primary key.
 	*
-	* @param entryId the primary key of the candidate entry
+	* @param candidateEntryId the primary key of the candidate entry
 	* @return the candidate entry
 	* @throws PortalException if a candidate entry with the primary key could not be found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CandidateEntry getCandidateEntry(long entryId)
+	public CandidateEntry getCandidateEntry(long candidateEntryId)
 		throws PortalException;
 
 	/**

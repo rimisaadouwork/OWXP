@@ -37,10 +37,11 @@ public interface DecisionEntry extends DecisionEntryModel, PersistedModel {
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.liferay.micro.maintainance.decision.model.impl.DecisionEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<DecisionEntry, Long> DECISION_ID_ACCESSOR = new Accessor<DecisionEntry, Long>() {
+	public static final Accessor<DecisionEntry, Long> DECISION_ENTRY_ID_ACCESSOR =
+		new Accessor<DecisionEntry, Long>() {
 			@Override
 			public Long get(DecisionEntry decisionEntry) {
-				return decisionEntry.getDecisionId();
+				return decisionEntry.getDecisionEntryId();
 			}
 
 			@Override

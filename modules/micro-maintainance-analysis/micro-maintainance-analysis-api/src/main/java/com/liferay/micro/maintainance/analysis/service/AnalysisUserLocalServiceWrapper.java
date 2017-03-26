@@ -50,10 +50,10 @@ public class AnalysisUserLocalServiceWrapper implements AnalysisUserLocalService
 	*/
 	@Override
 	public com.liferay.micro.maintainance.analysis.model.AnalysisUser addAnalysisUser(
-		long analysisId, long userId, int vote)
+		long analysisEntryId, long userId, int vote)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _analysisUserLocalService.addAnalysisUser(analysisId, userId,
-			vote);
+		return _analysisUserLocalService.addAnalysisUser(analysisEntryId,
+			userId, vote);
 	}
 
 	/**
@@ -102,8 +102,8 @@ public class AnalysisUserLocalServiceWrapper implements AnalysisUserLocalService
 
 	@Override
 	public com.liferay.micro.maintainance.analysis.model.AnalysisUser getAnalysisUser(
-		long analysisId, long userId) {
-		return _analysisUserLocalService.getAnalysisUser(analysisId, userId);
+		long analysisEntryId, long userId) {
+		return _analysisUserLocalService.getAnalysisUser(analysisEntryId, userId);
 	}
 
 	/**

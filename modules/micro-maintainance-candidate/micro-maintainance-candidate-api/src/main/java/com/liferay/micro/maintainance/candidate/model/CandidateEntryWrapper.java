@@ -61,7 +61,7 @@ public class CandidateEntryWrapper implements CandidateEntry,
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
-		attributes.put("entryId", getEntryId());
+		attributes.put("candidateEntryId", getCandidateEntryId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
@@ -81,10 +81,10 @@ public class CandidateEntryWrapper implements CandidateEntry,
 			setUuid(uuid);
 		}
 
-		Long entryId = (Long)attributes.get("entryId");
+		Long candidateEntryId = (Long)attributes.get("candidateEntryId");
 
-		if (entryId != null) {
-			setEntryId(entryId);
+		if (candidateEntryId != null) {
+			setCandidateEntryId(candidateEntryId);
 		}
 
 		Long groupId = (Long)attributes.get("groupId");
@@ -246,6 +246,16 @@ public class CandidateEntryWrapper implements CandidateEntry,
 	}
 
 	/**
+	* Returns the candidate entry ID of this candidate entry.
+	*
+	* @return the candidate entry ID of this candidate entry
+	*/
+	@Override
+	public long getCandidateEntryId() {
+		return _candidateEntry.getCandidateEntryId();
+	}
+
+	/**
 	* Returns the company ID of this candidate entry.
 	*
 	* @return the company ID of this candidate entry
@@ -253,16 +263,6 @@ public class CandidateEntryWrapper implements CandidateEntry,
 	@Override
 	public long getCompanyId() {
 		return _candidateEntry.getCompanyId();
-	}
-
-	/**
-	* Returns the entry ID of this candidate entry.
-	*
-	* @return the entry ID of this candidate entry
-	*/
-	@Override
-	public long getEntryId() {
-		return _candidateEntry.getEntryId();
 	}
 
 	/**
@@ -316,6 +316,16 @@ public class CandidateEntryWrapper implements CandidateEntry,
 	}
 
 	/**
+	* Sets the candidate entry ID of this candidate entry.
+	*
+	* @param candidateEntryId the candidate entry ID of this candidate entry
+	*/
+	@Override
+	public void setCandidateEntryId(long candidateEntryId) {
+		_candidateEntry.setCandidateEntryId(candidateEntryId);
+	}
+
+	/**
 	* Sets the company ID of this candidate entry.
 	*
 	* @param companyId the company ID of this candidate entry
@@ -333,16 +343,6 @@ public class CandidateEntryWrapper implements CandidateEntry,
 	@Override
 	public void setCreateDate(Date createDate) {
 		_candidateEntry.setCreateDate(createDate);
-	}
-
-	/**
-	* Sets the entry ID of this candidate entry.
-	*
-	* @param entryId the entry ID of this candidate entry
-	*/
-	@Override
-	public void setEntryId(long entryId) {
-		_candidateEntry.setEntryId(entryId);
 	}
 
 	@Override

@@ -125,9 +125,9 @@ public class CandidateMaintenancePersistenceTest {
 
 		newCandidateMaintenance.setUuid(RandomTestUtil.randomString());
 
-		newCandidateMaintenance.setCandidateId(RandomTestUtil.nextLong());
+		newCandidateMaintenance.setCandidateEntryId(RandomTestUtil.nextLong());
 
-		newCandidateMaintenance.setTaskId(RandomTestUtil.nextLong());
+		newCandidateMaintenance.setTaskEntryId(RandomTestUtil.nextLong());
 
 		newCandidateMaintenance.setCreateDate(RandomTestUtil.nextDate());
 
@@ -139,10 +139,10 @@ public class CandidateMaintenancePersistenceTest {
 			newCandidateMaintenance.getUuid());
 		Assert.assertEquals(existingCandidateMaintenance.getCandidateMaintenanceId(),
 			newCandidateMaintenance.getCandidateMaintenanceId());
-		Assert.assertEquals(existingCandidateMaintenance.getCandidateId(),
-			newCandidateMaintenance.getCandidateId());
-		Assert.assertEquals(existingCandidateMaintenance.getTaskId(),
-			newCandidateMaintenance.getTaskId());
+		Assert.assertEquals(existingCandidateMaintenance.getCandidateEntryId(),
+			newCandidateMaintenance.getCandidateEntryId());
+		Assert.assertEquals(existingCandidateMaintenance.getTaskEntryId(),
+			newCandidateMaintenance.getTaskEntryId());
 		Assert.assertEquals(Time.getShortTimestamp(
 				existingCandidateMaintenance.getCreateDate()),
 			Time.getShortTimestamp(newCandidateMaintenance.getCreateDate()));
@@ -158,17 +158,17 @@ public class CandidateMaintenancePersistenceTest {
 	}
 
 	@Test
-	public void testCountByCandidateIds() throws Exception {
-		_persistence.countByCandidateIds(RandomTestUtil.nextLong());
+	public void testCountByCandidateEntryIds() throws Exception {
+		_persistence.countByCandidateEntryIds(RandomTestUtil.nextLong());
 
-		_persistence.countByCandidateIds(0L);
+		_persistence.countByCandidateEntryIds(0L);
 	}
 
 	@Test
-	public void testCountByTaskIds() throws Exception {
-		_persistence.countByTaskIds(RandomTestUtil.nextLong());
+	public void testCountByTaskEntryIds() throws Exception {
+		_persistence.countByTaskEntryIds(RandomTestUtil.nextLong());
 
-		_persistence.countByTaskIds(0L);
+		_persistence.countByTaskEntryIds(0L);
 	}
 
 	@Test
@@ -204,8 +204,8 @@ public class CandidateMaintenancePersistenceTest {
 
 	protected OrderByComparator<CandidateMaintenance> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("Task_CandidateMaintenance",
-			"uuid", true, "candidateMaintenanceId", true, "candidateId", true,
-			"taskId", true, "createDate", true);
+			"uuid", true, "candidateMaintenanceId", true, "candidateEntryId",
+			true, "taskEntryId", true, "createDate", true);
 	}
 
 	@Test
@@ -415,13 +415,13 @@ public class CandidateMaintenancePersistenceTest {
 		CandidateMaintenance existingCandidateMaintenance = _persistence.findByPrimaryKey(newCandidateMaintenance.getPrimaryKey());
 
 		Assert.assertEquals(Long.valueOf(
-				existingCandidateMaintenance.getCandidateId()),
+				existingCandidateMaintenance.getCandidateEntryId()),
 			ReflectionTestUtil.<Long>invoke(existingCandidateMaintenance,
-				"getOriginalCandidateId", new Class<?>[0]));
+				"getOriginalCandidateEntryId", new Class<?>[0]));
 		Assert.assertEquals(Long.valueOf(
-				existingCandidateMaintenance.getTaskId()),
+				existingCandidateMaintenance.getTaskEntryId()),
 			ReflectionTestUtil.<Long>invoke(existingCandidateMaintenance,
-				"getOriginalTaskId", new Class<?>[0]));
+				"getOriginalTaskEntryId", new Class<?>[0]));
 	}
 
 	protected CandidateMaintenance addCandidateMaintenance()
@@ -432,9 +432,9 @@ public class CandidateMaintenancePersistenceTest {
 
 		candidateMaintenance.setUuid(RandomTestUtil.randomString());
 
-		candidateMaintenance.setCandidateId(RandomTestUtil.nextLong());
+		candidateMaintenance.setCandidateEntryId(RandomTestUtil.nextLong());
 
-		candidateMaintenance.setTaskId(RandomTestUtil.nextLong());
+		candidateMaintenance.setTaskEntryId(RandomTestUtil.nextLong());
 
 		candidateMaintenance.setCreateDate(RandomTestUtil.nextDate());
 

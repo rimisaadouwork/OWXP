@@ -267,164 +267,172 @@ public class AnalysisUserUtil {
 	}
 
 	/**
-	* Returns all the analysis users where analysisId = &#63;.
+	* Returns all the analysis users where analysisEntryId = &#63;.
 	*
-	* @param analysisId the analysis ID
+	* @param analysisEntryId the analysis entry ID
 	* @return the matching analysis users
 	*/
-	public static List<AnalysisUser> findByAnalysisId(long analysisId) {
-		return getPersistence().findByAnalysisId(analysisId);
+	public static List<AnalysisUser> findByAnalysisEntryId(long analysisEntryId) {
+		return getPersistence().findByAnalysisEntryId(analysisEntryId);
 	}
 
 	/**
-	* Returns a range of all the analysis users where analysisId = &#63;.
+	* Returns a range of all the analysis users where analysisEntryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisUserModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param analysisId the analysis ID
+	* @param analysisEntryId the analysis entry ID
 	* @param start the lower bound of the range of analysis users
 	* @param end the upper bound of the range of analysis users (not inclusive)
 	* @return the range of matching analysis users
 	*/
-	public static List<AnalysisUser> findByAnalysisId(long analysisId,
-		int start, int end) {
-		return getPersistence().findByAnalysisId(analysisId, start, end);
+	public static List<AnalysisUser> findByAnalysisEntryId(
+		long analysisEntryId, int start, int end) {
+		return getPersistence()
+				   .findByAnalysisEntryId(analysisEntryId, start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the analysis users where analysisId = &#63;.
+	* Returns an ordered range of all the analysis users where analysisEntryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisUserModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param analysisId the analysis ID
+	* @param analysisEntryId the analysis entry ID
 	* @param start the lower bound of the range of analysis users
 	* @param end the upper bound of the range of analysis users (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching analysis users
 	*/
-	public static List<AnalysisUser> findByAnalysisId(long analysisId,
-		int start, int end, OrderByComparator<AnalysisUser> orderByComparator) {
+	public static List<AnalysisUser> findByAnalysisEntryId(
+		long analysisEntryId, int start, int end,
+		OrderByComparator<AnalysisUser> orderByComparator) {
 		return getPersistence()
-				   .findByAnalysisId(analysisId, start, end, orderByComparator);
+				   .findByAnalysisEntryId(analysisEntryId, start, end,
+			orderByComparator);
 	}
 
 	/**
-	* Returns an ordered range of all the analysis users where analysisId = &#63;.
+	* Returns an ordered range of all the analysis users where analysisEntryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisUserModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param analysisId the analysis ID
+	* @param analysisEntryId the analysis entry ID
 	* @param start the lower bound of the range of analysis users
 	* @param end the upper bound of the range of analysis users (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching analysis users
 	*/
-	public static List<AnalysisUser> findByAnalysisId(long analysisId,
-		int start, int end, OrderByComparator<AnalysisUser> orderByComparator,
+	public static List<AnalysisUser> findByAnalysisEntryId(
+		long analysisEntryId, int start, int end,
+		OrderByComparator<AnalysisUser> orderByComparator,
 		boolean retrieveFromCache) {
 		return getPersistence()
-				   .findByAnalysisId(analysisId, start, end, orderByComparator,
-			retrieveFromCache);
+				   .findByAnalysisEntryId(analysisEntryId, start, end,
+			orderByComparator, retrieveFromCache);
 	}
 
 	/**
-	* Returns the first analysis user in the ordered set where analysisId = &#63;.
+	* Returns the first analysis user in the ordered set where analysisEntryId = &#63;.
 	*
-	* @param analysisId the analysis ID
+	* @param analysisEntryId the analysis entry ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching analysis user
 	* @throws NoSuchUserException if a matching analysis user could not be found
 	*/
-	public static AnalysisUser findByAnalysisId_First(long analysisId,
-		OrderByComparator<AnalysisUser> orderByComparator)
+	public static AnalysisUser findByAnalysisEntryId_First(
+		long analysisEntryId, OrderByComparator<AnalysisUser> orderByComparator)
 		throws com.liferay.micro.maintainance.analysis.exception.NoSuchUserException {
 		return getPersistence()
-				   .findByAnalysisId_First(analysisId, orderByComparator);
-	}
-
-	/**
-	* Returns the first analysis user in the ordered set where analysisId = &#63;.
-	*
-	* @param analysisId the analysis ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching analysis user, or <code>null</code> if a matching analysis user could not be found
-	*/
-	public static AnalysisUser fetchByAnalysisId_First(long analysisId,
-		OrderByComparator<AnalysisUser> orderByComparator) {
-		return getPersistence()
-				   .fetchByAnalysisId_First(analysisId, orderByComparator);
-	}
-
-	/**
-	* Returns the last analysis user in the ordered set where analysisId = &#63;.
-	*
-	* @param analysisId the analysis ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching analysis user
-	* @throws NoSuchUserException if a matching analysis user could not be found
-	*/
-	public static AnalysisUser findByAnalysisId_Last(long analysisId,
-		OrderByComparator<AnalysisUser> orderByComparator)
-		throws com.liferay.micro.maintainance.analysis.exception.NoSuchUserException {
-		return getPersistence()
-				   .findByAnalysisId_Last(analysisId, orderByComparator);
-	}
-
-	/**
-	* Returns the last analysis user in the ordered set where analysisId = &#63;.
-	*
-	* @param analysisId the analysis ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching analysis user, or <code>null</code> if a matching analysis user could not be found
-	*/
-	public static AnalysisUser fetchByAnalysisId_Last(long analysisId,
-		OrderByComparator<AnalysisUser> orderByComparator) {
-		return getPersistence()
-				   .fetchByAnalysisId_Last(analysisId, orderByComparator);
-	}
-
-	/**
-	* Returns the analysis users before and after the current analysis user in the ordered set where analysisId = &#63;.
-	*
-	* @param analysisUserId the primary key of the current analysis user
-	* @param analysisId the analysis ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next analysis user
-	* @throws NoSuchUserException if a analysis user with the primary key could not be found
-	*/
-	public static AnalysisUser[] findByAnalysisId_PrevAndNext(
-		long analysisUserId, long analysisId,
-		OrderByComparator<AnalysisUser> orderByComparator)
-		throws com.liferay.micro.maintainance.analysis.exception.NoSuchUserException {
-		return getPersistence()
-				   .findByAnalysisId_PrevAndNext(analysisUserId, analysisId,
+				   .findByAnalysisEntryId_First(analysisEntryId,
 			orderByComparator);
 	}
 
 	/**
-	* Removes all the analysis users where analysisId = &#63; from the database.
+	* Returns the first analysis user in the ordered set where analysisEntryId = &#63;.
 	*
-	* @param analysisId the analysis ID
+	* @param analysisEntryId the analysis entry ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching analysis user, or <code>null</code> if a matching analysis user could not be found
 	*/
-	public static void removeByAnalysisId(long analysisId) {
-		getPersistence().removeByAnalysisId(analysisId);
+	public static AnalysisUser fetchByAnalysisEntryId_First(
+		long analysisEntryId, OrderByComparator<AnalysisUser> orderByComparator) {
+		return getPersistence()
+				   .fetchByAnalysisEntryId_First(analysisEntryId,
+			orderByComparator);
 	}
 
 	/**
-	* Returns the number of analysis users where analysisId = &#63;.
+	* Returns the last analysis user in the ordered set where analysisEntryId = &#63;.
 	*
-	* @param analysisId the analysis ID
+	* @param analysisEntryId the analysis entry ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching analysis user
+	* @throws NoSuchUserException if a matching analysis user could not be found
+	*/
+	public static AnalysisUser findByAnalysisEntryId_Last(
+		long analysisEntryId, OrderByComparator<AnalysisUser> orderByComparator)
+		throws com.liferay.micro.maintainance.analysis.exception.NoSuchUserException {
+		return getPersistence()
+				   .findByAnalysisEntryId_Last(analysisEntryId,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last analysis user in the ordered set where analysisEntryId = &#63;.
+	*
+	* @param analysisEntryId the analysis entry ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching analysis user, or <code>null</code> if a matching analysis user could not be found
+	*/
+	public static AnalysisUser fetchByAnalysisEntryId_Last(
+		long analysisEntryId, OrderByComparator<AnalysisUser> orderByComparator) {
+		return getPersistence()
+				   .fetchByAnalysisEntryId_Last(analysisEntryId,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the analysis users before and after the current analysis user in the ordered set where analysisEntryId = &#63;.
+	*
+	* @param analysisUserId the primary key of the current analysis user
+	* @param analysisEntryId the analysis entry ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next analysis user
+	* @throws NoSuchUserException if a analysis user with the primary key could not be found
+	*/
+	public static AnalysisUser[] findByAnalysisEntryId_PrevAndNext(
+		long analysisUserId, long analysisEntryId,
+		OrderByComparator<AnalysisUser> orderByComparator)
+		throws com.liferay.micro.maintainance.analysis.exception.NoSuchUserException {
+		return getPersistence()
+				   .findByAnalysisEntryId_PrevAndNext(analysisUserId,
+			analysisEntryId, orderByComparator);
+	}
+
+	/**
+	* Removes all the analysis users where analysisEntryId = &#63; from the database.
+	*
+	* @param analysisEntryId the analysis entry ID
+	*/
+	public static void removeByAnalysisEntryId(long analysisEntryId) {
+		getPersistence().removeByAnalysisEntryId(analysisEntryId);
+	}
+
+	/**
+	* Returns the number of analysis users where analysisEntryId = &#63;.
+	*
+	* @param analysisEntryId the analysis entry ID
 	* @return the number of matching analysis users
 	*/
-	public static int countByAnalysisId(long analysisId) {
-		return getPersistence().countByAnalysisId(analysisId);
+	public static int countByAnalysisEntryId(long analysisEntryId) {
+		return getPersistence().countByAnalysisEntryId(analysisEntryId);
 	}
 
 	/**
@@ -743,66 +751,6 @@ public class AnalysisUserUtil {
 	}
 
 	/**
-	* Returns the analysis user where analysisId = &#63; and userId = &#63; or throws a {@link NoSuchUserException} if it could not be found.
-	*
-	* @param analysisId the analysis ID
-	* @param userId the user ID
-	* @return the matching analysis user
-	* @throws NoSuchUserException if a matching analysis user could not be found
-	*/
-	public static AnalysisUser findByA_U(long analysisId, long userId)
-		throws com.liferay.micro.maintainance.analysis.exception.NoSuchUserException {
-		return getPersistence().findByA_U(analysisId, userId);
-	}
-
-	/**
-	* Returns the analysis user where analysisId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param analysisId the analysis ID
-	* @param userId the user ID
-	* @return the matching analysis user, or <code>null</code> if a matching analysis user could not be found
-	*/
-	public static AnalysisUser fetchByA_U(long analysisId, long userId) {
-		return getPersistence().fetchByA_U(analysisId, userId);
-	}
-
-	/**
-	* Returns the analysis user where analysisId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param analysisId the analysis ID
-	* @param userId the user ID
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the matching analysis user, or <code>null</code> if a matching analysis user could not be found
-	*/
-	public static AnalysisUser fetchByA_U(long analysisId, long userId,
-		boolean retrieveFromCache) {
-		return getPersistence().fetchByA_U(analysisId, userId, retrieveFromCache);
-	}
-
-	/**
-	* Removes the analysis user where analysisId = &#63; and userId = &#63; from the database.
-	*
-	* @param analysisId the analysis ID
-	* @param userId the user ID
-	* @return the analysis user that was removed
-	*/
-	public static AnalysisUser removeByA_U(long analysisId, long userId)
-		throws com.liferay.micro.maintainance.analysis.exception.NoSuchUserException {
-		return getPersistence().removeByA_U(analysisId, userId);
-	}
-
-	/**
-	* Returns the number of analysis users where analysisId = &#63; and userId = &#63;.
-	*
-	* @param analysisId the analysis ID
-	* @param userId the user ID
-	* @return the number of matching analysis users
-	*/
-	public static int countByA_U(long analysisId, long userId) {
-		return getPersistence().countByA_U(analysisId, userId);
-	}
-
-	/**
 	* Returns the analysis user where analysisUserId = &#63; or throws a {@link NoSuchUserException} if it could not be found.
 	*
 	* @param analysisUserId the analysis user ID
@@ -858,62 +806,125 @@ public class AnalysisUserUtil {
 	}
 
 	/**
-	* Returns all the analysis users where analysisId = &#63; and voted = &#63;.
+	* Returns the analysis user where analysisEntryId = &#63; and userId = &#63; or throws a {@link NoSuchUserException} if it could not be found.
 	*
-	* @param analysisId the analysis ID
-	* @param voted the voted
-	* @return the matching analysis users
+	* @param analysisEntryId the analysis entry ID
+	* @param userId the user ID
+	* @return the matching analysis user
+	* @throws NoSuchUserException if a matching analysis user could not be found
 	*/
-	public static List<AnalysisUser> findByVoted(long analysisId, int voted) {
-		return getPersistence().findByVoted(analysisId, voted);
+	public static AnalysisUser findByA_U(long analysisEntryId, long userId)
+		throws com.liferay.micro.maintainance.analysis.exception.NoSuchUserException {
+		return getPersistence().findByA_U(analysisEntryId, userId);
 	}
 
 	/**
-	* Returns a range of all the analysis users where analysisId = &#63; and voted = &#63;.
+	* Returns the analysis user where analysisEntryId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param analysisEntryId the analysis entry ID
+	* @param userId the user ID
+	* @return the matching analysis user, or <code>null</code> if a matching analysis user could not be found
+	*/
+	public static AnalysisUser fetchByA_U(long analysisEntryId, long userId) {
+		return getPersistence().fetchByA_U(analysisEntryId, userId);
+	}
+
+	/**
+	* Returns the analysis user where analysisEntryId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param analysisEntryId the analysis entry ID
+	* @param userId the user ID
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching analysis user, or <code>null</code> if a matching analysis user could not be found
+	*/
+	public static AnalysisUser fetchByA_U(long analysisEntryId, long userId,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .fetchByA_U(analysisEntryId, userId, retrieveFromCache);
+	}
+
+	/**
+	* Removes the analysis user where analysisEntryId = &#63; and userId = &#63; from the database.
+	*
+	* @param analysisEntryId the analysis entry ID
+	* @param userId the user ID
+	* @return the analysis user that was removed
+	*/
+	public static AnalysisUser removeByA_U(long analysisEntryId, long userId)
+		throws com.liferay.micro.maintainance.analysis.exception.NoSuchUserException {
+		return getPersistence().removeByA_U(analysisEntryId, userId);
+	}
+
+	/**
+	* Returns the number of analysis users where analysisEntryId = &#63; and userId = &#63;.
+	*
+	* @param analysisEntryId the analysis entry ID
+	* @param userId the user ID
+	* @return the number of matching analysis users
+	*/
+	public static int countByA_U(long analysisEntryId, long userId) {
+		return getPersistence().countByA_U(analysisEntryId, userId);
+	}
+
+	/**
+	* Returns all the analysis users where analysisEntryId = &#63; and voted = &#63;.
+	*
+	* @param analysisEntryId the analysis entry ID
+	* @param voted the voted
+	* @return the matching analysis users
+	*/
+	public static List<AnalysisUser> findByVoted(long analysisEntryId, int voted) {
+		return getPersistence().findByVoted(analysisEntryId, voted);
+	}
+
+	/**
+	* Returns a range of all the analysis users where analysisEntryId = &#63; and voted = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisUserModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param analysisId the analysis ID
+	* @param analysisEntryId the analysis entry ID
 	* @param voted the voted
 	* @param start the lower bound of the range of analysis users
 	* @param end the upper bound of the range of analysis users (not inclusive)
 	* @return the range of matching analysis users
 	*/
-	public static List<AnalysisUser> findByVoted(long analysisId, int voted,
-		int start, int end) {
-		return getPersistence().findByVoted(analysisId, voted, start, end);
+	public static List<AnalysisUser> findByVoted(long analysisEntryId,
+		int voted, int start, int end) {
+		return getPersistence().findByVoted(analysisEntryId, voted, start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the analysis users where analysisId = &#63; and voted = &#63;.
+	* Returns an ordered range of all the analysis users where analysisEntryId = &#63; and voted = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisUserModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param analysisId the analysis ID
+	* @param analysisEntryId the analysis entry ID
 	* @param voted the voted
 	* @param start the lower bound of the range of analysis users
 	* @param end the upper bound of the range of analysis users (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching analysis users
 	*/
-	public static List<AnalysisUser> findByVoted(long analysisId, int voted,
-		int start, int end, OrderByComparator<AnalysisUser> orderByComparator) {
+	public static List<AnalysisUser> findByVoted(long analysisEntryId,
+		int voted, int start, int end,
+		OrderByComparator<AnalysisUser> orderByComparator) {
 		return getPersistence()
-				   .findByVoted(analysisId, voted, start, end, orderByComparator);
+				   .findByVoted(analysisEntryId, voted, start, end,
+			orderByComparator);
 	}
 
 	/**
-	* Returns an ordered range of all the analysis users where analysisId = &#63; and voted = &#63;.
+	* Returns an ordered range of all the analysis users where analysisEntryId = &#63; and voted = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisUserModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param analysisId the analysis ID
+	* @param analysisEntryId the analysis entry ID
 	* @param voted the voted
 	* @param start the lower bound of the range of analysis users
 	* @param end the upper bound of the range of analysis users (not inclusive)
@@ -921,112 +932,113 @@ public class AnalysisUserUtil {
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching analysis users
 	*/
-	public static List<AnalysisUser> findByVoted(long analysisId, int voted,
-		int start, int end, OrderByComparator<AnalysisUser> orderByComparator,
+	public static List<AnalysisUser> findByVoted(long analysisEntryId,
+		int voted, int start, int end,
+		OrderByComparator<AnalysisUser> orderByComparator,
 		boolean retrieveFromCache) {
 		return getPersistence()
-				   .findByVoted(analysisId, voted, start, end,
+				   .findByVoted(analysisEntryId, voted, start, end,
 			orderByComparator, retrieveFromCache);
 	}
 
 	/**
-	* Returns the first analysis user in the ordered set where analysisId = &#63; and voted = &#63;.
+	* Returns the first analysis user in the ordered set where analysisEntryId = &#63; and voted = &#63;.
 	*
-	* @param analysisId the analysis ID
+	* @param analysisEntryId the analysis entry ID
 	* @param voted the voted
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching analysis user
 	* @throws NoSuchUserException if a matching analysis user could not be found
 	*/
-	public static AnalysisUser findByVoted_First(long analysisId, int voted,
-		OrderByComparator<AnalysisUser> orderByComparator)
+	public static AnalysisUser findByVoted_First(long analysisEntryId,
+		int voted, OrderByComparator<AnalysisUser> orderByComparator)
 		throws com.liferay.micro.maintainance.analysis.exception.NoSuchUserException {
 		return getPersistence()
-				   .findByVoted_First(analysisId, voted, orderByComparator);
+				   .findByVoted_First(analysisEntryId, voted, orderByComparator);
 	}
 
 	/**
-	* Returns the first analysis user in the ordered set where analysisId = &#63; and voted = &#63;.
+	* Returns the first analysis user in the ordered set where analysisEntryId = &#63; and voted = &#63;.
 	*
-	* @param analysisId the analysis ID
+	* @param analysisEntryId the analysis entry ID
 	* @param voted the voted
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching analysis user, or <code>null</code> if a matching analysis user could not be found
 	*/
-	public static AnalysisUser fetchByVoted_First(long analysisId, int voted,
-		OrderByComparator<AnalysisUser> orderByComparator) {
+	public static AnalysisUser fetchByVoted_First(long analysisEntryId,
+		int voted, OrderByComparator<AnalysisUser> orderByComparator) {
 		return getPersistence()
-				   .fetchByVoted_First(analysisId, voted, orderByComparator);
+				   .fetchByVoted_First(analysisEntryId, voted, orderByComparator);
 	}
 
 	/**
-	* Returns the last analysis user in the ordered set where analysisId = &#63; and voted = &#63;.
+	* Returns the last analysis user in the ordered set where analysisEntryId = &#63; and voted = &#63;.
 	*
-	* @param analysisId the analysis ID
+	* @param analysisEntryId the analysis entry ID
 	* @param voted the voted
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching analysis user
 	* @throws NoSuchUserException if a matching analysis user could not be found
 	*/
-	public static AnalysisUser findByVoted_Last(long analysisId, int voted,
-		OrderByComparator<AnalysisUser> orderByComparator)
+	public static AnalysisUser findByVoted_Last(long analysisEntryId,
+		int voted, OrderByComparator<AnalysisUser> orderByComparator)
 		throws com.liferay.micro.maintainance.analysis.exception.NoSuchUserException {
 		return getPersistence()
-				   .findByVoted_Last(analysisId, voted, orderByComparator);
+				   .findByVoted_Last(analysisEntryId, voted, orderByComparator);
 	}
 
 	/**
-	* Returns the last analysis user in the ordered set where analysisId = &#63; and voted = &#63;.
+	* Returns the last analysis user in the ordered set where analysisEntryId = &#63; and voted = &#63;.
 	*
-	* @param analysisId the analysis ID
+	* @param analysisEntryId the analysis entry ID
 	* @param voted the voted
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching analysis user, or <code>null</code> if a matching analysis user could not be found
 	*/
-	public static AnalysisUser fetchByVoted_Last(long analysisId, int voted,
-		OrderByComparator<AnalysisUser> orderByComparator) {
+	public static AnalysisUser fetchByVoted_Last(long analysisEntryId,
+		int voted, OrderByComparator<AnalysisUser> orderByComparator) {
 		return getPersistence()
-				   .fetchByVoted_Last(analysisId, voted, orderByComparator);
+				   .fetchByVoted_Last(analysisEntryId, voted, orderByComparator);
 	}
 
 	/**
-	* Returns the analysis users before and after the current analysis user in the ordered set where analysisId = &#63; and voted = &#63;.
+	* Returns the analysis users before and after the current analysis user in the ordered set where analysisEntryId = &#63; and voted = &#63;.
 	*
 	* @param analysisUserId the primary key of the current analysis user
-	* @param analysisId the analysis ID
+	* @param analysisEntryId the analysis entry ID
 	* @param voted the voted
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next analysis user
 	* @throws NoSuchUserException if a analysis user with the primary key could not be found
 	*/
 	public static AnalysisUser[] findByVoted_PrevAndNext(long analysisUserId,
-		long analysisId, int voted,
+		long analysisEntryId, int voted,
 		OrderByComparator<AnalysisUser> orderByComparator)
 		throws com.liferay.micro.maintainance.analysis.exception.NoSuchUserException {
 		return getPersistence()
-				   .findByVoted_PrevAndNext(analysisUserId, analysisId, voted,
-			orderByComparator);
+				   .findByVoted_PrevAndNext(analysisUserId, analysisEntryId,
+			voted, orderByComparator);
 	}
 
 	/**
-	* Removes all the analysis users where analysisId = &#63; and voted = &#63; from the database.
+	* Removes all the analysis users where analysisEntryId = &#63; and voted = &#63; from the database.
 	*
-	* @param analysisId the analysis ID
+	* @param analysisEntryId the analysis entry ID
 	* @param voted the voted
 	*/
-	public static void removeByVoted(long analysisId, int voted) {
-		getPersistence().removeByVoted(analysisId, voted);
+	public static void removeByVoted(long analysisEntryId, int voted) {
+		getPersistence().removeByVoted(analysisEntryId, voted);
 	}
 
 	/**
-	* Returns the number of analysis users where analysisId = &#63; and voted = &#63;.
+	* Returns the number of analysis users where analysisEntryId = &#63; and voted = &#63;.
 	*
-	* @param analysisId the analysis ID
+	* @param analysisEntryId the analysis entry ID
 	* @param voted the voted
 	* @return the number of matching analysis users
 	*/
-	public static int countByVoted(long analysisId, int voted) {
-		return getPersistence().countByVoted(analysisId, voted);
+	public static int countByVoted(long analysisEntryId, int voted) {
+		return getPersistence().countByVoted(analysisEntryId, voted);
 	}
 
 	/**

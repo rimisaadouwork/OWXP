@@ -72,13 +72,13 @@ public class CandidateEntryLocalServiceWrapper
 	/**
 	* Creates a new candidate entry with the primary key. Does not add the candidate entry to the database.
 	*
-	* @param entryId the primary key for the new candidate entry
+	* @param candidateEntryId the primary key for the new candidate entry
 	* @return the new candidate entry
 	*/
 	@Override
 	public com.liferay.micro.maintainance.candidate.model.CandidateEntry createCandidateEntry(
-		long entryId) {
-		return _candidateEntryLocalService.createCandidateEntry(entryId);
+		long candidateEntryId) {
+		return _candidateEntryLocalService.createCandidateEntry(candidateEntryId);
 	}
 
 	/**
@@ -96,21 +96,21 @@ public class CandidateEntryLocalServiceWrapper
 	/**
 	* Deletes the candidate entry with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param entryId the primary key of the candidate entry
+	* @param candidateEntryId the primary key of the candidate entry
 	* @return the candidate entry that was removed
 	* @throws PortalException if a candidate entry with the primary key could not be found
 	*/
 	@Override
 	public com.liferay.micro.maintainance.candidate.model.CandidateEntry deleteCandidateEntry(
-		long entryId)
+		long candidateEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _candidateEntryLocalService.deleteCandidateEntry(entryId);
+		return _candidateEntryLocalService.deleteCandidateEntry(candidateEntryId);
 	}
 
 	@Override
 	public com.liferay.micro.maintainance.candidate.model.CandidateEntry fetchCandidateEntry(
-		long entryId) {
-		return _candidateEntryLocalService.fetchCandidateEntry(entryId);
+		long candidateEntryId) {
+		return _candidateEntryLocalService.fetchCandidateEntry(candidateEntryId);
 	}
 
 	/**
@@ -136,15 +136,15 @@ public class CandidateEntryLocalServiceWrapper
 	/**
 	* Returns the candidate entry with the primary key.
 	*
-	* @param entryId the primary key of the candidate entry
+	* @param candidateEntryId the primary key of the candidate entry
 	* @return the candidate entry
 	* @throws PortalException if a candidate entry with the primary key could not be found
 	*/
 	@Override
 	public com.liferay.micro.maintainance.candidate.model.CandidateEntry getCandidateEntry(
-		long entryId)
+		long candidateEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _candidateEntryLocalService.getCandidateEntry(entryId);
+		return _candidateEntryLocalService.getCandidateEntry(candidateEntryId);
 	}
 
 	/**

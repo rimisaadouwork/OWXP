@@ -92,32 +92,32 @@ public interface CandidateMaintenanceModel extends BaseModel<CandidateMaintenanc
 	public void setCandidateMaintenanceId(long candidateMaintenanceId);
 
 	/**
-	 * Returns the candidate ID of this candidate maintenance.
+	 * Returns the candidate entry ID of this candidate maintenance.
 	 *
-	 * @return the candidate ID of this candidate maintenance
+	 * @return the candidate entry ID of this candidate maintenance
 	 */
-	public long getCandidateId();
+	public long getCandidateEntryId();
 
 	/**
-	 * Sets the candidate ID of this candidate maintenance.
+	 * Sets the candidate entry ID of this candidate maintenance.
 	 *
-	 * @param candidateId the candidate ID of this candidate maintenance
+	 * @param candidateEntryId the candidate entry ID of this candidate maintenance
 	 */
-	public void setCandidateId(long candidateId);
+	public void setCandidateEntryId(long candidateEntryId);
 
 	/**
-	 * Returns the task ID of this candidate maintenance.
+	 * Returns the task entry ID of this candidate maintenance.
 	 *
-	 * @return the task ID of this candidate maintenance
+	 * @return the task entry ID of this candidate maintenance
 	 */
-	public long getTaskId();
+	public long getTaskEntryId();
 
 	/**
-	 * Sets the task ID of this candidate maintenance.
+	 * Sets the task entry ID of this candidate maintenance.
 	 *
-	 * @param taskId the task ID of this candidate maintenance
+	 * @param taskEntryId the task entry ID of this candidate maintenance
 	 */
-	public void setTaskId(long taskId);
+	public void setTaskEntryId(long taskEntryId);
 
 	/**
 	 * Returns the create date of this candidate maintenance.

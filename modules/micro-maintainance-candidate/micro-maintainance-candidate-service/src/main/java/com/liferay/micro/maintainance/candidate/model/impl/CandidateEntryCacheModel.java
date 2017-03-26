@@ -52,7 +52,7 @@ public class CandidateEntryCacheModel implements CacheModel<CandidateEntry>,
 
 		CandidateEntryCacheModel candidateEntryCacheModel = (CandidateEntryCacheModel)obj;
 
-		if (entryId == candidateEntryCacheModel.entryId) {
+		if (candidateEntryId == candidateEntryCacheModel.candidateEntryId) {
 			return true;
 		}
 
@@ -61,7 +61,7 @@ public class CandidateEntryCacheModel implements CacheModel<CandidateEntry>,
 
 	@Override
 	public int hashCode() {
-		return HashUtil.hash(0, entryId);
+		return HashUtil.hash(0, candidateEntryId);
 	}
 
 	@Override
@@ -70,8 +70,8 @@ public class CandidateEntryCacheModel implements CacheModel<CandidateEntry>,
 
 		sb.append("{uuid=");
 		sb.append(uuid);
-		sb.append(", entryId=");
-		sb.append(entryId);
+		sb.append(", candidateEntryId=");
+		sb.append(candidateEntryId);
 		sb.append(", groupId=");
 		sb.append(groupId);
 		sb.append(", companyId=");
@@ -102,7 +102,7 @@ public class CandidateEntryCacheModel implements CacheModel<CandidateEntry>,
 			candidateEntryImpl.setUuid(uuid);
 		}
 
-		candidateEntryImpl.setEntryId(entryId);
+		candidateEntryImpl.setCandidateEntryId(candidateEntryId);
 		candidateEntryImpl.setGroupId(groupId);
 		candidateEntryImpl.setCompanyId(companyId);
 		candidateEntryImpl.setUserId(userId);
@@ -139,7 +139,7 @@ public class CandidateEntryCacheModel implements CacheModel<CandidateEntry>,
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 
-		entryId = objectInput.readLong();
+		candidateEntryId = objectInput.readLong();
 
 		groupId = objectInput.readLong();
 
@@ -163,7 +163,7 @@ public class CandidateEntryCacheModel implements CacheModel<CandidateEntry>,
 			objectOutput.writeUTF(uuid);
 		}
 
-		objectOutput.writeLong(entryId);
+		objectOutput.writeLong(candidateEntryId);
 
 		objectOutput.writeLong(groupId);
 
@@ -185,7 +185,7 @@ public class CandidateEntryCacheModel implements CacheModel<CandidateEntry>,
 	}
 
 	public String uuid;
-	public long entryId;
+	public long candidateEntryId;
 	public long groupId;
 	public long companyId;
 	public long userId;

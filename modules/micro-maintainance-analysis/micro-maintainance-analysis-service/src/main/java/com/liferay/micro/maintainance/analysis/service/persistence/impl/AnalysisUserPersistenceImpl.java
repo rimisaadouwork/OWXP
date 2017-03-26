@@ -630,85 +630,86 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 	private static final String _FINDER_COLUMN_UUID_UUID_1 = "analysisUser.uuid IS NULL";
 	private static final String _FINDER_COLUMN_UUID_UUID_2 = "analysisUser.uuid = ?";
 	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(analysisUser.uuid IS NULL OR analysisUser.uuid = '')";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_ANALYSISID =
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_ANALYSISENTRYID =
 		new FinderPath(AnalysisUserModelImpl.ENTITY_CACHE_ENABLED,
 			AnalysisUserModelImpl.FINDER_CACHE_ENABLED, AnalysisUserImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByAnalysisId",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByAnalysisEntryId",
 			new String[] {
 				Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ANALYSISID =
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ANALYSISENTRYID =
 		new FinderPath(AnalysisUserModelImpl.ENTITY_CACHE_ENABLED,
 			AnalysisUserModelImpl.FINDER_CACHE_ENABLED, AnalysisUserImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByAnalysisId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByAnalysisEntryId",
 			new String[] { Long.class.getName() },
-			AnalysisUserModelImpl.ANALYSISID_COLUMN_BITMASK |
+			AnalysisUserModelImpl.ANALYSISENTRYID_COLUMN_BITMASK |
 			AnalysisUserModelImpl.USERNAME_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_ANALYSISID = new FinderPath(AnalysisUserModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_ANALYSISENTRYID = new FinderPath(AnalysisUserModelImpl.ENTITY_CACHE_ENABLED,
 			AnalysisUserModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByAnalysisId",
-			new String[] { Long.class.getName() });
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByAnalysisEntryId", new String[] { Long.class.getName() });
 
 	/**
-	 * Returns all the analysis users where analysisId = &#63;.
+	 * Returns all the analysis users where analysisEntryId = &#63;.
 	 *
-	 * @param analysisId the analysis ID
+	 * @param analysisEntryId the analysis entry ID
 	 * @return the matching analysis users
 	 */
 	@Override
-	public List<AnalysisUser> findByAnalysisId(long analysisId) {
-		return findByAnalysisId(analysisId, QueryUtil.ALL_POS,
+	public List<AnalysisUser> findByAnalysisEntryId(long analysisEntryId) {
+		return findByAnalysisEntryId(analysisEntryId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the analysis users where analysisId = &#63;.
+	 * Returns a range of all the analysis users where analysisEntryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisUserModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param analysisId the analysis ID
+	 * @param analysisEntryId the analysis entry ID
 	 * @param start the lower bound of the range of analysis users
 	 * @param end the upper bound of the range of analysis users (not inclusive)
 	 * @return the range of matching analysis users
 	 */
 	@Override
-	public List<AnalysisUser> findByAnalysisId(long analysisId, int start,
-		int end) {
-		return findByAnalysisId(analysisId, start, end, null);
+	public List<AnalysisUser> findByAnalysisEntryId(long analysisEntryId,
+		int start, int end) {
+		return findByAnalysisEntryId(analysisEntryId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the analysis users where analysisId = &#63;.
+	 * Returns an ordered range of all the analysis users where analysisEntryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisUserModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param analysisId the analysis ID
+	 * @param analysisEntryId the analysis entry ID
 	 * @param start the lower bound of the range of analysis users
 	 * @param end the upper bound of the range of analysis users (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching analysis users
 	 */
 	@Override
-	public List<AnalysisUser> findByAnalysisId(long analysisId, int start,
-		int end, OrderByComparator<AnalysisUser> orderByComparator) {
-		return findByAnalysisId(analysisId, start, end, orderByComparator, true);
+	public List<AnalysisUser> findByAnalysisEntryId(long analysisEntryId,
+		int start, int end, OrderByComparator<AnalysisUser> orderByComparator) {
+		return findByAnalysisEntryId(analysisEntryId, start, end,
+			orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the analysis users where analysisId = &#63;.
+	 * Returns an ordered range of all the analysis users where analysisEntryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisUserModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param analysisId the analysis ID
+	 * @param analysisEntryId the analysis entry ID
 	 * @param start the lower bound of the range of analysis users
 	 * @param end the upper bound of the range of analysis users (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -716,8 +717,8 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 	 * @return the ordered range of matching analysis users
 	 */
 	@Override
-	public List<AnalysisUser> findByAnalysisId(long analysisId, int start,
-		int end, OrderByComparator<AnalysisUser> orderByComparator,
+	public List<AnalysisUser> findByAnalysisEntryId(long analysisEntryId,
+		int start, int end, OrderByComparator<AnalysisUser> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -726,12 +727,16 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ANALYSISID;
-			finderArgs = new Object[] { analysisId };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ANALYSISENTRYID;
+			finderArgs = new Object[] { analysisEntryId };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_ANALYSISID;
-			finderArgs = new Object[] { analysisId, start, end, orderByComparator };
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_ANALYSISENTRYID;
+			finderArgs = new Object[] {
+					analysisEntryId,
+					
+					start, end, orderByComparator
+				};
 		}
 
 		List<AnalysisUser> list = null;
@@ -742,7 +747,7 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 
 			if ((list != null) && !list.isEmpty()) {
 				for (AnalysisUser analysisUser : list) {
-					if ((analysisId != analysisUser.getAnalysisId())) {
+					if ((analysisEntryId != analysisUser.getAnalysisEntryId())) {
 						list = null;
 
 						break;
@@ -764,7 +769,7 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 
 			query.append(_SQL_SELECT_ANALYSISUSER_WHERE);
 
-			query.append(_FINDER_COLUMN_ANALYSISID_ANALYSISID_2);
+			query.append(_FINDER_COLUMN_ANALYSISENTRYID_ANALYSISENTRYID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -786,7 +791,7 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(analysisId);
+				qPos.add(analysisEntryId);
 
 				if (!pagination) {
 					list = (List<AnalysisUser>)QueryUtil.list(q, getDialect(),
@@ -819,18 +824,18 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 	}
 
 	/**
-	 * Returns the first analysis user in the ordered set where analysisId = &#63;.
+	 * Returns the first analysis user in the ordered set where analysisEntryId = &#63;.
 	 *
-	 * @param analysisId the analysis ID
+	 * @param analysisEntryId the analysis entry ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching analysis user
 	 * @throws NoSuchUserException if a matching analysis user could not be found
 	 */
 	@Override
-	public AnalysisUser findByAnalysisId_First(long analysisId,
+	public AnalysisUser findByAnalysisEntryId_First(long analysisEntryId,
 		OrderByComparator<AnalysisUser> orderByComparator)
 		throws NoSuchUserException {
-		AnalysisUser analysisUser = fetchByAnalysisId_First(analysisId,
+		AnalysisUser analysisUser = fetchByAnalysisEntryId_First(analysisEntryId,
 				orderByComparator);
 
 		if (analysisUser != null) {
@@ -841,8 +846,8 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("analysisId=");
-		msg.append(analysisId);
+		msg.append("analysisEntryId=");
+		msg.append(analysisEntryId);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -850,16 +855,16 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 	}
 
 	/**
-	 * Returns the first analysis user in the ordered set where analysisId = &#63;.
+	 * Returns the first analysis user in the ordered set where analysisEntryId = &#63;.
 	 *
-	 * @param analysisId the analysis ID
+	 * @param analysisEntryId the analysis entry ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching analysis user, or <code>null</code> if a matching analysis user could not be found
 	 */
 	@Override
-	public AnalysisUser fetchByAnalysisId_First(long analysisId,
+	public AnalysisUser fetchByAnalysisEntryId_First(long analysisEntryId,
 		OrderByComparator<AnalysisUser> orderByComparator) {
-		List<AnalysisUser> list = findByAnalysisId(analysisId, 0, 1,
+		List<AnalysisUser> list = findByAnalysisEntryId(analysisEntryId, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -870,18 +875,18 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 	}
 
 	/**
-	 * Returns the last analysis user in the ordered set where analysisId = &#63;.
+	 * Returns the last analysis user in the ordered set where analysisEntryId = &#63;.
 	 *
-	 * @param analysisId the analysis ID
+	 * @param analysisEntryId the analysis entry ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching analysis user
 	 * @throws NoSuchUserException if a matching analysis user could not be found
 	 */
 	@Override
-	public AnalysisUser findByAnalysisId_Last(long analysisId,
+	public AnalysisUser findByAnalysisEntryId_Last(long analysisEntryId,
 		OrderByComparator<AnalysisUser> orderByComparator)
 		throws NoSuchUserException {
-		AnalysisUser analysisUser = fetchByAnalysisId_Last(analysisId,
+		AnalysisUser analysisUser = fetchByAnalysisEntryId_Last(analysisEntryId,
 				orderByComparator);
 
 		if (analysisUser != null) {
@@ -892,8 +897,8 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("analysisId=");
-		msg.append(analysisId);
+		msg.append("analysisEntryId=");
+		msg.append(analysisEntryId);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -901,23 +906,23 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 	}
 
 	/**
-	 * Returns the last analysis user in the ordered set where analysisId = &#63;.
+	 * Returns the last analysis user in the ordered set where analysisEntryId = &#63;.
 	 *
-	 * @param analysisId the analysis ID
+	 * @param analysisEntryId the analysis entry ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching analysis user, or <code>null</code> if a matching analysis user could not be found
 	 */
 	@Override
-	public AnalysisUser fetchByAnalysisId_Last(long analysisId,
+	public AnalysisUser fetchByAnalysisEntryId_Last(long analysisEntryId,
 		OrderByComparator<AnalysisUser> orderByComparator) {
-		int count = countByAnalysisId(analysisId);
+		int count = countByAnalysisEntryId(analysisEntryId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<AnalysisUser> list = findByAnalysisId(analysisId, count - 1,
-				count, orderByComparator);
+		List<AnalysisUser> list = findByAnalysisEntryId(analysisEntryId,
+				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -927,17 +932,18 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 	}
 
 	/**
-	 * Returns the analysis users before and after the current analysis user in the ordered set where analysisId = &#63;.
+	 * Returns the analysis users before and after the current analysis user in the ordered set where analysisEntryId = &#63;.
 	 *
 	 * @param analysisUserId the primary key of the current analysis user
-	 * @param analysisId the analysis ID
+	 * @param analysisEntryId the analysis entry ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next analysis user
 	 * @throws NoSuchUserException if a analysis user with the primary key could not be found
 	 */
 	@Override
-	public AnalysisUser[] findByAnalysisId_PrevAndNext(long analysisUserId,
-		long analysisId, OrderByComparator<AnalysisUser> orderByComparator)
+	public AnalysisUser[] findByAnalysisEntryId_PrevAndNext(
+		long analysisUserId, long analysisEntryId,
+		OrderByComparator<AnalysisUser> orderByComparator)
 		throws NoSuchUserException {
 		AnalysisUser analysisUser = findByPrimaryKey(analysisUserId);
 
@@ -948,13 +954,13 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 
 			AnalysisUser[] array = new AnalysisUserImpl[3];
 
-			array[0] = getByAnalysisId_PrevAndNext(session, analysisUser,
-					analysisId, orderByComparator, true);
+			array[0] = getByAnalysisEntryId_PrevAndNext(session, analysisUser,
+					analysisEntryId, orderByComparator, true);
 
 			array[1] = analysisUser;
 
-			array[2] = getByAnalysisId_PrevAndNext(session, analysisUser,
-					analysisId, orderByComparator, false);
+			array[2] = getByAnalysisEntryId_PrevAndNext(session, analysisUser,
+					analysisEntryId, orderByComparator, false);
 
 			return array;
 		}
@@ -966,8 +972,8 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 		}
 	}
 
-	protected AnalysisUser getByAnalysisId_PrevAndNext(Session session,
-		AnalysisUser analysisUser, long analysisId,
+	protected AnalysisUser getByAnalysisEntryId_PrevAndNext(Session session,
+		AnalysisUser analysisUser, long analysisEntryId,
 		OrderByComparator<AnalysisUser> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -982,7 +988,7 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 
 		query.append(_SQL_SELECT_ANALYSISUSER_WHERE);
 
-		query.append(_FINDER_COLUMN_ANALYSISID_ANALYSISID_2);
+		query.append(_FINDER_COLUMN_ANALYSISENTRYID_ANALYSISENTRYID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -1052,7 +1058,7 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(analysisId);
+		qPos.add(analysisEntryId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(analysisUser);
@@ -1073,29 +1079,29 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 	}
 
 	/**
-	 * Removes all the analysis users where analysisId = &#63; from the database.
+	 * Removes all the analysis users where analysisEntryId = &#63; from the database.
 	 *
-	 * @param analysisId the analysis ID
+	 * @param analysisEntryId the analysis entry ID
 	 */
 	@Override
-	public void removeByAnalysisId(long analysisId) {
-		for (AnalysisUser analysisUser : findByAnalysisId(analysisId,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+	public void removeByAnalysisEntryId(long analysisEntryId) {
+		for (AnalysisUser analysisUser : findByAnalysisEntryId(
+				analysisEntryId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(analysisUser);
 		}
 	}
 
 	/**
-	 * Returns the number of analysis users where analysisId = &#63;.
+	 * Returns the number of analysis users where analysisEntryId = &#63;.
 	 *
-	 * @param analysisId the analysis ID
+	 * @param analysisEntryId the analysis entry ID
 	 * @return the number of matching analysis users
 	 */
 	@Override
-	public int countByAnalysisId(long analysisId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_ANALYSISID;
+	public int countByAnalysisEntryId(long analysisEntryId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_ANALYSISENTRYID;
 
-		Object[] finderArgs = new Object[] { analysisId };
+		Object[] finderArgs = new Object[] { analysisEntryId };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1104,7 +1110,7 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 
 			query.append(_SQL_COUNT_ANALYSISUSER_WHERE);
 
-			query.append(_FINDER_COLUMN_ANALYSISID_ANALYSISID_2);
+			query.append(_FINDER_COLUMN_ANALYSISENTRYID_ANALYSISENTRYID_2);
 
 			String sql = query.toString();
 
@@ -1117,7 +1123,7 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(analysisId);
+				qPos.add(analysisEntryId);
 
 				count = (Long)q.uniqueResult();
 
@@ -1136,7 +1142,8 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_ANALYSISID_ANALYSISID_2 = "analysisUser.analysisId = ?";
+	private static final String _FINDER_COLUMN_ANALYSISENTRYID_ANALYSISENTRYID_2 =
+		"analysisUser.analysisEntryId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_USERID = new FinderPath(AnalysisUserModelImpl.ENTITY_CACHE_ENABLED,
 			AnalysisUserModelImpl.FINDER_CACHE_ENABLED, AnalysisUserImpl.class,
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByUserId",
@@ -2187,236 +2194,6 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 	private static final String _FINDER_COLUMN_USERNAME_USERNAME_1 = "analysisUser.userName IS NULL";
 	private static final String _FINDER_COLUMN_USERNAME_USERNAME_2 = "analysisUser.userName = ?";
 	private static final String _FINDER_COLUMN_USERNAME_USERNAME_3 = "(analysisUser.userName IS NULL OR analysisUser.userName = '')";
-	public static final FinderPath FINDER_PATH_FETCH_BY_A_U = new FinderPath(AnalysisUserModelImpl.ENTITY_CACHE_ENABLED,
-			AnalysisUserModelImpl.FINDER_CACHE_ENABLED, AnalysisUserImpl.class,
-			FINDER_CLASS_NAME_ENTITY, "fetchByA_U",
-			new String[] { Long.class.getName(), Long.class.getName() },
-			AnalysisUserModelImpl.ANALYSISID_COLUMN_BITMASK |
-			AnalysisUserModelImpl.USERID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_A_U = new FinderPath(AnalysisUserModelImpl.ENTITY_CACHE_ENABLED,
-			AnalysisUserModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByA_U",
-			new String[] { Long.class.getName(), Long.class.getName() });
-
-	/**
-	 * Returns the analysis user where analysisId = &#63; and userId = &#63; or throws a {@link NoSuchUserException} if it could not be found.
-	 *
-	 * @param analysisId the analysis ID
-	 * @param userId the user ID
-	 * @return the matching analysis user
-	 * @throws NoSuchUserException if a matching analysis user could not be found
-	 */
-	@Override
-	public AnalysisUser findByA_U(long analysisId, long userId)
-		throws NoSuchUserException {
-		AnalysisUser analysisUser = fetchByA_U(analysisId, userId);
-
-		if (analysisUser == null) {
-			StringBundler msg = new StringBundler(6);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("analysisId=");
-			msg.append(analysisId);
-
-			msg.append(", userId=");
-			msg.append(userId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(msg.toString());
-			}
-
-			throw new NoSuchUserException(msg.toString());
-		}
-
-		return analysisUser;
-	}
-
-	/**
-	 * Returns the analysis user where analysisId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param analysisId the analysis ID
-	 * @param userId the user ID
-	 * @return the matching analysis user, or <code>null</code> if a matching analysis user could not be found
-	 */
-	@Override
-	public AnalysisUser fetchByA_U(long analysisId, long userId) {
-		return fetchByA_U(analysisId, userId, true);
-	}
-
-	/**
-	 * Returns the analysis user where analysisId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param analysisId the analysis ID
-	 * @param userId the user ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the matching analysis user, or <code>null</code> if a matching analysis user could not be found
-	 */
-	@Override
-	public AnalysisUser fetchByA_U(long analysisId, long userId,
-		boolean retrieveFromCache) {
-		Object[] finderArgs = new Object[] { analysisId, userId };
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = finderCache.getResult(FINDER_PATH_FETCH_BY_A_U,
-					finderArgs, this);
-		}
-
-		if (result instanceof AnalysisUser) {
-			AnalysisUser analysisUser = (AnalysisUser)result;
-
-			if ((analysisId != analysisUser.getAnalysisId()) ||
-					(userId != analysisUser.getUserId())) {
-				result = null;
-			}
-		}
-
-		if (result == null) {
-			StringBundler query = new StringBundler(4);
-
-			query.append(_SQL_SELECT_ANALYSISUSER_WHERE);
-
-			query.append(_FINDER_COLUMN_A_U_ANALYSISID_2);
-
-			query.append(_FINDER_COLUMN_A_U_USERID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(analysisId);
-
-				qPos.add(userId);
-
-				List<AnalysisUser> list = q.list();
-
-				if (list.isEmpty()) {
-					finderCache.putResult(FINDER_PATH_FETCH_BY_A_U, finderArgs,
-						list);
-				}
-				else {
-					if ((list.size() > 1) && _log.isWarnEnabled()) {
-						_log.warn(
-							"AnalysisUserPersistenceImpl.fetchByA_U(long, long, boolean) with parameters (" +
-							StringUtil.merge(finderArgs) +
-							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
-					}
-
-					AnalysisUser analysisUser = list.get(0);
-
-					result = analysisUser;
-
-					cacheResult(analysisUser);
-
-					if ((analysisUser.getAnalysisId() != analysisId) ||
-							(analysisUser.getUserId() != userId)) {
-						finderCache.putResult(FINDER_PATH_FETCH_BY_A_U,
-							finderArgs, analysisUser);
-					}
-				}
-			}
-			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_FETCH_BY_A_U, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		if (result instanceof List<?>) {
-			return null;
-		}
-		else {
-			return (AnalysisUser)result;
-		}
-	}
-
-	/**
-	 * Removes the analysis user where analysisId = &#63; and userId = &#63; from the database.
-	 *
-	 * @param analysisId the analysis ID
-	 * @param userId the user ID
-	 * @return the analysis user that was removed
-	 */
-	@Override
-	public AnalysisUser removeByA_U(long analysisId, long userId)
-		throws NoSuchUserException {
-		AnalysisUser analysisUser = findByA_U(analysisId, userId);
-
-		return remove(analysisUser);
-	}
-
-	/**
-	 * Returns the number of analysis users where analysisId = &#63; and userId = &#63;.
-	 *
-	 * @param analysisId the analysis ID
-	 * @param userId the user ID
-	 * @return the number of matching analysis users
-	 */
-	@Override
-	public int countByA_U(long analysisId, long userId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_A_U;
-
-		Object[] finderArgs = new Object[] { analysisId, userId };
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_COUNT_ANALYSISUSER_WHERE);
-
-			query.append(_FINDER_COLUMN_A_U_ANALYSISID_2);
-
-			query.append(_FINDER_COLUMN_A_U_USERID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(analysisId);
-
-				qPos.add(userId);
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_A_U_ANALYSISID_2 = "analysisUser.analysisId = ? AND ";
-	private static final String _FINDER_COLUMN_A_U_USERID_2 = "analysisUser.userId = ?";
 	public static final FinderPath FINDER_PATH_FETCH_BY_AU = new FinderPath(AnalysisUserModelImpl.ENTITY_CACHE_ENABLED,
 			AnalysisUserModelImpl.FINDER_CACHE_ENABLED, AnalysisUserImpl.class,
 			FINDER_CLASS_NAME_ENTITY, "fetchByAU",
@@ -2626,6 +2403,236 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 	}
 
 	private static final String _FINDER_COLUMN_AU_ANALYSISUSERID_2 = "analysisUser.analysisUserId = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_A_U = new FinderPath(AnalysisUserModelImpl.ENTITY_CACHE_ENABLED,
+			AnalysisUserModelImpl.FINDER_CACHE_ENABLED, AnalysisUserImpl.class,
+			FINDER_CLASS_NAME_ENTITY, "fetchByA_U",
+			new String[] { Long.class.getName(), Long.class.getName() },
+			AnalysisUserModelImpl.ANALYSISENTRYID_COLUMN_BITMASK |
+			AnalysisUserModelImpl.USERID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_A_U = new FinderPath(AnalysisUserModelImpl.ENTITY_CACHE_ENABLED,
+			AnalysisUserModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByA_U",
+			new String[] { Long.class.getName(), Long.class.getName() });
+
+	/**
+	 * Returns the analysis user where analysisEntryId = &#63; and userId = &#63; or throws a {@link NoSuchUserException} if it could not be found.
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param userId the user ID
+	 * @return the matching analysis user
+	 * @throws NoSuchUserException if a matching analysis user could not be found
+	 */
+	@Override
+	public AnalysisUser findByA_U(long analysisEntryId, long userId)
+		throws NoSuchUserException {
+		AnalysisUser analysisUser = fetchByA_U(analysisEntryId, userId);
+
+		if (analysisUser == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("analysisEntryId=");
+			msg.append(analysisEntryId);
+
+			msg.append(", userId=");
+			msg.append(userId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchUserException(msg.toString());
+		}
+
+		return analysisUser;
+	}
+
+	/**
+	 * Returns the analysis user where analysisEntryId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param userId the user ID
+	 * @return the matching analysis user, or <code>null</code> if a matching analysis user could not be found
+	 */
+	@Override
+	public AnalysisUser fetchByA_U(long analysisEntryId, long userId) {
+		return fetchByA_U(analysisEntryId, userId, true);
+	}
+
+	/**
+	 * Returns the analysis user where analysisEntryId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param userId the user ID
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching analysis user, or <code>null</code> if a matching analysis user could not be found
+	 */
+	@Override
+	public AnalysisUser fetchByA_U(long analysisEntryId, long userId,
+		boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { analysisEntryId, userId };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_A_U,
+					finderArgs, this);
+		}
+
+		if (result instanceof AnalysisUser) {
+			AnalysisUser analysisUser = (AnalysisUser)result;
+
+			if ((analysisEntryId != analysisUser.getAnalysisEntryId()) ||
+					(userId != analysisUser.getUserId())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_SELECT_ANALYSISUSER_WHERE);
+
+			query.append(_FINDER_COLUMN_A_U_ANALYSISENTRYID_2);
+
+			query.append(_FINDER_COLUMN_A_U_USERID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(analysisEntryId);
+
+				qPos.add(userId);
+
+				List<AnalysisUser> list = q.list();
+
+				if (list.isEmpty()) {
+					finderCache.putResult(FINDER_PATH_FETCH_BY_A_U, finderArgs,
+						list);
+				}
+				else {
+					if ((list.size() > 1) && _log.isWarnEnabled()) {
+						_log.warn(
+							"AnalysisUserPersistenceImpl.fetchByA_U(long, long, boolean) with parameters (" +
+							StringUtil.merge(finderArgs) +
+							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+					}
+
+					AnalysisUser analysisUser = list.get(0);
+
+					result = analysisUser;
+
+					cacheResult(analysisUser);
+
+					if ((analysisUser.getAnalysisEntryId() != analysisEntryId) ||
+							(analysisUser.getUserId() != userId)) {
+						finderCache.putResult(FINDER_PATH_FETCH_BY_A_U,
+							finderArgs, analysisUser);
+					}
+				}
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_A_U, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (AnalysisUser)result;
+		}
+	}
+
+	/**
+	 * Removes the analysis user where analysisEntryId = &#63; and userId = &#63; from the database.
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param userId the user ID
+	 * @return the analysis user that was removed
+	 */
+	@Override
+	public AnalysisUser removeByA_U(long analysisEntryId, long userId)
+		throws NoSuchUserException {
+		AnalysisUser analysisUser = findByA_U(analysisEntryId, userId);
+
+		return remove(analysisUser);
+	}
+
+	/**
+	 * Returns the number of analysis users where analysisEntryId = &#63; and userId = &#63;.
+	 *
+	 * @param analysisEntryId the analysis entry ID
+	 * @param userId the user ID
+	 * @return the number of matching analysis users
+	 */
+	@Override
+	public int countByA_U(long analysisEntryId, long userId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_A_U;
+
+		Object[] finderArgs = new Object[] { analysisEntryId, userId };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_ANALYSISUSER_WHERE);
+
+			query.append(_FINDER_COLUMN_A_U_ANALYSISENTRYID_2);
+
+			query.append(_FINDER_COLUMN_A_U_USERID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(analysisEntryId);
+
+				qPos.add(userId);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_A_U_ANALYSISENTRYID_2 = "analysisUser.analysisEntryId = ? AND ";
+	private static final String _FINDER_COLUMN_A_U_USERID_2 = "analysisUser.userId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_VOTED = new FinderPath(AnalysisUserModelImpl.ENTITY_CACHE_ENABLED,
 			AnalysisUserModelImpl.FINDER_CACHE_ENABLED, AnalysisUserImpl.class,
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByVoted",
@@ -2639,7 +2646,7 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 			AnalysisUserModelImpl.FINDER_CACHE_ENABLED, AnalysisUserImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByVoted",
 			new String[] { Long.class.getName(), Integer.class.getName() },
-			AnalysisUserModelImpl.ANALYSISID_COLUMN_BITMASK |
+			AnalysisUserModelImpl.ANALYSISENTRYID_COLUMN_BITMASK |
 			AnalysisUserModelImpl.VOTED_COLUMN_BITMASK |
 			AnalysisUserModelImpl.USERNAME_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_VOTED = new FinderPath(AnalysisUserModelImpl.ENTITY_CACHE_ENABLED,
@@ -2648,45 +2655,45 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 			new String[] { Long.class.getName(), Integer.class.getName() });
 
 	/**
-	 * Returns all the analysis users where analysisId = &#63; and voted = &#63;.
+	 * Returns all the analysis users where analysisEntryId = &#63; and voted = &#63;.
 	 *
-	 * @param analysisId the analysis ID
+	 * @param analysisEntryId the analysis entry ID
 	 * @param voted the voted
 	 * @return the matching analysis users
 	 */
 	@Override
-	public List<AnalysisUser> findByVoted(long analysisId, int voted) {
-		return findByVoted(analysisId, voted, QueryUtil.ALL_POS,
+	public List<AnalysisUser> findByVoted(long analysisEntryId, int voted) {
+		return findByVoted(analysisEntryId, voted, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the analysis users where analysisId = &#63; and voted = &#63;.
+	 * Returns a range of all the analysis users where analysisEntryId = &#63; and voted = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisUserModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param analysisId the analysis ID
+	 * @param analysisEntryId the analysis entry ID
 	 * @param voted the voted
 	 * @param start the lower bound of the range of analysis users
 	 * @param end the upper bound of the range of analysis users (not inclusive)
 	 * @return the range of matching analysis users
 	 */
 	@Override
-	public List<AnalysisUser> findByVoted(long analysisId, int voted,
+	public List<AnalysisUser> findByVoted(long analysisEntryId, int voted,
 		int start, int end) {
-		return findByVoted(analysisId, voted, start, end, null);
+		return findByVoted(analysisEntryId, voted, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the analysis users where analysisId = &#63; and voted = &#63;.
+	 * Returns an ordered range of all the analysis users where analysisEntryId = &#63; and voted = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisUserModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param analysisId the analysis ID
+	 * @param analysisEntryId the analysis entry ID
 	 * @param voted the voted
 	 * @param start the lower bound of the range of analysis users
 	 * @param end the upper bound of the range of analysis users (not inclusive)
@@ -2694,20 +2701,20 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 	 * @return the ordered range of matching analysis users
 	 */
 	@Override
-	public List<AnalysisUser> findByVoted(long analysisId, int voted,
+	public List<AnalysisUser> findByVoted(long analysisEntryId, int voted,
 		int start, int end, OrderByComparator<AnalysisUser> orderByComparator) {
-		return findByVoted(analysisId, voted, start, end, orderByComparator,
-			true);
+		return findByVoted(analysisEntryId, voted, start, end,
+			orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the analysis users where analysisId = &#63; and voted = &#63;.
+	 * Returns an ordered range of all the analysis users where analysisEntryId = &#63; and voted = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AnalysisUserModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param analysisId the analysis ID
+	 * @param analysisEntryId the analysis entry ID
 	 * @param voted the voted
 	 * @param start the lower bound of the range of analysis users
 	 * @param end the upper bound of the range of analysis users (not inclusive)
@@ -2716,7 +2723,7 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 	 * @return the ordered range of matching analysis users
 	 */
 	@Override
-	public List<AnalysisUser> findByVoted(long analysisId, int voted,
+	public List<AnalysisUser> findByVoted(long analysisEntryId, int voted,
 		int start, int end, OrderByComparator<AnalysisUser> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
@@ -2727,12 +2734,12 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 				(orderByComparator == null)) {
 			pagination = false;
 			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_VOTED;
-			finderArgs = new Object[] { analysisId, voted };
+			finderArgs = new Object[] { analysisEntryId, voted };
 		}
 		else {
 			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_VOTED;
 			finderArgs = new Object[] {
-					analysisId, voted,
+					analysisEntryId, voted,
 					
 					start, end, orderByComparator
 				};
@@ -2746,7 +2753,7 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 
 			if ((list != null) && !list.isEmpty()) {
 				for (AnalysisUser analysisUser : list) {
-					if ((analysisId != analysisUser.getAnalysisId()) ||
+					if ((analysisEntryId != analysisUser.getAnalysisEntryId()) ||
 							(voted != analysisUser.getVoted())) {
 						list = null;
 
@@ -2769,7 +2776,7 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 
 			query.append(_SQL_SELECT_ANALYSISUSER_WHERE);
 
-			query.append(_FINDER_COLUMN_VOTED_ANALYSISID_2);
+			query.append(_FINDER_COLUMN_VOTED_ANALYSISENTRYID_2);
 
 			query.append(_FINDER_COLUMN_VOTED_VOTED_2);
 
@@ -2793,7 +2800,7 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(analysisId);
+				qPos.add(analysisEntryId);
 
 				qPos.add(voted);
 
@@ -2828,19 +2835,19 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 	}
 
 	/**
-	 * Returns the first analysis user in the ordered set where analysisId = &#63; and voted = &#63;.
+	 * Returns the first analysis user in the ordered set where analysisEntryId = &#63; and voted = &#63;.
 	 *
-	 * @param analysisId the analysis ID
+	 * @param analysisEntryId the analysis entry ID
 	 * @param voted the voted
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching analysis user
 	 * @throws NoSuchUserException if a matching analysis user could not be found
 	 */
 	@Override
-	public AnalysisUser findByVoted_First(long analysisId, int voted,
+	public AnalysisUser findByVoted_First(long analysisEntryId, int voted,
 		OrderByComparator<AnalysisUser> orderByComparator)
 		throws NoSuchUserException {
-		AnalysisUser analysisUser = fetchByVoted_First(analysisId, voted,
+		AnalysisUser analysisUser = fetchByVoted_First(analysisEntryId, voted,
 				orderByComparator);
 
 		if (analysisUser != null) {
@@ -2851,8 +2858,8 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("analysisId=");
-		msg.append(analysisId);
+		msg.append("analysisEntryId=");
+		msg.append(analysisEntryId);
 
 		msg.append(", voted=");
 		msg.append(voted);
@@ -2863,17 +2870,17 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 	}
 
 	/**
-	 * Returns the first analysis user in the ordered set where analysisId = &#63; and voted = &#63;.
+	 * Returns the first analysis user in the ordered set where analysisEntryId = &#63; and voted = &#63;.
 	 *
-	 * @param analysisId the analysis ID
+	 * @param analysisEntryId the analysis entry ID
 	 * @param voted the voted
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching analysis user, or <code>null</code> if a matching analysis user could not be found
 	 */
 	@Override
-	public AnalysisUser fetchByVoted_First(long analysisId, int voted,
+	public AnalysisUser fetchByVoted_First(long analysisEntryId, int voted,
 		OrderByComparator<AnalysisUser> orderByComparator) {
-		List<AnalysisUser> list = findByVoted(analysisId, voted, 0, 1,
+		List<AnalysisUser> list = findByVoted(analysisEntryId, voted, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -2884,19 +2891,19 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 	}
 
 	/**
-	 * Returns the last analysis user in the ordered set where analysisId = &#63; and voted = &#63;.
+	 * Returns the last analysis user in the ordered set where analysisEntryId = &#63; and voted = &#63;.
 	 *
-	 * @param analysisId the analysis ID
+	 * @param analysisEntryId the analysis entry ID
 	 * @param voted the voted
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching analysis user
 	 * @throws NoSuchUserException if a matching analysis user could not be found
 	 */
 	@Override
-	public AnalysisUser findByVoted_Last(long analysisId, int voted,
+	public AnalysisUser findByVoted_Last(long analysisEntryId, int voted,
 		OrderByComparator<AnalysisUser> orderByComparator)
 		throws NoSuchUserException {
-		AnalysisUser analysisUser = fetchByVoted_Last(analysisId, voted,
+		AnalysisUser analysisUser = fetchByVoted_Last(analysisEntryId, voted,
 				orderByComparator);
 
 		if (analysisUser != null) {
@@ -2907,8 +2914,8 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("analysisId=");
-		msg.append(analysisId);
+		msg.append("analysisEntryId=");
+		msg.append(analysisEntryId);
 
 		msg.append(", voted=");
 		msg.append(voted);
@@ -2919,24 +2926,24 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 	}
 
 	/**
-	 * Returns the last analysis user in the ordered set where analysisId = &#63; and voted = &#63;.
+	 * Returns the last analysis user in the ordered set where analysisEntryId = &#63; and voted = &#63;.
 	 *
-	 * @param analysisId the analysis ID
+	 * @param analysisEntryId the analysis entry ID
 	 * @param voted the voted
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching analysis user, or <code>null</code> if a matching analysis user could not be found
 	 */
 	@Override
-	public AnalysisUser fetchByVoted_Last(long analysisId, int voted,
+	public AnalysisUser fetchByVoted_Last(long analysisEntryId, int voted,
 		OrderByComparator<AnalysisUser> orderByComparator) {
-		int count = countByVoted(analysisId, voted);
+		int count = countByVoted(analysisEntryId, voted);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<AnalysisUser> list = findByVoted(analysisId, voted, count - 1,
-				count, orderByComparator);
+		List<AnalysisUser> list = findByVoted(analysisEntryId, voted,
+				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -2946,10 +2953,10 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 	}
 
 	/**
-	 * Returns the analysis users before and after the current analysis user in the ordered set where analysisId = &#63; and voted = &#63;.
+	 * Returns the analysis users before and after the current analysis user in the ordered set where analysisEntryId = &#63; and voted = &#63;.
 	 *
 	 * @param analysisUserId the primary key of the current analysis user
-	 * @param analysisId the analysis ID
+	 * @param analysisEntryId the analysis entry ID
 	 * @param voted the voted
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next analysis user
@@ -2957,7 +2964,7 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 	 */
 	@Override
 	public AnalysisUser[] findByVoted_PrevAndNext(long analysisUserId,
-		long analysisId, int voted,
+		long analysisEntryId, int voted,
 		OrderByComparator<AnalysisUser> orderByComparator)
 		throws NoSuchUserException {
 		AnalysisUser analysisUser = findByPrimaryKey(analysisUserId);
@@ -2970,12 +2977,12 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 			AnalysisUser[] array = new AnalysisUserImpl[3];
 
 			array[0] = getByVoted_PrevAndNext(session, analysisUser,
-					analysisId, voted, orderByComparator, true);
+					analysisEntryId, voted, orderByComparator, true);
 
 			array[1] = analysisUser;
 
 			array[2] = getByVoted_PrevAndNext(session, analysisUser,
-					analysisId, voted, orderByComparator, false);
+					analysisEntryId, voted, orderByComparator, false);
 
 			return array;
 		}
@@ -2988,7 +2995,7 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 	}
 
 	protected AnalysisUser getByVoted_PrevAndNext(Session session,
-		AnalysisUser analysisUser, long analysisId, int voted,
+		AnalysisUser analysisUser, long analysisEntryId, int voted,
 		OrderByComparator<AnalysisUser> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -3003,7 +3010,7 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 
 		query.append(_SQL_SELECT_ANALYSISUSER_WHERE);
 
-		query.append(_FINDER_COLUMN_VOTED_ANALYSISID_2);
+		query.append(_FINDER_COLUMN_VOTED_ANALYSISENTRYID_2);
 
 		query.append(_FINDER_COLUMN_VOTED_VOTED_2);
 
@@ -3075,7 +3082,7 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(analysisId);
+		qPos.add(analysisEntryId);
 
 		qPos.add(voted);
 
@@ -3098,31 +3105,31 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 	}
 
 	/**
-	 * Removes all the analysis users where analysisId = &#63; and voted = &#63; from the database.
+	 * Removes all the analysis users where analysisEntryId = &#63; and voted = &#63; from the database.
 	 *
-	 * @param analysisId the analysis ID
+	 * @param analysisEntryId the analysis entry ID
 	 * @param voted the voted
 	 */
 	@Override
-	public void removeByVoted(long analysisId, int voted) {
-		for (AnalysisUser analysisUser : findByVoted(analysisId, voted,
+	public void removeByVoted(long analysisEntryId, int voted) {
+		for (AnalysisUser analysisUser : findByVoted(analysisEntryId, voted,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(analysisUser);
 		}
 	}
 
 	/**
-	 * Returns the number of analysis users where analysisId = &#63; and voted = &#63;.
+	 * Returns the number of analysis users where analysisEntryId = &#63; and voted = &#63;.
 	 *
-	 * @param analysisId the analysis ID
+	 * @param analysisEntryId the analysis entry ID
 	 * @param voted the voted
 	 * @return the number of matching analysis users
 	 */
 	@Override
-	public int countByVoted(long analysisId, int voted) {
+	public int countByVoted(long analysisEntryId, int voted) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_VOTED;
 
-		Object[] finderArgs = new Object[] { analysisId, voted };
+		Object[] finderArgs = new Object[] { analysisEntryId, voted };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -3131,7 +3138,7 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 
 			query.append(_SQL_COUNT_ANALYSISUSER_WHERE);
 
-			query.append(_FINDER_COLUMN_VOTED_ANALYSISID_2);
+			query.append(_FINDER_COLUMN_VOTED_ANALYSISENTRYID_2);
 
 			query.append(_FINDER_COLUMN_VOTED_VOTED_2);
 
@@ -3146,7 +3153,7 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(analysisId);
+				qPos.add(analysisEntryId);
 
 				qPos.add(voted);
 
@@ -3167,7 +3174,7 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_VOTED_ANALYSISID_2 = "analysisUser.analysisId = ? AND ";
+	private static final String _FINDER_COLUMN_VOTED_ANALYSISENTRYID_2 = "analysisUser.analysisEntryId = ? AND ";
 	private static final String _FINDER_COLUMN_VOTED_VOTED_2 = "analysisUser.voted = ?";
 
 	public AnalysisUserPersistenceImpl() {
@@ -3184,12 +3191,13 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 		entityCache.putResult(AnalysisUserModelImpl.ENTITY_CACHE_ENABLED,
 			AnalysisUserImpl.class, analysisUser.getPrimaryKey(), analysisUser);
 
-		finderCache.putResult(FINDER_PATH_FETCH_BY_A_U,
-			new Object[] { analysisUser.getAnalysisId(), analysisUser.getUserId() },
-			analysisUser);
-
 		finderCache.putResult(FINDER_PATH_FETCH_BY_AU,
 			new Object[] { analysisUser.getAnalysisUserId() }, analysisUser);
+
+		finderCache.putResult(FINDER_PATH_FETCH_BY_A_U,
+			new Object[] {
+				analysisUser.getAnalysisEntryId(), analysisUser.getUserId()
+			}, analysisUser);
 
 		analysisUser.resetOriginalValues();
 	}
@@ -3264,7 +3272,15 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 		AnalysisUserModelImpl analysisUserModelImpl, boolean isNew) {
 		if (isNew) {
 			Object[] args = new Object[] {
-					analysisUserModelImpl.getAnalysisId(),
+					analysisUserModelImpl.getAnalysisUserId()
+				};
+
+			finderCache.putResult(FINDER_PATH_COUNT_BY_AU, args, Long.valueOf(1));
+			finderCache.putResult(FINDER_PATH_FETCH_BY_AU, args,
+				analysisUserModelImpl);
+
+			args = new Object[] {
+					analysisUserModelImpl.getAnalysisEntryId(),
 					analysisUserModelImpl.getUserId()
 				};
 
@@ -3272,27 +3288,8 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 				Long.valueOf(1));
 			finderCache.putResult(FINDER_PATH_FETCH_BY_A_U, args,
 				analysisUserModelImpl);
-
-			args = new Object[] { analysisUserModelImpl.getAnalysisUserId() };
-
-			finderCache.putResult(FINDER_PATH_COUNT_BY_AU, args, Long.valueOf(1));
-			finderCache.putResult(FINDER_PATH_FETCH_BY_AU, args,
-				analysisUserModelImpl);
 		}
 		else {
-			if ((analysisUserModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_A_U.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						analysisUserModelImpl.getAnalysisId(),
-						analysisUserModelImpl.getUserId()
-					};
-
-				finderCache.putResult(FINDER_PATH_COUNT_BY_A_U, args,
-					Long.valueOf(1));
-				finderCache.putResult(FINDER_PATH_FETCH_BY_A_U, args,
-					analysisUserModelImpl);
-			}
-
 			if ((analysisUserModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_AU.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
@@ -3304,31 +3301,25 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 				finderCache.putResult(FINDER_PATH_FETCH_BY_AU, args,
 					analysisUserModelImpl);
 			}
+
+			if ((analysisUserModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_A_U.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						analysisUserModelImpl.getAnalysisEntryId(),
+						analysisUserModelImpl.getUserId()
+					};
+
+				finderCache.putResult(FINDER_PATH_COUNT_BY_A_U, args,
+					Long.valueOf(1));
+				finderCache.putResult(FINDER_PATH_FETCH_BY_A_U, args,
+					analysisUserModelImpl);
+			}
 		}
 	}
 
 	protected void clearUniqueFindersCache(
 		AnalysisUserModelImpl analysisUserModelImpl) {
-		Object[] args = new Object[] {
-				analysisUserModelImpl.getAnalysisId(),
-				analysisUserModelImpl.getUserId()
-			};
-
-		finderCache.removeResult(FINDER_PATH_COUNT_BY_A_U, args);
-		finderCache.removeResult(FINDER_PATH_FETCH_BY_A_U, args);
-
-		if ((analysisUserModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_A_U.getColumnBitmask()) != 0) {
-			args = new Object[] {
-					analysisUserModelImpl.getOriginalAnalysisId(),
-					analysisUserModelImpl.getOriginalUserId()
-				};
-
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_A_U, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_A_U, args);
-		}
-
-		args = new Object[] { analysisUserModelImpl.getAnalysisUserId() };
+		Object[] args = new Object[] { analysisUserModelImpl.getAnalysisUserId() };
 
 		finderCache.removeResult(FINDER_PATH_COUNT_BY_AU, args);
 		finderCache.removeResult(FINDER_PATH_FETCH_BY_AU, args);
@@ -3341,6 +3332,25 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 
 			finderCache.removeResult(FINDER_PATH_COUNT_BY_AU, args);
 			finderCache.removeResult(FINDER_PATH_FETCH_BY_AU, args);
+		}
+
+		args = new Object[] {
+				analysisUserModelImpl.getAnalysisEntryId(),
+				analysisUserModelImpl.getUserId()
+			};
+
+		finderCache.removeResult(FINDER_PATH_COUNT_BY_A_U, args);
+		finderCache.removeResult(FINDER_PATH_FETCH_BY_A_U, args);
+
+		if ((analysisUserModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_A_U.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					analysisUserModelImpl.getOriginalAnalysisEntryId(),
+					analysisUserModelImpl.getOriginalUserId()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_A_U, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_A_U, args);
 		}
 	}
 
@@ -3508,19 +3518,21 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 			}
 
 			if ((analysisUserModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ANALYSISID.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ANALYSISENTRYID.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						analysisUserModelImpl.getOriginalAnalysisId()
+						analysisUserModelImpl.getOriginalAnalysisEntryId()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_ANALYSISID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ANALYSISID,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_ANALYSISENTRYID,
+					args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ANALYSISENTRYID,
 					args);
 
-				args = new Object[] { analysisUserModelImpl.getAnalysisId() };
+				args = new Object[] { analysisUserModelImpl.getAnalysisEntryId() };
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_ANALYSISID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ANALYSISID,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_ANALYSISENTRYID,
+					args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ANALYSISENTRYID,
 					args);
 			}
 
@@ -3561,7 +3573,7 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 			if ((analysisUserModelImpl.getColumnBitmask() &
 					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_VOTED.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						analysisUserModelImpl.getOriginalAnalysisId(),
+						analysisUserModelImpl.getOriginalAnalysisEntryId(),
 						analysisUserModelImpl.getOriginalVoted()
 					};
 
@@ -3570,7 +3582,7 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 					args);
 
 				args = new Object[] {
-						analysisUserModelImpl.getAnalysisId(),
+						analysisUserModelImpl.getAnalysisEntryId(),
 						analysisUserModelImpl.getVoted()
 					};
 
@@ -3604,7 +3616,7 @@ public class AnalysisUserPersistenceImpl extends BasePersistenceImpl<AnalysisUse
 
 		analysisUserImpl.setUuid(analysisUser.getUuid());
 		analysisUserImpl.setAnalysisUserId(analysisUser.getAnalysisUserId());
-		analysisUserImpl.setAnalysisId(analysisUser.getAnalysisId());
+		analysisUserImpl.setAnalysisEntryId(analysisUser.getAnalysisEntryId());
 		analysisUserImpl.setUserId(analysisUser.getUserId());
 		analysisUserImpl.setUserName(analysisUser.getUserName());
 		analysisUserImpl.setVoted(analysisUser.getVoted());

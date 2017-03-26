@@ -77,21 +77,21 @@ public interface AnalysisEntryLocalService extends BaseLocalService,
 	* Adds an analysis entry, which will store the votes
 	*
 	* @param userId: the id of the user who flagged the page
-	* @param canMainId: the id of the CandidateMaintenance entry, in which the
+	* @param candidateMaintenanceId: the id of the CandidateMaintenance entry, in which the
 	assignment between a task and a candidate is stored.
 	* @return the AnalysisEntry that was added
 	* @throws PortalException
 	*/
-	public AnalysisEntry addAnalysisEntry(long userId, long canMainId)
-		throws PortalException;
+	public AnalysisEntry addAnalysisEntry(long userId,
+		long candidateMaintenanceId) throws PortalException;
 
 	/**
 	* Creates a new analysis entry with the primary key. Does not add the analysis entry to the database.
 	*
-	* @param analysisId the primary key for the new analysis entry
+	* @param analysisEntryId the primary key for the new analysis entry
 	* @return the new analysis entry
 	*/
-	public AnalysisEntry createAnalysisEntry(long analysisId);
+	public AnalysisEntry createAnalysisEntry(long analysisEntryId);
 
 	/**
 	* Deletes the analysis entry from the database. Also notifies the appropriate model listeners.
@@ -105,16 +105,16 @@ public interface AnalysisEntryLocalService extends BaseLocalService,
 	/**
 	* Deletes the analysis entry with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param analysisId the primary key of the analysis entry
+	* @param analysisEntryId the primary key of the analysis entry
 	* @return the analysis entry that was removed
 	* @throws PortalException if a analysis entry with the primary key could not be found
 	*/
 	@Indexable(type = IndexableType.DELETE)
-	public AnalysisEntry deleteAnalysisEntry(long analysisId)
+	public AnalysisEntry deleteAnalysisEntry(long analysisEntryId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public AnalysisEntry fetchAnalysisEntry(long analysisId);
+	public AnalysisEntry fetchAnalysisEntry(long analysisEntryId);
 
 	/**
 	* Returns the analysis entry with the matching UUID and company.
@@ -128,17 +128,18 @@ public interface AnalysisEntryLocalService extends BaseLocalService,
 		java.lang.String uuid, long companyId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public AnalysisEntry getAnalysisByCandidateMaintenance(long canMainId);
+	public AnalysisEntry getAnalysisByCandidateMaintenance(
+		long candidateMaintenanceId);
 
 	/**
 	* Returns the analysis entry with the primary key.
 	*
-	* @param analysisId the primary key of the analysis entry
+	* @param analysisEntryId the primary key of the analysis entry
 	* @return the analysis entry
 	* @throws PortalException if a analysis entry with the primary key could not be found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public AnalysisEntry getAnalysisEntry(long analysisId)
+	public AnalysisEntry getAnalysisEntry(long analysisEntryId)
 		throws PortalException;
 
 	/**

@@ -124,7 +124,7 @@ public class AnalysisUserPersistenceTest {
 
 		newAnalysisUser.setUuid(RandomTestUtil.randomString());
 
-		newAnalysisUser.setAnalysisId(RandomTestUtil.nextLong());
+		newAnalysisUser.setAnalysisEntryId(RandomTestUtil.nextLong());
 
 		newAnalysisUser.setUserId(RandomTestUtil.nextLong());
 
@@ -140,8 +140,8 @@ public class AnalysisUserPersistenceTest {
 			newAnalysisUser.getUuid());
 		Assert.assertEquals(existingAnalysisUser.getAnalysisUserId(),
 			newAnalysisUser.getAnalysisUserId());
-		Assert.assertEquals(existingAnalysisUser.getAnalysisId(),
-			newAnalysisUser.getAnalysisId());
+		Assert.assertEquals(existingAnalysisUser.getAnalysisEntryId(),
+			newAnalysisUser.getAnalysisEntryId());
 		Assert.assertEquals(existingAnalysisUser.getUserId(),
 			newAnalysisUser.getUserId());
 		Assert.assertEquals(existingAnalysisUser.getUserName(),
@@ -160,10 +160,10 @@ public class AnalysisUserPersistenceTest {
 	}
 
 	@Test
-	public void testCountByAnalysisId() throws Exception {
-		_persistence.countByAnalysisId(RandomTestUtil.nextLong());
+	public void testCountByAnalysisEntryId() throws Exception {
+		_persistence.countByAnalysisEntryId(RandomTestUtil.nextLong());
 
-		_persistence.countByAnalysisId(0L);
+		_persistence.countByAnalysisEntryId(0L);
 	}
 
 	@Test
@@ -183,18 +183,18 @@ public class AnalysisUserPersistenceTest {
 	}
 
 	@Test
+	public void testCountByAU() throws Exception {
+		_persistence.countByAU(RandomTestUtil.nextLong());
+
+		_persistence.countByAU(0L);
+	}
+
+	@Test
 	public void testCountByA_U() throws Exception {
 		_persistence.countByA_U(RandomTestUtil.nextLong(),
 			RandomTestUtil.nextLong());
 
 		_persistence.countByA_U(0L, 0L);
-	}
-
-	@Test
-	public void testCountByAU() throws Exception {
-		_persistence.countByAU(RandomTestUtil.nextLong());
-
-		_persistence.countByAU(0L);
 	}
 
 	@Test
@@ -229,8 +229,8 @@ public class AnalysisUserPersistenceTest {
 
 	protected OrderByComparator<AnalysisUser> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("Analysis_AnalysisUser",
-			"uuid", true, "analysisUserId", true, "analysisId", true, "userId",
-			true, "userName", true, "voted", true);
+			"uuid", true, "analysisUserId", true, "analysisEntryId", true,
+			"userId", true, "userName", true, "voted", true);
 	}
 
 	@Test
@@ -435,17 +435,18 @@ public class AnalysisUserPersistenceTest {
 
 		AnalysisUser existingAnalysisUser = _persistence.findByPrimaryKey(newAnalysisUser.getPrimaryKey());
 
-		Assert.assertEquals(Long.valueOf(existingAnalysisUser.getAnalysisId()),
-			ReflectionTestUtil.<Long>invoke(existingAnalysisUser,
-				"getOriginalAnalysisId", new Class<?>[0]));
-		Assert.assertEquals(Long.valueOf(existingAnalysisUser.getUserId()),
-			ReflectionTestUtil.<Long>invoke(existingAnalysisUser,
-				"getOriginalUserId", new Class<?>[0]));
-
 		Assert.assertEquals(Long.valueOf(
 				existingAnalysisUser.getAnalysisUserId()),
 			ReflectionTestUtil.<Long>invoke(existingAnalysisUser,
 				"getOriginalAnalysisUserId", new Class<?>[0]));
+
+		Assert.assertEquals(Long.valueOf(
+				existingAnalysisUser.getAnalysisEntryId()),
+			ReflectionTestUtil.<Long>invoke(existingAnalysisUser,
+				"getOriginalAnalysisEntryId", new Class<?>[0]));
+		Assert.assertEquals(Long.valueOf(existingAnalysisUser.getUserId()),
+			ReflectionTestUtil.<Long>invoke(existingAnalysisUser,
+				"getOriginalUserId", new Class<?>[0]));
 	}
 
 	protected AnalysisUser addAnalysisUser() throws Exception {
@@ -455,7 +456,7 @@ public class AnalysisUserPersistenceTest {
 
 		analysisUser.setUuid(RandomTestUtil.randomString());
 
-		analysisUser.setAnalysisId(RandomTestUtil.nextLong());
+		analysisUser.setAnalysisEntryId(RandomTestUtil.nextLong());
 
 		analysisUser.setUserId(RandomTestUtil.nextLong());
 

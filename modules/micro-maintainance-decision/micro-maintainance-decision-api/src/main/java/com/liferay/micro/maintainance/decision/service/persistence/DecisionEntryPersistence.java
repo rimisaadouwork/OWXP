@@ -147,13 +147,13 @@ public interface DecisionEntryPersistence extends BasePersistence<DecisionEntry>
 	/**
 	* Returns the decision entries before and after the current decision entry in the ordered set where uuid = &#63;.
 	*
-	* @param decisionId the primary key of the current decision entry
+	* @param decisionEntryId the primary key of the current decision entry
 	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next decision entry
 	* @throws NoSuchEntryException if a decision entry with the primary key could not be found
 	*/
-	public DecisionEntry[] findByUuid_PrevAndNext(long decisionId,
+	public DecisionEntry[] findByUuid_PrevAndNext(long decisionEntryId,
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
 		throws NoSuchEntryException;
@@ -292,14 +292,14 @@ public interface DecisionEntryPersistence extends BasePersistence<DecisionEntry>
 	/**
 	* Returns the decision entries before and after the current decision entry in the ordered set where uuid = &#63; and companyId = &#63;.
 	*
-	* @param decisionId the primary key of the current decision entry
+	* @param decisionEntryId the primary key of the current decision entry
 	* @param uuid the uuid
 	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next decision entry
 	* @throws NoSuchEntryException if a decision entry with the primary key could not be found
 	*/
-	public DecisionEntry[] findByUuid_C_PrevAndNext(long decisionId,
+	public DecisionEntry[] findByUuid_C_PrevAndNext(long decisionEntryId,
 		java.lang.String uuid, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
 		throws NoSuchEntryException;
@@ -320,124 +320,6 @@ public interface DecisionEntryPersistence extends BasePersistence<DecisionEntry>
 	* @return the number of matching decision entries
 	*/
 	public int countByUuid_C(java.lang.String uuid, long companyId);
-
-	/**
-	* Returns all the decision entries where decisionId = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @return the matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByDecisionId(long decisionId);
-
-	/**
-	* Returns a range of all the decision entries where decisionId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param decisionId the decision ID
-	* @param start the lower bound of the range of decision entries
-	* @param end the upper bound of the range of decision entries (not inclusive)
-	* @return the range of matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByDecisionId(long decisionId,
-		int start, int end);
-
-	/**
-	* Returns an ordered range of all the decision entries where decisionId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param decisionId the decision ID
-	* @param start the lower bound of the range of decision entries
-	* @param end the upper bound of the range of decision entries (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByDecisionId(long decisionId,
-		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
-
-	/**
-	* Returns an ordered range of all the decision entries where decisionId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param decisionId the decision ID
-	* @param start the lower bound of the range of decision entries
-	* @param end the upper bound of the range of decision entries (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByDecisionId(long decisionId,
-		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator,
-		boolean retrieveFromCache);
-
-	/**
-	* Returns the first decision entry in the ordered set where decisionId = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching decision entry
-	* @throws NoSuchEntryException if a matching decision entry could not be found
-	*/
-	public DecisionEntry findByDecisionId_First(long decisionId,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
-		throws NoSuchEntryException;
-
-	/**
-	* Returns the first decision entry in the ordered set where decisionId = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching decision entry, or <code>null</code> if a matching decision entry could not be found
-	*/
-	public DecisionEntry fetchByDecisionId_First(long decisionId,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
-
-	/**
-	* Returns the last decision entry in the ordered set where decisionId = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching decision entry
-	* @throws NoSuchEntryException if a matching decision entry could not be found
-	*/
-	public DecisionEntry findByDecisionId_Last(long decisionId,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
-		throws NoSuchEntryException;
-
-	/**
-	* Returns the last decision entry in the ordered set where decisionId = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching decision entry, or <code>null</code> if a matching decision entry could not be found
-	*/
-	public DecisionEntry fetchByDecisionId_Last(long decisionId,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
-
-	/**
-	* Removes all the decision entries where decisionId = &#63; from the database.
-	*
-	* @param decisionId the decision ID
-	*/
-	public void removeByDecisionId(long decisionId);
-
-	/**
-	* Returns the number of decision entries where decisionId = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @return the number of matching decision entries
-	*/
-	public int countByDecisionId(long decisionId);
 
 	/**
 	* Returns all the decision entries where companyId = &#63;.
@@ -545,13 +427,13 @@ public interface DecisionEntryPersistence extends BasePersistence<DecisionEntry>
 	/**
 	* Returns the decision entries before and after the current decision entry in the ordered set where companyId = &#63;.
 	*
-	* @param decisionId the primary key of the current decision entry
+	* @param decisionEntryId the primary key of the current decision entry
 	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next decision entry
 	* @throws NoSuchEntryException if a decision entry with the primary key could not be found
 	*/
-	public DecisionEntry[] findByCompanyId_PrevAndNext(long decisionId,
+	public DecisionEntry[] findByCompanyId_PrevAndNext(long decisionEntryId,
 		long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
 		throws NoSuchEntryException;
@@ -570,6 +452,257 @@ public interface DecisionEntryPersistence extends BasePersistence<DecisionEntry>
 	* @return the number of matching decision entries
 	*/
 	public int countByCompanyId(long companyId);
+
+	/**
+	* Returns all the decision entries where decisionEntryId = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @return the matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByDecisionEntryId(
+		long decisionEntryId);
+
+	/**
+	* Returns a range of all the decision entries where decisionEntryId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param start the lower bound of the range of decision entries
+	* @param end the upper bound of the range of decision entries (not inclusive)
+	* @return the range of matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByDecisionEntryId(
+		long decisionEntryId, int start, int end);
+
+	/**
+	* Returns an ordered range of all the decision entries where decisionEntryId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param start the lower bound of the range of decision entries
+	* @param end the upper bound of the range of decision entries (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByDecisionEntryId(
+		long decisionEntryId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
+
+	/**
+	* Returns an ordered range of all the decision entries where decisionEntryId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param start the lower bound of the range of decision entries
+	* @param end the upper bound of the range of decision entries (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByDecisionEntryId(
+		long decisionEntryId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator,
+		boolean retrieveFromCache);
+
+	/**
+	* Returns the first decision entry in the ordered set where decisionEntryId = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching decision entry
+	* @throws NoSuchEntryException if a matching decision entry could not be found
+	*/
+	public DecisionEntry findByDecisionEntryId_First(long decisionEntryId,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
+		throws NoSuchEntryException;
+
+	/**
+	* Returns the first decision entry in the ordered set where decisionEntryId = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching decision entry, or <code>null</code> if a matching decision entry could not be found
+	*/
+	public DecisionEntry fetchByDecisionEntryId_First(long decisionEntryId,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
+
+	/**
+	* Returns the last decision entry in the ordered set where decisionEntryId = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching decision entry
+	* @throws NoSuchEntryException if a matching decision entry could not be found
+	*/
+	public DecisionEntry findByDecisionEntryId_Last(long decisionEntryId,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
+		throws NoSuchEntryException;
+
+	/**
+	* Returns the last decision entry in the ordered set where decisionEntryId = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching decision entry, or <code>null</code> if a matching decision entry could not be found
+	*/
+	public DecisionEntry fetchByDecisionEntryId_Last(long decisionEntryId,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
+
+	/**
+	* Removes all the decision entries where decisionEntryId = &#63; from the database.
+	*
+	* @param decisionEntryId the decision entry ID
+	*/
+	public void removeByDecisionEntryId(long decisionEntryId);
+
+	/**
+	* Returns the number of decision entries where decisionEntryId = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @return the number of matching decision entries
+	*/
+	public int countByDecisionEntryId(long decisionEntryId);
+
+	/**
+	* Returns all the decision entries where outcome = &#63;.
+	*
+	* @param outcome the outcome
+	* @return the matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByOutcome(java.lang.String outcome);
+
+	/**
+	* Returns a range of all the decision entries where outcome = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param outcome the outcome
+	* @param start the lower bound of the range of decision entries
+	* @param end the upper bound of the range of decision entries (not inclusive)
+	* @return the range of matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByOutcome(
+		java.lang.String outcome, int start, int end);
+
+	/**
+	* Returns an ordered range of all the decision entries where outcome = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param outcome the outcome
+	* @param start the lower bound of the range of decision entries
+	* @param end the upper bound of the range of decision entries (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByOutcome(
+		java.lang.String outcome, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
+
+	/**
+	* Returns an ordered range of all the decision entries where outcome = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param outcome the outcome
+	* @param start the lower bound of the range of decision entries
+	* @param end the upper bound of the range of decision entries (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByOutcome(
+		java.lang.String outcome, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator,
+		boolean retrieveFromCache);
+
+	/**
+	* Returns the first decision entry in the ordered set where outcome = &#63;.
+	*
+	* @param outcome the outcome
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching decision entry
+	* @throws NoSuchEntryException if a matching decision entry could not be found
+	*/
+	public DecisionEntry findByOutcome_First(java.lang.String outcome,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
+		throws NoSuchEntryException;
+
+	/**
+	* Returns the first decision entry in the ordered set where outcome = &#63;.
+	*
+	* @param outcome the outcome
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching decision entry, or <code>null</code> if a matching decision entry could not be found
+	*/
+	public DecisionEntry fetchByOutcome_First(java.lang.String outcome,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
+
+	/**
+	* Returns the last decision entry in the ordered set where outcome = &#63;.
+	*
+	* @param outcome the outcome
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching decision entry
+	* @throws NoSuchEntryException if a matching decision entry could not be found
+	*/
+	public DecisionEntry findByOutcome_Last(java.lang.String outcome,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
+		throws NoSuchEntryException;
+
+	/**
+	* Returns the last decision entry in the ordered set where outcome = &#63;.
+	*
+	* @param outcome the outcome
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching decision entry, or <code>null</code> if a matching decision entry could not be found
+	*/
+	public DecisionEntry fetchByOutcome_Last(java.lang.String outcome,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
+
+	/**
+	* Returns the decision entries before and after the current decision entry in the ordered set where outcome = &#63;.
+	*
+	* @param decisionEntryId the primary key of the current decision entry
+	* @param outcome the outcome
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next decision entry
+	* @throws NoSuchEntryException if a decision entry with the primary key could not be found
+	*/
+	public DecisionEntry[] findByOutcome_PrevAndNext(long decisionEntryId,
+		java.lang.String outcome,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
+		throws NoSuchEntryException;
+
+	/**
+	* Removes all the decision entries where outcome = &#63; from the database.
+	*
+	* @param outcome the outcome
+	*/
+	public void removeByOutcome(java.lang.String outcome);
+
+	/**
+	* Returns the number of decision entries where outcome = &#63;.
+	*
+	* @param outcome the outcome
+	* @return the number of matching decision entries
+	*/
+	public int countByOutcome(java.lang.String outcome);
 
 	/**
 	* Returns all the decision entries where wikiPageId = &#63;.
@@ -677,13 +810,13 @@ public interface DecisionEntryPersistence extends BasePersistence<DecisionEntry>
 	/**
 	* Returns the decision entries before and after the current decision entry in the ordered set where wikiPageId = &#63;.
 	*
-	* @param decisionId the primary key of the current decision entry
+	* @param decisionEntryId the primary key of the current decision entry
 	* @param wikiPageId the wiki page ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next decision entry
 	* @throws NoSuchEntryException if a decision entry with the primary key could not be found
 	*/
-	public DecisionEntry[] findByWikiPageId_PrevAndNext(long decisionId,
+	public DecisionEntry[] findByWikiPageId_PrevAndNext(long decisionEntryId,
 		long wikiPageId,
 		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
 		throws NoSuchEntryException;
@@ -814,14 +947,14 @@ public interface DecisionEntryPersistence extends BasePersistence<DecisionEntry>
 	/**
 	* Returns the decision entries before and after the current decision entry in the ordered set where wikiPageName = &#63;.
 	*
-	* @param decisionId the primary key of the current decision entry
+	* @param decisionEntryId the primary key of the current decision entry
 	* @param wikiPageName the wiki page name
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next decision entry
 	* @throws NoSuchEntryException if a decision entry with the primary key could not be found
 	*/
-	public DecisionEntry[] findByWikiPageName_PrevAndNext(long decisionId,
-		java.lang.String wikiPageName,
+	public DecisionEntry[] findByWikiPageName_PrevAndNext(
+		long decisionEntryId, java.lang.String wikiPageName,
 		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
 		throws NoSuchEntryException;
 
@@ -839,953 +972,6 @@ public interface DecisionEntryPersistence extends BasePersistence<DecisionEntry>
 	* @return the number of matching decision entries
 	*/
 	public int countByWikiPageName(java.lang.String wikiPageName);
-
-	/**
-	* Returns all the decision entries where outcome = &#63;.
-	*
-	* @param outcome the outcome
-	* @return the matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByOutcome(java.lang.String outcome);
-
-	/**
-	* Returns a range of all the decision entries where outcome = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param outcome the outcome
-	* @param start the lower bound of the range of decision entries
-	* @param end the upper bound of the range of decision entries (not inclusive)
-	* @return the range of matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByOutcome(
-		java.lang.String outcome, int start, int end);
-
-	/**
-	* Returns an ordered range of all the decision entries where outcome = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param outcome the outcome
-	* @param start the lower bound of the range of decision entries
-	* @param end the upper bound of the range of decision entries (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByOutcome(
-		java.lang.String outcome, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
-
-	/**
-	* Returns an ordered range of all the decision entries where outcome = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param outcome the outcome
-	* @param start the lower bound of the range of decision entries
-	* @param end the upper bound of the range of decision entries (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByOutcome(
-		java.lang.String outcome, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator,
-		boolean retrieveFromCache);
-
-	/**
-	* Returns the first decision entry in the ordered set where outcome = &#63;.
-	*
-	* @param outcome the outcome
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching decision entry
-	* @throws NoSuchEntryException if a matching decision entry could not be found
-	*/
-	public DecisionEntry findByOutcome_First(java.lang.String outcome,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
-		throws NoSuchEntryException;
-
-	/**
-	* Returns the first decision entry in the ordered set where outcome = &#63;.
-	*
-	* @param outcome the outcome
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching decision entry, or <code>null</code> if a matching decision entry could not be found
-	*/
-	public DecisionEntry fetchByOutcome_First(java.lang.String outcome,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
-
-	/**
-	* Returns the last decision entry in the ordered set where outcome = &#63;.
-	*
-	* @param outcome the outcome
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching decision entry
-	* @throws NoSuchEntryException if a matching decision entry could not be found
-	*/
-	public DecisionEntry findByOutcome_Last(java.lang.String outcome,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
-		throws NoSuchEntryException;
-
-	/**
-	* Returns the last decision entry in the ordered set where outcome = &#63;.
-	*
-	* @param outcome the outcome
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching decision entry, or <code>null</code> if a matching decision entry could not be found
-	*/
-	public DecisionEntry fetchByOutcome_Last(java.lang.String outcome,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
-
-	/**
-	* Returns the decision entries before and after the current decision entry in the ordered set where outcome = &#63;.
-	*
-	* @param decisionId the primary key of the current decision entry
-	* @param outcome the outcome
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next decision entry
-	* @throws NoSuchEntryException if a decision entry with the primary key could not be found
-	*/
-	public DecisionEntry[] findByOutcome_PrevAndNext(long decisionId,
-		java.lang.String outcome,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
-		throws NoSuchEntryException;
-
-	/**
-	* Removes all the decision entries where outcome = &#63; from the database.
-	*
-	* @param outcome the outcome
-	*/
-	public void removeByOutcome(java.lang.String outcome);
-
-	/**
-	* Returns the number of decision entries where outcome = &#63;.
-	*
-	* @param outcome the outcome
-	* @return the number of matching decision entries
-	*/
-	public int countByOutcome(java.lang.String outcome);
-
-	/**
-	* Returns all the decision entries where decisionId = &#63; and companyId = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @param companyId the company ID
-	* @return the matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByD_C(long decisionId,
-		long companyId);
-
-	/**
-	* Returns a range of all the decision entries where decisionId = &#63; and companyId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param decisionId the decision ID
-	* @param companyId the company ID
-	* @param start the lower bound of the range of decision entries
-	* @param end the upper bound of the range of decision entries (not inclusive)
-	* @return the range of matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByD_C(long decisionId,
-		long companyId, int start, int end);
-
-	/**
-	* Returns an ordered range of all the decision entries where decisionId = &#63; and companyId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param decisionId the decision ID
-	* @param companyId the company ID
-	* @param start the lower bound of the range of decision entries
-	* @param end the upper bound of the range of decision entries (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByD_C(long decisionId,
-		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
-
-	/**
-	* Returns an ordered range of all the decision entries where decisionId = &#63; and companyId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param decisionId the decision ID
-	* @param companyId the company ID
-	* @param start the lower bound of the range of decision entries
-	* @param end the upper bound of the range of decision entries (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByD_C(long decisionId,
-		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator,
-		boolean retrieveFromCache);
-
-	/**
-	* Returns the first decision entry in the ordered set where decisionId = &#63; and companyId = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @param companyId the company ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching decision entry
-	* @throws NoSuchEntryException if a matching decision entry could not be found
-	*/
-	public DecisionEntry findByD_C_First(long decisionId, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
-		throws NoSuchEntryException;
-
-	/**
-	* Returns the first decision entry in the ordered set where decisionId = &#63; and companyId = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @param companyId the company ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching decision entry, or <code>null</code> if a matching decision entry could not be found
-	*/
-	public DecisionEntry fetchByD_C_First(long decisionId, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
-
-	/**
-	* Returns the last decision entry in the ordered set where decisionId = &#63; and companyId = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @param companyId the company ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching decision entry
-	* @throws NoSuchEntryException if a matching decision entry could not be found
-	*/
-	public DecisionEntry findByD_C_Last(long decisionId, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
-		throws NoSuchEntryException;
-
-	/**
-	* Returns the last decision entry in the ordered set where decisionId = &#63; and companyId = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @param companyId the company ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching decision entry, or <code>null</code> if a matching decision entry could not be found
-	*/
-	public DecisionEntry fetchByD_C_Last(long decisionId, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
-
-	/**
-	* Removes all the decision entries where decisionId = &#63; and companyId = &#63; from the database.
-	*
-	* @param decisionId the decision ID
-	* @param companyId the company ID
-	*/
-	public void removeByD_C(long decisionId, long companyId);
-
-	/**
-	* Returns the number of decision entries where decisionId = &#63; and companyId = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @param companyId the company ID
-	* @return the number of matching decision entries
-	*/
-	public int countByD_C(long decisionId, long companyId);
-
-	/**
-	* Returns all the decision entries where decisionId = &#63; and handled = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @param handled the handled
-	* @return the matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByD_H(long decisionId,
-		boolean handled);
-
-	/**
-	* Returns a range of all the decision entries where decisionId = &#63; and handled = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param decisionId the decision ID
-	* @param handled the handled
-	* @param start the lower bound of the range of decision entries
-	* @param end the upper bound of the range of decision entries (not inclusive)
-	* @return the range of matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByD_H(long decisionId,
-		boolean handled, int start, int end);
-
-	/**
-	* Returns an ordered range of all the decision entries where decisionId = &#63; and handled = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param decisionId the decision ID
-	* @param handled the handled
-	* @param start the lower bound of the range of decision entries
-	* @param end the upper bound of the range of decision entries (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByD_H(long decisionId,
-		boolean handled, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
-
-	/**
-	* Returns an ordered range of all the decision entries where decisionId = &#63; and handled = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param decisionId the decision ID
-	* @param handled the handled
-	* @param start the lower bound of the range of decision entries
-	* @param end the upper bound of the range of decision entries (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByD_H(long decisionId,
-		boolean handled, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator,
-		boolean retrieveFromCache);
-
-	/**
-	* Returns the first decision entry in the ordered set where decisionId = &#63; and handled = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @param handled the handled
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching decision entry
-	* @throws NoSuchEntryException if a matching decision entry could not be found
-	*/
-	public DecisionEntry findByD_H_First(long decisionId, boolean handled,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
-		throws NoSuchEntryException;
-
-	/**
-	* Returns the first decision entry in the ordered set where decisionId = &#63; and handled = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @param handled the handled
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching decision entry, or <code>null</code> if a matching decision entry could not be found
-	*/
-	public DecisionEntry fetchByD_H_First(long decisionId, boolean handled,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
-
-	/**
-	* Returns the last decision entry in the ordered set where decisionId = &#63; and handled = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @param handled the handled
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching decision entry
-	* @throws NoSuchEntryException if a matching decision entry could not be found
-	*/
-	public DecisionEntry findByD_H_Last(long decisionId, boolean handled,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
-		throws NoSuchEntryException;
-
-	/**
-	* Returns the last decision entry in the ordered set where decisionId = &#63; and handled = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @param handled the handled
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching decision entry, or <code>null</code> if a matching decision entry could not be found
-	*/
-	public DecisionEntry fetchByD_H_Last(long decisionId, boolean handled,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
-
-	/**
-	* Removes all the decision entries where decisionId = &#63; and handled = &#63; from the database.
-	*
-	* @param decisionId the decision ID
-	* @param handled the handled
-	*/
-	public void removeByD_H(long decisionId, boolean handled);
-
-	/**
-	* Returns the number of decision entries where decisionId = &#63; and handled = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @param handled the handled
-	* @return the number of matching decision entries
-	*/
-	public int countByD_H(long decisionId, boolean handled);
-
-	/**
-	* Returns all the decision entries where decisionId = &#63; and userId = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @param userId the user ID
-	* @return the matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByD_U(long decisionId, long userId);
-
-	/**
-	* Returns a range of all the decision entries where decisionId = &#63; and userId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param decisionId the decision ID
-	* @param userId the user ID
-	* @param start the lower bound of the range of decision entries
-	* @param end the upper bound of the range of decision entries (not inclusive)
-	* @return the range of matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByD_U(long decisionId,
-		long userId, int start, int end);
-
-	/**
-	* Returns an ordered range of all the decision entries where decisionId = &#63; and userId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param decisionId the decision ID
-	* @param userId the user ID
-	* @param start the lower bound of the range of decision entries
-	* @param end the upper bound of the range of decision entries (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByD_U(long decisionId,
-		long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
-
-	/**
-	* Returns an ordered range of all the decision entries where decisionId = &#63; and userId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param decisionId the decision ID
-	* @param userId the user ID
-	* @param start the lower bound of the range of decision entries
-	* @param end the upper bound of the range of decision entries (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByD_U(long decisionId,
-		long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator,
-		boolean retrieveFromCache);
-
-	/**
-	* Returns the first decision entry in the ordered set where decisionId = &#63; and userId = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @param userId the user ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching decision entry
-	* @throws NoSuchEntryException if a matching decision entry could not be found
-	*/
-	public DecisionEntry findByD_U_First(long decisionId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
-		throws NoSuchEntryException;
-
-	/**
-	* Returns the first decision entry in the ordered set where decisionId = &#63; and userId = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @param userId the user ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching decision entry, or <code>null</code> if a matching decision entry could not be found
-	*/
-	public DecisionEntry fetchByD_U_First(long decisionId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
-
-	/**
-	* Returns the last decision entry in the ordered set where decisionId = &#63; and userId = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @param userId the user ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching decision entry
-	* @throws NoSuchEntryException if a matching decision entry could not be found
-	*/
-	public DecisionEntry findByD_U_Last(long decisionId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
-		throws NoSuchEntryException;
-
-	/**
-	* Returns the last decision entry in the ordered set where decisionId = &#63; and userId = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @param userId the user ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching decision entry, or <code>null</code> if a matching decision entry could not be found
-	*/
-	public DecisionEntry fetchByD_U_Last(long decisionId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
-
-	/**
-	* Removes all the decision entries where decisionId = &#63; and userId = &#63; from the database.
-	*
-	* @param decisionId the decision ID
-	* @param userId the user ID
-	*/
-	public void removeByD_U(long decisionId, long userId);
-
-	/**
-	* Returns the number of decision entries where decisionId = &#63; and userId = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @param userId the user ID
-	* @return the number of matching decision entries
-	*/
-	public int countByD_U(long decisionId, long userId);
-
-	/**
-	* Returns all the decision entries where decisionId = &#63; and userId = &#63; and companyId = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @param userId the user ID
-	* @param companyId the company ID
-	* @return the matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByD_U_C(long decisionId,
-		long userId, long companyId);
-
-	/**
-	* Returns a range of all the decision entries where decisionId = &#63; and userId = &#63; and companyId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param decisionId the decision ID
-	* @param userId the user ID
-	* @param companyId the company ID
-	* @param start the lower bound of the range of decision entries
-	* @param end the upper bound of the range of decision entries (not inclusive)
-	* @return the range of matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByD_U_C(long decisionId,
-		long userId, long companyId, int start, int end);
-
-	/**
-	* Returns an ordered range of all the decision entries where decisionId = &#63; and userId = &#63; and companyId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param decisionId the decision ID
-	* @param userId the user ID
-	* @param companyId the company ID
-	* @param start the lower bound of the range of decision entries
-	* @param end the upper bound of the range of decision entries (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByD_U_C(long decisionId,
-		long userId, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
-
-	/**
-	* Returns an ordered range of all the decision entries where decisionId = &#63; and userId = &#63; and companyId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param decisionId the decision ID
-	* @param userId the user ID
-	* @param companyId the company ID
-	* @param start the lower bound of the range of decision entries
-	* @param end the upper bound of the range of decision entries (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByD_U_C(long decisionId,
-		long userId, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator,
-		boolean retrieveFromCache);
-
-	/**
-	* Returns the first decision entry in the ordered set where decisionId = &#63; and userId = &#63; and companyId = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @param userId the user ID
-	* @param companyId the company ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching decision entry
-	* @throws NoSuchEntryException if a matching decision entry could not be found
-	*/
-	public DecisionEntry findByD_U_C_First(long decisionId, long userId,
-		long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
-		throws NoSuchEntryException;
-
-	/**
-	* Returns the first decision entry in the ordered set where decisionId = &#63; and userId = &#63; and companyId = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @param userId the user ID
-	* @param companyId the company ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching decision entry, or <code>null</code> if a matching decision entry could not be found
-	*/
-	public DecisionEntry fetchByD_U_C_First(long decisionId, long userId,
-		long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
-
-	/**
-	* Returns the last decision entry in the ordered set where decisionId = &#63; and userId = &#63; and companyId = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @param userId the user ID
-	* @param companyId the company ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching decision entry
-	* @throws NoSuchEntryException if a matching decision entry could not be found
-	*/
-	public DecisionEntry findByD_U_C_Last(long decisionId, long userId,
-		long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
-		throws NoSuchEntryException;
-
-	/**
-	* Returns the last decision entry in the ordered set where decisionId = &#63; and userId = &#63; and companyId = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @param userId the user ID
-	* @param companyId the company ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching decision entry, or <code>null</code> if a matching decision entry could not be found
-	*/
-	public DecisionEntry fetchByD_U_C_Last(long decisionId, long userId,
-		long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
-
-	/**
-	* Removes all the decision entries where decisionId = &#63; and userId = &#63; and companyId = &#63; from the database.
-	*
-	* @param decisionId the decision ID
-	* @param userId the user ID
-	* @param companyId the company ID
-	*/
-	public void removeByD_U_C(long decisionId, long userId, long companyId);
-
-	/**
-	* Returns the number of decision entries where decisionId = &#63; and userId = &#63; and companyId = &#63;.
-	*
-	* @param decisionId the decision ID
-	* @param userId the user ID
-	* @param companyId the company ID
-	* @return the number of matching decision entries
-	*/
-	public int countByD_U_C(long decisionId, long userId, long companyId);
-
-	/**
-	* Returns all the decision entries where userId = &#63; and handled = &#63;.
-	*
-	* @param userId the user ID
-	* @param handled the handled
-	* @return the matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByU_H(long userId, boolean handled);
-
-	/**
-	* Returns a range of all the decision entries where userId = &#63; and handled = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param userId the user ID
-	* @param handled the handled
-	* @param start the lower bound of the range of decision entries
-	* @param end the upper bound of the range of decision entries (not inclusive)
-	* @return the range of matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByU_H(long userId,
-		boolean handled, int start, int end);
-
-	/**
-	* Returns an ordered range of all the decision entries where userId = &#63; and handled = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param userId the user ID
-	* @param handled the handled
-	* @param start the lower bound of the range of decision entries
-	* @param end the upper bound of the range of decision entries (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByU_H(long userId,
-		boolean handled, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
-
-	/**
-	* Returns an ordered range of all the decision entries where userId = &#63; and handled = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param userId the user ID
-	* @param handled the handled
-	* @param start the lower bound of the range of decision entries
-	* @param end the upper bound of the range of decision entries (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByU_H(long userId,
-		boolean handled, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator,
-		boolean retrieveFromCache);
-
-	/**
-	* Returns the first decision entry in the ordered set where userId = &#63; and handled = &#63;.
-	*
-	* @param userId the user ID
-	* @param handled the handled
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching decision entry
-	* @throws NoSuchEntryException if a matching decision entry could not be found
-	*/
-	public DecisionEntry findByU_H_First(long userId, boolean handled,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
-		throws NoSuchEntryException;
-
-	/**
-	* Returns the first decision entry in the ordered set where userId = &#63; and handled = &#63;.
-	*
-	* @param userId the user ID
-	* @param handled the handled
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching decision entry, or <code>null</code> if a matching decision entry could not be found
-	*/
-	public DecisionEntry fetchByU_H_First(long userId, boolean handled,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
-
-	/**
-	* Returns the last decision entry in the ordered set where userId = &#63; and handled = &#63;.
-	*
-	* @param userId the user ID
-	* @param handled the handled
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching decision entry
-	* @throws NoSuchEntryException if a matching decision entry could not be found
-	*/
-	public DecisionEntry findByU_H_Last(long userId, boolean handled,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
-		throws NoSuchEntryException;
-
-	/**
-	* Returns the last decision entry in the ordered set where userId = &#63; and handled = &#63;.
-	*
-	* @param userId the user ID
-	* @param handled the handled
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching decision entry, or <code>null</code> if a matching decision entry could not be found
-	*/
-	public DecisionEntry fetchByU_H_Last(long userId, boolean handled,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
-
-	/**
-	* Returns the decision entries before and after the current decision entry in the ordered set where userId = &#63; and handled = &#63;.
-	*
-	* @param decisionId the primary key of the current decision entry
-	* @param userId the user ID
-	* @param handled the handled
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next decision entry
-	* @throws NoSuchEntryException if a decision entry with the primary key could not be found
-	*/
-	public DecisionEntry[] findByU_H_PrevAndNext(long decisionId, long userId,
-		boolean handled,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
-		throws NoSuchEntryException;
-
-	/**
-	* Removes all the decision entries where userId = &#63; and handled = &#63; from the database.
-	*
-	* @param userId the user ID
-	* @param handled the handled
-	*/
-	public void removeByU_H(long userId, boolean handled);
-
-	/**
-	* Returns the number of decision entries where userId = &#63; and handled = &#63;.
-	*
-	* @param userId the user ID
-	* @param handled the handled
-	* @return the number of matching decision entries
-	*/
-	public int countByU_H(long userId, boolean handled);
-
-	/**
-	* Returns all the decision entries where userId = &#63; and handled = &#63; and decisionId = &#63;.
-	*
-	* @param userId the user ID
-	* @param handled the handled
-	* @param decisionId the decision ID
-	* @return the matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByU_H_D(long userId,
-		boolean handled, long decisionId);
-
-	/**
-	* Returns a range of all the decision entries where userId = &#63; and handled = &#63; and decisionId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param userId the user ID
-	* @param handled the handled
-	* @param decisionId the decision ID
-	* @param start the lower bound of the range of decision entries
-	* @param end the upper bound of the range of decision entries (not inclusive)
-	* @return the range of matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByU_H_D(long userId,
-		boolean handled, long decisionId, int start, int end);
-
-	/**
-	* Returns an ordered range of all the decision entries where userId = &#63; and handled = &#63; and decisionId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param userId the user ID
-	* @param handled the handled
-	* @param decisionId the decision ID
-	* @param start the lower bound of the range of decision entries
-	* @param end the upper bound of the range of decision entries (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByU_H_D(long userId,
-		boolean handled, long decisionId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
-
-	/**
-	* Returns an ordered range of all the decision entries where userId = &#63; and handled = &#63; and decisionId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param userId the user ID
-	* @param handled the handled
-	* @param decisionId the decision ID
-	* @param start the lower bound of the range of decision entries
-	* @param end the upper bound of the range of decision entries (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching decision entries
-	*/
-	public java.util.List<DecisionEntry> findByU_H_D(long userId,
-		boolean handled, long decisionId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator,
-		boolean retrieveFromCache);
-
-	/**
-	* Returns the first decision entry in the ordered set where userId = &#63; and handled = &#63; and decisionId = &#63;.
-	*
-	* @param userId the user ID
-	* @param handled the handled
-	* @param decisionId the decision ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching decision entry
-	* @throws NoSuchEntryException if a matching decision entry could not be found
-	*/
-	public DecisionEntry findByU_H_D_First(long userId, boolean handled,
-		long decisionId,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
-		throws NoSuchEntryException;
-
-	/**
-	* Returns the first decision entry in the ordered set where userId = &#63; and handled = &#63; and decisionId = &#63;.
-	*
-	* @param userId the user ID
-	* @param handled the handled
-	* @param decisionId the decision ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching decision entry, or <code>null</code> if a matching decision entry could not be found
-	*/
-	public DecisionEntry fetchByU_H_D_First(long userId, boolean handled,
-		long decisionId,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
-
-	/**
-	* Returns the last decision entry in the ordered set where userId = &#63; and handled = &#63; and decisionId = &#63;.
-	*
-	* @param userId the user ID
-	* @param handled the handled
-	* @param decisionId the decision ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching decision entry
-	* @throws NoSuchEntryException if a matching decision entry could not be found
-	*/
-	public DecisionEntry findByU_H_D_Last(long userId, boolean handled,
-		long decisionId,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
-		throws NoSuchEntryException;
-
-	/**
-	* Returns the last decision entry in the ordered set where userId = &#63; and handled = &#63; and decisionId = &#63;.
-	*
-	* @param userId the user ID
-	* @param handled the handled
-	* @param decisionId the decision ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching decision entry, or <code>null</code> if a matching decision entry could not be found
-	*/
-	public DecisionEntry fetchByU_H_D_Last(long userId, boolean handled,
-		long decisionId,
-		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
-
-	/**
-	* Removes all the decision entries where userId = &#63; and handled = &#63; and decisionId = &#63; from the database.
-	*
-	* @param userId the user ID
-	* @param handled the handled
-	* @param decisionId the decision ID
-	*/
-	public void removeByU_H_D(long userId, boolean handled, long decisionId);
-
-	/**
-	* Returns the number of decision entries where userId = &#63; and handled = &#63; and decisionId = &#63;.
-	*
-	* @param userId the user ID
-	* @param handled the handled
-	* @param decisionId the decision ID
-	* @return the number of matching decision entries
-	*/
-	public int countByU_H_D(long userId, boolean handled, long decisionId);
 
 	/**
 	* Returns all the decision entries where companyId = &#63; and handled = &#63;.
@@ -1902,14 +1088,14 @@ public interface DecisionEntryPersistence extends BasePersistence<DecisionEntry>
 	/**
 	* Returns the decision entries before and after the current decision entry in the ordered set where companyId = &#63; and handled = &#63;.
 	*
-	* @param decisionId the primary key of the current decision entry
+	* @param decisionEntryId the primary key of the current decision entry
 	* @param companyId the company ID
 	* @param handled the handled
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next decision entry
 	* @throws NoSuchEntryException if a decision entry with the primary key could not be found
 	*/
-	public DecisionEntry[] findByC_H_PrevAndNext(long decisionId,
+	public DecisionEntry[] findByC_H_PrevAndNext(long decisionEntryId,
 		long companyId, boolean handled,
 		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
 		throws NoSuchEntryException;
@@ -1932,6 +1118,823 @@ public interface DecisionEntryPersistence extends BasePersistence<DecisionEntry>
 	public int countByC_H(long companyId, boolean handled);
 
 	/**
+	* Returns all the decision entries where decisionEntryId = &#63; and companyId = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param companyId the company ID
+	* @return the matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByD_C(long decisionEntryId,
+		long companyId);
+
+	/**
+	* Returns a range of all the decision entries where decisionEntryId = &#63; and companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param companyId the company ID
+	* @param start the lower bound of the range of decision entries
+	* @param end the upper bound of the range of decision entries (not inclusive)
+	* @return the range of matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByD_C(long decisionEntryId,
+		long companyId, int start, int end);
+
+	/**
+	* Returns an ordered range of all the decision entries where decisionEntryId = &#63; and companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param companyId the company ID
+	* @param start the lower bound of the range of decision entries
+	* @param end the upper bound of the range of decision entries (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByD_C(long decisionEntryId,
+		long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
+
+	/**
+	* Returns an ordered range of all the decision entries where decisionEntryId = &#63; and companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param companyId the company ID
+	* @param start the lower bound of the range of decision entries
+	* @param end the upper bound of the range of decision entries (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByD_C(long decisionEntryId,
+		long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator,
+		boolean retrieveFromCache);
+
+	/**
+	* Returns the first decision entry in the ordered set where decisionEntryId = &#63; and companyId = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param companyId the company ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching decision entry
+	* @throws NoSuchEntryException if a matching decision entry could not be found
+	*/
+	public DecisionEntry findByD_C_First(long decisionEntryId, long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
+		throws NoSuchEntryException;
+
+	/**
+	* Returns the first decision entry in the ordered set where decisionEntryId = &#63; and companyId = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param companyId the company ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching decision entry, or <code>null</code> if a matching decision entry could not be found
+	*/
+	public DecisionEntry fetchByD_C_First(long decisionEntryId, long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
+
+	/**
+	* Returns the last decision entry in the ordered set where decisionEntryId = &#63; and companyId = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param companyId the company ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching decision entry
+	* @throws NoSuchEntryException if a matching decision entry could not be found
+	*/
+	public DecisionEntry findByD_C_Last(long decisionEntryId, long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
+		throws NoSuchEntryException;
+
+	/**
+	* Returns the last decision entry in the ordered set where decisionEntryId = &#63; and companyId = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param companyId the company ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching decision entry, or <code>null</code> if a matching decision entry could not be found
+	*/
+	public DecisionEntry fetchByD_C_Last(long decisionEntryId, long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
+
+	/**
+	* Removes all the decision entries where decisionEntryId = &#63; and companyId = &#63; from the database.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param companyId the company ID
+	*/
+	public void removeByD_C(long decisionEntryId, long companyId);
+
+	/**
+	* Returns the number of decision entries where decisionEntryId = &#63; and companyId = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param companyId the company ID
+	* @return the number of matching decision entries
+	*/
+	public int countByD_C(long decisionEntryId, long companyId);
+
+	/**
+	* Returns all the decision entries where decisionEntryId = &#63; and handled = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param handled the handled
+	* @return the matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByD_H(long decisionEntryId,
+		boolean handled);
+
+	/**
+	* Returns a range of all the decision entries where decisionEntryId = &#63; and handled = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param handled the handled
+	* @param start the lower bound of the range of decision entries
+	* @param end the upper bound of the range of decision entries (not inclusive)
+	* @return the range of matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByD_H(long decisionEntryId,
+		boolean handled, int start, int end);
+
+	/**
+	* Returns an ordered range of all the decision entries where decisionEntryId = &#63; and handled = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param handled the handled
+	* @param start the lower bound of the range of decision entries
+	* @param end the upper bound of the range of decision entries (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByD_H(long decisionEntryId,
+		boolean handled, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
+
+	/**
+	* Returns an ordered range of all the decision entries where decisionEntryId = &#63; and handled = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param handled the handled
+	* @param start the lower bound of the range of decision entries
+	* @param end the upper bound of the range of decision entries (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByD_H(long decisionEntryId,
+		boolean handled, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator,
+		boolean retrieveFromCache);
+
+	/**
+	* Returns the first decision entry in the ordered set where decisionEntryId = &#63; and handled = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param handled the handled
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching decision entry
+	* @throws NoSuchEntryException if a matching decision entry could not be found
+	*/
+	public DecisionEntry findByD_H_First(long decisionEntryId, boolean handled,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
+		throws NoSuchEntryException;
+
+	/**
+	* Returns the first decision entry in the ordered set where decisionEntryId = &#63; and handled = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param handled the handled
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching decision entry, or <code>null</code> if a matching decision entry could not be found
+	*/
+	public DecisionEntry fetchByD_H_First(long decisionEntryId,
+		boolean handled,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
+
+	/**
+	* Returns the last decision entry in the ordered set where decisionEntryId = &#63; and handled = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param handled the handled
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching decision entry
+	* @throws NoSuchEntryException if a matching decision entry could not be found
+	*/
+	public DecisionEntry findByD_H_Last(long decisionEntryId, boolean handled,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
+		throws NoSuchEntryException;
+
+	/**
+	* Returns the last decision entry in the ordered set where decisionEntryId = &#63; and handled = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param handled the handled
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching decision entry, or <code>null</code> if a matching decision entry could not be found
+	*/
+	public DecisionEntry fetchByD_H_Last(long decisionEntryId, boolean handled,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
+
+	/**
+	* Removes all the decision entries where decisionEntryId = &#63; and handled = &#63; from the database.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param handled the handled
+	*/
+	public void removeByD_H(long decisionEntryId, boolean handled);
+
+	/**
+	* Returns the number of decision entries where decisionEntryId = &#63; and handled = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param handled the handled
+	* @return the number of matching decision entries
+	*/
+	public int countByD_H(long decisionEntryId, boolean handled);
+
+	/**
+	* Returns all the decision entries where decisionEntryId = &#63; and userId = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param userId the user ID
+	* @return the matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByD_U(long decisionEntryId,
+		long userId);
+
+	/**
+	* Returns a range of all the decision entries where decisionEntryId = &#63; and userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param userId the user ID
+	* @param start the lower bound of the range of decision entries
+	* @param end the upper bound of the range of decision entries (not inclusive)
+	* @return the range of matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByD_U(long decisionEntryId,
+		long userId, int start, int end);
+
+	/**
+	* Returns an ordered range of all the decision entries where decisionEntryId = &#63; and userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param userId the user ID
+	* @param start the lower bound of the range of decision entries
+	* @param end the upper bound of the range of decision entries (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByD_U(long decisionEntryId,
+		long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
+
+	/**
+	* Returns an ordered range of all the decision entries where decisionEntryId = &#63; and userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param userId the user ID
+	* @param start the lower bound of the range of decision entries
+	* @param end the upper bound of the range of decision entries (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByD_U(long decisionEntryId,
+		long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator,
+		boolean retrieveFromCache);
+
+	/**
+	* Returns the first decision entry in the ordered set where decisionEntryId = &#63; and userId = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching decision entry
+	* @throws NoSuchEntryException if a matching decision entry could not be found
+	*/
+	public DecisionEntry findByD_U_First(long decisionEntryId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
+		throws NoSuchEntryException;
+
+	/**
+	* Returns the first decision entry in the ordered set where decisionEntryId = &#63; and userId = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching decision entry, or <code>null</code> if a matching decision entry could not be found
+	*/
+	public DecisionEntry fetchByD_U_First(long decisionEntryId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
+
+	/**
+	* Returns the last decision entry in the ordered set where decisionEntryId = &#63; and userId = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching decision entry
+	* @throws NoSuchEntryException if a matching decision entry could not be found
+	*/
+	public DecisionEntry findByD_U_Last(long decisionEntryId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
+		throws NoSuchEntryException;
+
+	/**
+	* Returns the last decision entry in the ordered set where decisionEntryId = &#63; and userId = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching decision entry, or <code>null</code> if a matching decision entry could not be found
+	*/
+	public DecisionEntry fetchByD_U_Last(long decisionEntryId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
+
+	/**
+	* Removes all the decision entries where decisionEntryId = &#63; and userId = &#63; from the database.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param userId the user ID
+	*/
+	public void removeByD_U(long decisionEntryId, long userId);
+
+	/**
+	* Returns the number of decision entries where decisionEntryId = &#63; and userId = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param userId the user ID
+	* @return the number of matching decision entries
+	*/
+	public int countByD_U(long decisionEntryId, long userId);
+
+	/**
+	* Returns all the decision entries where decisionEntryId = &#63; and userId = &#63; and companyId = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param userId the user ID
+	* @param companyId the company ID
+	* @return the matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByD_U_C(long decisionEntryId,
+		long userId, long companyId);
+
+	/**
+	* Returns a range of all the decision entries where decisionEntryId = &#63; and userId = &#63; and companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param userId the user ID
+	* @param companyId the company ID
+	* @param start the lower bound of the range of decision entries
+	* @param end the upper bound of the range of decision entries (not inclusive)
+	* @return the range of matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByD_U_C(long decisionEntryId,
+		long userId, long companyId, int start, int end);
+
+	/**
+	* Returns an ordered range of all the decision entries where decisionEntryId = &#63; and userId = &#63; and companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param userId the user ID
+	* @param companyId the company ID
+	* @param start the lower bound of the range of decision entries
+	* @param end the upper bound of the range of decision entries (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByD_U_C(long decisionEntryId,
+		long userId, long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
+
+	/**
+	* Returns an ordered range of all the decision entries where decisionEntryId = &#63; and userId = &#63; and companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param userId the user ID
+	* @param companyId the company ID
+	* @param start the lower bound of the range of decision entries
+	* @param end the upper bound of the range of decision entries (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByD_U_C(long decisionEntryId,
+		long userId, long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator,
+		boolean retrieveFromCache);
+
+	/**
+	* Returns the first decision entry in the ordered set where decisionEntryId = &#63; and userId = &#63; and companyId = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param userId the user ID
+	* @param companyId the company ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching decision entry
+	* @throws NoSuchEntryException if a matching decision entry could not be found
+	*/
+	public DecisionEntry findByD_U_C_First(long decisionEntryId, long userId,
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
+		throws NoSuchEntryException;
+
+	/**
+	* Returns the first decision entry in the ordered set where decisionEntryId = &#63; and userId = &#63; and companyId = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param userId the user ID
+	* @param companyId the company ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching decision entry, or <code>null</code> if a matching decision entry could not be found
+	*/
+	public DecisionEntry fetchByD_U_C_First(long decisionEntryId, long userId,
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
+
+	/**
+	* Returns the last decision entry in the ordered set where decisionEntryId = &#63; and userId = &#63; and companyId = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param userId the user ID
+	* @param companyId the company ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching decision entry
+	* @throws NoSuchEntryException if a matching decision entry could not be found
+	*/
+	public DecisionEntry findByD_U_C_Last(long decisionEntryId, long userId,
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
+		throws NoSuchEntryException;
+
+	/**
+	* Returns the last decision entry in the ordered set where decisionEntryId = &#63; and userId = &#63; and companyId = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param userId the user ID
+	* @param companyId the company ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching decision entry, or <code>null</code> if a matching decision entry could not be found
+	*/
+	public DecisionEntry fetchByD_U_C_Last(long decisionEntryId, long userId,
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
+
+	/**
+	* Removes all the decision entries where decisionEntryId = &#63; and userId = &#63; and companyId = &#63; from the database.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param userId the user ID
+	* @param companyId the company ID
+	*/
+	public void removeByD_U_C(long decisionEntryId, long userId, long companyId);
+
+	/**
+	* Returns the number of decision entries where decisionEntryId = &#63; and userId = &#63; and companyId = &#63;.
+	*
+	* @param decisionEntryId the decision entry ID
+	* @param userId the user ID
+	* @param companyId the company ID
+	* @return the number of matching decision entries
+	*/
+	public int countByD_U_C(long decisionEntryId, long userId, long companyId);
+
+	/**
+	* Returns all the decision entries where userId = &#63; and handled = &#63;.
+	*
+	* @param userId the user ID
+	* @param handled the handled
+	* @return the matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByU_H(long userId, boolean handled);
+
+	/**
+	* Returns a range of all the decision entries where userId = &#63; and handled = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param handled the handled
+	* @param start the lower bound of the range of decision entries
+	* @param end the upper bound of the range of decision entries (not inclusive)
+	* @return the range of matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByU_H(long userId,
+		boolean handled, int start, int end);
+
+	/**
+	* Returns an ordered range of all the decision entries where userId = &#63; and handled = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param handled the handled
+	* @param start the lower bound of the range of decision entries
+	* @param end the upper bound of the range of decision entries (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByU_H(long userId,
+		boolean handled, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
+
+	/**
+	* Returns an ordered range of all the decision entries where userId = &#63; and handled = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param handled the handled
+	* @param start the lower bound of the range of decision entries
+	* @param end the upper bound of the range of decision entries (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByU_H(long userId,
+		boolean handled, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator,
+		boolean retrieveFromCache);
+
+	/**
+	* Returns the first decision entry in the ordered set where userId = &#63; and handled = &#63;.
+	*
+	* @param userId the user ID
+	* @param handled the handled
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching decision entry
+	* @throws NoSuchEntryException if a matching decision entry could not be found
+	*/
+	public DecisionEntry findByU_H_First(long userId, boolean handled,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
+		throws NoSuchEntryException;
+
+	/**
+	* Returns the first decision entry in the ordered set where userId = &#63; and handled = &#63;.
+	*
+	* @param userId the user ID
+	* @param handled the handled
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching decision entry, or <code>null</code> if a matching decision entry could not be found
+	*/
+	public DecisionEntry fetchByU_H_First(long userId, boolean handled,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
+
+	/**
+	* Returns the last decision entry in the ordered set where userId = &#63; and handled = &#63;.
+	*
+	* @param userId the user ID
+	* @param handled the handled
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching decision entry
+	* @throws NoSuchEntryException if a matching decision entry could not be found
+	*/
+	public DecisionEntry findByU_H_Last(long userId, boolean handled,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
+		throws NoSuchEntryException;
+
+	/**
+	* Returns the last decision entry in the ordered set where userId = &#63; and handled = &#63;.
+	*
+	* @param userId the user ID
+	* @param handled the handled
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching decision entry, or <code>null</code> if a matching decision entry could not be found
+	*/
+	public DecisionEntry fetchByU_H_Last(long userId, boolean handled,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
+
+	/**
+	* Returns the decision entries before and after the current decision entry in the ordered set where userId = &#63; and handled = &#63;.
+	*
+	* @param decisionEntryId the primary key of the current decision entry
+	* @param userId the user ID
+	* @param handled the handled
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next decision entry
+	* @throws NoSuchEntryException if a decision entry with the primary key could not be found
+	*/
+	public DecisionEntry[] findByU_H_PrevAndNext(long decisionEntryId,
+		long userId, boolean handled,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
+		throws NoSuchEntryException;
+
+	/**
+	* Removes all the decision entries where userId = &#63; and handled = &#63; from the database.
+	*
+	* @param userId the user ID
+	* @param handled the handled
+	*/
+	public void removeByU_H(long userId, boolean handled);
+
+	/**
+	* Returns the number of decision entries where userId = &#63; and handled = &#63;.
+	*
+	* @param userId the user ID
+	* @param handled the handled
+	* @return the number of matching decision entries
+	*/
+	public int countByU_H(long userId, boolean handled);
+
+	/**
+	* Returns all the decision entries where userId = &#63; and handled = &#63; and decisionEntryId = &#63;.
+	*
+	* @param userId the user ID
+	* @param handled the handled
+	* @param decisionEntryId the decision entry ID
+	* @return the matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByU_H_D(long userId,
+		boolean handled, long decisionEntryId);
+
+	/**
+	* Returns a range of all the decision entries where userId = &#63; and handled = &#63; and decisionEntryId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param handled the handled
+	* @param decisionEntryId the decision entry ID
+	* @param start the lower bound of the range of decision entries
+	* @param end the upper bound of the range of decision entries (not inclusive)
+	* @return the range of matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByU_H_D(long userId,
+		boolean handled, long decisionEntryId, int start, int end);
+
+	/**
+	* Returns an ordered range of all the decision entries where userId = &#63; and handled = &#63; and decisionEntryId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param handled the handled
+	* @param decisionEntryId the decision entry ID
+	* @param start the lower bound of the range of decision entries
+	* @param end the upper bound of the range of decision entries (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByU_H_D(long userId,
+		boolean handled, long decisionEntryId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
+
+	/**
+	* Returns an ordered range of all the decision entries where userId = &#63; and handled = &#63; and decisionEntryId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param handled the handled
+	* @param decisionEntryId the decision entry ID
+	* @param start the lower bound of the range of decision entries
+	* @param end the upper bound of the range of decision entries (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching decision entries
+	*/
+	public java.util.List<DecisionEntry> findByU_H_D(long userId,
+		boolean handled, long decisionEntryId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator,
+		boolean retrieveFromCache);
+
+	/**
+	* Returns the first decision entry in the ordered set where userId = &#63; and handled = &#63; and decisionEntryId = &#63;.
+	*
+	* @param userId the user ID
+	* @param handled the handled
+	* @param decisionEntryId the decision entry ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching decision entry
+	* @throws NoSuchEntryException if a matching decision entry could not be found
+	*/
+	public DecisionEntry findByU_H_D_First(long userId, boolean handled,
+		long decisionEntryId,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
+		throws NoSuchEntryException;
+
+	/**
+	* Returns the first decision entry in the ordered set where userId = &#63; and handled = &#63; and decisionEntryId = &#63;.
+	*
+	* @param userId the user ID
+	* @param handled the handled
+	* @param decisionEntryId the decision entry ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching decision entry, or <code>null</code> if a matching decision entry could not be found
+	*/
+	public DecisionEntry fetchByU_H_D_First(long userId, boolean handled,
+		long decisionEntryId,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
+
+	/**
+	* Returns the last decision entry in the ordered set where userId = &#63; and handled = &#63; and decisionEntryId = &#63;.
+	*
+	* @param userId the user ID
+	* @param handled the handled
+	* @param decisionEntryId the decision entry ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching decision entry
+	* @throws NoSuchEntryException if a matching decision entry could not be found
+	*/
+	public DecisionEntry findByU_H_D_Last(long userId, boolean handled,
+		long decisionEntryId,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator)
+		throws NoSuchEntryException;
+
+	/**
+	* Returns the last decision entry in the ordered set where userId = &#63; and handled = &#63; and decisionEntryId = &#63;.
+	*
+	* @param userId the user ID
+	* @param handled the handled
+	* @param decisionEntryId the decision entry ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching decision entry, or <code>null</code> if a matching decision entry could not be found
+	*/
+	public DecisionEntry fetchByU_H_D_Last(long userId, boolean handled,
+		long decisionEntryId,
+		com.liferay.portal.kernel.util.OrderByComparator<DecisionEntry> orderByComparator);
+
+	/**
+	* Removes all the decision entries where userId = &#63; and handled = &#63; and decisionEntryId = &#63; from the database.
+	*
+	* @param userId the user ID
+	* @param handled the handled
+	* @param decisionEntryId the decision entry ID
+	*/
+	public void removeByU_H_D(long userId, boolean handled, long decisionEntryId);
+
+	/**
+	* Returns the number of decision entries where userId = &#63; and handled = &#63; and decisionEntryId = &#63;.
+	*
+	* @param userId the user ID
+	* @param handled the handled
+	* @param decisionEntryId the decision entry ID
+	* @return the number of matching decision entries
+	*/
+	public int countByU_H_D(long userId, boolean handled, long decisionEntryId);
+
+	/**
 	* Caches the decision entry in the entity cache if it is enabled.
 	*
 	* @param decisionEntry the decision entry
@@ -1948,39 +1951,40 @@ public interface DecisionEntryPersistence extends BasePersistence<DecisionEntry>
 	/**
 	* Creates a new decision entry with the primary key. Does not add the decision entry to the database.
 	*
-	* @param decisionId the primary key for the new decision entry
+	* @param decisionEntryId the primary key for the new decision entry
 	* @return the new decision entry
 	*/
-	public DecisionEntry create(long decisionId);
+	public DecisionEntry create(long decisionEntryId);
 
 	/**
 	* Removes the decision entry with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param decisionId the primary key of the decision entry
+	* @param decisionEntryId the primary key of the decision entry
 	* @return the decision entry that was removed
 	* @throws NoSuchEntryException if a decision entry with the primary key could not be found
 	*/
-	public DecisionEntry remove(long decisionId) throws NoSuchEntryException;
+	public DecisionEntry remove(long decisionEntryId)
+		throws NoSuchEntryException;
 
 	public DecisionEntry updateImpl(DecisionEntry decisionEntry);
 
 	/**
 	* Returns the decision entry with the primary key or throws a {@link NoSuchEntryException} if it could not be found.
 	*
-	* @param decisionId the primary key of the decision entry
+	* @param decisionEntryId the primary key of the decision entry
 	* @return the decision entry
 	* @throws NoSuchEntryException if a decision entry with the primary key could not be found
 	*/
-	public DecisionEntry findByPrimaryKey(long decisionId)
+	public DecisionEntry findByPrimaryKey(long decisionEntryId)
 		throws NoSuchEntryException;
 
 	/**
 	* Returns the decision entry with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param decisionId the primary key of the decision entry
+	* @param decisionEntryId the primary key of the decision entry
 	* @return the decision entry, or <code>null</code> if a decision entry with the primary key could not be found
 	*/
-	public DecisionEntry fetchByPrimaryKey(long decisionId);
+	public DecisionEntry fetchByPrimaryKey(long decisionEntryId);
 
 	@Override
 	public java.util.Map<java.io.Serializable, DecisionEntry> fetchByPrimaryKeys(

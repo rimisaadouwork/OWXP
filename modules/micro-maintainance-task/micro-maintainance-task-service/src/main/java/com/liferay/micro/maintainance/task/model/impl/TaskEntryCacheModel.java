@@ -52,7 +52,7 @@ public class TaskEntryCacheModel implements CacheModel<TaskEntry>,
 
 		TaskEntryCacheModel taskEntryCacheModel = (TaskEntryCacheModel)obj;
 
-		if (taskId == taskEntryCacheModel.taskId) {
+		if (taskEntryId == taskEntryCacheModel.taskEntryId) {
 			return true;
 		}
 
@@ -61,7 +61,7 @@ public class TaskEntryCacheModel implements CacheModel<TaskEntry>,
 
 	@Override
 	public int hashCode() {
-		return HashUtil.hash(0, taskId);
+		return HashUtil.hash(0, taskEntryId);
 	}
 
 	@Override
@@ -70,12 +70,12 @@ public class TaskEntryCacheModel implements CacheModel<TaskEntry>,
 
 		sb.append("{uuid=");
 		sb.append(uuid);
-		sb.append(", taskId=");
-		sb.append(taskId);
+		sb.append(", taskEntryId=");
+		sb.append(taskEntryId);
 		sb.append(", createDate=");
 		sb.append(createDate);
-		sb.append(", taskName=");
-		sb.append(taskName);
+		sb.append(", taskEntryName=");
+		sb.append(taskEntryName);
 		sb.append("}");
 
 		return sb.toString();
@@ -92,7 +92,7 @@ public class TaskEntryCacheModel implements CacheModel<TaskEntry>,
 			taskEntryImpl.setUuid(uuid);
 		}
 
-		taskEntryImpl.setTaskId(taskId);
+		taskEntryImpl.setTaskEntryId(taskEntryId);
 
 		if (createDate == Long.MIN_VALUE) {
 			taskEntryImpl.setCreateDate(null);
@@ -101,11 +101,11 @@ public class TaskEntryCacheModel implements CacheModel<TaskEntry>,
 			taskEntryImpl.setCreateDate(new Date(createDate));
 		}
 
-		if (taskName == null) {
-			taskEntryImpl.setTaskName(StringPool.BLANK);
+		if (taskEntryName == null) {
+			taskEntryImpl.setTaskEntryName(StringPool.BLANK);
 		}
 		else {
-			taskEntryImpl.setTaskName(taskName);
+			taskEntryImpl.setTaskEntryName(taskEntryName);
 		}
 
 		taskEntryImpl.resetOriginalValues();
@@ -117,9 +117,9 @@ public class TaskEntryCacheModel implements CacheModel<TaskEntry>,
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 
-		taskId = objectInput.readLong();
+		taskEntryId = objectInput.readLong();
 		createDate = objectInput.readLong();
-		taskName = objectInput.readUTF();
+		taskEntryName = objectInput.readUTF();
 	}
 
 	@Override
@@ -132,19 +132,19 @@ public class TaskEntryCacheModel implements CacheModel<TaskEntry>,
 			objectOutput.writeUTF(uuid);
 		}
 
-		objectOutput.writeLong(taskId);
+		objectOutput.writeLong(taskEntryId);
 		objectOutput.writeLong(createDate);
 
-		if (taskName == null) {
+		if (taskEntryName == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(taskName);
+			objectOutput.writeUTF(taskEntryName);
 		}
 	}
 
 	public String uuid;
-	public long taskId;
+	public long taskEntryId;
 	public long createDate;
-	public String taskName;
+	public String taskEntryName;
 }

@@ -61,7 +61,7 @@ public class DecisionEntryWrapper implements DecisionEntry,
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
-		attributes.put("decisionId", getDecisionId());
+		attributes.put("decisionEntryId", getDecisionEntryId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -84,10 +84,10 @@ public class DecisionEntryWrapper implements DecisionEntry,
 			setUuid(uuid);
 		}
 
-		Long decisionId = (Long)attributes.get("decisionId");
+		Long decisionEntryId = (Long)attributes.get("decisionEntryId");
 
-		if (decisionId != null) {
-			setDecisionId(decisionId);
+		if (decisionEntryId != null) {
+			setDecisionEntryId(decisionEntryId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -327,13 +327,13 @@ public class DecisionEntryWrapper implements DecisionEntry,
 	}
 
 	/**
-	* Returns the decision ID of this decision entry.
+	* Returns the decision entry ID of this decision entry.
 	*
-	* @return the decision ID of this decision entry
+	* @return the decision entry ID of this decision entry
 	*/
 	@Override
-	public long getDecisionId() {
-		return _decisionEntry.getDecisionId();
+	public long getDecisionEntryId() {
+		return _decisionEntry.getDecisionEntryId();
 	}
 
 	/**
@@ -407,13 +407,13 @@ public class DecisionEntryWrapper implements DecisionEntry,
 	}
 
 	/**
-	* Sets the decision ID of this decision entry.
+	* Sets the decision entry ID of this decision entry.
 	*
-	* @param decisionId the decision ID of this decision entry
+	* @param decisionEntryId the decision entry ID of this decision entry
 	*/
 	@Override
-	public void setDecisionId(long decisionId) {
-		_decisionEntry.setDecisionId(decisionId);
+	public void setDecisionEntryId(long decisionEntryId) {
+		_decisionEntry.setDecisionEntryId(decisionEntryId);
 	}
 
 	@Override

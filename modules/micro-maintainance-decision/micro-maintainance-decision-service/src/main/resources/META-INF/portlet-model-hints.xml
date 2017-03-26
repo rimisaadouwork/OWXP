@@ -3,7 +3,7 @@
 <model-hints>
 	<model name="com.liferay.micro.maintainance.decision.model.DecisionEntry">
 		<field name="uuid" type="String" />
-		<field name="decisionId" type="long" />
+		<field name="decisionEntryId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />

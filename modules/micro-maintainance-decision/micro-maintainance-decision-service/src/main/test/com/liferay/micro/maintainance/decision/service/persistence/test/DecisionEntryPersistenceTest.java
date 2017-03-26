@@ -150,8 +150,8 @@ public class DecisionEntryPersistenceTest {
 
 		Assert.assertEquals(existingDecisionEntry.getUuid(),
 			newDecisionEntry.getUuid());
-		Assert.assertEquals(existingDecisionEntry.getDecisionId(),
-			newDecisionEntry.getDecisionId());
+		Assert.assertEquals(existingDecisionEntry.getDecisionEntryId(),
+			newDecisionEntry.getDecisionEntryId());
 		Assert.assertEquals(existingDecisionEntry.getCompanyId(),
 			newDecisionEntry.getCompanyId());
 		Assert.assertEquals(existingDecisionEntry.getUserId(),
@@ -195,17 +195,26 @@ public class DecisionEntryPersistenceTest {
 	}
 
 	@Test
-	public void testCountByDecisionId() throws Exception {
-		_persistence.countByDecisionId(RandomTestUtil.nextLong());
-
-		_persistence.countByDecisionId(0L);
-	}
-
-	@Test
 	public void testCountByCompanyId() throws Exception {
 		_persistence.countByCompanyId(RandomTestUtil.nextLong());
 
 		_persistence.countByCompanyId(0L);
+	}
+
+	@Test
+	public void testCountByDecisionEntryId() throws Exception {
+		_persistence.countByDecisionEntryId(RandomTestUtil.nextLong());
+
+		_persistence.countByDecisionEntryId(0L);
+	}
+
+	@Test
+	public void testCountByOutcome() throws Exception {
+		_persistence.countByOutcome(StringPool.BLANK);
+
+		_persistence.countByOutcome(StringPool.NULL);
+
+		_persistence.countByOutcome((String)null);
 	}
 
 	@Test
@@ -225,12 +234,11 @@ public class DecisionEntryPersistenceTest {
 	}
 
 	@Test
-	public void testCountByOutcome() throws Exception {
-		_persistence.countByOutcome(StringPool.BLANK);
+	public void testCountByC_H() throws Exception {
+		_persistence.countByC_H(RandomTestUtil.nextLong(),
+			RandomTestUtil.randomBoolean());
 
-		_persistence.countByOutcome(StringPool.NULL);
-
-		_persistence.countByOutcome((String)null);
+		_persistence.countByC_H(0L, RandomTestUtil.randomBoolean());
 	}
 
 	@Test
@@ -282,14 +290,6 @@ public class DecisionEntryPersistenceTest {
 	}
 
 	@Test
-	public void testCountByC_H() throws Exception {
-		_persistence.countByC_H(RandomTestUtil.nextLong(),
-			RandomTestUtil.randomBoolean());
-
-		_persistence.countByC_H(0L, RandomTestUtil.randomBoolean());
-	}
-
-	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		DecisionEntry newDecisionEntry = addDecisionEntry();
 
@@ -313,7 +313,7 @@ public class DecisionEntryPersistenceTest {
 
 	protected OrderByComparator<DecisionEntry> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("Decision_DecisionEntry",
-			"uuid", true, "decisionId", true, "companyId", true, "userId",
+			"uuid", true, "decisionEntryId", true, "companyId", true, "userId",
 			true, "userName", true, "createDate", true, "modifiedDate", true,
 			"analysisData", true, "wikiPageId", true, "wikiPageName", true,
 			"outcome", true, "handled", true);
@@ -447,8 +447,8 @@ public class DecisionEntryPersistenceTest {
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DecisionEntry.class,
 				_dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("decisionId",
-				newDecisionEntry.getDecisionId()));
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("decisionEntryId",
+				newDecisionEntry.getDecisionEntryId()));
 
 		List<DecisionEntry> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -464,7 +464,7 @@ public class DecisionEntryPersistenceTest {
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DecisionEntry.class,
 				_dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("decisionId",
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("decisionEntryId",
 				RandomTestUtil.nextLong()));
 
 		List<DecisionEntry> result = _persistence.findWithDynamicQuery(dynamicQuery);
@@ -480,20 +480,21 @@ public class DecisionEntryPersistenceTest {
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DecisionEntry.class,
 				_dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property("decisionId"));
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"decisionEntryId"));
 
-		Object newDecisionId = newDecisionEntry.getDecisionId();
+		Object newDecisionEntryId = newDecisionEntry.getDecisionEntryId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("decisionId",
-				new Object[] { newDecisionId }));
+		dynamicQuery.add(RestrictionsFactoryUtil.in("decisionEntryId",
+				new Object[] { newDecisionEntryId }));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
-		Object existingDecisionId = result.get(0);
+		Object existingDecisionEntryId = result.get(0);
 
-		Assert.assertEquals(existingDecisionId, newDecisionId);
+		Assert.assertEquals(existingDecisionEntryId, newDecisionEntryId);
 	}
 
 	@Test
@@ -501,9 +502,10 @@ public class DecisionEntryPersistenceTest {
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DecisionEntry.class,
 				_dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property("decisionId"));
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"decisionEntryId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("decisionId",
+		dynamicQuery.add(RestrictionsFactoryUtil.in("decisionEntryId",
 				new Object[] { RandomTestUtil.nextLong() }));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);

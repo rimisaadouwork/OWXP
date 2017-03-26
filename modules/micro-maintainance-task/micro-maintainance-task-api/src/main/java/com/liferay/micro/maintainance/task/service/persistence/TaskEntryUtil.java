@@ -233,17 +233,17 @@ public class TaskEntryUtil {
 	/**
 	* Returns the task entries before and after the current task entry in the ordered set where uuid = &#63;.
 	*
-	* @param taskId the primary key of the current task entry
+	* @param taskEntryId the primary key of the current task entry
 	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next task entry
 	* @throws NoSuchEntryException if a task entry with the primary key could not be found
 	*/
-	public static TaskEntry[] findByUuid_PrevAndNext(long taskId,
+	public static TaskEntry[] findByUuid_PrevAndNext(long taskEntryId,
 		java.lang.String uuid, OrderByComparator<TaskEntry> orderByComparator)
 		throws com.liferay.micro.maintainance.task.exception.NoSuchEntryException {
 		return getPersistence()
-				   .findByUuid_PrevAndNext(taskId, uuid, orderByComparator);
+				   .findByUuid_PrevAndNext(taskEntryId, uuid, orderByComparator);
 	}
 
 	/**
@@ -266,113 +266,114 @@ public class TaskEntryUtil {
 	}
 
 	/**
-	* Returns the task entry where taskId = &#63; or throws a {@link NoSuchEntryException} if it could not be found.
+	* Returns the task entry where taskEntryId = &#63; or throws a {@link NoSuchEntryException} if it could not be found.
 	*
-	* @param taskId the task ID
+	* @param taskEntryId the task entry ID
 	* @return the matching task entry
 	* @throws NoSuchEntryException if a matching task entry could not be found
 	*/
-	public static TaskEntry findByTasksById(long taskId)
+	public static TaskEntry findByTasksById(long taskEntryId)
 		throws com.liferay.micro.maintainance.task.exception.NoSuchEntryException {
-		return getPersistence().findByTasksById(taskId);
+		return getPersistence().findByTasksById(taskEntryId);
 	}
 
 	/**
-	* Returns the task entry where taskId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the task entry where taskEntryId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param taskId the task ID
+	* @param taskEntryId the task entry ID
 	* @return the matching task entry, or <code>null</code> if a matching task entry could not be found
 	*/
-	public static TaskEntry fetchByTasksById(long taskId) {
-		return getPersistence().fetchByTasksById(taskId);
+	public static TaskEntry fetchByTasksById(long taskEntryId) {
+		return getPersistence().fetchByTasksById(taskEntryId);
 	}
 
 	/**
-	* Returns the task entry where taskId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the task entry where taskEntryId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param taskId the task ID
+	* @param taskEntryId the task entry ID
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching task entry, or <code>null</code> if a matching task entry could not be found
 	*/
-	public static TaskEntry fetchByTasksById(long taskId,
+	public static TaskEntry fetchByTasksById(long taskEntryId,
 		boolean retrieveFromCache) {
-		return getPersistence().fetchByTasksById(taskId, retrieveFromCache);
+		return getPersistence().fetchByTasksById(taskEntryId, retrieveFromCache);
 	}
 
 	/**
-	* Removes the task entry where taskId = &#63; from the database.
+	* Removes the task entry where taskEntryId = &#63; from the database.
 	*
-	* @param taskId the task ID
+	* @param taskEntryId the task entry ID
 	* @return the task entry that was removed
 	*/
-	public static TaskEntry removeByTasksById(long taskId)
+	public static TaskEntry removeByTasksById(long taskEntryId)
 		throws com.liferay.micro.maintainance.task.exception.NoSuchEntryException {
-		return getPersistence().removeByTasksById(taskId);
+		return getPersistence().removeByTasksById(taskEntryId);
 	}
 
 	/**
-	* Returns the number of task entries where taskId = &#63;.
+	* Returns the number of task entries where taskEntryId = &#63;.
 	*
-	* @param taskId the task ID
+	* @param taskEntryId the task entry ID
 	* @return the number of matching task entries
 	*/
-	public static int countByTasksById(long taskId) {
-		return getPersistence().countByTasksById(taskId);
+	public static int countByTasksById(long taskEntryId) {
+		return getPersistence().countByTasksById(taskEntryId);
 	}
 
 	/**
-	* Returns the task entry where taskName = &#63; or throws a {@link NoSuchEntryException} if it could not be found.
+	* Returns the task entry where taskEntryName = &#63; or throws a {@link NoSuchEntryException} if it could not be found.
 	*
-	* @param taskName the task name
+	* @param taskEntryName the task entry name
 	* @return the matching task entry
 	* @throws NoSuchEntryException if a matching task entry could not be found
 	*/
-	public static TaskEntry findByTasksByName(java.lang.String taskName)
+	public static TaskEntry findByTasksByName(java.lang.String taskEntryName)
 		throws com.liferay.micro.maintainance.task.exception.NoSuchEntryException {
-		return getPersistence().findByTasksByName(taskName);
+		return getPersistence().findByTasksByName(taskEntryName);
 	}
 
 	/**
-	* Returns the task entry where taskName = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the task entry where taskEntryName = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param taskName the task name
+	* @param taskEntryName the task entry name
 	* @return the matching task entry, or <code>null</code> if a matching task entry could not be found
 	*/
-	public static TaskEntry fetchByTasksByName(java.lang.String taskName) {
-		return getPersistence().fetchByTasksByName(taskName);
+	public static TaskEntry fetchByTasksByName(java.lang.String taskEntryName) {
+		return getPersistence().fetchByTasksByName(taskEntryName);
 	}
 
 	/**
-	* Returns the task entry where taskName = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the task entry where taskEntryName = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param taskName the task name
+	* @param taskEntryName the task entry name
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching task entry, or <code>null</code> if a matching task entry could not be found
 	*/
-	public static TaskEntry fetchByTasksByName(java.lang.String taskName,
+	public static TaskEntry fetchByTasksByName(java.lang.String taskEntryName,
 		boolean retrieveFromCache) {
-		return getPersistence().fetchByTasksByName(taskName, retrieveFromCache);
+		return getPersistence()
+				   .fetchByTasksByName(taskEntryName, retrieveFromCache);
 	}
 
 	/**
-	* Removes the task entry where taskName = &#63; from the database.
+	* Removes the task entry where taskEntryName = &#63; from the database.
 	*
-	* @param taskName the task name
+	* @param taskEntryName the task entry name
 	* @return the task entry that was removed
 	*/
-	public static TaskEntry removeByTasksByName(java.lang.String taskName)
+	public static TaskEntry removeByTasksByName(java.lang.String taskEntryName)
 		throws com.liferay.micro.maintainance.task.exception.NoSuchEntryException {
-		return getPersistence().removeByTasksByName(taskName);
+		return getPersistence().removeByTasksByName(taskEntryName);
 	}
 
 	/**
-	* Returns the number of task entries where taskName = &#63;.
+	* Returns the number of task entries where taskEntryName = &#63;.
 	*
-	* @param taskName the task name
+	* @param taskEntryName the task entry name
 	* @return the number of matching task entries
 	*/
-	public static int countByTasksByName(java.lang.String taskName) {
-		return getPersistence().countByTasksByName(taskName);
+	public static int countByTasksByName(java.lang.String taskEntryName) {
+		return getPersistence().countByTasksByName(taskEntryName);
 	}
 
 	/**
@@ -396,23 +397,23 @@ public class TaskEntryUtil {
 	/**
 	* Creates a new task entry with the primary key. Does not add the task entry to the database.
 	*
-	* @param taskId the primary key for the new task entry
+	* @param taskEntryId the primary key for the new task entry
 	* @return the new task entry
 	*/
-	public static TaskEntry create(long taskId) {
-		return getPersistence().create(taskId);
+	public static TaskEntry create(long taskEntryId) {
+		return getPersistence().create(taskEntryId);
 	}
 
 	/**
 	* Removes the task entry with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param taskId the primary key of the task entry
+	* @param taskEntryId the primary key of the task entry
 	* @return the task entry that was removed
 	* @throws NoSuchEntryException if a task entry with the primary key could not be found
 	*/
-	public static TaskEntry remove(long taskId)
+	public static TaskEntry remove(long taskEntryId)
 		throws com.liferay.micro.maintainance.task.exception.NoSuchEntryException {
-		return getPersistence().remove(taskId);
+		return getPersistence().remove(taskEntryId);
 	}
 
 	public static TaskEntry updateImpl(TaskEntry taskEntry) {
@@ -422,23 +423,23 @@ public class TaskEntryUtil {
 	/**
 	* Returns the task entry with the primary key or throws a {@link NoSuchEntryException} if it could not be found.
 	*
-	* @param taskId the primary key of the task entry
+	* @param taskEntryId the primary key of the task entry
 	* @return the task entry
 	* @throws NoSuchEntryException if a task entry with the primary key could not be found
 	*/
-	public static TaskEntry findByPrimaryKey(long taskId)
+	public static TaskEntry findByPrimaryKey(long taskEntryId)
 		throws com.liferay.micro.maintainance.task.exception.NoSuchEntryException {
-		return getPersistence().findByPrimaryKey(taskId);
+		return getPersistence().findByPrimaryKey(taskEntryId);
 	}
 
 	/**
 	* Returns the task entry with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param taskId the primary key of the task entry
+	* @param taskEntryId the primary key of the task entry
 	* @return the task entry, or <code>null</code> if a task entry with the primary key could not be found
 	*/
-	public static TaskEntry fetchByPrimaryKey(long taskId) {
-		return getPersistence().fetchByPrimaryKey(taskId);
+	public static TaskEntry fetchByPrimaryKey(long taskEntryId) {
+		return getPersistence().fetchByPrimaryKey(taskEntryId);
 	}
 
 	public static java.util.Map<java.io.Serializable, TaskEntry> fetchByPrimaryKeys(

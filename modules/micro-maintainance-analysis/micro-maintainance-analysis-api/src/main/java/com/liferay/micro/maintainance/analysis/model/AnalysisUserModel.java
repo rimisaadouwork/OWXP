@@ -104,18 +104,18 @@ public interface AnalysisUserModel extends BaseModel<AnalysisUser> {
 	public void setAnalysisUserUuid(String analysisUserUuid);
 
 	/**
-	 * Returns the analysis ID of this analysis user.
+	 * Returns the analysis entry ID of this analysis user.
 	 *
-	 * @return the analysis ID of this analysis user
+	 * @return the analysis entry ID of this analysis user
 	 */
-	public long getAnalysisId();
+	public long getAnalysisEntryId();
 
 	/**
-	 * Sets the analysis ID of this analysis user.
+	 * Sets the analysis entry ID of this analysis user.
 	 *
-	 * @param analysisId the analysis ID of this analysis user
+	 * @param analysisEntryId the analysis entry ID of this analysis user
 	 */
-	public void setAnalysisId(long analysisId);
+	public void setAnalysisEntryId(long analysisEntryId);
 
 	/**
 	 * Returns the user ID of this analysis user.

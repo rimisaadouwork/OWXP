@@ -175,319 +175,325 @@ public interface CandidateMaintenancePersistence extends BasePersistence<Candida
 	public int countByUuid(java.lang.String uuid);
 
 	/**
-	* Returns all the candidate maintenances where candidateId = &#63;.
+	* Returns all the candidate maintenances where candidateEntryId = &#63;.
 	*
-	* @param candidateId the candidate ID
+	* @param candidateEntryId the candidate entry ID
 	* @return the matching candidate maintenances
 	*/
-	public java.util.List<CandidateMaintenance> findByCandidateIds(
-		long candidateId);
+	public java.util.List<CandidateMaintenance> findByCandidateEntryIds(
+		long candidateEntryId);
 
 	/**
-	* Returns a range of all the candidate maintenances where candidateId = &#63;.
+	* Returns a range of all the candidate maintenances where candidateEntryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateMaintenanceModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param candidateId the candidate ID
+	* @param candidateEntryId the candidate entry ID
 	* @param start the lower bound of the range of candidate maintenances
 	* @param end the upper bound of the range of candidate maintenances (not inclusive)
 	* @return the range of matching candidate maintenances
 	*/
-	public java.util.List<CandidateMaintenance> findByCandidateIds(
-		long candidateId, int start, int end);
+	public java.util.List<CandidateMaintenance> findByCandidateEntryIds(
+		long candidateEntryId, int start, int end);
 
 	/**
-	* Returns an ordered range of all the candidate maintenances where candidateId = &#63;.
+	* Returns an ordered range of all the candidate maintenances where candidateEntryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateMaintenanceModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param candidateId the candidate ID
+	* @param candidateEntryId the candidate entry ID
 	* @param start the lower bound of the range of candidate maintenances
 	* @param end the upper bound of the range of candidate maintenances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching candidate maintenances
 	*/
-	public java.util.List<CandidateMaintenance> findByCandidateIds(
-		long candidateId, int start, int end,
+	public java.util.List<CandidateMaintenance> findByCandidateEntryIds(
+		long candidateEntryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CandidateMaintenance> orderByComparator);
 
 	/**
-	* Returns an ordered range of all the candidate maintenances where candidateId = &#63;.
+	* Returns an ordered range of all the candidate maintenances where candidateEntryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateMaintenanceModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param candidateId the candidate ID
+	* @param candidateEntryId the candidate entry ID
 	* @param start the lower bound of the range of candidate maintenances
 	* @param end the upper bound of the range of candidate maintenances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching candidate maintenances
 	*/
-	public java.util.List<CandidateMaintenance> findByCandidateIds(
-		long candidateId, int start, int end,
+	public java.util.List<CandidateMaintenance> findByCandidateEntryIds(
+		long candidateEntryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CandidateMaintenance> orderByComparator,
 		boolean retrieveFromCache);
 
 	/**
-	* Returns the first candidate maintenance in the ordered set where candidateId = &#63;.
+	* Returns the first candidate maintenance in the ordered set where candidateEntryId = &#63;.
 	*
-	* @param candidateId the candidate ID
+	* @param candidateEntryId the candidate entry ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching candidate maintenance
 	* @throws NoSuchCandidateMaintenanceException if a matching candidate maintenance could not be found
 	*/
-	public CandidateMaintenance findByCandidateIds_First(long candidateId,
+	public CandidateMaintenance findByCandidateEntryIds_First(
+		long candidateEntryId,
 		com.liferay.portal.kernel.util.OrderByComparator<CandidateMaintenance> orderByComparator)
 		throws NoSuchCandidateMaintenanceException;
 
 	/**
-	* Returns the first candidate maintenance in the ordered set where candidateId = &#63;.
+	* Returns the first candidate maintenance in the ordered set where candidateEntryId = &#63;.
 	*
-	* @param candidateId the candidate ID
+	* @param candidateEntryId the candidate entry ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching candidate maintenance, or <code>null</code> if a matching candidate maintenance could not be found
 	*/
-	public CandidateMaintenance fetchByCandidateIds_First(long candidateId,
+	public CandidateMaintenance fetchByCandidateEntryIds_First(
+		long candidateEntryId,
 		com.liferay.portal.kernel.util.OrderByComparator<CandidateMaintenance> orderByComparator);
 
 	/**
-	* Returns the last candidate maintenance in the ordered set where candidateId = &#63;.
+	* Returns the last candidate maintenance in the ordered set where candidateEntryId = &#63;.
 	*
-	* @param candidateId the candidate ID
+	* @param candidateEntryId the candidate entry ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching candidate maintenance
 	* @throws NoSuchCandidateMaintenanceException if a matching candidate maintenance could not be found
 	*/
-	public CandidateMaintenance findByCandidateIds_Last(long candidateId,
+	public CandidateMaintenance findByCandidateEntryIds_Last(
+		long candidateEntryId,
 		com.liferay.portal.kernel.util.OrderByComparator<CandidateMaintenance> orderByComparator)
 		throws NoSuchCandidateMaintenanceException;
 
 	/**
-	* Returns the last candidate maintenance in the ordered set where candidateId = &#63;.
+	* Returns the last candidate maintenance in the ordered set where candidateEntryId = &#63;.
 	*
-	* @param candidateId the candidate ID
+	* @param candidateEntryId the candidate entry ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching candidate maintenance, or <code>null</code> if a matching candidate maintenance could not be found
 	*/
-	public CandidateMaintenance fetchByCandidateIds_Last(long candidateId,
+	public CandidateMaintenance fetchByCandidateEntryIds_Last(
+		long candidateEntryId,
 		com.liferay.portal.kernel.util.OrderByComparator<CandidateMaintenance> orderByComparator);
 
 	/**
-	* Returns the candidate maintenances before and after the current candidate maintenance in the ordered set where candidateId = &#63;.
+	* Returns the candidate maintenances before and after the current candidate maintenance in the ordered set where candidateEntryId = &#63;.
 	*
 	* @param candidateMaintenanceId the primary key of the current candidate maintenance
-	* @param candidateId the candidate ID
+	* @param candidateEntryId the candidate entry ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next candidate maintenance
 	* @throws NoSuchCandidateMaintenanceException if a candidate maintenance with the primary key could not be found
 	*/
-	public CandidateMaintenance[] findByCandidateIds_PrevAndNext(
-		long candidateMaintenanceId, long candidateId,
+	public CandidateMaintenance[] findByCandidateEntryIds_PrevAndNext(
+		long candidateMaintenanceId, long candidateEntryId,
 		com.liferay.portal.kernel.util.OrderByComparator<CandidateMaintenance> orderByComparator)
 		throws NoSuchCandidateMaintenanceException;
 
 	/**
-	* Removes all the candidate maintenances where candidateId = &#63; from the database.
+	* Removes all the candidate maintenances where candidateEntryId = &#63; from the database.
 	*
-	* @param candidateId the candidate ID
+	* @param candidateEntryId the candidate entry ID
 	*/
-	public void removeByCandidateIds(long candidateId);
+	public void removeByCandidateEntryIds(long candidateEntryId);
 
 	/**
-	* Returns the number of candidate maintenances where candidateId = &#63;.
+	* Returns the number of candidate maintenances where candidateEntryId = &#63;.
 	*
-	* @param candidateId the candidate ID
+	* @param candidateEntryId the candidate entry ID
 	* @return the number of matching candidate maintenances
 	*/
-	public int countByCandidateIds(long candidateId);
+	public int countByCandidateEntryIds(long candidateEntryId);
 
 	/**
-	* Returns all the candidate maintenances where taskId = &#63;.
+	* Returns all the candidate maintenances where taskEntryId = &#63;.
 	*
-	* @param taskId the task ID
+	* @param taskEntryId the task entry ID
 	* @return the matching candidate maintenances
 	*/
-	public java.util.List<CandidateMaintenance> findByTaskIds(long taskId);
+	public java.util.List<CandidateMaintenance> findByTaskEntryIds(
+		long taskEntryId);
 
 	/**
-	* Returns a range of all the candidate maintenances where taskId = &#63;.
+	* Returns a range of all the candidate maintenances where taskEntryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateMaintenanceModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param taskId the task ID
+	* @param taskEntryId the task entry ID
 	* @param start the lower bound of the range of candidate maintenances
 	* @param end the upper bound of the range of candidate maintenances (not inclusive)
 	* @return the range of matching candidate maintenances
 	*/
-	public java.util.List<CandidateMaintenance> findByTaskIds(long taskId,
-		int start, int end);
+	public java.util.List<CandidateMaintenance> findByTaskEntryIds(
+		long taskEntryId, int start, int end);
 
 	/**
-	* Returns an ordered range of all the candidate maintenances where taskId = &#63;.
+	* Returns an ordered range of all the candidate maintenances where taskEntryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateMaintenanceModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param taskId the task ID
+	* @param taskEntryId the task entry ID
 	* @param start the lower bound of the range of candidate maintenances
 	* @param end the upper bound of the range of candidate maintenances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching candidate maintenances
 	*/
-	public java.util.List<CandidateMaintenance> findByTaskIds(long taskId,
-		int start, int end,
+	public java.util.List<CandidateMaintenance> findByTaskEntryIds(
+		long taskEntryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CandidateMaintenance> orderByComparator);
 
 	/**
-	* Returns an ordered range of all the candidate maintenances where taskId = &#63;.
+	* Returns an ordered range of all the candidate maintenances where taskEntryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateMaintenanceModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param taskId the task ID
+	* @param taskEntryId the task entry ID
 	* @param start the lower bound of the range of candidate maintenances
 	* @param end the upper bound of the range of candidate maintenances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching candidate maintenances
 	*/
-	public java.util.List<CandidateMaintenance> findByTaskIds(long taskId,
-		int start, int end,
+	public java.util.List<CandidateMaintenance> findByTaskEntryIds(
+		long taskEntryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CandidateMaintenance> orderByComparator,
 		boolean retrieveFromCache);
 
 	/**
-	* Returns the first candidate maintenance in the ordered set where taskId = &#63;.
+	* Returns the first candidate maintenance in the ordered set where taskEntryId = &#63;.
 	*
-	* @param taskId the task ID
+	* @param taskEntryId the task entry ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching candidate maintenance
 	* @throws NoSuchCandidateMaintenanceException if a matching candidate maintenance could not be found
 	*/
-	public CandidateMaintenance findByTaskIds_First(long taskId,
+	public CandidateMaintenance findByTaskEntryIds_First(long taskEntryId,
 		com.liferay.portal.kernel.util.OrderByComparator<CandidateMaintenance> orderByComparator)
 		throws NoSuchCandidateMaintenanceException;
 
 	/**
-	* Returns the first candidate maintenance in the ordered set where taskId = &#63;.
+	* Returns the first candidate maintenance in the ordered set where taskEntryId = &#63;.
 	*
-	* @param taskId the task ID
+	* @param taskEntryId the task entry ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching candidate maintenance, or <code>null</code> if a matching candidate maintenance could not be found
 	*/
-	public CandidateMaintenance fetchByTaskIds_First(long taskId,
+	public CandidateMaintenance fetchByTaskEntryIds_First(long taskEntryId,
 		com.liferay.portal.kernel.util.OrderByComparator<CandidateMaintenance> orderByComparator);
 
 	/**
-	* Returns the last candidate maintenance in the ordered set where taskId = &#63;.
+	* Returns the last candidate maintenance in the ordered set where taskEntryId = &#63;.
 	*
-	* @param taskId the task ID
+	* @param taskEntryId the task entry ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching candidate maintenance
 	* @throws NoSuchCandidateMaintenanceException if a matching candidate maintenance could not be found
 	*/
-	public CandidateMaintenance findByTaskIds_Last(long taskId,
+	public CandidateMaintenance findByTaskEntryIds_Last(long taskEntryId,
 		com.liferay.portal.kernel.util.OrderByComparator<CandidateMaintenance> orderByComparator)
 		throws NoSuchCandidateMaintenanceException;
 
 	/**
-	* Returns the last candidate maintenance in the ordered set where taskId = &#63;.
+	* Returns the last candidate maintenance in the ordered set where taskEntryId = &#63;.
 	*
-	* @param taskId the task ID
+	* @param taskEntryId the task entry ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching candidate maintenance, or <code>null</code> if a matching candidate maintenance could not be found
 	*/
-	public CandidateMaintenance fetchByTaskIds_Last(long taskId,
+	public CandidateMaintenance fetchByTaskEntryIds_Last(long taskEntryId,
 		com.liferay.portal.kernel.util.OrderByComparator<CandidateMaintenance> orderByComparator);
 
 	/**
-	* Returns the candidate maintenances before and after the current candidate maintenance in the ordered set where taskId = &#63;.
+	* Returns the candidate maintenances before and after the current candidate maintenance in the ordered set where taskEntryId = &#63;.
 	*
 	* @param candidateMaintenanceId the primary key of the current candidate maintenance
-	* @param taskId the task ID
+	* @param taskEntryId the task entry ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next candidate maintenance
 	* @throws NoSuchCandidateMaintenanceException if a candidate maintenance with the primary key could not be found
 	*/
-	public CandidateMaintenance[] findByTaskIds_PrevAndNext(
-		long candidateMaintenanceId, long taskId,
+	public CandidateMaintenance[] findByTaskEntryIds_PrevAndNext(
+		long candidateMaintenanceId, long taskEntryId,
 		com.liferay.portal.kernel.util.OrderByComparator<CandidateMaintenance> orderByComparator)
 		throws NoSuchCandidateMaintenanceException;
 
 	/**
-	* Removes all the candidate maintenances where taskId = &#63; from the database.
+	* Removes all the candidate maintenances where taskEntryId = &#63; from the database.
 	*
-	* @param taskId the task ID
+	* @param taskEntryId the task entry ID
 	*/
-	public void removeByTaskIds(long taskId);
+	public void removeByTaskEntryIds(long taskEntryId);
 
 	/**
-	* Returns the number of candidate maintenances where taskId = &#63;.
+	* Returns the number of candidate maintenances where taskEntryId = &#63;.
 	*
-	* @param taskId the task ID
+	* @param taskEntryId the task entry ID
 	* @return the number of matching candidate maintenances
 	*/
-	public int countByTaskIds(long taskId);
+	public int countByTaskEntryIds(long taskEntryId);
 
 	/**
-	* Returns the candidate maintenance where candidateId = &#63; and taskId = &#63; or throws a {@link NoSuchCandidateMaintenanceException} if it could not be found.
+	* Returns the candidate maintenance where candidateEntryId = &#63; and taskEntryId = &#63; or throws a {@link NoSuchCandidateMaintenanceException} if it could not be found.
 	*
-	* @param candidateId the candidate ID
-	* @param taskId the task ID
+	* @param candidateEntryId the candidate entry ID
+	* @param taskEntryId the task entry ID
 	* @return the matching candidate maintenance
 	* @throws NoSuchCandidateMaintenanceException if a matching candidate maintenance could not be found
 	*/
-	public CandidateMaintenance findByC_T(long candidateId, long taskId)
-		throws NoSuchCandidateMaintenanceException;
+	public CandidateMaintenance findByC_T(long candidateEntryId,
+		long taskEntryId) throws NoSuchCandidateMaintenanceException;
 
 	/**
-	* Returns the candidate maintenance where candidateId = &#63; and taskId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the candidate maintenance where candidateEntryId = &#63; and taskEntryId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param candidateId the candidate ID
-	* @param taskId the task ID
+	* @param candidateEntryId the candidate entry ID
+	* @param taskEntryId the task entry ID
 	* @return the matching candidate maintenance, or <code>null</code> if a matching candidate maintenance could not be found
 	*/
-	public CandidateMaintenance fetchByC_T(long candidateId, long taskId);
+	public CandidateMaintenance fetchByC_T(long candidateEntryId,
+		long taskEntryId);
 
 	/**
-	* Returns the candidate maintenance where candidateId = &#63; and taskId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the candidate maintenance where candidateEntryId = &#63; and taskEntryId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param candidateId the candidate ID
-	* @param taskId the task ID
+	* @param candidateEntryId the candidate entry ID
+	* @param taskEntryId the task entry ID
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching candidate maintenance, or <code>null</code> if a matching candidate maintenance could not be found
 	*/
-	public CandidateMaintenance fetchByC_T(long candidateId, long taskId,
-		boolean retrieveFromCache);
+	public CandidateMaintenance fetchByC_T(long candidateEntryId,
+		long taskEntryId, boolean retrieveFromCache);
 
 	/**
-	* Removes the candidate maintenance where candidateId = &#63; and taskId = &#63; from the database.
+	* Removes the candidate maintenance where candidateEntryId = &#63; and taskEntryId = &#63; from the database.
 	*
-	* @param candidateId the candidate ID
-	* @param taskId the task ID
+	* @param candidateEntryId the candidate entry ID
+	* @param taskEntryId the task entry ID
 	* @return the candidate maintenance that was removed
 	*/
-	public CandidateMaintenance removeByC_T(long candidateId, long taskId)
-		throws NoSuchCandidateMaintenanceException;
+	public CandidateMaintenance removeByC_T(long candidateEntryId,
+		long taskEntryId) throws NoSuchCandidateMaintenanceException;
 
 	/**
-	* Returns the number of candidate maintenances where candidateId = &#63; and taskId = &#63;.
+	* Returns the number of candidate maintenances where candidateEntryId = &#63; and taskEntryId = &#63;.
 	*
-	* @param candidateId the candidate ID
-	* @param taskId the task ID
+	* @param candidateEntryId the candidate entry ID
+	* @param taskEntryId the task entry ID
 	* @return the number of matching candidate maintenances
 	*/
-	public int countByC_T(long candidateId, long taskId);
+	public int countByC_T(long candidateEntryId, long taskEntryId);
 
 	/**
 	* Caches the candidate maintenance in the entity cache if it is enabled.

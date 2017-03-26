@@ -35,9 +35,9 @@ public class TaskEntrySoap implements Serializable {
 		TaskEntrySoap soapModel = new TaskEntrySoap();
 
 		soapModel.setUuid(model.getUuid());
-		soapModel.setTaskId(model.getTaskId());
+		soapModel.setTaskEntryId(model.getTaskEntryId());
 		soapModel.setCreateDate(model.getCreateDate());
-		soapModel.setTaskName(model.getTaskName());
+		soapModel.setTaskEntryName(model.getTaskEntryName());
 
 		return soapModel;
 	}
@@ -83,11 +83,11 @@ public class TaskEntrySoap implements Serializable {
 	}
 
 	public long getPrimaryKey() {
-		return _taskId;
+		return _taskEntryId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setTaskId(pk);
+		setTaskEntryId(pk);
 	}
 
 	public String getUuid() {
@@ -98,12 +98,12 @@ public class TaskEntrySoap implements Serializable {
 		_uuid = uuid;
 	}
 
-	public long getTaskId() {
-		return _taskId;
+	public long getTaskEntryId() {
+		return _taskEntryId;
 	}
 
-	public void setTaskId(long taskId) {
-		_taskId = taskId;
+	public void setTaskEntryId(long taskEntryId) {
+		_taskEntryId = taskEntryId;
 	}
 
 	public Date getCreateDate() {
@@ -114,16 +114,16 @@ public class TaskEntrySoap implements Serializable {
 		_createDate = createDate;
 	}
 
-	public String getTaskName() {
-		return _taskName;
+	public String getTaskEntryName() {
+		return _taskEntryName;
 	}
 
-	public void setTaskName(String taskName) {
-		_taskName = taskName;
+	public void setTaskEntryName(String taskEntryName) {
+		_taskEntryName = taskEntryName;
 	}
 
 	private String _uuid;
-	private long _taskId;
+	private long _taskEntryId;
 	private Date _createDate;
-	private String _taskName;
+	private String _taskEntryName;
 }

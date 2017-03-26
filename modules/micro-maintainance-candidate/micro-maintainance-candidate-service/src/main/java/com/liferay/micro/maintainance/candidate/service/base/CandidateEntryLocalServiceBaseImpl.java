@@ -97,26 +97,26 @@ public abstract class CandidateEntryLocalServiceBaseImpl
 	/**
 	 * Creates a new candidate entry with the primary key. Does not add the candidate entry to the database.
 	 *
-	 * @param entryId the primary key for the new candidate entry
+	 * @param candidateEntryId the primary key for the new candidate entry
 	 * @return the new candidate entry
 	 */
 	@Override
-	public CandidateEntry createCandidateEntry(long entryId) {
-		return candidateEntryPersistence.create(entryId);
+	public CandidateEntry createCandidateEntry(long candidateEntryId) {
+		return candidateEntryPersistence.create(candidateEntryId);
 	}
 
 	/**
 	 * Deletes the candidate entry with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param entryId the primary key of the candidate entry
+	 * @param candidateEntryId the primary key of the candidate entry
 	 * @return the candidate entry that was removed
 	 * @throws PortalException if a candidate entry with the primary key could not be found
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public CandidateEntry deleteCandidateEntry(long entryId)
+	public CandidateEntry deleteCandidateEntry(long candidateEntryId)
 		throws PortalException {
-		return candidateEntryPersistence.remove(entryId);
+		return candidateEntryPersistence.remove(candidateEntryId);
 	}
 
 	/**
@@ -215,8 +215,8 @@ public abstract class CandidateEntryLocalServiceBaseImpl
 	}
 
 	@Override
-	public CandidateEntry fetchCandidateEntry(long entryId) {
-		return candidateEntryPersistence.fetchByPrimaryKey(entryId);
+	public CandidateEntry fetchCandidateEntry(long candidateEntryId) {
+		return candidateEntryPersistence.fetchByPrimaryKey(candidateEntryId);
 	}
 
 	/**
@@ -235,14 +235,14 @@ public abstract class CandidateEntryLocalServiceBaseImpl
 	/**
 	 * Returns the candidate entry with the primary key.
 	 *
-	 * @param entryId the primary key of the candidate entry
+	 * @param candidateEntryId the primary key of the candidate entry
 	 * @return the candidate entry
 	 * @throws PortalException if a candidate entry with the primary key could not be found
 	 */
 	@Override
-	public CandidateEntry getCandidateEntry(long entryId)
+	public CandidateEntry getCandidateEntry(long candidateEntryId)
 		throws PortalException {
-		return candidateEntryPersistence.findByPrimaryKey(entryId);
+		return candidateEntryPersistence.findByPrimaryKey(candidateEntryId);
 	}
 
 	@Override
@@ -253,7 +253,7 @@ public abstract class CandidateEntryLocalServiceBaseImpl
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(CandidateEntry.class);
 
-		actionableDynamicQuery.setPrimaryKeyPropertyName("entryId");
+		actionableDynamicQuery.setPrimaryKeyPropertyName("candidateEntryId");
 
 		return actionableDynamicQuery;
 	}
@@ -266,7 +266,8 @@ public abstract class CandidateEntryLocalServiceBaseImpl
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
 		indexableActionableDynamicQuery.setModelClass(CandidateEntry.class);
 
-		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("entryId");
+		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
+			"candidateEntryId");
 
 		return indexableActionableDynamicQuery;
 	}
@@ -277,7 +278,7 @@ public abstract class CandidateEntryLocalServiceBaseImpl
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(CandidateEntry.class);
 
-		actionableDynamicQuery.setPrimaryKeyPropertyName("entryId");
+		actionableDynamicQuery.setPrimaryKeyPropertyName("candidateEntryId");
 	}
 
 	@Override

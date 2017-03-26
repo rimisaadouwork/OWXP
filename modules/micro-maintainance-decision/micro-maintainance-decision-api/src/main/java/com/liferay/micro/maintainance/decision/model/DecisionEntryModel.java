@@ -83,18 +83,18 @@ public interface DecisionEntryModel extends BaseModel<DecisionEntry>,
 	public void setUuid(String uuid);
 
 	/**
-	 * Returns the decision ID of this decision entry.
+	 * Returns the decision entry ID of this decision entry.
 	 *
-	 * @return the decision ID of this decision entry
+	 * @return the decision entry ID of this decision entry
 	 */
-	public long getDecisionId();
+	public long getDecisionEntryId();
 
 	/**
-	 * Sets the decision ID of this decision entry.
+	 * Sets the decision entry ID of this decision entry.
 	 *
-	 * @param decisionId the decision ID of this decision entry
+	 * @param decisionEntryId the decision entry ID of this decision entry
 	 */
-	public void setDecisionId(long decisionId);
+	public void setDecisionEntryId(long decisionEntryId);
 
 	/**
 	 * Returns the company ID of this decision entry.

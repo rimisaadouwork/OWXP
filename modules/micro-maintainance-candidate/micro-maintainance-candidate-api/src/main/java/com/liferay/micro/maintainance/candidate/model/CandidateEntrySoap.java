@@ -35,7 +35,7 @@ public class CandidateEntrySoap implements Serializable {
 		CandidateEntrySoap soapModel = new CandidateEntrySoap();
 
 		soapModel.setUuid(model.getUuid());
-		soapModel.setEntryId(model.getEntryId());
+		soapModel.setCandidateEntryId(model.getCandidateEntryId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -88,11 +88,11 @@ public class CandidateEntrySoap implements Serializable {
 	}
 
 	public long getPrimaryKey() {
-		return _entryId;
+		return _candidateEntryId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setEntryId(pk);
+		setCandidateEntryId(pk);
 	}
 
 	public String getUuid() {
@@ -103,12 +103,12 @@ public class CandidateEntrySoap implements Serializable {
 		_uuid = uuid;
 	}
 
-	public long getEntryId() {
-		return _entryId;
+	public long getCandidateEntryId() {
+		return _candidateEntryId;
 	}
 
-	public void setEntryId(long entryId) {
-		_entryId = entryId;
+	public void setCandidateEntryId(long candidateEntryId) {
+		_candidateEntryId = candidateEntryId;
 	}
 
 	public long getGroupId() {
@@ -168,7 +168,7 @@ public class CandidateEntrySoap implements Serializable {
 	}
 
 	private String _uuid;
-	private long _entryId;
+	private long _candidateEntryId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;

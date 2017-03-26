@@ -57,9 +57,9 @@ public class AnalysisUserLocalServiceUtil {
 	* Adds a user's vote to an analysis
 	*/
 	public static com.liferay.micro.maintainance.analysis.model.AnalysisUser addAnalysisUser(
-		long analysisId, long userId, int vote)
+		long analysisEntryId, long userId, int vote)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().addAnalysisUser(analysisId, userId, vote);
+		return getService().addAnalysisUser(analysisEntryId, userId, vote);
 	}
 
 	/**
@@ -103,8 +103,8 @@ public class AnalysisUserLocalServiceUtil {
 	}
 
 	public static com.liferay.micro.maintainance.analysis.model.AnalysisUser getAnalysisUser(
-		long analysisId, long userId) {
-		return getService().getAnalysisUser(analysisId, userId);
+		long analysisEntryId, long userId) {
+		return getService().getAnalysisUser(analysisEntryId, userId);
 	}
 
 	/**

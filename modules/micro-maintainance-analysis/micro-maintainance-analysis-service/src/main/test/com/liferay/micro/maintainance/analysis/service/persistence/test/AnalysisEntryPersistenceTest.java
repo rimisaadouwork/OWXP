@@ -135,7 +135,7 @@ public class AnalysisEntryPersistenceTest {
 
 		newAnalysisEntry.setModifiedDate(RandomTestUtil.nextDate());
 
-		newAnalysisEntry.setCanMainId(RandomTestUtil.nextLong());
+		newAnalysisEntry.setCandidateMaintenanceId(RandomTestUtil.nextLong());
 
 		newAnalysisEntry.setAnalysisData(RandomTestUtil.randomString());
 
@@ -145,8 +145,8 @@ public class AnalysisEntryPersistenceTest {
 
 		Assert.assertEquals(existingAnalysisEntry.getUuid(),
 			newAnalysisEntry.getUuid());
-		Assert.assertEquals(existingAnalysisEntry.getAnalysisId(),
-			newAnalysisEntry.getAnalysisId());
+		Assert.assertEquals(existingAnalysisEntry.getAnalysisEntryId(),
+			newAnalysisEntry.getAnalysisEntryId());
 		Assert.assertEquals(existingAnalysisEntry.getCompanyId(),
 			newAnalysisEntry.getCompanyId());
 		Assert.assertEquals(existingAnalysisEntry.getUserId(),
@@ -159,8 +159,8 @@ public class AnalysisEntryPersistenceTest {
 		Assert.assertEquals(Time.getShortTimestamp(
 				existingAnalysisEntry.getModifiedDate()),
 			Time.getShortTimestamp(newAnalysisEntry.getModifiedDate()));
-		Assert.assertEquals(existingAnalysisEntry.getCanMainId(),
-			newAnalysisEntry.getCanMainId());
+		Assert.assertEquals(existingAnalysisEntry.getCandidateMaintenanceId(),
+			newAnalysisEntry.getCandidateMaintenanceId());
 		Assert.assertEquals(existingAnalysisEntry.getAnalysisData(),
 			newAnalysisEntry.getAnalysisData());
 	}
@@ -184,24 +184,10 @@ public class AnalysisEntryPersistenceTest {
 	}
 
 	@Test
-	public void testCountByAnalysisId() throws Exception {
-		_persistence.countByAnalysisId(RandomTestUtil.nextLong());
+	public void testCountByAnalysisEntryId() throws Exception {
+		_persistence.countByAnalysisEntryId(RandomTestUtil.nextLong());
 
-		_persistence.countByAnalysisId(0L);
-	}
-
-	@Test
-	public void testCountByCompanyId() throws Exception {
-		_persistence.countByCompanyId(RandomTestUtil.nextLong());
-
-		_persistence.countByCompanyId(0L);
-	}
-
-	@Test
-	public void testCountByCanMainId() throws Exception {
-		_persistence.countByCanMainId(RandomTestUtil.nextLong());
-
-		_persistence.countByCanMainId(0L);
+		_persistence.countByAnalysisEntryId(0L);
 	}
 
 	@Test
@@ -226,6 +212,20 @@ public class AnalysisEntryPersistenceTest {
 			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
 
 		_persistence.countByA_U_CM(0L, 0L, 0L);
+	}
+
+	@Test
+	public void testCountByCandidateMaintenanceId() throws Exception {
+		_persistence.countByCandidateMaintenanceId(RandomTestUtil.nextLong());
+
+		_persistence.countByCandidateMaintenanceId(0L);
+	}
+
+	@Test
+	public void testCountByCompanyId() throws Exception {
+		_persistence.countByCompanyId(RandomTestUtil.nextLong());
+
+		_persistence.countByCompanyId(0L);
 	}
 
 	@Test
@@ -276,9 +276,9 @@ public class AnalysisEntryPersistenceTest {
 
 	protected OrderByComparator<AnalysisEntry> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("Analysis_AnalysisEntry",
-			"uuid", true, "analysisId", true, "companyId", true, "userId",
+			"uuid", true, "analysisEntryId", true, "companyId", true, "userId",
 			true, "userName", true, "createDate", true, "modifiedDate", true,
-			"canMainId", true, "analysisData", true);
+			"candidateMaintenanceId", true, "analysisData", true);
 	}
 
 	@Test
@@ -409,8 +409,8 @@ public class AnalysisEntryPersistenceTest {
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AnalysisEntry.class,
 				_dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("analysisId",
-				newAnalysisEntry.getAnalysisId()));
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("analysisEntryId",
+				newAnalysisEntry.getAnalysisEntryId()));
 
 		List<AnalysisEntry> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -426,7 +426,7 @@ public class AnalysisEntryPersistenceTest {
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AnalysisEntry.class,
 				_dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("analysisId",
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("analysisEntryId",
 				RandomTestUtil.nextLong()));
 
 		List<AnalysisEntry> result = _persistence.findWithDynamicQuery(dynamicQuery);
@@ -442,20 +442,21 @@ public class AnalysisEntryPersistenceTest {
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AnalysisEntry.class,
 				_dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property("analysisId"));
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"analysisEntryId"));
 
-		Object newAnalysisId = newAnalysisEntry.getAnalysisId();
+		Object newAnalysisEntryId = newAnalysisEntry.getAnalysisEntryId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("analysisId",
-				new Object[] { newAnalysisId }));
+		dynamicQuery.add(RestrictionsFactoryUtil.in("analysisEntryId",
+				new Object[] { newAnalysisEntryId }));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
-		Object existingAnalysisId = result.get(0);
+		Object existingAnalysisEntryId = result.get(0);
 
-		Assert.assertEquals(existingAnalysisId, newAnalysisId);
+		Assert.assertEquals(existingAnalysisEntryId, newAnalysisEntryId);
 	}
 
 	@Test
@@ -463,9 +464,10 @@ public class AnalysisEntryPersistenceTest {
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AnalysisEntry.class,
 				_dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property("analysisId"));
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"analysisEntryId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("analysisId",
+		dynamicQuery.add(RestrictionsFactoryUtil.in("analysisEntryId",
 				new Object[] { RandomTestUtil.nextLong() }));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
@@ -481,13 +483,15 @@ public class AnalysisEntryPersistenceTest {
 
 		AnalysisEntry existingAnalysisEntry = _persistence.findByPrimaryKey(newAnalysisEntry.getPrimaryKey());
 
-		Assert.assertEquals(Long.valueOf(existingAnalysisEntry.getAnalysisId()),
+		Assert.assertEquals(Long.valueOf(
+				existingAnalysisEntry.getAnalysisEntryId()),
 			ReflectionTestUtil.<Long>invoke(existingAnalysisEntry,
-				"getOriginalAnalysisId", new Class<?>[0]));
+				"getOriginalAnalysisEntryId", new Class<?>[0]));
 
-		Assert.assertEquals(Long.valueOf(existingAnalysisEntry.getCanMainId()),
+		Assert.assertEquals(Long.valueOf(
+				existingAnalysisEntry.getCandidateMaintenanceId()),
 			ReflectionTestUtil.<Long>invoke(existingAnalysisEntry,
-				"getOriginalCanMainId", new Class<?>[0]));
+				"getOriginalCandidateMaintenanceId", new Class<?>[0]));
 	}
 
 	protected AnalysisEntry addAnalysisEntry() throws Exception {
@@ -507,7 +511,7 @@ public class AnalysisEntryPersistenceTest {
 
 		analysisEntry.setModifiedDate(RandomTestUtil.nextDate());
 
-		analysisEntry.setCanMainId(RandomTestUtil.nextLong());
+		analysisEntry.setCandidateMaintenanceId(RandomTestUtil.nextLong());
 
 		analysisEntry.setAnalysisData(RandomTestUtil.randomString());
 

@@ -71,7 +71,7 @@ public class AnalysisUserModelImpl extends BaseModelImpl<AnalysisUser>
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", Types.VARCHAR },
 			{ "analysisUserId", Types.BIGINT },
-			{ "analysisId", Types.BIGINT },
+			{ "analysisEntryId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
 			{ "voted", Types.INTEGER }
@@ -81,13 +81,13 @@ public class AnalysisUserModelImpl extends BaseModelImpl<AnalysisUser>
 	static {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("analysisUserId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("analysisId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("analysisEntryId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("voted", Types.INTEGER);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table Analysis_AnalysisUser (uuid_ VARCHAR(75) null,analysisUserId LONG not null primary key,analysisId LONG,userId LONG,userName VARCHAR(75) null,voted INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table Analysis_AnalysisUser (uuid_ VARCHAR(75) null,analysisUserId LONG not null primary key,analysisEntryId LONG,userId LONG,userName VARCHAR(75) null,voted INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table Analysis_AnalysisUser";
 	public static final String ORDER_BY_JPQL = " ORDER BY analysisUser.userName ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Analysis_AnalysisUser.userName ASC";
@@ -103,7 +103,7 @@ public class AnalysisUserModelImpl extends BaseModelImpl<AnalysisUser>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.micro.maintainance.analysis.service.util.PropsUtil.get(
 				"value.object.column.bitmask.enabled.com.liferay.micro.maintainance.analysis.model.AnalysisUser"),
 			true);
-	public static final long ANALYSISID_COLUMN_BITMASK = 1L;
+	public static final long ANALYSISENTRYID_COLUMN_BITMASK = 1L;
 	public static final long ANALYSISUSERID_COLUMN_BITMASK = 2L;
 	public static final long USERID_COLUMN_BITMASK = 4L;
 	public static final long USERNAME_COLUMN_BITMASK = 8L;
@@ -125,7 +125,7 @@ public class AnalysisUserModelImpl extends BaseModelImpl<AnalysisUser>
 
 		model.setUuid(soapModel.getUuid());
 		model.setAnalysisUserId(soapModel.getAnalysisUserId());
-		model.setAnalysisId(soapModel.getAnalysisId());
+		model.setAnalysisEntryId(soapModel.getAnalysisEntryId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
 		model.setVoted(soapModel.getVoted());
@@ -195,7 +195,7 @@ public class AnalysisUserModelImpl extends BaseModelImpl<AnalysisUser>
 
 		attributes.put("uuid", getUuid());
 		attributes.put("analysisUserId", getAnalysisUserId());
-		attributes.put("analysisId", getAnalysisId());
+		attributes.put("analysisEntryId", getAnalysisEntryId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("voted", getVoted());
@@ -220,10 +220,10 @@ public class AnalysisUserModelImpl extends BaseModelImpl<AnalysisUser>
 			setAnalysisUserId(analysisUserId);
 		}
 
-		Long analysisId = (Long)attributes.get("analysisId");
+		Long analysisEntryId = (Long)attributes.get("analysisEntryId");
 
-		if (analysisId != null) {
-			setAnalysisId(analysisId);
+		if (analysisEntryId != null) {
+			setAnalysisEntryId(analysisEntryId);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -310,25 +310,25 @@ public class AnalysisUserModelImpl extends BaseModelImpl<AnalysisUser>
 
 	@JSON
 	@Override
-	public long getAnalysisId() {
-		return _analysisId;
+	public long getAnalysisEntryId() {
+		return _analysisEntryId;
 	}
 
 	@Override
-	public void setAnalysisId(long analysisId) {
-		_columnBitmask |= ANALYSISID_COLUMN_BITMASK;
+	public void setAnalysisEntryId(long analysisEntryId) {
+		_columnBitmask |= ANALYSISENTRYID_COLUMN_BITMASK;
 
-		if (!_setOriginalAnalysisId) {
-			_setOriginalAnalysisId = true;
+		if (!_setOriginalAnalysisEntryId) {
+			_setOriginalAnalysisEntryId = true;
 
-			_originalAnalysisId = _analysisId;
+			_originalAnalysisEntryId = _analysisEntryId;
 		}
 
-		_analysisId = analysisId;
+		_analysisEntryId = analysisEntryId;
 	}
 
-	public long getOriginalAnalysisId() {
-		return _originalAnalysisId;
+	public long getOriginalAnalysisEntryId() {
+		return _originalAnalysisEntryId;
 	}
 
 	@JSON
@@ -452,7 +452,7 @@ public class AnalysisUserModelImpl extends BaseModelImpl<AnalysisUser>
 
 		analysisUserImpl.setUuid(getUuid());
 		analysisUserImpl.setAnalysisUserId(getAnalysisUserId());
-		analysisUserImpl.setAnalysisId(getAnalysisId());
+		analysisUserImpl.setAnalysisEntryId(getAnalysisEntryId());
 		analysisUserImpl.setUserId(getUserId());
 		analysisUserImpl.setUserName(getUserName());
 		analysisUserImpl.setVoted(getVoted());
@@ -522,9 +522,9 @@ public class AnalysisUserModelImpl extends BaseModelImpl<AnalysisUser>
 
 		analysisUserModelImpl._setOriginalAnalysisUserId = false;
 
-		analysisUserModelImpl._originalAnalysisId = analysisUserModelImpl._analysisId;
+		analysisUserModelImpl._originalAnalysisEntryId = analysisUserModelImpl._analysisEntryId;
 
-		analysisUserModelImpl._setOriginalAnalysisId = false;
+		analysisUserModelImpl._setOriginalAnalysisEntryId = false;
 
 		analysisUserModelImpl._originalUserId = analysisUserModelImpl._userId;
 
@@ -553,7 +553,7 @@ public class AnalysisUserModelImpl extends BaseModelImpl<AnalysisUser>
 
 		analysisUserCacheModel.analysisUserId = getAnalysisUserId();
 
-		analysisUserCacheModel.analysisId = getAnalysisId();
+		analysisUserCacheModel.analysisEntryId = getAnalysisEntryId();
 
 		analysisUserCacheModel.userId = getUserId();
 
@@ -578,8 +578,8 @@ public class AnalysisUserModelImpl extends BaseModelImpl<AnalysisUser>
 		sb.append(getUuid());
 		sb.append(", analysisUserId=");
 		sb.append(getAnalysisUserId());
-		sb.append(", analysisId=");
-		sb.append(getAnalysisId());
+		sb.append(", analysisEntryId=");
+		sb.append(getAnalysisEntryId());
 		sb.append(", userId=");
 		sb.append(getUserId());
 		sb.append(", userName=");
@@ -608,8 +608,8 @@ public class AnalysisUserModelImpl extends BaseModelImpl<AnalysisUser>
 		sb.append(getAnalysisUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>analysisId</column-name><column-value><![CDATA[");
-		sb.append(getAnalysisId());
+			"<column><column-name>analysisEntryId</column-name><column-value><![CDATA[");
+		sb.append(getAnalysisEntryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
@@ -638,9 +638,9 @@ public class AnalysisUserModelImpl extends BaseModelImpl<AnalysisUser>
 	private long _analysisUserId;
 	private long _originalAnalysisUserId;
 	private boolean _setOriginalAnalysisUserId;
-	private long _analysisId;
-	private long _originalAnalysisId;
-	private boolean _setOriginalAnalysisId;
+	private long _analysisEntryId;
+	private long _originalAnalysisEntryId;
+	private boolean _setOriginalAnalysisEntryId;
 	private long _userId;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;

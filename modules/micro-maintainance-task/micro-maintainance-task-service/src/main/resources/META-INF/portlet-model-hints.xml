@@ -4,14 +4,14 @@
 	<model name="com.liferay.micro.maintainance.task.model.CandidateMaintenance">
 		<field name="uuid" type="String" />
 		<field name="candidateMaintenanceId" type="long" />
-		<field name="candidateId" type="long" />
-		<field name="taskId" type="long" />
+		<field name="candidateEntryId" type="long" />
+		<field name="taskEntryId" type="long" />
 		<field name="createDate" type="Date" />
 	</model>
 	<model name="com.liferay.micro.maintainance.task.model.TaskEntry">
 		<field name="uuid" type="String" />
-		<field name="taskId" type="long" />
+		<field name="taskEntryId" type="long" />
 		<field name="createDate" type="Date" />
-		<field name="taskName" type="String" />
+		<field name="taskEntryName" type="String" />
 	</model>
 </model-hints>

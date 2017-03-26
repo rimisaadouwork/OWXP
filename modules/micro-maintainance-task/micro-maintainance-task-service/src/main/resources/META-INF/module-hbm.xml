@@ -9,16 +9,16 @@
 			<generator class="assigned" />
 		</id>
 		<property column="uuid_" name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="candidateId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="taskId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="candidateEntryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="taskEntryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="com.liferay.micro.maintainance.task.model.impl.TaskEntryImpl" table="Task_TaskEntry">
-		<id name="taskId" type="long">
+		<id name="taskEntryId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property column="uuid_" name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
-		<property name="taskName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="taskEntryName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

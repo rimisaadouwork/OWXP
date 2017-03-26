@@ -3,19 +3,19 @@
 <model-hints>
 	<model name="com.liferay.micro.maintainance.analysis.model.AnalysisEntry">
 		<field name="uuid" type="String" />
-		<field name="analysisId" type="long" />
+		<field name="analysisEntryId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="canMainId" type="long" />
+		<field name="candidateMaintenanceId" type="long" />
 		<field name="analysisData" type="String" />
 	</model>
 	<model name="com.liferay.micro.maintainance.analysis.model.AnalysisUser">
 		<field name="uuid" type="String" />
 		<field name="analysisUserId" type="long" />
-		<field name="analysisId" type="long" />
+		<field name="analysisEntryId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="voted" type="int" />

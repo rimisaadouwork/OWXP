@@ -61,13 +61,13 @@ public class AnalysisEntryWrapper implements AnalysisEntry,
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
-		attributes.put("analysisId", getAnalysisId());
+		attributes.put("analysisEntryId", getAnalysisEntryId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("canMainId", getCanMainId());
+		attributes.put("candidateMaintenanceId", getCandidateMaintenanceId());
 		attributes.put("analysisData", getAnalysisData());
 
 		return attributes;
@@ -81,10 +81,10 @@ public class AnalysisEntryWrapper implements AnalysisEntry,
 			setUuid(uuid);
 		}
 
-		Long analysisId = (Long)attributes.get("analysisId");
+		Long analysisEntryId = (Long)attributes.get("analysisEntryId");
 
-		if (analysisId != null) {
-			setAnalysisId(analysisId);
+		if (analysisEntryId != null) {
+			setAnalysisEntryId(analysisEntryId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -117,10 +117,11 @@ public class AnalysisEntryWrapper implements AnalysisEntry,
 			setModifiedDate(modifiedDate);
 		}
 
-		Long canMainId = (Long)attributes.get("canMainId");
+		Long candidateMaintenanceId = (Long)attributes.get(
+				"candidateMaintenanceId");
 
-		if (canMainId != null) {
-			setCanMainId(canMainId);
+		if (candidateMaintenanceId != null) {
+			setCandidateMaintenanceId(candidateMaintenanceId);
 		}
 
 		String analysisData = (String)attributes.get("analysisData");
@@ -256,23 +257,23 @@ public class AnalysisEntryWrapper implements AnalysisEntry,
 	}
 
 	/**
-	* Returns the analysis ID of this analysis entry.
+	* Returns the analysis entry ID of this analysis entry.
 	*
-	* @return the analysis ID of this analysis entry
+	* @return the analysis entry ID of this analysis entry
 	*/
 	@Override
-	public long getAnalysisId() {
-		return _analysisEntry.getAnalysisId();
+	public long getAnalysisEntryId() {
+		return _analysisEntry.getAnalysisEntryId();
 	}
 
 	/**
-	* Returns the can main ID of this analysis entry.
+	* Returns the candidate maintenance ID of this analysis entry.
 	*
-	* @return the can main ID of this analysis entry
+	* @return the candidate maintenance ID of this analysis entry
 	*/
 	@Override
-	public long getCanMainId() {
-		return _analysisEntry.getCanMainId();
+	public long getCandidateMaintenanceId() {
+		return _analysisEntry.getCandidateMaintenanceId();
 	}
 
 	/**
@@ -321,13 +322,13 @@ public class AnalysisEntryWrapper implements AnalysisEntry,
 	}
 
 	/**
-	* Sets the analysis ID of this analysis entry.
+	* Sets the analysis entry ID of this analysis entry.
 	*
-	* @param analysisId the analysis ID of this analysis entry
+	* @param analysisEntryId the analysis entry ID of this analysis entry
 	*/
 	@Override
-	public void setAnalysisId(long analysisId) {
-		_analysisEntry.setAnalysisId(analysisId);
+	public void setAnalysisEntryId(long analysisEntryId) {
+		_analysisEntry.setAnalysisEntryId(analysisEntryId);
 	}
 
 	@Override
@@ -336,13 +337,13 @@ public class AnalysisEntryWrapper implements AnalysisEntry,
 	}
 
 	/**
-	* Sets the can main ID of this analysis entry.
+	* Sets the candidate maintenance ID of this analysis entry.
 	*
-	* @param canMainId the can main ID of this analysis entry
+	* @param candidateMaintenanceId the candidate maintenance ID of this analysis entry
 	*/
 	@Override
-	public void setCanMainId(long canMainId) {
-		_analysisEntry.setCanMainId(canMainId);
+	public void setCandidateMaintenanceId(long candidateMaintenanceId) {
+		_analysisEntry.setCandidateMaintenanceId(candidateMaintenanceId);
 	}
 
 	/**

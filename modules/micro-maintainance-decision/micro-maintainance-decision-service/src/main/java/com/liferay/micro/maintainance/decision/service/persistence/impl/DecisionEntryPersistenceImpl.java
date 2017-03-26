@@ -399,17 +399,17 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	/**
 	 * Returns the decision entries before and after the current decision entry in the ordered set where uuid = &#63;.
 	 *
-	 * @param decisionId the primary key of the current decision entry
+	 * @param decisionEntryId the primary key of the current decision entry
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next decision entry
 	 * @throws NoSuchEntryException if a decision entry with the primary key could not be found
 	 */
 	@Override
-	public DecisionEntry[] findByUuid_PrevAndNext(long decisionId, String uuid,
-		OrderByComparator<DecisionEntry> orderByComparator)
+	public DecisionEntry[] findByUuid_PrevAndNext(long decisionEntryId,
+		String uuid, OrderByComparator<DecisionEntry> orderByComparator)
 		throws NoSuchEntryException {
-		DecisionEntry decisionEntry = findByPrimaryKey(decisionId);
+		DecisionEntry decisionEntry = findByPrimaryKey(decisionEntryId);
 
 		Session session = null;
 
@@ -975,7 +975,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	/**
 	 * Returns the decision entries before and after the current decision entry in the ordered set where uuid = &#63; and companyId = &#63;.
 	 *
-	 * @param decisionId the primary key of the current decision entry
+	 * @param decisionEntryId the primary key of the current decision entry
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -983,11 +983,11 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	 * @throws NoSuchEntryException if a decision entry with the primary key could not be found
 	 */
 	@Override
-	public DecisionEntry[] findByUuid_C_PrevAndNext(long decisionId,
+	public DecisionEntry[] findByUuid_C_PrevAndNext(long decisionEntryId,
 		String uuid, long companyId,
 		OrderByComparator<DecisionEntry> orderByComparator)
 		throws NoSuchEntryException {
-		DecisionEntry decisionEntry = findByPrimaryKey(decisionId);
+		DecisionEntry decisionEntry = findByPrimaryKey(decisionEntryId);
 
 		Session session = null;
 
@@ -1226,368 +1226,6 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	private static final String _FINDER_COLUMN_UUID_C_UUID_2 = "decisionEntry.uuid = ? AND ";
 	private static final String _FINDER_COLUMN_UUID_C_UUID_3 = "(decisionEntry.uuid IS NULL OR decisionEntry.uuid = '') AND ";
 	private static final String _FINDER_COLUMN_UUID_C_COMPANYID_2 = "decisionEntry.companyId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_DECISIONID =
-		new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
-			DecisionEntryModelImpl.FINDER_CACHE_ENABLED,
-			DecisionEntryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByDecisionId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_DECISIONID =
-		new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
-			DecisionEntryModelImpl.FINDER_CACHE_ENABLED,
-			DecisionEntryImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByDecisionId", new String[] { Long.class.getName() },
-			DecisionEntryModelImpl.DECISIONID_COLUMN_BITMASK |
-			DecisionEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_DECISIONID = new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
-			DecisionEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByDecisionId",
-			new String[] { Long.class.getName() });
-
-	/**
-	 * Returns all the decision entries where decisionId = &#63;.
-	 *
-	 * @param decisionId the decision ID
-	 * @return the matching decision entries
-	 */
-	@Override
-	public List<DecisionEntry> findByDecisionId(long decisionId) {
-		return findByDecisionId(decisionId, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
-	}
-
-	/**
-	 * Returns a range of all the decision entries where decisionId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param decisionId the decision ID
-	 * @param start the lower bound of the range of decision entries
-	 * @param end the upper bound of the range of decision entries (not inclusive)
-	 * @return the range of matching decision entries
-	 */
-	@Override
-	public List<DecisionEntry> findByDecisionId(long decisionId, int start,
-		int end) {
-		return findByDecisionId(decisionId, start, end, null);
-	}
-
-	/**
-	 * Returns an ordered range of all the decision entries where decisionId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param decisionId the decision ID
-	 * @param start the lower bound of the range of decision entries
-	 * @param end the upper bound of the range of decision entries (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching decision entries
-	 */
-	@Override
-	public List<DecisionEntry> findByDecisionId(long decisionId, int start,
-		int end, OrderByComparator<DecisionEntry> orderByComparator) {
-		return findByDecisionId(decisionId, start, end, orderByComparator, true);
-	}
-
-	/**
-	 * Returns an ordered range of all the decision entries where decisionId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param decisionId the decision ID
-	 * @param start the lower bound of the range of decision entries
-	 * @param end the upper bound of the range of decision entries (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of matching decision entries
-	 */
-	@Override
-	public List<DecisionEntry> findByDecisionId(long decisionId, int start,
-		int end, OrderByComparator<DecisionEntry> orderByComparator,
-		boolean retrieveFromCache) {
-		boolean pagination = true;
-		FinderPath finderPath = null;
-		Object[] finderArgs = null;
-
-		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
-			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_DECISIONID;
-			finderArgs = new Object[] { decisionId };
-		}
-		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_DECISIONID;
-			finderArgs = new Object[] { decisionId, start, end, orderByComparator };
-		}
-
-		List<DecisionEntry> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<DecisionEntry>)finderCache.getResult(finderPath,
-					finderArgs, this);
-
-			if ((list != null) && !list.isEmpty()) {
-				for (DecisionEntry decisionEntry : list) {
-					if ((decisionId != decisionEntry.getDecisionId())) {
-						list = null;
-
-						break;
-					}
-				}
-			}
-		}
-
-		if (list == null) {
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_DECISIONENTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_DECISIONID_DECISIONID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-			else
-			 if (pagination) {
-				query.append(DecisionEntryModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(decisionId);
-
-				if (!pagination) {
-					list = (List<DecisionEntry>)QueryUtil.list(q, getDialect(),
-							start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<DecisionEntry>)QueryUtil.list(q, getDialect(),
-							start, end);
-				}
-
-				cacheResult(list);
-
-				finderCache.putResult(finderPath, finderArgs, list);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	/**
-	 * Returns the first decision entry in the ordered set where decisionId = &#63;.
-	 *
-	 * @param decisionId the decision ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching decision entry
-	 * @throws NoSuchEntryException if a matching decision entry could not be found
-	 */
-	@Override
-	public DecisionEntry findByDecisionId_First(long decisionId,
-		OrderByComparator<DecisionEntry> orderByComparator)
-		throws NoSuchEntryException {
-		DecisionEntry decisionEntry = fetchByDecisionId_First(decisionId,
-				orderByComparator);
-
-		if (decisionEntry != null) {
-			return decisionEntry;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("decisionId=");
-		msg.append(decisionId);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchEntryException(msg.toString());
-	}
-
-	/**
-	 * Returns the first decision entry in the ordered set where decisionId = &#63;.
-	 *
-	 * @param decisionId the decision ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching decision entry, or <code>null</code> if a matching decision entry could not be found
-	 */
-	@Override
-	public DecisionEntry fetchByDecisionId_First(long decisionId,
-		OrderByComparator<DecisionEntry> orderByComparator) {
-		List<DecisionEntry> list = findByDecisionId(decisionId, 0, 1,
-				orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last decision entry in the ordered set where decisionId = &#63;.
-	 *
-	 * @param decisionId the decision ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching decision entry
-	 * @throws NoSuchEntryException if a matching decision entry could not be found
-	 */
-	@Override
-	public DecisionEntry findByDecisionId_Last(long decisionId,
-		OrderByComparator<DecisionEntry> orderByComparator)
-		throws NoSuchEntryException {
-		DecisionEntry decisionEntry = fetchByDecisionId_Last(decisionId,
-				orderByComparator);
-
-		if (decisionEntry != null) {
-			return decisionEntry;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("decisionId=");
-		msg.append(decisionId);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchEntryException(msg.toString());
-	}
-
-	/**
-	 * Returns the last decision entry in the ordered set where decisionId = &#63;.
-	 *
-	 * @param decisionId the decision ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching decision entry, or <code>null</code> if a matching decision entry could not be found
-	 */
-	@Override
-	public DecisionEntry fetchByDecisionId_Last(long decisionId,
-		OrderByComparator<DecisionEntry> orderByComparator) {
-		int count = countByDecisionId(decisionId);
-
-		if (count == 0) {
-			return null;
-		}
-
-		List<DecisionEntry> list = findByDecisionId(decisionId, count - 1,
-				count, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Removes all the decision entries where decisionId = &#63; from the database.
-	 *
-	 * @param decisionId the decision ID
-	 */
-	@Override
-	public void removeByDecisionId(long decisionId) {
-		for (DecisionEntry decisionEntry : findByDecisionId(decisionId,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
-			remove(decisionEntry);
-		}
-	}
-
-	/**
-	 * Returns the number of decision entries where decisionId = &#63;.
-	 *
-	 * @param decisionId the decision ID
-	 * @return the number of matching decision entries
-	 */
-	@Override
-	public int countByDecisionId(long decisionId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_DECISIONID;
-
-		Object[] finderArgs = new Object[] { decisionId };
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(2);
-
-			query.append(_SQL_COUNT_DECISIONENTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_DECISIONID_DECISIONID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(decisionId);
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_DECISIONID_DECISIONID_2 = "decisionEntry.decisionId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID =
 		new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
 			DecisionEntryModelImpl.FINDER_CACHE_ENABLED,
@@ -1888,17 +1526,17 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	/**
 	 * Returns the decision entries before and after the current decision entry in the ordered set where companyId = &#63;.
 	 *
-	 * @param decisionId the primary key of the current decision entry
+	 * @param decisionEntryId the primary key of the current decision entry
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next decision entry
 	 * @throws NoSuchEntryException if a decision entry with the primary key could not be found
 	 */
 	@Override
-	public DecisionEntry[] findByCompanyId_PrevAndNext(long decisionId,
+	public DecisionEntry[] findByCompanyId_PrevAndNext(long decisionEntryId,
 		long companyId, OrderByComparator<DecisionEntry> orderByComparator)
 		throws NoSuchEntryException {
-		DecisionEntry decisionEntry = findByPrimaryKey(decisionId);
+		DecisionEntry decisionEntry = findByPrimaryKey(decisionEntryId);
 
 		Session session = null;
 
@@ -2096,6 +1734,923 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "decisionEntry.companyId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_DECISIONENTRYID =
+		new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
+			DecisionEntryModelImpl.FINDER_CACHE_ENABLED,
+			DecisionEntryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByDecisionEntryId",
+			new String[] {
+				Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_DECISIONENTRYID =
+		new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
+			DecisionEntryModelImpl.FINDER_CACHE_ENABLED,
+			DecisionEntryImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByDecisionEntryId", new String[] { Long.class.getName() },
+			DecisionEntryModelImpl.DECISIONENTRYID_COLUMN_BITMASK |
+			DecisionEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_DECISIONENTRYID = new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
+			DecisionEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByDecisionEntryId", new String[] { Long.class.getName() });
+
+	/**
+	 * Returns all the decision entries where decisionEntryId = &#63;.
+	 *
+	 * @param decisionEntryId the decision entry ID
+	 * @return the matching decision entries
+	 */
+	@Override
+	public List<DecisionEntry> findByDecisionEntryId(long decisionEntryId) {
+		return findByDecisionEntryId(decisionEntryId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the decision entries where decisionEntryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param decisionEntryId the decision entry ID
+	 * @param start the lower bound of the range of decision entries
+	 * @param end the upper bound of the range of decision entries (not inclusive)
+	 * @return the range of matching decision entries
+	 */
+	@Override
+	public List<DecisionEntry> findByDecisionEntryId(long decisionEntryId,
+		int start, int end) {
+		return findByDecisionEntryId(decisionEntryId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the decision entries where decisionEntryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param decisionEntryId the decision entry ID
+	 * @param start the lower bound of the range of decision entries
+	 * @param end the upper bound of the range of decision entries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching decision entries
+	 */
+	@Override
+	public List<DecisionEntry> findByDecisionEntryId(long decisionEntryId,
+		int start, int end, OrderByComparator<DecisionEntry> orderByComparator) {
+		return findByDecisionEntryId(decisionEntryId, start, end,
+			orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the decision entries where decisionEntryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param decisionEntryId the decision entry ID
+	 * @param start the lower bound of the range of decision entries
+	 * @param end the upper bound of the range of decision entries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching decision entries
+	 */
+	@Override
+	public List<DecisionEntry> findByDecisionEntryId(long decisionEntryId,
+		int start, int end, OrderByComparator<DecisionEntry> orderByComparator,
+		boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_DECISIONENTRYID;
+			finderArgs = new Object[] { decisionEntryId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_DECISIONENTRYID;
+			finderArgs = new Object[] {
+					decisionEntryId,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<DecisionEntry> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<DecisionEntry>)finderCache.getResult(finderPath,
+					finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (DecisionEntry decisionEntry : list) {
+					if ((decisionEntryId != decisionEntry.getDecisionEntryId())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_DECISIONENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_DECISIONENTRYID_DECISIONENTRYID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(DecisionEntryModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(decisionEntryId);
+
+				if (!pagination) {
+					list = (List<DecisionEntry>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<DecisionEntry>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first decision entry in the ordered set where decisionEntryId = &#63;.
+	 *
+	 * @param decisionEntryId the decision entry ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching decision entry
+	 * @throws NoSuchEntryException if a matching decision entry could not be found
+	 */
+	@Override
+	public DecisionEntry findByDecisionEntryId_First(long decisionEntryId,
+		OrderByComparator<DecisionEntry> orderByComparator)
+		throws NoSuchEntryException {
+		DecisionEntry decisionEntry = fetchByDecisionEntryId_First(decisionEntryId,
+				orderByComparator);
+
+		if (decisionEntry != null) {
+			return decisionEntry;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("decisionEntryId=");
+		msg.append(decisionEntryId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchEntryException(msg.toString());
+	}
+
+	/**
+	 * Returns the first decision entry in the ordered set where decisionEntryId = &#63;.
+	 *
+	 * @param decisionEntryId the decision entry ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching decision entry, or <code>null</code> if a matching decision entry could not be found
+	 */
+	@Override
+	public DecisionEntry fetchByDecisionEntryId_First(long decisionEntryId,
+		OrderByComparator<DecisionEntry> orderByComparator) {
+		List<DecisionEntry> list = findByDecisionEntryId(decisionEntryId, 0, 1,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last decision entry in the ordered set where decisionEntryId = &#63;.
+	 *
+	 * @param decisionEntryId the decision entry ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching decision entry
+	 * @throws NoSuchEntryException if a matching decision entry could not be found
+	 */
+	@Override
+	public DecisionEntry findByDecisionEntryId_Last(long decisionEntryId,
+		OrderByComparator<DecisionEntry> orderByComparator)
+		throws NoSuchEntryException {
+		DecisionEntry decisionEntry = fetchByDecisionEntryId_Last(decisionEntryId,
+				orderByComparator);
+
+		if (decisionEntry != null) {
+			return decisionEntry;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("decisionEntryId=");
+		msg.append(decisionEntryId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchEntryException(msg.toString());
+	}
+
+	/**
+	 * Returns the last decision entry in the ordered set where decisionEntryId = &#63;.
+	 *
+	 * @param decisionEntryId the decision entry ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching decision entry, or <code>null</code> if a matching decision entry could not be found
+	 */
+	@Override
+	public DecisionEntry fetchByDecisionEntryId_Last(long decisionEntryId,
+		OrderByComparator<DecisionEntry> orderByComparator) {
+		int count = countByDecisionEntryId(decisionEntryId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<DecisionEntry> list = findByDecisionEntryId(decisionEntryId,
+				count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Removes all the decision entries where decisionEntryId = &#63; from the database.
+	 *
+	 * @param decisionEntryId the decision entry ID
+	 */
+	@Override
+	public void removeByDecisionEntryId(long decisionEntryId) {
+		for (DecisionEntry decisionEntry : findByDecisionEntryId(
+				decisionEntryId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(decisionEntry);
+		}
+	}
+
+	/**
+	 * Returns the number of decision entries where decisionEntryId = &#63;.
+	 *
+	 * @param decisionEntryId the decision entry ID
+	 * @return the number of matching decision entries
+	 */
+	@Override
+	public int countByDecisionEntryId(long decisionEntryId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_DECISIONENTRYID;
+
+		Object[] finderArgs = new Object[] { decisionEntryId };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_DECISIONENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_DECISIONENTRYID_DECISIONENTRYID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(decisionEntryId);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_DECISIONENTRYID_DECISIONENTRYID_2 =
+		"decisionEntry.decisionEntryId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_OUTCOME = new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
+			DecisionEntryModelImpl.FINDER_CACHE_ENABLED,
+			DecisionEntryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByOutcome",
+			new String[] {
+				String.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_OUTCOME =
+		new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
+			DecisionEntryModelImpl.FINDER_CACHE_ENABLED,
+			DecisionEntryImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByOutcome", new String[] { String.class.getName() },
+			DecisionEntryModelImpl.OUTCOME_COLUMN_BITMASK |
+			DecisionEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_OUTCOME = new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
+			DecisionEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByOutcome",
+			new String[] { String.class.getName() });
+
+	/**
+	 * Returns all the decision entries where outcome = &#63;.
+	 *
+	 * @param outcome the outcome
+	 * @return the matching decision entries
+	 */
+	@Override
+	public List<DecisionEntry> findByOutcome(String outcome) {
+		return findByOutcome(outcome, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the decision entries where outcome = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param outcome the outcome
+	 * @param start the lower bound of the range of decision entries
+	 * @param end the upper bound of the range of decision entries (not inclusive)
+	 * @return the range of matching decision entries
+	 */
+	@Override
+	public List<DecisionEntry> findByOutcome(String outcome, int start, int end) {
+		return findByOutcome(outcome, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the decision entries where outcome = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param outcome the outcome
+	 * @param start the lower bound of the range of decision entries
+	 * @param end the upper bound of the range of decision entries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching decision entries
+	 */
+	@Override
+	public List<DecisionEntry> findByOutcome(String outcome, int start,
+		int end, OrderByComparator<DecisionEntry> orderByComparator) {
+		return findByOutcome(outcome, start, end, orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the decision entries where outcome = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param outcome the outcome
+	 * @param start the lower bound of the range of decision entries
+	 * @param end the upper bound of the range of decision entries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching decision entries
+	 */
+	@Override
+	public List<DecisionEntry> findByOutcome(String outcome, int start,
+		int end, OrderByComparator<DecisionEntry> orderByComparator,
+		boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_OUTCOME;
+			finderArgs = new Object[] { outcome };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_OUTCOME;
+			finderArgs = new Object[] { outcome, start, end, orderByComparator };
+		}
+
+		List<DecisionEntry> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<DecisionEntry>)finderCache.getResult(finderPath,
+					finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (DecisionEntry decisionEntry : list) {
+					if (!Objects.equals(outcome, decisionEntry.getOutcome())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_DECISIONENTRY_WHERE);
+
+			boolean bindOutcome = false;
+
+			if (outcome == null) {
+				query.append(_FINDER_COLUMN_OUTCOME_OUTCOME_1);
+			}
+			else if (outcome.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_OUTCOME_OUTCOME_3);
+			}
+			else {
+				bindOutcome = true;
+
+				query.append(_FINDER_COLUMN_OUTCOME_OUTCOME_2);
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(DecisionEntryModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindOutcome) {
+					qPos.add(outcome);
+				}
+
+				if (!pagination) {
+					list = (List<DecisionEntry>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<DecisionEntry>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first decision entry in the ordered set where outcome = &#63;.
+	 *
+	 * @param outcome the outcome
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching decision entry
+	 * @throws NoSuchEntryException if a matching decision entry could not be found
+	 */
+	@Override
+	public DecisionEntry findByOutcome_First(String outcome,
+		OrderByComparator<DecisionEntry> orderByComparator)
+		throws NoSuchEntryException {
+		DecisionEntry decisionEntry = fetchByOutcome_First(outcome,
+				orderByComparator);
+
+		if (decisionEntry != null) {
+			return decisionEntry;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("outcome=");
+		msg.append(outcome);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchEntryException(msg.toString());
+	}
+
+	/**
+	 * Returns the first decision entry in the ordered set where outcome = &#63;.
+	 *
+	 * @param outcome the outcome
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching decision entry, or <code>null</code> if a matching decision entry could not be found
+	 */
+	@Override
+	public DecisionEntry fetchByOutcome_First(String outcome,
+		OrderByComparator<DecisionEntry> orderByComparator) {
+		List<DecisionEntry> list = findByOutcome(outcome, 0, 1,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last decision entry in the ordered set where outcome = &#63;.
+	 *
+	 * @param outcome the outcome
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching decision entry
+	 * @throws NoSuchEntryException if a matching decision entry could not be found
+	 */
+	@Override
+	public DecisionEntry findByOutcome_Last(String outcome,
+		OrderByComparator<DecisionEntry> orderByComparator)
+		throws NoSuchEntryException {
+		DecisionEntry decisionEntry = fetchByOutcome_Last(outcome,
+				orderByComparator);
+
+		if (decisionEntry != null) {
+			return decisionEntry;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("outcome=");
+		msg.append(outcome);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchEntryException(msg.toString());
+	}
+
+	/**
+	 * Returns the last decision entry in the ordered set where outcome = &#63;.
+	 *
+	 * @param outcome the outcome
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching decision entry, or <code>null</code> if a matching decision entry could not be found
+	 */
+	@Override
+	public DecisionEntry fetchByOutcome_Last(String outcome,
+		OrderByComparator<DecisionEntry> orderByComparator) {
+		int count = countByOutcome(outcome);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<DecisionEntry> list = findByOutcome(outcome, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the decision entries before and after the current decision entry in the ordered set where outcome = &#63;.
+	 *
+	 * @param decisionEntryId the primary key of the current decision entry
+	 * @param outcome the outcome
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next decision entry
+	 * @throws NoSuchEntryException if a decision entry with the primary key could not be found
+	 */
+	@Override
+	public DecisionEntry[] findByOutcome_PrevAndNext(long decisionEntryId,
+		String outcome, OrderByComparator<DecisionEntry> orderByComparator)
+		throws NoSuchEntryException {
+		DecisionEntry decisionEntry = findByPrimaryKey(decisionEntryId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			DecisionEntry[] array = new DecisionEntryImpl[3];
+
+			array[0] = getByOutcome_PrevAndNext(session, decisionEntry,
+					outcome, orderByComparator, true);
+
+			array[1] = decisionEntry;
+
+			array[2] = getByOutcome_PrevAndNext(session, decisionEntry,
+					outcome, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected DecisionEntry getByOutcome_PrevAndNext(Session session,
+		DecisionEntry decisionEntry, String outcome,
+		OrderByComparator<DecisionEntry> orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(4 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_DECISIONENTRY_WHERE);
+
+		boolean bindOutcome = false;
+
+		if (outcome == null) {
+			query.append(_FINDER_COLUMN_OUTCOME_OUTCOME_1);
+		}
+		else if (outcome.equals(StringPool.BLANK)) {
+			query.append(_FINDER_COLUMN_OUTCOME_OUTCOME_3);
+		}
+		else {
+			bindOutcome = true;
+
+			query.append(_FINDER_COLUMN_OUTCOME_OUTCOME_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(DecisionEntryModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (bindOutcome) {
+			qPos.add(outcome);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(decisionEntry);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<DecisionEntry> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the decision entries where outcome = &#63; from the database.
+	 *
+	 * @param outcome the outcome
+	 */
+	@Override
+	public void removeByOutcome(String outcome) {
+		for (DecisionEntry decisionEntry : findByOutcome(outcome,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(decisionEntry);
+		}
+	}
+
+	/**
+	 * Returns the number of decision entries where outcome = &#63;.
+	 *
+	 * @param outcome the outcome
+	 * @return the number of matching decision entries
+	 */
+	@Override
+	public int countByOutcome(String outcome) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_OUTCOME;
+
+		Object[] finderArgs = new Object[] { outcome };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_DECISIONENTRY_WHERE);
+
+			boolean bindOutcome = false;
+
+			if (outcome == null) {
+				query.append(_FINDER_COLUMN_OUTCOME_OUTCOME_1);
+			}
+			else if (outcome.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_OUTCOME_OUTCOME_3);
+			}
+			else {
+				bindOutcome = true;
+
+				query.append(_FINDER_COLUMN_OUTCOME_OUTCOME_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindOutcome) {
+					qPos.add(outcome);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_OUTCOME_OUTCOME_1 = "decisionEntry.outcome IS NULL";
+	private static final String _FINDER_COLUMN_OUTCOME_OUTCOME_2 = "decisionEntry.outcome = ?";
+	private static final String _FINDER_COLUMN_OUTCOME_OUTCOME_3 = "(decisionEntry.outcome IS NULL OR decisionEntry.outcome = '')";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_WIKIPAGEID =
 		new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
 			DecisionEntryModelImpl.FINDER_CACHE_ENABLED,
@@ -2396,17 +2951,17 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	/**
 	 * Returns the decision entries before and after the current decision entry in the ordered set where wikiPageId = &#63;.
 	 *
-	 * @param decisionId the primary key of the current decision entry
+	 * @param decisionEntryId the primary key of the current decision entry
 	 * @param wikiPageId the wiki page ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next decision entry
 	 * @throws NoSuchEntryException if a decision entry with the primary key could not be found
 	 */
 	@Override
-	public DecisionEntry[] findByWikiPageId_PrevAndNext(long decisionId,
+	public DecisionEntry[] findByWikiPageId_PrevAndNext(long decisionEntryId,
 		long wikiPageId, OrderByComparator<DecisionEntry> orderByComparator)
 		throws NoSuchEntryException {
-		DecisionEntry decisionEntry = findByPrimaryKey(decisionId);
+		DecisionEntry decisionEntry = findByPrimaryKey(decisionEntryId);
 
 		Session session = null;
 
@@ -2924,17 +3479,18 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	/**
 	 * Returns the decision entries before and after the current decision entry in the ordered set where wikiPageName = &#63;.
 	 *
-	 * @param decisionId the primary key of the current decision entry
+	 * @param decisionEntryId the primary key of the current decision entry
 	 * @param wikiPageName the wiki page name
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next decision entry
 	 * @throws NoSuchEntryException if a decision entry with the primary key could not be found
 	 */
 	@Override
-	public DecisionEntry[] findByWikiPageName_PrevAndNext(long decisionId,
-		String wikiPageName, OrderByComparator<DecisionEntry> orderByComparator)
+	public DecisionEntry[] findByWikiPageName_PrevAndNext(
+		long decisionEntryId, String wikiPageName,
+		OrderByComparator<DecisionEntry> orderByComparator)
 		throws NoSuchEntryException {
-		DecisionEntry decisionEntry = findByPrimaryKey(decisionId);
+		DecisionEntry decisionEntry = findByPrimaryKey(decisionEntryId);
 
 		Session session = null;
 
@@ -3162,83 +3718,90 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	private static final String _FINDER_COLUMN_WIKIPAGENAME_WIKIPAGENAME_1 = "decisionEntry.wikiPageName IS NULL";
 	private static final String _FINDER_COLUMN_WIKIPAGENAME_WIKIPAGENAME_2 = "decisionEntry.wikiPageName = ?";
 	private static final String _FINDER_COLUMN_WIKIPAGENAME_WIKIPAGENAME_3 = "(decisionEntry.wikiPageName IS NULL OR decisionEntry.wikiPageName = '')";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_OUTCOME = new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_C_H = new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
 			DecisionEntryModelImpl.FINDER_CACHE_ENABLED,
 			DecisionEntryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByOutcome",
+			"findByC_H",
 			new String[] {
-				String.class.getName(),
+				Long.class.getName(), Boolean.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_OUTCOME =
-		new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_H = new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
 			DecisionEntryModelImpl.FINDER_CACHE_ENABLED,
 			DecisionEntryImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByOutcome", new String[] { String.class.getName() },
-			DecisionEntryModelImpl.OUTCOME_COLUMN_BITMASK |
+			"findByC_H",
+			new String[] { Long.class.getName(), Boolean.class.getName() },
+			DecisionEntryModelImpl.COMPANYID_COLUMN_BITMASK |
+			DecisionEntryModelImpl.HANDLED_COLUMN_BITMASK |
 			DecisionEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_OUTCOME = new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_H = new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
 			DecisionEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByOutcome",
-			new String[] { String.class.getName() });
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_H",
+			new String[] { Long.class.getName(), Boolean.class.getName() });
 
 	/**
-	 * Returns all the decision entries where outcome = &#63;.
+	 * Returns all the decision entries where companyId = &#63; and handled = &#63;.
 	 *
-	 * @param outcome the outcome
+	 * @param companyId the company ID
+	 * @param handled the handled
 	 * @return the matching decision entries
 	 */
 	@Override
-	public List<DecisionEntry> findByOutcome(String outcome) {
-		return findByOutcome(outcome, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<DecisionEntry> findByC_H(long companyId, boolean handled) {
+		return findByC_H(companyId, handled, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the decision entries where outcome = &#63;.
+	 * Returns a range of all the decision entries where companyId = &#63; and handled = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param outcome the outcome
+	 * @param companyId the company ID
+	 * @param handled the handled
 	 * @param start the lower bound of the range of decision entries
 	 * @param end the upper bound of the range of decision entries (not inclusive)
 	 * @return the range of matching decision entries
 	 */
 	@Override
-	public List<DecisionEntry> findByOutcome(String outcome, int start, int end) {
-		return findByOutcome(outcome, start, end, null);
+	public List<DecisionEntry> findByC_H(long companyId, boolean handled,
+		int start, int end) {
+		return findByC_H(companyId, handled, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the decision entries where outcome = &#63;.
+	 * Returns an ordered range of all the decision entries where companyId = &#63; and handled = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param outcome the outcome
+	 * @param companyId the company ID
+	 * @param handled the handled
 	 * @param start the lower bound of the range of decision entries
 	 * @param end the upper bound of the range of decision entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching decision entries
 	 */
 	@Override
-	public List<DecisionEntry> findByOutcome(String outcome, int start,
-		int end, OrderByComparator<DecisionEntry> orderByComparator) {
-		return findByOutcome(outcome, start, end, orderByComparator, true);
+	public List<DecisionEntry> findByC_H(long companyId, boolean handled,
+		int start, int end, OrderByComparator<DecisionEntry> orderByComparator) {
+		return findByC_H(companyId, handled, start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the decision entries where outcome = &#63;.
+	 * Returns an ordered range of all the decision entries where companyId = &#63; and handled = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param outcome the outcome
+	 * @param companyId the company ID
+	 * @param handled the handled
 	 * @param start the lower bound of the range of decision entries
 	 * @param end the upper bound of the range of decision entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -3246,8 +3809,8 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	 * @return the ordered range of matching decision entries
 	 */
 	@Override
-	public List<DecisionEntry> findByOutcome(String outcome, int start,
-		int end, OrderByComparator<DecisionEntry> orderByComparator,
+	public List<DecisionEntry> findByC_H(long companyId, boolean handled,
+		int start, int end, OrderByComparator<DecisionEntry> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -3256,12 +3819,16 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_OUTCOME;
-			finderArgs = new Object[] { outcome };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_H;
+			finderArgs = new Object[] { companyId, handled };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_OUTCOME;
-			finderArgs = new Object[] { outcome, start, end, orderByComparator };
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_C_H;
+			finderArgs = new Object[] {
+					companyId, handled,
+					
+					start, end, orderByComparator
+				};
 		}
 
 		List<DecisionEntry> list = null;
@@ -3272,7 +3839,8 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 			if ((list != null) && !list.isEmpty()) {
 				for (DecisionEntry decisionEntry : list) {
-					if (!Objects.equals(outcome, decisionEntry.getOutcome())) {
+					if ((companyId != decisionEntry.getCompanyId()) ||
+							(handled != decisionEntry.getHandled())) {
 						list = null;
 
 						break;
@@ -3285,28 +3853,18 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
+				query = new StringBundler(4 +
 						(orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
-				query = new StringBundler(3);
+				query = new StringBundler(4);
 			}
 
 			query.append(_SQL_SELECT_DECISIONENTRY_WHERE);
 
-			boolean bindOutcome = false;
+			query.append(_FINDER_COLUMN_C_H_COMPANYID_2);
 
-			if (outcome == null) {
-				query.append(_FINDER_COLUMN_OUTCOME_OUTCOME_1);
-			}
-			else if (outcome.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_OUTCOME_OUTCOME_3);
-			}
-			else {
-				bindOutcome = true;
-
-				query.append(_FINDER_COLUMN_OUTCOME_OUTCOME_2);
-			}
+			query.append(_FINDER_COLUMN_C_H_HANDLED_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -3328,9 +3886,9 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (bindOutcome) {
-					qPos.add(outcome);
-				}
+				qPos.add(companyId);
+
+				qPos.add(handled);
 
 				if (!pagination) {
 					list = (List<DecisionEntry>)QueryUtil.list(q, getDialect(),
@@ -3363,30 +3921,34 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Returns the first decision entry in the ordered set where outcome = &#63;.
+	 * Returns the first decision entry in the ordered set where companyId = &#63; and handled = &#63;.
 	 *
-	 * @param outcome the outcome
+	 * @param companyId the company ID
+	 * @param handled the handled
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching decision entry
 	 * @throws NoSuchEntryException if a matching decision entry could not be found
 	 */
 	@Override
-	public DecisionEntry findByOutcome_First(String outcome,
+	public DecisionEntry findByC_H_First(long companyId, boolean handled,
 		OrderByComparator<DecisionEntry> orderByComparator)
 		throws NoSuchEntryException {
-		DecisionEntry decisionEntry = fetchByOutcome_First(outcome,
+		DecisionEntry decisionEntry = fetchByC_H_First(companyId, handled,
 				orderByComparator);
 
 		if (decisionEntry != null) {
 			return decisionEntry;
 		}
 
-		StringBundler msg = new StringBundler(4);
+		StringBundler msg = new StringBundler(6);
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("outcome=");
-		msg.append(outcome);
+		msg.append("companyId=");
+		msg.append(companyId);
+
+		msg.append(", handled=");
+		msg.append(handled);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -3394,16 +3956,17 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Returns the first decision entry in the ordered set where outcome = &#63;.
+	 * Returns the first decision entry in the ordered set where companyId = &#63; and handled = &#63;.
 	 *
-	 * @param outcome the outcome
+	 * @param companyId the company ID
+	 * @param handled the handled
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching decision entry, or <code>null</code> if a matching decision entry could not be found
 	 */
 	@Override
-	public DecisionEntry fetchByOutcome_First(String outcome,
+	public DecisionEntry fetchByC_H_First(long companyId, boolean handled,
 		OrderByComparator<DecisionEntry> orderByComparator) {
-		List<DecisionEntry> list = findByOutcome(outcome, 0, 1,
+		List<DecisionEntry> list = findByC_H(companyId, handled, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -3414,30 +3977,34 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Returns the last decision entry in the ordered set where outcome = &#63;.
+	 * Returns the last decision entry in the ordered set where companyId = &#63; and handled = &#63;.
 	 *
-	 * @param outcome the outcome
+	 * @param companyId the company ID
+	 * @param handled the handled
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching decision entry
 	 * @throws NoSuchEntryException if a matching decision entry could not be found
 	 */
 	@Override
-	public DecisionEntry findByOutcome_Last(String outcome,
+	public DecisionEntry findByC_H_Last(long companyId, boolean handled,
 		OrderByComparator<DecisionEntry> orderByComparator)
 		throws NoSuchEntryException {
-		DecisionEntry decisionEntry = fetchByOutcome_Last(outcome,
+		DecisionEntry decisionEntry = fetchByC_H_Last(companyId, handled,
 				orderByComparator);
 
 		if (decisionEntry != null) {
 			return decisionEntry;
 		}
 
-		StringBundler msg = new StringBundler(4);
+		StringBundler msg = new StringBundler(6);
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("outcome=");
-		msg.append(outcome);
+		msg.append("companyId=");
+		msg.append(companyId);
+
+		msg.append(", handled=");
+		msg.append(handled);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -3445,23 +4012,24 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Returns the last decision entry in the ordered set where outcome = &#63;.
+	 * Returns the last decision entry in the ordered set where companyId = &#63; and handled = &#63;.
 	 *
-	 * @param outcome the outcome
+	 * @param companyId the company ID
+	 * @param handled the handled
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching decision entry, or <code>null</code> if a matching decision entry could not be found
 	 */
 	@Override
-	public DecisionEntry fetchByOutcome_Last(String outcome,
+	public DecisionEntry fetchByC_H_Last(long companyId, boolean handled,
 		OrderByComparator<DecisionEntry> orderByComparator) {
-		int count = countByOutcome(outcome);
+		int count = countByC_H(companyId, handled);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<DecisionEntry> list = findByOutcome(outcome, count - 1, count,
-				orderByComparator);
+		List<DecisionEntry> list = findByC_H(companyId, handled, count - 1,
+				count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -3471,19 +4039,21 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Returns the decision entries before and after the current decision entry in the ordered set where outcome = &#63;.
+	 * Returns the decision entries before and after the current decision entry in the ordered set where companyId = &#63; and handled = &#63;.
 	 *
-	 * @param decisionId the primary key of the current decision entry
-	 * @param outcome the outcome
+	 * @param decisionEntryId the primary key of the current decision entry
+	 * @param companyId the company ID
+	 * @param handled the handled
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next decision entry
 	 * @throws NoSuchEntryException if a decision entry with the primary key could not be found
 	 */
 	@Override
-	public DecisionEntry[] findByOutcome_PrevAndNext(long decisionId,
-		String outcome, OrderByComparator<DecisionEntry> orderByComparator)
+	public DecisionEntry[] findByC_H_PrevAndNext(long decisionEntryId,
+		long companyId, boolean handled,
+		OrderByComparator<DecisionEntry> orderByComparator)
 		throws NoSuchEntryException {
-		DecisionEntry decisionEntry = findByPrimaryKey(decisionId);
+		DecisionEntry decisionEntry = findByPrimaryKey(decisionEntryId);
 
 		Session session = null;
 
@@ -3492,13 +4062,13 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 			DecisionEntry[] array = new DecisionEntryImpl[3];
 
-			array[0] = getByOutcome_PrevAndNext(session, decisionEntry,
-					outcome, orderByComparator, true);
+			array[0] = getByC_H_PrevAndNext(session, decisionEntry, companyId,
+					handled, orderByComparator, true);
 
 			array[1] = decisionEntry;
 
-			array[2] = getByOutcome_PrevAndNext(session, decisionEntry,
-					outcome, orderByComparator, false);
+			array[2] = getByC_H_PrevAndNext(session, decisionEntry, companyId,
+					handled, orderByComparator, false);
 
 			return array;
 		}
@@ -3510,35 +4080,25 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 		}
 	}
 
-	protected DecisionEntry getByOutcome_PrevAndNext(Session session,
-		DecisionEntry decisionEntry, String outcome,
+	protected DecisionEntry getByC_H_PrevAndNext(Session session,
+		DecisionEntry decisionEntry, long companyId, boolean handled,
 		OrderByComparator<DecisionEntry> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
+			query = new StringBundler(5 +
 					(orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
-			query = new StringBundler(3);
+			query = new StringBundler(4);
 		}
 
 		query.append(_SQL_SELECT_DECISIONENTRY_WHERE);
 
-		boolean bindOutcome = false;
+		query.append(_FINDER_COLUMN_C_H_COMPANYID_2);
 
-		if (outcome == null) {
-			query.append(_FINDER_COLUMN_OUTCOME_OUTCOME_1);
-		}
-		else if (outcome.equals(StringPool.BLANK)) {
-			query.append(_FINDER_COLUMN_OUTCOME_OUTCOME_3);
-		}
-		else {
-			bindOutcome = true;
-
-			query.append(_FINDER_COLUMN_OUTCOME_OUTCOME_2);
-		}
+		query.append(_FINDER_COLUMN_C_H_HANDLED_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -3608,9 +4168,9 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		if (bindOutcome) {
-			qPos.add(outcome);
-		}
+		qPos.add(companyId);
+
+		qPos.add(handled);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(decisionEntry);
@@ -3631,50 +4191,42 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Removes all the decision entries where outcome = &#63; from the database.
+	 * Removes all the decision entries where companyId = &#63; and handled = &#63; from the database.
 	 *
-	 * @param outcome the outcome
+	 * @param companyId the company ID
+	 * @param handled the handled
 	 */
 	@Override
-	public void removeByOutcome(String outcome) {
-		for (DecisionEntry decisionEntry : findByOutcome(outcome,
+	public void removeByC_H(long companyId, boolean handled) {
+		for (DecisionEntry decisionEntry : findByC_H(companyId, handled,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(decisionEntry);
 		}
 	}
 
 	/**
-	 * Returns the number of decision entries where outcome = &#63;.
+	 * Returns the number of decision entries where companyId = &#63; and handled = &#63;.
 	 *
-	 * @param outcome the outcome
+	 * @param companyId the company ID
+	 * @param handled the handled
 	 * @return the number of matching decision entries
 	 */
 	@Override
-	public int countByOutcome(String outcome) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_OUTCOME;
+	public int countByC_H(long companyId, boolean handled) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_H;
 
-		Object[] finderArgs = new Object[] { outcome };
+		Object[] finderArgs = new Object[] { companyId, handled };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
 		if (count == null) {
-			StringBundler query = new StringBundler(2);
+			StringBundler query = new StringBundler(3);
 
 			query.append(_SQL_COUNT_DECISIONENTRY_WHERE);
 
-			boolean bindOutcome = false;
+			query.append(_FINDER_COLUMN_C_H_COMPANYID_2);
 
-			if (outcome == null) {
-				query.append(_FINDER_COLUMN_OUTCOME_OUTCOME_1);
-			}
-			else if (outcome.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_OUTCOME_OUTCOME_3);
-			}
-			else {
-				bindOutcome = true;
-
-				query.append(_FINDER_COLUMN_OUTCOME_OUTCOME_2);
-			}
+			query.append(_FINDER_COLUMN_C_H_HANDLED_2);
 
 			String sql = query.toString();
 
@@ -3687,9 +4239,9 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (bindOutcome) {
-					qPos.add(outcome);
-				}
+				qPos.add(companyId);
+
+				qPos.add(handled);
 
 				count = (Long)q.uniqueResult();
 
@@ -3708,9 +4260,8 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_OUTCOME_OUTCOME_1 = "decisionEntry.outcome IS NULL";
-	private static final String _FINDER_COLUMN_OUTCOME_OUTCOME_2 = "decisionEntry.outcome = ?";
-	private static final String _FINDER_COLUMN_OUTCOME_OUTCOME_3 = "(decisionEntry.outcome IS NULL OR decisionEntry.outcome = '')";
+	private static final String _FINDER_COLUMN_C_H_COMPANYID_2 = "decisionEntry.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_H_HANDLED_2 = "decisionEntry.handled = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_D_C = new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
 			DecisionEntryModelImpl.FINDER_CACHE_ENABLED,
 			DecisionEntryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
@@ -3726,7 +4277,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 			DecisionEntryImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
 			"findByD_C",
 			new String[] { Long.class.getName(), Long.class.getName() },
-			DecisionEntryModelImpl.DECISIONID_COLUMN_BITMASK |
+			DecisionEntryModelImpl.DECISIONENTRYID_COLUMN_BITMASK |
 			DecisionEntryModelImpl.COMPANYID_COLUMN_BITMASK |
 			DecisionEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_D_C = new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
@@ -3735,45 +4286,45 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	/**
-	 * Returns all the decision entries where decisionId = &#63; and companyId = &#63;.
+	 * Returns all the decision entries where decisionEntryId = &#63; and companyId = &#63;.
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param companyId the company ID
 	 * @return the matching decision entries
 	 */
 	@Override
-	public List<DecisionEntry> findByD_C(long decisionId, long companyId) {
-		return findByD_C(decisionId, companyId, QueryUtil.ALL_POS,
+	public List<DecisionEntry> findByD_C(long decisionEntryId, long companyId) {
+		return findByD_C(decisionEntryId, companyId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the decision entries where decisionId = &#63; and companyId = &#63;.
+	 * Returns a range of all the decision entries where decisionEntryId = &#63; and companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param companyId the company ID
 	 * @param start the lower bound of the range of decision entries
 	 * @param end the upper bound of the range of decision entries (not inclusive)
 	 * @return the range of matching decision entries
 	 */
 	@Override
-	public List<DecisionEntry> findByD_C(long decisionId, long companyId,
+	public List<DecisionEntry> findByD_C(long decisionEntryId, long companyId,
 		int start, int end) {
-		return findByD_C(decisionId, companyId, start, end, null);
+		return findByD_C(decisionEntryId, companyId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the decision entries where decisionId = &#63; and companyId = &#63;.
+	 * Returns an ordered range of all the decision entries where decisionEntryId = &#63; and companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param companyId the company ID
 	 * @param start the lower bound of the range of decision entries
 	 * @param end the upper bound of the range of decision entries (not inclusive)
@@ -3781,20 +4332,20 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	 * @return the ordered range of matching decision entries
 	 */
 	@Override
-	public List<DecisionEntry> findByD_C(long decisionId, long companyId,
+	public List<DecisionEntry> findByD_C(long decisionEntryId, long companyId,
 		int start, int end, OrderByComparator<DecisionEntry> orderByComparator) {
-		return findByD_C(decisionId, companyId, start, end, orderByComparator,
-			true);
+		return findByD_C(decisionEntryId, companyId, start, end,
+			orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the decision entries where decisionId = &#63; and companyId = &#63;.
+	 * Returns an ordered range of all the decision entries where decisionEntryId = &#63; and companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param companyId the company ID
 	 * @param start the lower bound of the range of decision entries
 	 * @param end the upper bound of the range of decision entries (not inclusive)
@@ -3803,7 +4354,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	 * @return the ordered range of matching decision entries
 	 */
 	@Override
-	public List<DecisionEntry> findByD_C(long decisionId, long companyId,
+	public List<DecisionEntry> findByD_C(long decisionEntryId, long companyId,
 		int start, int end, OrderByComparator<DecisionEntry> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
@@ -3814,12 +4365,12 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 				(orderByComparator == null)) {
 			pagination = false;
 			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_D_C;
-			finderArgs = new Object[] { decisionId, companyId };
+			finderArgs = new Object[] { decisionEntryId, companyId };
 		}
 		else {
 			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_D_C;
 			finderArgs = new Object[] {
-					decisionId, companyId,
+					decisionEntryId, companyId,
 					
 					start, end, orderByComparator
 				};
@@ -3833,7 +4384,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 			if ((list != null) && !list.isEmpty()) {
 				for (DecisionEntry decisionEntry : list) {
-					if ((decisionId != decisionEntry.getDecisionId()) ||
+					if ((decisionEntryId != decisionEntry.getDecisionEntryId()) ||
 							(companyId != decisionEntry.getCompanyId())) {
 						list = null;
 
@@ -3856,7 +4407,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 			query.append(_SQL_SELECT_DECISIONENTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_D_C_DECISIONID_2);
+			query.append(_FINDER_COLUMN_D_C_DECISIONENTRYID_2);
 
 			query.append(_FINDER_COLUMN_D_C_COMPANYID_2);
 
@@ -3880,7 +4431,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(decisionId);
+				qPos.add(decisionEntryId);
 
 				qPos.add(companyId);
 
@@ -3915,20 +4466,20 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Returns the first decision entry in the ordered set where decisionId = &#63; and companyId = &#63;.
+	 * Returns the first decision entry in the ordered set where decisionEntryId = &#63; and companyId = &#63;.
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching decision entry
 	 * @throws NoSuchEntryException if a matching decision entry could not be found
 	 */
 	@Override
-	public DecisionEntry findByD_C_First(long decisionId, long companyId,
+	public DecisionEntry findByD_C_First(long decisionEntryId, long companyId,
 		OrderByComparator<DecisionEntry> orderByComparator)
 		throws NoSuchEntryException {
-		DecisionEntry decisionEntry = fetchByD_C_First(decisionId, companyId,
-				orderByComparator);
+		DecisionEntry decisionEntry = fetchByD_C_First(decisionEntryId,
+				companyId, orderByComparator);
 
 		if (decisionEntry != null) {
 			return decisionEntry;
@@ -3938,8 +4489,8 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("decisionId=");
-		msg.append(decisionId);
+		msg.append("decisionEntryId=");
+		msg.append(decisionEntryId);
 
 		msg.append(", companyId=");
 		msg.append(companyId);
@@ -3950,17 +4501,17 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Returns the first decision entry in the ordered set where decisionId = &#63; and companyId = &#63;.
+	 * Returns the first decision entry in the ordered set where decisionEntryId = &#63; and companyId = &#63;.
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching decision entry, or <code>null</code> if a matching decision entry could not be found
 	 */
 	@Override
-	public DecisionEntry fetchByD_C_First(long decisionId, long companyId,
+	public DecisionEntry fetchByD_C_First(long decisionEntryId, long companyId,
 		OrderByComparator<DecisionEntry> orderByComparator) {
-		List<DecisionEntry> list = findByD_C(decisionId, companyId, 0, 1,
+		List<DecisionEntry> list = findByD_C(decisionEntryId, companyId, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -3971,20 +4522,20 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Returns the last decision entry in the ordered set where decisionId = &#63; and companyId = &#63;.
+	 * Returns the last decision entry in the ordered set where decisionEntryId = &#63; and companyId = &#63;.
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching decision entry
 	 * @throws NoSuchEntryException if a matching decision entry could not be found
 	 */
 	@Override
-	public DecisionEntry findByD_C_Last(long decisionId, long companyId,
+	public DecisionEntry findByD_C_Last(long decisionEntryId, long companyId,
 		OrderByComparator<DecisionEntry> orderByComparator)
 		throws NoSuchEntryException {
-		DecisionEntry decisionEntry = fetchByD_C_Last(decisionId, companyId,
-				orderByComparator);
+		DecisionEntry decisionEntry = fetchByD_C_Last(decisionEntryId,
+				companyId, orderByComparator);
 
 		if (decisionEntry != null) {
 			return decisionEntry;
@@ -3994,8 +4545,8 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("decisionId=");
-		msg.append(decisionId);
+		msg.append("decisionEntryId=");
+		msg.append(decisionEntryId);
 
 		msg.append(", companyId=");
 		msg.append(companyId);
@@ -4006,24 +4557,24 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Returns the last decision entry in the ordered set where decisionId = &#63; and companyId = &#63;.
+	 * Returns the last decision entry in the ordered set where decisionEntryId = &#63; and companyId = &#63;.
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching decision entry, or <code>null</code> if a matching decision entry could not be found
 	 */
 	@Override
-	public DecisionEntry fetchByD_C_Last(long decisionId, long companyId,
+	public DecisionEntry fetchByD_C_Last(long decisionEntryId, long companyId,
 		OrderByComparator<DecisionEntry> orderByComparator) {
-		int count = countByD_C(decisionId, companyId);
+		int count = countByD_C(decisionEntryId, companyId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<DecisionEntry> list = findByD_C(decisionId, companyId, count - 1,
-				count, orderByComparator);
+		List<DecisionEntry> list = findByD_C(decisionEntryId, companyId,
+				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -4033,31 +4584,31 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Removes all the decision entries where decisionId = &#63; and companyId = &#63; from the database.
+	 * Removes all the decision entries where decisionEntryId = &#63; and companyId = &#63; from the database.
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param companyId the company ID
 	 */
 	@Override
-	public void removeByD_C(long decisionId, long companyId) {
-		for (DecisionEntry decisionEntry : findByD_C(decisionId, companyId,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+	public void removeByD_C(long decisionEntryId, long companyId) {
+		for (DecisionEntry decisionEntry : findByD_C(decisionEntryId,
+				companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(decisionEntry);
 		}
 	}
 
 	/**
-	 * Returns the number of decision entries where decisionId = &#63; and companyId = &#63;.
+	 * Returns the number of decision entries where decisionEntryId = &#63; and companyId = &#63;.
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param companyId the company ID
 	 * @return the number of matching decision entries
 	 */
 	@Override
-	public int countByD_C(long decisionId, long companyId) {
+	public int countByD_C(long decisionEntryId, long companyId) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_D_C;
 
-		Object[] finderArgs = new Object[] { decisionId, companyId };
+		Object[] finderArgs = new Object[] { decisionEntryId, companyId };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -4066,7 +4617,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 			query.append(_SQL_COUNT_DECISIONENTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_D_C_DECISIONID_2);
+			query.append(_FINDER_COLUMN_D_C_DECISIONENTRYID_2);
 
 			query.append(_FINDER_COLUMN_D_C_COMPANYID_2);
 
@@ -4081,7 +4632,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(decisionId);
+				qPos.add(decisionEntryId);
 
 				qPos.add(companyId);
 
@@ -4102,7 +4653,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_D_C_DECISIONID_2 = "decisionEntry.decisionId = ? AND ";
+	private static final String _FINDER_COLUMN_D_C_DECISIONENTRYID_2 = "decisionEntry.decisionEntryId = ? AND ";
 	private static final String _FINDER_COLUMN_D_C_COMPANYID_2 = "decisionEntry.companyId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_D_H = new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
 			DecisionEntryModelImpl.FINDER_CACHE_ENABLED,
@@ -4119,7 +4670,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 			DecisionEntryImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
 			"findByD_H",
 			new String[] { Long.class.getName(), Boolean.class.getName() },
-			DecisionEntryModelImpl.DECISIONID_COLUMN_BITMASK |
+			DecisionEntryModelImpl.DECISIONENTRYID_COLUMN_BITMASK |
 			DecisionEntryModelImpl.HANDLED_COLUMN_BITMASK |
 			DecisionEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_D_H = new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
@@ -4128,45 +4679,45 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 			new String[] { Long.class.getName(), Boolean.class.getName() });
 
 	/**
-	 * Returns all the decision entries where decisionId = &#63; and handled = &#63;.
+	 * Returns all the decision entries where decisionEntryId = &#63; and handled = &#63;.
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param handled the handled
 	 * @return the matching decision entries
 	 */
 	@Override
-	public List<DecisionEntry> findByD_H(long decisionId, boolean handled) {
-		return findByD_H(decisionId, handled, QueryUtil.ALL_POS,
+	public List<DecisionEntry> findByD_H(long decisionEntryId, boolean handled) {
+		return findByD_H(decisionEntryId, handled, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the decision entries where decisionId = &#63; and handled = &#63;.
+	 * Returns a range of all the decision entries where decisionEntryId = &#63; and handled = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param handled the handled
 	 * @param start the lower bound of the range of decision entries
 	 * @param end the upper bound of the range of decision entries (not inclusive)
 	 * @return the range of matching decision entries
 	 */
 	@Override
-	public List<DecisionEntry> findByD_H(long decisionId, boolean handled,
+	public List<DecisionEntry> findByD_H(long decisionEntryId, boolean handled,
 		int start, int end) {
-		return findByD_H(decisionId, handled, start, end, null);
+		return findByD_H(decisionEntryId, handled, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the decision entries where decisionId = &#63; and handled = &#63;.
+	 * Returns an ordered range of all the decision entries where decisionEntryId = &#63; and handled = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param handled the handled
 	 * @param start the lower bound of the range of decision entries
 	 * @param end the upper bound of the range of decision entries (not inclusive)
@@ -4174,20 +4725,20 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	 * @return the ordered range of matching decision entries
 	 */
 	@Override
-	public List<DecisionEntry> findByD_H(long decisionId, boolean handled,
+	public List<DecisionEntry> findByD_H(long decisionEntryId, boolean handled,
 		int start, int end, OrderByComparator<DecisionEntry> orderByComparator) {
-		return findByD_H(decisionId, handled, start, end, orderByComparator,
-			true);
+		return findByD_H(decisionEntryId, handled, start, end,
+			orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the decision entries where decisionId = &#63; and handled = &#63;.
+	 * Returns an ordered range of all the decision entries where decisionEntryId = &#63; and handled = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param handled the handled
 	 * @param start the lower bound of the range of decision entries
 	 * @param end the upper bound of the range of decision entries (not inclusive)
@@ -4196,7 +4747,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	 * @return the ordered range of matching decision entries
 	 */
 	@Override
-	public List<DecisionEntry> findByD_H(long decisionId, boolean handled,
+	public List<DecisionEntry> findByD_H(long decisionEntryId, boolean handled,
 		int start, int end, OrderByComparator<DecisionEntry> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
@@ -4207,12 +4758,12 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 				(orderByComparator == null)) {
 			pagination = false;
 			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_D_H;
-			finderArgs = new Object[] { decisionId, handled };
+			finderArgs = new Object[] { decisionEntryId, handled };
 		}
 		else {
 			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_D_H;
 			finderArgs = new Object[] {
-					decisionId, handled,
+					decisionEntryId, handled,
 					
 					start, end, orderByComparator
 				};
@@ -4226,7 +4777,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 			if ((list != null) && !list.isEmpty()) {
 				for (DecisionEntry decisionEntry : list) {
-					if ((decisionId != decisionEntry.getDecisionId()) ||
+					if ((decisionEntryId != decisionEntry.getDecisionEntryId()) ||
 							(handled != decisionEntry.getHandled())) {
 						list = null;
 
@@ -4249,7 +4800,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 			query.append(_SQL_SELECT_DECISIONENTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_D_H_DECISIONID_2);
+			query.append(_FINDER_COLUMN_D_H_DECISIONENTRYID_2);
 
 			query.append(_FINDER_COLUMN_D_H_HANDLED_2);
 
@@ -4273,7 +4824,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(decisionId);
+				qPos.add(decisionEntryId);
 
 				qPos.add(handled);
 
@@ -4308,20 +4859,20 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Returns the first decision entry in the ordered set where decisionId = &#63; and handled = &#63;.
+	 * Returns the first decision entry in the ordered set where decisionEntryId = &#63; and handled = &#63;.
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param handled the handled
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching decision entry
 	 * @throws NoSuchEntryException if a matching decision entry could not be found
 	 */
 	@Override
-	public DecisionEntry findByD_H_First(long decisionId, boolean handled,
+	public DecisionEntry findByD_H_First(long decisionEntryId, boolean handled,
 		OrderByComparator<DecisionEntry> orderByComparator)
 		throws NoSuchEntryException {
-		DecisionEntry decisionEntry = fetchByD_H_First(decisionId, handled,
-				orderByComparator);
+		DecisionEntry decisionEntry = fetchByD_H_First(decisionEntryId,
+				handled, orderByComparator);
 
 		if (decisionEntry != null) {
 			return decisionEntry;
@@ -4331,8 +4882,8 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("decisionId=");
-		msg.append(decisionId);
+		msg.append("decisionEntryId=");
+		msg.append(decisionEntryId);
 
 		msg.append(", handled=");
 		msg.append(handled);
@@ -4343,17 +4894,17 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Returns the first decision entry in the ordered set where decisionId = &#63; and handled = &#63;.
+	 * Returns the first decision entry in the ordered set where decisionEntryId = &#63; and handled = &#63;.
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param handled the handled
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching decision entry, or <code>null</code> if a matching decision entry could not be found
 	 */
 	@Override
-	public DecisionEntry fetchByD_H_First(long decisionId, boolean handled,
-		OrderByComparator<DecisionEntry> orderByComparator) {
-		List<DecisionEntry> list = findByD_H(decisionId, handled, 0, 1,
+	public DecisionEntry fetchByD_H_First(long decisionEntryId,
+		boolean handled, OrderByComparator<DecisionEntry> orderByComparator) {
+		List<DecisionEntry> list = findByD_H(decisionEntryId, handled, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -4364,19 +4915,19 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Returns the last decision entry in the ordered set where decisionId = &#63; and handled = &#63;.
+	 * Returns the last decision entry in the ordered set where decisionEntryId = &#63; and handled = &#63;.
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param handled the handled
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching decision entry
 	 * @throws NoSuchEntryException if a matching decision entry could not be found
 	 */
 	@Override
-	public DecisionEntry findByD_H_Last(long decisionId, boolean handled,
+	public DecisionEntry findByD_H_Last(long decisionEntryId, boolean handled,
 		OrderByComparator<DecisionEntry> orderByComparator)
 		throws NoSuchEntryException {
-		DecisionEntry decisionEntry = fetchByD_H_Last(decisionId, handled,
+		DecisionEntry decisionEntry = fetchByD_H_Last(decisionEntryId, handled,
 				orderByComparator);
 
 		if (decisionEntry != null) {
@@ -4387,8 +4938,8 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("decisionId=");
-		msg.append(decisionId);
+		msg.append("decisionEntryId=");
+		msg.append(decisionEntryId);
 
 		msg.append(", handled=");
 		msg.append(handled);
@@ -4399,24 +4950,24 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Returns the last decision entry in the ordered set where decisionId = &#63; and handled = &#63;.
+	 * Returns the last decision entry in the ordered set where decisionEntryId = &#63; and handled = &#63;.
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param handled the handled
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching decision entry, or <code>null</code> if a matching decision entry could not be found
 	 */
 	@Override
-	public DecisionEntry fetchByD_H_Last(long decisionId, boolean handled,
+	public DecisionEntry fetchByD_H_Last(long decisionEntryId, boolean handled,
 		OrderByComparator<DecisionEntry> orderByComparator) {
-		int count = countByD_H(decisionId, handled);
+		int count = countByD_H(decisionEntryId, handled);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<DecisionEntry> list = findByD_H(decisionId, handled, count - 1,
-				count, orderByComparator);
+		List<DecisionEntry> list = findByD_H(decisionEntryId, handled,
+				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -4426,31 +4977,31 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Removes all the decision entries where decisionId = &#63; and handled = &#63; from the database.
+	 * Removes all the decision entries where decisionEntryId = &#63; and handled = &#63; from the database.
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param handled the handled
 	 */
 	@Override
-	public void removeByD_H(long decisionId, boolean handled) {
-		for (DecisionEntry decisionEntry : findByD_H(decisionId, handled,
+	public void removeByD_H(long decisionEntryId, boolean handled) {
+		for (DecisionEntry decisionEntry : findByD_H(decisionEntryId, handled,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(decisionEntry);
 		}
 	}
 
 	/**
-	 * Returns the number of decision entries where decisionId = &#63; and handled = &#63;.
+	 * Returns the number of decision entries where decisionEntryId = &#63; and handled = &#63;.
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param handled the handled
 	 * @return the number of matching decision entries
 	 */
 	@Override
-	public int countByD_H(long decisionId, boolean handled) {
+	public int countByD_H(long decisionEntryId, boolean handled) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_D_H;
 
-		Object[] finderArgs = new Object[] { decisionId, handled };
+		Object[] finderArgs = new Object[] { decisionEntryId, handled };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -4459,7 +5010,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 			query.append(_SQL_COUNT_DECISIONENTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_D_H_DECISIONID_2);
+			query.append(_FINDER_COLUMN_D_H_DECISIONENTRYID_2);
 
 			query.append(_FINDER_COLUMN_D_H_HANDLED_2);
 
@@ -4474,7 +5025,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(decisionId);
+				qPos.add(decisionEntryId);
 
 				qPos.add(handled);
 
@@ -4495,7 +5046,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_D_H_DECISIONID_2 = "decisionEntry.decisionId = ? AND ";
+	private static final String _FINDER_COLUMN_D_H_DECISIONENTRYID_2 = "decisionEntry.decisionEntryId = ? AND ";
 	private static final String _FINDER_COLUMN_D_H_HANDLED_2 = "decisionEntry.handled = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_D_U = new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
 			DecisionEntryModelImpl.FINDER_CACHE_ENABLED,
@@ -4512,7 +5063,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 			DecisionEntryImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
 			"findByD_U",
 			new String[] { Long.class.getName(), Long.class.getName() },
-			DecisionEntryModelImpl.DECISIONID_COLUMN_BITMASK |
+			DecisionEntryModelImpl.DECISIONENTRYID_COLUMN_BITMASK |
 			DecisionEntryModelImpl.USERID_COLUMN_BITMASK |
 			DecisionEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_D_U = new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
@@ -4521,45 +5072,45 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	/**
-	 * Returns all the decision entries where decisionId = &#63; and userId = &#63;.
+	 * Returns all the decision entries where decisionEntryId = &#63; and userId = &#63;.
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param userId the user ID
 	 * @return the matching decision entries
 	 */
 	@Override
-	public List<DecisionEntry> findByD_U(long decisionId, long userId) {
-		return findByD_U(decisionId, userId, QueryUtil.ALL_POS,
+	public List<DecisionEntry> findByD_U(long decisionEntryId, long userId) {
+		return findByD_U(decisionEntryId, userId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the decision entries where decisionId = &#63; and userId = &#63;.
+	 * Returns a range of all the decision entries where decisionEntryId = &#63; and userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param userId the user ID
 	 * @param start the lower bound of the range of decision entries
 	 * @param end the upper bound of the range of decision entries (not inclusive)
 	 * @return the range of matching decision entries
 	 */
 	@Override
-	public List<DecisionEntry> findByD_U(long decisionId, long userId,
+	public List<DecisionEntry> findByD_U(long decisionEntryId, long userId,
 		int start, int end) {
-		return findByD_U(decisionId, userId, start, end, null);
+		return findByD_U(decisionEntryId, userId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the decision entries where decisionId = &#63; and userId = &#63;.
+	 * Returns an ordered range of all the decision entries where decisionEntryId = &#63; and userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param userId the user ID
 	 * @param start the lower bound of the range of decision entries
 	 * @param end the upper bound of the range of decision entries (not inclusive)
@@ -4567,19 +5118,20 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	 * @return the ordered range of matching decision entries
 	 */
 	@Override
-	public List<DecisionEntry> findByD_U(long decisionId, long userId,
+	public List<DecisionEntry> findByD_U(long decisionEntryId, long userId,
 		int start, int end, OrderByComparator<DecisionEntry> orderByComparator) {
-		return findByD_U(decisionId, userId, start, end, orderByComparator, true);
+		return findByD_U(decisionEntryId, userId, start, end,
+			orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the decision entries where decisionId = &#63; and userId = &#63;.
+	 * Returns an ordered range of all the decision entries where decisionEntryId = &#63; and userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param userId the user ID
 	 * @param start the lower bound of the range of decision entries
 	 * @param end the upper bound of the range of decision entries (not inclusive)
@@ -4588,7 +5140,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	 * @return the ordered range of matching decision entries
 	 */
 	@Override
-	public List<DecisionEntry> findByD_U(long decisionId, long userId,
+	public List<DecisionEntry> findByD_U(long decisionEntryId, long userId,
 		int start, int end, OrderByComparator<DecisionEntry> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
@@ -4599,12 +5151,12 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 				(orderByComparator == null)) {
 			pagination = false;
 			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_D_U;
-			finderArgs = new Object[] { decisionId, userId };
+			finderArgs = new Object[] { decisionEntryId, userId };
 		}
 		else {
 			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_D_U;
 			finderArgs = new Object[] {
-					decisionId, userId,
+					decisionEntryId, userId,
 					
 					start, end, orderByComparator
 				};
@@ -4618,7 +5170,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 			if ((list != null) && !list.isEmpty()) {
 				for (DecisionEntry decisionEntry : list) {
-					if ((decisionId != decisionEntry.getDecisionId()) ||
+					if ((decisionEntryId != decisionEntry.getDecisionEntryId()) ||
 							(userId != decisionEntry.getUserId())) {
 						list = null;
 
@@ -4641,7 +5193,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 			query.append(_SQL_SELECT_DECISIONENTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_D_U_DECISIONID_2);
+			query.append(_FINDER_COLUMN_D_U_DECISIONENTRYID_2);
 
 			query.append(_FINDER_COLUMN_D_U_USERID_2);
 
@@ -4665,7 +5217,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(decisionId);
+				qPos.add(decisionEntryId);
 
 				qPos.add(userId);
 
@@ -4700,19 +5252,19 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Returns the first decision entry in the ordered set where decisionId = &#63; and userId = &#63;.
+	 * Returns the first decision entry in the ordered set where decisionEntryId = &#63; and userId = &#63;.
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching decision entry
 	 * @throws NoSuchEntryException if a matching decision entry could not be found
 	 */
 	@Override
-	public DecisionEntry findByD_U_First(long decisionId, long userId,
+	public DecisionEntry findByD_U_First(long decisionEntryId, long userId,
 		OrderByComparator<DecisionEntry> orderByComparator)
 		throws NoSuchEntryException {
-		DecisionEntry decisionEntry = fetchByD_U_First(decisionId, userId,
+		DecisionEntry decisionEntry = fetchByD_U_First(decisionEntryId, userId,
 				orderByComparator);
 
 		if (decisionEntry != null) {
@@ -4723,8 +5275,8 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("decisionId=");
-		msg.append(decisionId);
+		msg.append("decisionEntryId=");
+		msg.append(decisionEntryId);
 
 		msg.append(", userId=");
 		msg.append(userId);
@@ -4735,17 +5287,17 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Returns the first decision entry in the ordered set where decisionId = &#63; and userId = &#63;.
+	 * Returns the first decision entry in the ordered set where decisionEntryId = &#63; and userId = &#63;.
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching decision entry, or <code>null</code> if a matching decision entry could not be found
 	 */
 	@Override
-	public DecisionEntry fetchByD_U_First(long decisionId, long userId,
+	public DecisionEntry fetchByD_U_First(long decisionEntryId, long userId,
 		OrderByComparator<DecisionEntry> orderByComparator) {
-		List<DecisionEntry> list = findByD_U(decisionId, userId, 0, 1,
+		List<DecisionEntry> list = findByD_U(decisionEntryId, userId, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -4756,19 +5308,19 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Returns the last decision entry in the ordered set where decisionId = &#63; and userId = &#63;.
+	 * Returns the last decision entry in the ordered set where decisionEntryId = &#63; and userId = &#63;.
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching decision entry
 	 * @throws NoSuchEntryException if a matching decision entry could not be found
 	 */
 	@Override
-	public DecisionEntry findByD_U_Last(long decisionId, long userId,
+	public DecisionEntry findByD_U_Last(long decisionEntryId, long userId,
 		OrderByComparator<DecisionEntry> orderByComparator)
 		throws NoSuchEntryException {
-		DecisionEntry decisionEntry = fetchByD_U_Last(decisionId, userId,
+		DecisionEntry decisionEntry = fetchByD_U_Last(decisionEntryId, userId,
 				orderByComparator);
 
 		if (decisionEntry != null) {
@@ -4779,8 +5331,8 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("decisionId=");
-		msg.append(decisionId);
+		msg.append("decisionEntryId=");
+		msg.append(decisionEntryId);
 
 		msg.append(", userId=");
 		msg.append(userId);
@@ -4791,24 +5343,24 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Returns the last decision entry in the ordered set where decisionId = &#63; and userId = &#63;.
+	 * Returns the last decision entry in the ordered set where decisionEntryId = &#63; and userId = &#63;.
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching decision entry, or <code>null</code> if a matching decision entry could not be found
 	 */
 	@Override
-	public DecisionEntry fetchByD_U_Last(long decisionId, long userId,
+	public DecisionEntry fetchByD_U_Last(long decisionEntryId, long userId,
 		OrderByComparator<DecisionEntry> orderByComparator) {
-		int count = countByD_U(decisionId, userId);
+		int count = countByD_U(decisionEntryId, userId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<DecisionEntry> list = findByD_U(decisionId, userId, count - 1,
-				count, orderByComparator);
+		List<DecisionEntry> list = findByD_U(decisionEntryId, userId,
+				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -4818,31 +5370,31 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Removes all the decision entries where decisionId = &#63; and userId = &#63; from the database.
+	 * Removes all the decision entries where decisionEntryId = &#63; and userId = &#63; from the database.
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param userId the user ID
 	 */
 	@Override
-	public void removeByD_U(long decisionId, long userId) {
-		for (DecisionEntry decisionEntry : findByD_U(decisionId, userId,
+	public void removeByD_U(long decisionEntryId, long userId) {
+		for (DecisionEntry decisionEntry : findByD_U(decisionEntryId, userId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(decisionEntry);
 		}
 	}
 
 	/**
-	 * Returns the number of decision entries where decisionId = &#63; and userId = &#63;.
+	 * Returns the number of decision entries where decisionEntryId = &#63; and userId = &#63;.
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param userId the user ID
 	 * @return the number of matching decision entries
 	 */
 	@Override
-	public int countByD_U(long decisionId, long userId) {
+	public int countByD_U(long decisionEntryId, long userId) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_D_U;
 
-		Object[] finderArgs = new Object[] { decisionId, userId };
+		Object[] finderArgs = new Object[] { decisionEntryId, userId };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -4851,7 +5403,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 			query.append(_SQL_COUNT_DECISIONENTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_D_U_DECISIONID_2);
+			query.append(_FINDER_COLUMN_D_U_DECISIONENTRYID_2);
 
 			query.append(_FINDER_COLUMN_D_U_USERID_2);
 
@@ -4866,7 +5418,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(decisionId);
+				qPos.add(decisionEntryId);
 
 				qPos.add(userId);
 
@@ -4887,7 +5439,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_D_U_DECISIONID_2 = "decisionEntry.decisionId = ? AND ";
+	private static final String _FINDER_COLUMN_D_U_DECISIONENTRYID_2 = "decisionEntry.decisionEntryId = ? AND ";
 	private static final String _FINDER_COLUMN_D_U_USERID_2 = "decisionEntry.userId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_D_U_C = new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
 			DecisionEntryModelImpl.FINDER_CACHE_ENABLED,
@@ -4906,7 +5458,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 			new String[] {
 				Long.class.getName(), Long.class.getName(), Long.class.getName()
 			},
-			DecisionEntryModelImpl.DECISIONID_COLUMN_BITMASK |
+			DecisionEntryModelImpl.DECISIONENTRYID_COLUMN_BITMASK |
 			DecisionEntryModelImpl.USERID_COLUMN_BITMASK |
 			DecisionEntryModelImpl.COMPANYID_COLUMN_BITMASK |
 			DecisionEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
@@ -4918,28 +5470,28 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 			});
 
 	/**
-	 * Returns all the decision entries where decisionId = &#63; and userId = &#63; and companyId = &#63;.
+	 * Returns all the decision entries where decisionEntryId = &#63; and userId = &#63; and companyId = &#63;.
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param userId the user ID
 	 * @param companyId the company ID
 	 * @return the matching decision entries
 	 */
 	@Override
-	public List<DecisionEntry> findByD_U_C(long decisionId, long userId,
+	public List<DecisionEntry> findByD_U_C(long decisionEntryId, long userId,
 		long companyId) {
-		return findByD_U_C(decisionId, userId, companyId, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
+		return findByD_U_C(decisionEntryId, userId, companyId,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the decision entries where decisionId = &#63; and userId = &#63; and companyId = &#63;.
+	 * Returns a range of all the decision entries where decisionEntryId = &#63; and userId = &#63; and companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param userId the user ID
 	 * @param companyId the company ID
 	 * @param start the lower bound of the range of decision entries
@@ -4947,19 +5499,19 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	 * @return the range of matching decision entries
 	 */
 	@Override
-	public List<DecisionEntry> findByD_U_C(long decisionId, long userId,
+	public List<DecisionEntry> findByD_U_C(long decisionEntryId, long userId,
 		long companyId, int start, int end) {
-		return findByD_U_C(decisionId, userId, companyId, start, end, null);
+		return findByD_U_C(decisionEntryId, userId, companyId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the decision entries where decisionId = &#63; and userId = &#63; and companyId = &#63;.
+	 * Returns an ordered range of all the decision entries where decisionEntryId = &#63; and userId = &#63; and companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param userId the user ID
 	 * @param companyId the company ID
 	 * @param start the lower bound of the range of decision entries
@@ -4968,21 +5520,21 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	 * @return the ordered range of matching decision entries
 	 */
 	@Override
-	public List<DecisionEntry> findByD_U_C(long decisionId, long userId,
+	public List<DecisionEntry> findByD_U_C(long decisionEntryId, long userId,
 		long companyId, int start, int end,
 		OrderByComparator<DecisionEntry> orderByComparator) {
-		return findByD_U_C(decisionId, userId, companyId, start, end,
+		return findByD_U_C(decisionEntryId, userId, companyId, start, end,
 			orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the decision entries where decisionId = &#63; and userId = &#63; and companyId = &#63;.
+	 * Returns an ordered range of all the decision entries where decisionEntryId = &#63; and userId = &#63; and companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param userId the user ID
 	 * @param companyId the company ID
 	 * @param start the lower bound of the range of decision entries
@@ -4992,7 +5544,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	 * @return the ordered range of matching decision entries
 	 */
 	@Override
-	public List<DecisionEntry> findByD_U_C(long decisionId, long userId,
+	public List<DecisionEntry> findByD_U_C(long decisionEntryId, long userId,
 		long companyId, int start, int end,
 		OrderByComparator<DecisionEntry> orderByComparator,
 		boolean retrieveFromCache) {
@@ -5004,12 +5556,12 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 				(orderByComparator == null)) {
 			pagination = false;
 			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_D_U_C;
-			finderArgs = new Object[] { decisionId, userId, companyId };
+			finderArgs = new Object[] { decisionEntryId, userId, companyId };
 		}
 		else {
 			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_D_U_C;
 			finderArgs = new Object[] {
-					decisionId, userId, companyId,
+					decisionEntryId, userId, companyId,
 					
 					start, end, orderByComparator
 				};
@@ -5023,7 +5575,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 			if ((list != null) && !list.isEmpty()) {
 				for (DecisionEntry decisionEntry : list) {
-					if ((decisionId != decisionEntry.getDecisionId()) ||
+					if ((decisionEntryId != decisionEntry.getDecisionEntryId()) ||
 							(userId != decisionEntry.getUserId()) ||
 							(companyId != decisionEntry.getCompanyId())) {
 						list = null;
@@ -5047,7 +5599,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 			query.append(_SQL_SELECT_DECISIONENTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_D_U_C_DECISIONID_2);
+			query.append(_FINDER_COLUMN_D_U_C_DECISIONENTRYID_2);
 
 			query.append(_FINDER_COLUMN_D_U_C_USERID_2);
 
@@ -5073,7 +5625,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(decisionId);
+				qPos.add(decisionEntryId);
 
 				qPos.add(userId);
 
@@ -5110,9 +5662,9 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Returns the first decision entry in the ordered set where decisionId = &#63; and userId = &#63; and companyId = &#63;.
+	 * Returns the first decision entry in the ordered set where decisionEntryId = &#63; and userId = &#63; and companyId = &#63;.
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param userId the user ID
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -5120,11 +5672,11 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	 * @throws NoSuchEntryException if a matching decision entry could not be found
 	 */
 	@Override
-	public DecisionEntry findByD_U_C_First(long decisionId, long userId,
+	public DecisionEntry findByD_U_C_First(long decisionEntryId, long userId,
 		long companyId, OrderByComparator<DecisionEntry> orderByComparator)
 		throws NoSuchEntryException {
-		DecisionEntry decisionEntry = fetchByD_U_C_First(decisionId, userId,
-				companyId, orderByComparator);
+		DecisionEntry decisionEntry = fetchByD_U_C_First(decisionEntryId,
+				userId, companyId, orderByComparator);
 
 		if (decisionEntry != null) {
 			return decisionEntry;
@@ -5134,8 +5686,8 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("decisionId=");
-		msg.append(decisionId);
+		msg.append("decisionEntryId=");
+		msg.append(decisionEntryId);
 
 		msg.append(", userId=");
 		msg.append(userId);
@@ -5149,19 +5701,19 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Returns the first decision entry in the ordered set where decisionId = &#63; and userId = &#63; and companyId = &#63;.
+	 * Returns the first decision entry in the ordered set where decisionEntryId = &#63; and userId = &#63; and companyId = &#63;.
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param userId the user ID
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching decision entry, or <code>null</code> if a matching decision entry could not be found
 	 */
 	@Override
-	public DecisionEntry fetchByD_U_C_First(long decisionId, long userId,
+	public DecisionEntry fetchByD_U_C_First(long decisionEntryId, long userId,
 		long companyId, OrderByComparator<DecisionEntry> orderByComparator) {
-		List<DecisionEntry> list = findByD_U_C(decisionId, userId, companyId,
-				0, 1, orderByComparator);
+		List<DecisionEntry> list = findByD_U_C(decisionEntryId, userId,
+				companyId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -5171,9 +5723,9 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Returns the last decision entry in the ordered set where decisionId = &#63; and userId = &#63; and companyId = &#63;.
+	 * Returns the last decision entry in the ordered set where decisionEntryId = &#63; and userId = &#63; and companyId = &#63;.
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param userId the user ID
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -5181,11 +5733,11 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	 * @throws NoSuchEntryException if a matching decision entry could not be found
 	 */
 	@Override
-	public DecisionEntry findByD_U_C_Last(long decisionId, long userId,
+	public DecisionEntry findByD_U_C_Last(long decisionEntryId, long userId,
 		long companyId, OrderByComparator<DecisionEntry> orderByComparator)
 		throws NoSuchEntryException {
-		DecisionEntry decisionEntry = fetchByD_U_C_Last(decisionId, userId,
-				companyId, orderByComparator);
+		DecisionEntry decisionEntry = fetchByD_U_C_Last(decisionEntryId,
+				userId, companyId, orderByComparator);
 
 		if (decisionEntry != null) {
 			return decisionEntry;
@@ -5195,8 +5747,8 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("decisionId=");
-		msg.append(decisionId);
+		msg.append("decisionEntryId=");
+		msg.append(decisionEntryId);
 
 		msg.append(", userId=");
 		msg.append(userId);
@@ -5210,25 +5762,25 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Returns the last decision entry in the ordered set where decisionId = &#63; and userId = &#63; and companyId = &#63;.
+	 * Returns the last decision entry in the ordered set where decisionEntryId = &#63; and userId = &#63; and companyId = &#63;.
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param userId the user ID
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching decision entry, or <code>null</code> if a matching decision entry could not be found
 	 */
 	@Override
-	public DecisionEntry fetchByD_U_C_Last(long decisionId, long userId,
+	public DecisionEntry fetchByD_U_C_Last(long decisionEntryId, long userId,
 		long companyId, OrderByComparator<DecisionEntry> orderByComparator) {
-		int count = countByD_U_C(decisionId, userId, companyId);
+		int count = countByD_U_C(decisionEntryId, userId, companyId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<DecisionEntry> list = findByD_U_C(decisionId, userId, companyId,
-				count - 1, count, orderByComparator);
+		List<DecisionEntry> list = findByD_U_C(decisionEntryId, userId,
+				companyId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -5238,33 +5790,33 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Removes all the decision entries where decisionId = &#63; and userId = &#63; and companyId = &#63; from the database.
+	 * Removes all the decision entries where decisionEntryId = &#63; and userId = &#63; and companyId = &#63; from the database.
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param userId the user ID
 	 * @param companyId the company ID
 	 */
 	@Override
-	public void removeByD_U_C(long decisionId, long userId, long companyId) {
-		for (DecisionEntry decisionEntry : findByD_U_C(decisionId, userId,
+	public void removeByD_U_C(long decisionEntryId, long userId, long companyId) {
+		for (DecisionEntry decisionEntry : findByD_U_C(decisionEntryId, userId,
 				companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(decisionEntry);
 		}
 	}
 
 	/**
-	 * Returns the number of decision entries where decisionId = &#63; and userId = &#63; and companyId = &#63;.
+	 * Returns the number of decision entries where decisionEntryId = &#63; and userId = &#63; and companyId = &#63;.
 	 *
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param userId the user ID
 	 * @param companyId the company ID
 	 * @return the number of matching decision entries
 	 */
 	@Override
-	public int countByD_U_C(long decisionId, long userId, long companyId) {
+	public int countByD_U_C(long decisionEntryId, long userId, long companyId) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_D_U_C;
 
-		Object[] finderArgs = new Object[] { decisionId, userId, companyId };
+		Object[] finderArgs = new Object[] { decisionEntryId, userId, companyId };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -5273,7 +5825,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 			query.append(_SQL_COUNT_DECISIONENTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_D_U_C_DECISIONID_2);
+			query.append(_FINDER_COLUMN_D_U_C_DECISIONENTRYID_2);
 
 			query.append(_FINDER_COLUMN_D_U_C_USERID_2);
 
@@ -5290,7 +5842,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(decisionId);
+				qPos.add(decisionEntryId);
 
 				qPos.add(userId);
 
@@ -5313,7 +5865,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_D_U_C_DECISIONID_2 = "decisionEntry.decisionId = ? AND ";
+	private static final String _FINDER_COLUMN_D_U_C_DECISIONENTRYID_2 = "decisionEntry.decisionEntryId = ? AND ";
 	private static final String _FINDER_COLUMN_D_U_C_USERID_2 = "decisionEntry.userId = ? AND ";
 	private static final String _FINDER_COLUMN_D_U_C_COMPANYID_2 = "decisionEntry.companyId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_U_H = new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
@@ -5639,7 +6191,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	/**
 	 * Returns the decision entries before and after the current decision entry in the ordered set where userId = &#63; and handled = &#63;.
 	 *
-	 * @param decisionId the primary key of the current decision entry
+	 * @param decisionEntryId the primary key of the current decision entry
 	 * @param userId the user ID
 	 * @param handled the handled
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -5647,10 +6199,11 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	 * @throws NoSuchEntryException if a decision entry with the primary key could not be found
 	 */
 	@Override
-	public DecisionEntry[] findByU_H_PrevAndNext(long decisionId, long userId,
-		boolean handled, OrderByComparator<DecisionEntry> orderByComparator)
+	public DecisionEntry[] findByU_H_PrevAndNext(long decisionEntryId,
+		long userId, boolean handled,
+		OrderByComparator<DecisionEntry> orderByComparator)
 		throws NoSuchEntryException {
-		DecisionEntry decisionEntry = findByPrimaryKey(decisionId);
+		DecisionEntry decisionEntry = findByPrimaryKey(decisionEntryId);
 
 		Session session = null;
 
@@ -5880,7 +6433,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 			},
 			DecisionEntryModelImpl.USERID_COLUMN_BITMASK |
 			DecisionEntryModelImpl.HANDLED_COLUMN_BITMASK |
-			DecisionEntryModelImpl.DECISIONID_COLUMN_BITMASK |
+			DecisionEntryModelImpl.DECISIONENTRYID_COLUMN_BITMASK |
 			DecisionEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_U_H_D = new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
 			DecisionEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
@@ -5891,22 +6444,22 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 			});
 
 	/**
-	 * Returns all the decision entries where userId = &#63; and handled = &#63; and decisionId = &#63;.
+	 * Returns all the decision entries where userId = &#63; and handled = &#63; and decisionEntryId = &#63;.
 	 *
 	 * @param userId the user ID
 	 * @param handled the handled
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @return the matching decision entries
 	 */
 	@Override
 	public List<DecisionEntry> findByU_H_D(long userId, boolean handled,
-		long decisionId) {
-		return findByU_H_D(userId, handled, decisionId, QueryUtil.ALL_POS,
+		long decisionEntryId) {
+		return findByU_H_D(userId, handled, decisionEntryId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the decision entries where userId = &#63; and handled = &#63; and decisionId = &#63;.
+	 * Returns a range of all the decision entries where userId = &#63; and handled = &#63; and decisionEntryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
@@ -5914,19 +6467,19 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	 *
 	 * @param userId the user ID
 	 * @param handled the handled
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param start the lower bound of the range of decision entries
 	 * @param end the upper bound of the range of decision entries (not inclusive)
 	 * @return the range of matching decision entries
 	 */
 	@Override
 	public List<DecisionEntry> findByU_H_D(long userId, boolean handled,
-		long decisionId, int start, int end) {
-		return findByU_H_D(userId, handled, decisionId, start, end, null);
+		long decisionEntryId, int start, int end) {
+		return findByU_H_D(userId, handled, decisionEntryId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the decision entries where userId = &#63; and handled = &#63; and decisionId = &#63;.
+	 * Returns an ordered range of all the decision entries where userId = &#63; and handled = &#63; and decisionEntryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
@@ -5934,7 +6487,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	 *
 	 * @param userId the user ID
 	 * @param handled the handled
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param start the lower bound of the range of decision entries
 	 * @param end the upper bound of the range of decision entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -5942,14 +6495,14 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	 */
 	@Override
 	public List<DecisionEntry> findByU_H_D(long userId, boolean handled,
-		long decisionId, int start, int end,
+		long decisionEntryId, int start, int end,
 		OrderByComparator<DecisionEntry> orderByComparator) {
-		return findByU_H_D(userId, handled, decisionId, start, end,
+		return findByU_H_D(userId, handled, decisionEntryId, start, end,
 			orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the decision entries where userId = &#63; and handled = &#63; and decisionId = &#63;.
+	 * Returns an ordered range of all the decision entries where userId = &#63; and handled = &#63; and decisionEntryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
@@ -5957,7 +6510,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	 *
 	 * @param userId the user ID
 	 * @param handled the handled
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param start the lower bound of the range of decision entries
 	 * @param end the upper bound of the range of decision entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -5966,7 +6519,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	 */
 	@Override
 	public List<DecisionEntry> findByU_H_D(long userId, boolean handled,
-		long decisionId, int start, int end,
+		long decisionEntryId, int start, int end,
 		OrderByComparator<DecisionEntry> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
@@ -5977,12 +6530,12 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 				(orderByComparator == null)) {
 			pagination = false;
 			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_U_H_D;
-			finderArgs = new Object[] { userId, handled, decisionId };
+			finderArgs = new Object[] { userId, handled, decisionEntryId };
 		}
 		else {
 			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_U_H_D;
 			finderArgs = new Object[] {
-					userId, handled, decisionId,
+					userId, handled, decisionEntryId,
 					
 					start, end, orderByComparator
 				};
@@ -5998,7 +6551,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 				for (DecisionEntry decisionEntry : list) {
 					if ((userId != decisionEntry.getUserId()) ||
 							(handled != decisionEntry.getHandled()) ||
-							(decisionId != decisionEntry.getDecisionId())) {
+							(decisionEntryId != decisionEntry.getDecisionEntryId())) {
 						list = null;
 
 						break;
@@ -6024,7 +6577,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 			query.append(_FINDER_COLUMN_U_H_D_HANDLED_2);
 
-			query.append(_FINDER_COLUMN_U_H_D_DECISIONID_2);
+			query.append(_FINDER_COLUMN_U_H_D_DECISIONENTRYID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -6050,7 +6603,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 				qPos.add(handled);
 
-				qPos.add(decisionId);
+				qPos.add(decisionEntryId);
 
 				if (!pagination) {
 					list = (List<DecisionEntry>)QueryUtil.list(q, getDialect(),
@@ -6083,21 +6636,21 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Returns the first decision entry in the ordered set where userId = &#63; and handled = &#63; and decisionId = &#63;.
+	 * Returns the first decision entry in the ordered set where userId = &#63; and handled = &#63; and decisionEntryId = &#63;.
 	 *
 	 * @param userId the user ID
 	 * @param handled the handled
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching decision entry
 	 * @throws NoSuchEntryException if a matching decision entry could not be found
 	 */
 	@Override
 	public DecisionEntry findByU_H_D_First(long userId, boolean handled,
-		long decisionId, OrderByComparator<DecisionEntry> orderByComparator)
+		long decisionEntryId, OrderByComparator<DecisionEntry> orderByComparator)
 		throws NoSuchEntryException {
 		DecisionEntry decisionEntry = fetchByU_H_D_First(userId, handled,
-				decisionId, orderByComparator);
+				decisionEntryId, orderByComparator);
 
 		if (decisionEntry != null) {
 			return decisionEntry;
@@ -6113,8 +6666,8 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 		msg.append(", handled=");
 		msg.append(handled);
 
-		msg.append(", decisionId=");
-		msg.append(decisionId);
+		msg.append(", decisionEntryId=");
+		msg.append(decisionEntryId);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -6122,19 +6675,19 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Returns the first decision entry in the ordered set where userId = &#63; and handled = &#63; and decisionId = &#63;.
+	 * Returns the first decision entry in the ordered set where userId = &#63; and handled = &#63; and decisionEntryId = &#63;.
 	 *
 	 * @param userId the user ID
 	 * @param handled the handled
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching decision entry, or <code>null</code> if a matching decision entry could not be found
 	 */
 	@Override
 	public DecisionEntry fetchByU_H_D_First(long userId, boolean handled,
-		long decisionId, OrderByComparator<DecisionEntry> orderByComparator) {
-		List<DecisionEntry> list = findByU_H_D(userId, handled, decisionId, 0,
-				1, orderByComparator);
+		long decisionEntryId, OrderByComparator<DecisionEntry> orderByComparator) {
+		List<DecisionEntry> list = findByU_H_D(userId, handled,
+				decisionEntryId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -6144,21 +6697,21 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Returns the last decision entry in the ordered set where userId = &#63; and handled = &#63; and decisionId = &#63;.
+	 * Returns the last decision entry in the ordered set where userId = &#63; and handled = &#63; and decisionEntryId = &#63;.
 	 *
 	 * @param userId the user ID
 	 * @param handled the handled
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching decision entry
 	 * @throws NoSuchEntryException if a matching decision entry could not be found
 	 */
 	@Override
 	public DecisionEntry findByU_H_D_Last(long userId, boolean handled,
-		long decisionId, OrderByComparator<DecisionEntry> orderByComparator)
+		long decisionEntryId, OrderByComparator<DecisionEntry> orderByComparator)
 		throws NoSuchEntryException {
 		DecisionEntry decisionEntry = fetchByU_H_D_Last(userId, handled,
-				decisionId, orderByComparator);
+				decisionEntryId, orderByComparator);
 
 		if (decisionEntry != null) {
 			return decisionEntry;
@@ -6174,8 +6727,8 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 		msg.append(", handled=");
 		msg.append(handled);
 
-		msg.append(", decisionId=");
-		msg.append(decisionId);
+		msg.append(", decisionEntryId=");
+		msg.append(decisionEntryId);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -6183,25 +6736,25 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Returns the last decision entry in the ordered set where userId = &#63; and handled = &#63; and decisionId = &#63;.
+	 * Returns the last decision entry in the ordered set where userId = &#63; and handled = &#63; and decisionEntryId = &#63;.
 	 *
 	 * @param userId the user ID
 	 * @param handled the handled
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching decision entry, or <code>null</code> if a matching decision entry could not be found
 	 */
 	@Override
 	public DecisionEntry fetchByU_H_D_Last(long userId, boolean handled,
-		long decisionId, OrderByComparator<DecisionEntry> orderByComparator) {
-		int count = countByU_H_D(userId, handled, decisionId);
+		long decisionEntryId, OrderByComparator<DecisionEntry> orderByComparator) {
+		int count = countByU_H_D(userId, handled, decisionEntryId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<DecisionEntry> list = findByU_H_D(userId, handled, decisionId,
-				count - 1, count, orderByComparator);
+		List<DecisionEntry> list = findByU_H_D(userId, handled,
+				decisionEntryId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -6211,33 +6764,33 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	}
 
 	/**
-	 * Removes all the decision entries where userId = &#63; and handled = &#63; and decisionId = &#63; from the database.
+	 * Removes all the decision entries where userId = &#63; and handled = &#63; and decisionEntryId = &#63; from the database.
 	 *
 	 * @param userId the user ID
 	 * @param handled the handled
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 */
 	@Override
-	public void removeByU_H_D(long userId, boolean handled, long decisionId) {
+	public void removeByU_H_D(long userId, boolean handled, long decisionEntryId) {
 		for (DecisionEntry decisionEntry : findByU_H_D(userId, handled,
-				decisionId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+				decisionEntryId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(decisionEntry);
 		}
 	}
 
 	/**
-	 * Returns the number of decision entries where userId = &#63; and handled = &#63; and decisionId = &#63;.
+	 * Returns the number of decision entries where userId = &#63; and handled = &#63; and decisionEntryId = &#63;.
 	 *
 	 * @param userId the user ID
 	 * @param handled the handled
-	 * @param decisionId the decision ID
+	 * @param decisionEntryId the decision entry ID
 	 * @return the number of matching decision entries
 	 */
 	@Override
-	public int countByU_H_D(long userId, boolean handled, long decisionId) {
+	public int countByU_H_D(long userId, boolean handled, long decisionEntryId) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_U_H_D;
 
-		Object[] finderArgs = new Object[] { userId, handled, decisionId };
+		Object[] finderArgs = new Object[] { userId, handled, decisionEntryId };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -6250,7 +6803,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 			query.append(_FINDER_COLUMN_U_H_D_HANDLED_2);
 
-			query.append(_FINDER_COLUMN_U_H_D_DECISIONID_2);
+			query.append(_FINDER_COLUMN_U_H_D_DECISIONENTRYID_2);
 
 			String sql = query.toString();
 
@@ -6267,7 +6820,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 				qPos.add(handled);
 
-				qPos.add(decisionId);
+				qPos.add(decisionEntryId);
 
 				count = (Long)q.uniqueResult();
 
@@ -6288,551 +6841,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 	private static final String _FINDER_COLUMN_U_H_D_USERID_2 = "decisionEntry.userId = ? AND ";
 	private static final String _FINDER_COLUMN_U_H_D_HANDLED_2 = "decisionEntry.handled = ? AND ";
-	private static final String _FINDER_COLUMN_U_H_D_DECISIONID_2 = "decisionEntry.decisionId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_C_H = new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
-			DecisionEntryModelImpl.FINDER_CACHE_ENABLED,
-			DecisionEntryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByC_H",
-			new String[] {
-				Long.class.getName(), Boolean.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_H = new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
-			DecisionEntryModelImpl.FINDER_CACHE_ENABLED,
-			DecisionEntryImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByC_H",
-			new String[] { Long.class.getName(), Boolean.class.getName() },
-			DecisionEntryModelImpl.COMPANYID_COLUMN_BITMASK |
-			DecisionEntryModelImpl.HANDLED_COLUMN_BITMASK |
-			DecisionEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_C_H = new FinderPath(DecisionEntryModelImpl.ENTITY_CACHE_ENABLED,
-			DecisionEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_H",
-			new String[] { Long.class.getName(), Boolean.class.getName() });
-
-	/**
-	 * Returns all the decision entries where companyId = &#63; and handled = &#63;.
-	 *
-	 * @param companyId the company ID
-	 * @param handled the handled
-	 * @return the matching decision entries
-	 */
-	@Override
-	public List<DecisionEntry> findByC_H(long companyId, boolean handled) {
-		return findByC_H(companyId, handled, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
-	}
-
-	/**
-	 * Returns a range of all the decision entries where companyId = &#63; and handled = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param companyId the company ID
-	 * @param handled the handled
-	 * @param start the lower bound of the range of decision entries
-	 * @param end the upper bound of the range of decision entries (not inclusive)
-	 * @return the range of matching decision entries
-	 */
-	@Override
-	public List<DecisionEntry> findByC_H(long companyId, boolean handled,
-		int start, int end) {
-		return findByC_H(companyId, handled, start, end, null);
-	}
-
-	/**
-	 * Returns an ordered range of all the decision entries where companyId = &#63; and handled = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param companyId the company ID
-	 * @param handled the handled
-	 * @param start the lower bound of the range of decision entries
-	 * @param end the upper bound of the range of decision entries (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching decision entries
-	 */
-	@Override
-	public List<DecisionEntry> findByC_H(long companyId, boolean handled,
-		int start, int end, OrderByComparator<DecisionEntry> orderByComparator) {
-		return findByC_H(companyId, handled, start, end, orderByComparator, true);
-	}
-
-	/**
-	 * Returns an ordered range of all the decision entries where companyId = &#63; and handled = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link DecisionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param companyId the company ID
-	 * @param handled the handled
-	 * @param start the lower bound of the range of decision entries
-	 * @param end the upper bound of the range of decision entries (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of matching decision entries
-	 */
-	@Override
-	public List<DecisionEntry> findByC_H(long companyId, boolean handled,
-		int start, int end, OrderByComparator<DecisionEntry> orderByComparator,
-		boolean retrieveFromCache) {
-		boolean pagination = true;
-		FinderPath finderPath = null;
-		Object[] finderArgs = null;
-
-		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
-			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_H;
-			finderArgs = new Object[] { companyId, handled };
-		}
-		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_C_H;
-			finderArgs = new Object[] {
-					companyId, handled,
-					
-					start, end, orderByComparator
-				};
-		}
-
-		List<DecisionEntry> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<DecisionEntry>)finderCache.getResult(finderPath,
-					finderArgs, this);
-
-			if ((list != null) && !list.isEmpty()) {
-				for (DecisionEntry decisionEntry : list) {
-					if ((companyId != decisionEntry.getCompanyId()) ||
-							(handled != decisionEntry.getHandled())) {
-						list = null;
-
-						break;
-					}
-				}
-			}
-		}
-
-		if (list == null) {
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 2));
-			}
-			else {
-				query = new StringBundler(4);
-			}
-
-			query.append(_SQL_SELECT_DECISIONENTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_C_H_COMPANYID_2);
-
-			query.append(_FINDER_COLUMN_C_H_HANDLED_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-			else
-			 if (pagination) {
-				query.append(DecisionEntryModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				qPos.add(handled);
-
-				if (!pagination) {
-					list = (List<DecisionEntry>)QueryUtil.list(q, getDialect(),
-							start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<DecisionEntry>)QueryUtil.list(q, getDialect(),
-							start, end);
-				}
-
-				cacheResult(list);
-
-				finderCache.putResult(finderPath, finderArgs, list);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	/**
-	 * Returns the first decision entry in the ordered set where companyId = &#63; and handled = &#63;.
-	 *
-	 * @param companyId the company ID
-	 * @param handled the handled
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching decision entry
-	 * @throws NoSuchEntryException if a matching decision entry could not be found
-	 */
-	@Override
-	public DecisionEntry findByC_H_First(long companyId, boolean handled,
-		OrderByComparator<DecisionEntry> orderByComparator)
-		throws NoSuchEntryException {
-		DecisionEntry decisionEntry = fetchByC_H_First(companyId, handled,
-				orderByComparator);
-
-		if (decisionEntry != null) {
-			return decisionEntry;
-		}
-
-		StringBundler msg = new StringBundler(6);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("companyId=");
-		msg.append(companyId);
-
-		msg.append(", handled=");
-		msg.append(handled);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchEntryException(msg.toString());
-	}
-
-	/**
-	 * Returns the first decision entry in the ordered set where companyId = &#63; and handled = &#63;.
-	 *
-	 * @param companyId the company ID
-	 * @param handled the handled
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching decision entry, or <code>null</code> if a matching decision entry could not be found
-	 */
-	@Override
-	public DecisionEntry fetchByC_H_First(long companyId, boolean handled,
-		OrderByComparator<DecisionEntry> orderByComparator) {
-		List<DecisionEntry> list = findByC_H(companyId, handled, 0, 1,
-				orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last decision entry in the ordered set where companyId = &#63; and handled = &#63;.
-	 *
-	 * @param companyId the company ID
-	 * @param handled the handled
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching decision entry
-	 * @throws NoSuchEntryException if a matching decision entry could not be found
-	 */
-	@Override
-	public DecisionEntry findByC_H_Last(long companyId, boolean handled,
-		OrderByComparator<DecisionEntry> orderByComparator)
-		throws NoSuchEntryException {
-		DecisionEntry decisionEntry = fetchByC_H_Last(companyId, handled,
-				orderByComparator);
-
-		if (decisionEntry != null) {
-			return decisionEntry;
-		}
-
-		StringBundler msg = new StringBundler(6);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("companyId=");
-		msg.append(companyId);
-
-		msg.append(", handled=");
-		msg.append(handled);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchEntryException(msg.toString());
-	}
-
-	/**
-	 * Returns the last decision entry in the ordered set where companyId = &#63; and handled = &#63;.
-	 *
-	 * @param companyId the company ID
-	 * @param handled the handled
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching decision entry, or <code>null</code> if a matching decision entry could not be found
-	 */
-	@Override
-	public DecisionEntry fetchByC_H_Last(long companyId, boolean handled,
-		OrderByComparator<DecisionEntry> orderByComparator) {
-		int count = countByC_H(companyId, handled);
-
-		if (count == 0) {
-			return null;
-		}
-
-		List<DecisionEntry> list = findByC_H(companyId, handled, count - 1,
-				count, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the decision entries before and after the current decision entry in the ordered set where companyId = &#63; and handled = &#63;.
-	 *
-	 * @param decisionId the primary key of the current decision entry
-	 * @param companyId the company ID
-	 * @param handled the handled
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next decision entry
-	 * @throws NoSuchEntryException if a decision entry with the primary key could not be found
-	 */
-	@Override
-	public DecisionEntry[] findByC_H_PrevAndNext(long decisionId,
-		long companyId, boolean handled,
-		OrderByComparator<DecisionEntry> orderByComparator)
-		throws NoSuchEntryException {
-		DecisionEntry decisionEntry = findByPrimaryKey(decisionId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DecisionEntry[] array = new DecisionEntryImpl[3];
-
-			array[0] = getByC_H_PrevAndNext(session, decisionEntry, companyId,
-					handled, orderByComparator, true);
-
-			array[1] = decisionEntry;
-
-			array[2] = getByC_H_PrevAndNext(session, decisionEntry, companyId,
-					handled, orderByComparator, false);
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected DecisionEntry getByC_H_PrevAndNext(Session session,
-		DecisionEntry decisionEntry, long companyId, boolean handled,
-		OrderByComparator<DecisionEntry> orderByComparator, boolean previous) {
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(5 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
-					(orderByComparator.getOrderByFields().length * 3));
-		}
-		else {
-			query = new StringBundler(4);
-		}
-
-		query.append(_SQL_SELECT_DECISIONENTRY_WHERE);
-
-		query.append(_FINDER_COLUMN_C_H_COMPANYID_2);
-
-		query.append(_FINDER_COLUMN_C_H_HANDLED_2);
-
-		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
-
-			if (orderByConditionFields.length > 0) {
-				query.append(WHERE_AND);
-			}
-
-			for (int i = 0; i < orderByConditionFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByConditionFields[i]);
-
-				if ((i + 1) < orderByConditionFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN_HAS_NEXT);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN);
-					}
-				}
-			}
-
-			query.append(ORDER_BY_CLAUSE);
-
-			String[] orderByFields = orderByComparator.getOrderByFields();
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC_HAS_NEXT);
-					}
-					else {
-						query.append(ORDER_BY_DESC_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC);
-					}
-					else {
-						query.append(ORDER_BY_DESC);
-					}
-				}
-			}
-		}
-		else {
-			query.append(DecisionEntryModelImpl.ORDER_BY_JPQL);
-		}
-
-		String sql = query.toString();
-
-		Query q = session.createQuery(sql);
-
-		q.setFirstResult(0);
-		q.setMaxResults(2);
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		qPos.add(companyId);
-
-		qPos.add(handled);
-
-		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(decisionEntry);
-
-			for (Object value : values) {
-				qPos.add(value);
-			}
-		}
-
-		List<DecisionEntry> list = q.list();
-
-		if (list.size() == 2) {
-			return list.get(1);
-		}
-		else {
-			return null;
-		}
-	}
-
-	/**
-	 * Removes all the decision entries where companyId = &#63; and handled = &#63; from the database.
-	 *
-	 * @param companyId the company ID
-	 * @param handled the handled
-	 */
-	@Override
-	public void removeByC_H(long companyId, boolean handled) {
-		for (DecisionEntry decisionEntry : findByC_H(companyId, handled,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
-			remove(decisionEntry);
-		}
-	}
-
-	/**
-	 * Returns the number of decision entries where companyId = &#63; and handled = &#63;.
-	 *
-	 * @param companyId the company ID
-	 * @param handled the handled
-	 * @return the number of matching decision entries
-	 */
-	@Override
-	public int countByC_H(long companyId, boolean handled) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_H;
-
-		Object[] finderArgs = new Object[] { companyId, handled };
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_COUNT_DECISIONENTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_C_H_COMPANYID_2);
-
-			query.append(_FINDER_COLUMN_C_H_HANDLED_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				qPos.add(handled);
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_C_H_COMPANYID_2 = "decisionEntry.companyId = ? AND ";
-	private static final String _FINDER_COLUMN_C_H_HANDLED_2 = "decisionEntry.handled = ?";
+	private static final String _FINDER_COLUMN_U_H_D_DECISIONENTRYID_2 = "decisionEntry.decisionEntryId = ?";
 
 	public DecisionEntryPersistenceImpl() {
 		setModelClass(DecisionEntry.class);
@@ -6917,15 +6926,15 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	/**
 	 * Creates a new decision entry with the primary key. Does not add the decision entry to the database.
 	 *
-	 * @param decisionId the primary key for the new decision entry
+	 * @param decisionEntryId the primary key for the new decision entry
 	 * @return the new decision entry
 	 */
 	@Override
-	public DecisionEntry create(long decisionId) {
+	public DecisionEntry create(long decisionEntryId) {
 		DecisionEntry decisionEntry = new DecisionEntryImpl();
 
 		decisionEntry.setNew(true);
-		decisionEntry.setPrimaryKey(decisionId);
+		decisionEntry.setPrimaryKey(decisionEntryId);
 
 		String uuid = PortalUUIDUtil.generate();
 
@@ -6939,13 +6948,14 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	/**
 	 * Removes the decision entry with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param decisionId the primary key of the decision entry
+	 * @param decisionEntryId the primary key of the decision entry
 	 * @return the decision entry that was removed
 	 * @throws NoSuchEntryException if a decision entry with the primary key could not be found
 	 */
 	@Override
-	public DecisionEntry remove(long decisionId) throws NoSuchEntryException {
-		return remove((Serializable)decisionId);
+	public DecisionEntry remove(long decisionEntryId)
+		throws NoSuchEntryException {
+		return remove((Serializable)decisionEntryId);
 	}
 
 	/**
@@ -7124,23 +7134,6 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 			}
 
 			if ((decisionEntryModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_DECISIONID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						decisionEntryModelImpl.getOriginalDecisionId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_DECISIONID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_DECISIONID,
-					args);
-
-				args = new Object[] { decisionEntryModelImpl.getDecisionId() };
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_DECISIONID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_DECISIONID,
-					args);
-			}
-
-			if ((decisionEntryModelImpl.getColumnBitmask() &
 					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
 						decisionEntryModelImpl.getOriginalCompanyId()
@@ -7154,6 +7147,42 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 
 				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMPANYID, args);
 				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
+					args);
+			}
+
+			if ((decisionEntryModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_DECISIONENTRYID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						decisionEntryModelImpl.getOriginalDecisionEntryId()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_DECISIONENTRYID,
+					args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_DECISIONENTRYID,
+					args);
+
+				args = new Object[] { decisionEntryModelImpl.getDecisionEntryId() };
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_DECISIONENTRYID,
+					args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_DECISIONENTRYID,
+					args);
+			}
+
+			if ((decisionEntryModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_OUTCOME.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						decisionEntryModelImpl.getOriginalOutcome()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_OUTCOME, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_OUTCOME,
+					args);
+
+				args = new Object[] { decisionEntryModelImpl.getOutcome() };
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_OUTCOME, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_OUTCOME,
 					args);
 			}
 
@@ -7192,26 +7221,30 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 			}
 
 			if ((decisionEntryModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_OUTCOME.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_H.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						decisionEntryModelImpl.getOriginalOutcome()
+						decisionEntryModelImpl.getOriginalCompanyId(),
+						decisionEntryModelImpl.getOriginalHandled()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_OUTCOME, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_OUTCOME,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_H, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_H,
 					args);
 
-				args = new Object[] { decisionEntryModelImpl.getOutcome() };
+				args = new Object[] {
+						decisionEntryModelImpl.getCompanyId(),
+						decisionEntryModelImpl.getHandled()
+					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_OUTCOME, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_OUTCOME,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_H, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_H,
 					args);
 			}
 
 			if ((decisionEntryModelImpl.getColumnBitmask() &
 					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_D_C.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						decisionEntryModelImpl.getOriginalDecisionId(),
+						decisionEntryModelImpl.getOriginalDecisionEntryId(),
 						decisionEntryModelImpl.getOriginalCompanyId()
 					};
 
@@ -7220,7 +7253,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 					args);
 
 				args = new Object[] {
-						decisionEntryModelImpl.getDecisionId(),
+						decisionEntryModelImpl.getDecisionEntryId(),
 						decisionEntryModelImpl.getCompanyId()
 					};
 
@@ -7232,7 +7265,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 			if ((decisionEntryModelImpl.getColumnBitmask() &
 					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_D_H.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						decisionEntryModelImpl.getOriginalDecisionId(),
+						decisionEntryModelImpl.getOriginalDecisionEntryId(),
 						decisionEntryModelImpl.getOriginalHandled()
 					};
 
@@ -7241,7 +7274,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 					args);
 
 				args = new Object[] {
-						decisionEntryModelImpl.getDecisionId(),
+						decisionEntryModelImpl.getDecisionEntryId(),
 						decisionEntryModelImpl.getHandled()
 					};
 
@@ -7253,7 +7286,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 			if ((decisionEntryModelImpl.getColumnBitmask() &
 					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_D_U.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						decisionEntryModelImpl.getOriginalDecisionId(),
+						decisionEntryModelImpl.getOriginalDecisionEntryId(),
 						decisionEntryModelImpl.getOriginalUserId()
 					};
 
@@ -7262,7 +7295,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 					args);
 
 				args = new Object[] {
-						decisionEntryModelImpl.getDecisionId(),
+						decisionEntryModelImpl.getDecisionEntryId(),
 						decisionEntryModelImpl.getUserId()
 					};
 
@@ -7274,7 +7307,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 			if ((decisionEntryModelImpl.getColumnBitmask() &
 					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_D_U_C.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						decisionEntryModelImpl.getOriginalDecisionId(),
+						decisionEntryModelImpl.getOriginalDecisionEntryId(),
 						decisionEntryModelImpl.getOriginalUserId(),
 						decisionEntryModelImpl.getOriginalCompanyId()
 					};
@@ -7284,7 +7317,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 					args);
 
 				args = new Object[] {
-						decisionEntryModelImpl.getDecisionId(),
+						decisionEntryModelImpl.getDecisionEntryId(),
 						decisionEntryModelImpl.getUserId(),
 						decisionEntryModelImpl.getCompanyId()
 					};
@@ -7320,7 +7353,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 				Object[] args = new Object[] {
 						decisionEntryModelImpl.getOriginalUserId(),
 						decisionEntryModelImpl.getOriginalHandled(),
-						decisionEntryModelImpl.getOriginalDecisionId()
+						decisionEntryModelImpl.getOriginalDecisionEntryId()
 					};
 
 				finderCache.removeResult(FINDER_PATH_COUNT_BY_U_H_D, args);
@@ -7330,32 +7363,11 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 				args = new Object[] {
 						decisionEntryModelImpl.getUserId(),
 						decisionEntryModelImpl.getHandled(),
-						decisionEntryModelImpl.getDecisionId()
+						decisionEntryModelImpl.getDecisionEntryId()
 					};
 
 				finderCache.removeResult(FINDER_PATH_COUNT_BY_U_H_D, args);
 				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_U_H_D,
-					args);
-			}
-
-			if ((decisionEntryModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_H.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						decisionEntryModelImpl.getOriginalCompanyId(),
-						decisionEntryModelImpl.getOriginalHandled()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_H, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_H,
-					args);
-
-				args = new Object[] {
-						decisionEntryModelImpl.getCompanyId(),
-						decisionEntryModelImpl.getHandled()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_H, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_H,
 					args);
 			}
 		}
@@ -7380,7 +7392,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 		decisionEntryImpl.setPrimaryKey(decisionEntry.getPrimaryKey());
 
 		decisionEntryImpl.setUuid(decisionEntry.getUuid());
-		decisionEntryImpl.setDecisionId(decisionEntry.getDecisionId());
+		decisionEntryImpl.setDecisionEntryId(decisionEntry.getDecisionEntryId());
 		decisionEntryImpl.setCompanyId(decisionEntry.getCompanyId());
 		decisionEntryImpl.setUserId(decisionEntry.getUserId());
 		decisionEntryImpl.setUserName(decisionEntry.getUserName());
@@ -7422,14 +7434,14 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	/**
 	 * Returns the decision entry with the primary key or throws a {@link NoSuchEntryException} if it could not be found.
 	 *
-	 * @param decisionId the primary key of the decision entry
+	 * @param decisionEntryId the primary key of the decision entry
 	 * @return the decision entry
 	 * @throws NoSuchEntryException if a decision entry with the primary key could not be found
 	 */
 	@Override
-	public DecisionEntry findByPrimaryKey(long decisionId)
+	public DecisionEntry findByPrimaryKey(long decisionEntryId)
 		throws NoSuchEntryException {
-		return findByPrimaryKey((Serializable)decisionId);
+		return findByPrimaryKey((Serializable)decisionEntryId);
 	}
 
 	/**
@@ -7483,12 +7495,12 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	/**
 	 * Returns the decision entry with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param decisionId the primary key of the decision entry
+	 * @param decisionEntryId the primary key of the decision entry
 	 * @return the decision entry, or <code>null</code> if a decision entry with the primary key could not be found
 	 */
 	@Override
-	public DecisionEntry fetchByPrimaryKey(long decisionId) {
-		return fetchByPrimaryKey((Serializable)decisionId);
+	public DecisionEntry fetchByPrimaryKey(long decisionEntryId) {
+		return fetchByPrimaryKey((Serializable)decisionEntryId);
 	}
 
 	@Override
@@ -7806,7 +7818,7 @@ public class DecisionEntryPersistenceImpl extends BasePersistenceImpl<DecisionEn
 	@ServiceReference(type = FinderCache.class)
 	protected FinderCache finderCache;
 	private static final String _SQL_SELECT_DECISIONENTRY = "SELECT decisionEntry FROM DecisionEntry decisionEntry";
-	private static final String _SQL_SELECT_DECISIONENTRY_WHERE_PKS_IN = "SELECT decisionEntry FROM DecisionEntry decisionEntry WHERE decisionId IN (";
+	private static final String _SQL_SELECT_DECISIONENTRY_WHERE_PKS_IN = "SELECT decisionEntry FROM DecisionEntry decisionEntry WHERE decisionEntryId IN (";
 	private static final String _SQL_SELECT_DECISIONENTRY_WHERE = "SELECT decisionEntry FROM DecisionEntry decisionEntry WHERE ";
 	private static final String _SQL_COUNT_DECISIONENTRY = "SELECT COUNT(decisionEntry) FROM DecisionEntry decisionEntry";
 	private static final String _SQL_COUNT_DECISIONENTRY_WHERE = "SELECT COUNT(decisionEntry) FROM DecisionEntry decisionEntry WHERE ";

@@ -37,10 +37,11 @@ public interface AnalysisEntry extends AnalysisEntryModel, PersistedModel {
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.liferay.micro.maintainance.analysis.model.impl.AnalysisEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<AnalysisEntry, Long> ANALYSIS_ID_ACCESSOR = new Accessor<AnalysisEntry, Long>() {
+	public static final Accessor<AnalysisEntry, Long> ANALYSIS_ENTRY_ID_ACCESSOR =
+		new Accessor<AnalysisEntry, Long>() {
 			@Override
 			public Long get(AnalysisEntry analysisEntry) {
-				return analysisEntry.getAnalysisId();
+				return analysisEntry.getAnalysisEntryId();
 			}
 
 			@Override

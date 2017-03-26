@@ -75,7 +75,7 @@ public class DecisionEntryModelImpl extends BaseModelImpl<DecisionEntry>
 	public static final String TABLE_NAME = "Decision_DecisionEntry";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", Types.VARCHAR },
-			{ "decisionId", Types.BIGINT },
+			{ "decisionEntryId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
@@ -91,7 +91,7 @@ public class DecisionEntryModelImpl extends BaseModelImpl<DecisionEntry>
 
 	static {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("decisionId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("decisionEntryId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
@@ -104,7 +104,7 @@ public class DecisionEntryModelImpl extends BaseModelImpl<DecisionEntry>
 		TABLE_COLUMNS_MAP.put("handled", Types.BOOLEAN);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table Decision_DecisionEntry (uuid_ VARCHAR(75) null,decisionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,analysisData VARCHAR(75) null,wikiPageId LONG,wikiPageName VARCHAR(75) null,outcome VARCHAR(75) null,handled BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table Decision_DecisionEntry (uuid_ VARCHAR(75) null,decisionEntryId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,analysisData VARCHAR(75) null,wikiPageId LONG,wikiPageName VARCHAR(75) null,outcome VARCHAR(75) null,handled BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table Decision_DecisionEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY decisionEntry.createDate ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Decision_DecisionEntry.createDate ASC";
@@ -121,7 +121,7 @@ public class DecisionEntryModelImpl extends BaseModelImpl<DecisionEntry>
 				"value.object.column.bitmask.enabled.com.liferay.micro.maintainance.decision.model.DecisionEntry"),
 			true);
 	public static final long COMPANYID_COLUMN_BITMASK = 1L;
-	public static final long DECISIONID_COLUMN_BITMASK = 2L;
+	public static final long DECISIONENTRYID_COLUMN_BITMASK = 2L;
 	public static final long HANDLED_COLUMN_BITMASK = 4L;
 	public static final long OUTCOME_COLUMN_BITMASK = 8L;
 	public static final long USERID_COLUMN_BITMASK = 16L;
@@ -144,7 +144,7 @@ public class DecisionEntryModelImpl extends BaseModelImpl<DecisionEntry>
 		DecisionEntry model = new DecisionEntryImpl();
 
 		model.setUuid(soapModel.getUuid());
-		model.setDecisionId(soapModel.getDecisionId());
+		model.setDecisionEntryId(soapModel.getDecisionEntryId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -187,17 +187,17 @@ public class DecisionEntryModelImpl extends BaseModelImpl<DecisionEntry>
 
 	@Override
 	public long getPrimaryKey() {
-		return _decisionId;
+		return _decisionEntryId;
 	}
 
 	@Override
 	public void setPrimaryKey(long primaryKey) {
-		setDecisionId(primaryKey);
+		setDecisionEntryId(primaryKey);
 	}
 
 	@Override
 	public Serializable getPrimaryKeyObj() {
-		return _decisionId;
+		return _decisionEntryId;
 	}
 
 	@Override
@@ -220,7 +220,7 @@ public class DecisionEntryModelImpl extends BaseModelImpl<DecisionEntry>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
-		attributes.put("decisionId", getDecisionId());
+		attributes.put("decisionEntryId", getDecisionEntryId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -246,10 +246,10 @@ public class DecisionEntryModelImpl extends BaseModelImpl<DecisionEntry>
 			setUuid(uuid);
 		}
 
-		Long decisionId = (Long)attributes.get("decisionId");
+		Long decisionEntryId = (Long)attributes.get("decisionEntryId");
 
-		if (decisionId != null) {
-			setDecisionId(decisionId);
+		if (decisionEntryId != null) {
+			setDecisionEntryId(decisionEntryId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -339,25 +339,25 @@ public class DecisionEntryModelImpl extends BaseModelImpl<DecisionEntry>
 
 	@JSON
 	@Override
-	public long getDecisionId() {
-		return _decisionId;
+	public long getDecisionEntryId() {
+		return _decisionEntryId;
 	}
 
 	@Override
-	public void setDecisionId(long decisionId) {
-		_columnBitmask |= DECISIONID_COLUMN_BITMASK;
+	public void setDecisionEntryId(long decisionEntryId) {
+		_columnBitmask |= DECISIONENTRYID_COLUMN_BITMASK;
 
-		if (!_setOriginalDecisionId) {
-			_setOriginalDecisionId = true;
+		if (!_setOriginalDecisionEntryId) {
+			_setOriginalDecisionEntryId = true;
 
-			_originalDecisionId = _decisionId;
+			_originalDecisionEntryId = _decisionEntryId;
 		}
 
-		_decisionId = decisionId;
+		_decisionEntryId = decisionEntryId;
 	}
 
-	public long getOriginalDecisionId() {
-		return _originalDecisionId;
+	public long getOriginalDecisionEntryId() {
+		return _originalDecisionEntryId;
 	}
 
 	@JSON
@@ -626,7 +626,7 @@ public class DecisionEntryModelImpl extends BaseModelImpl<DecisionEntry>
 		DecisionEntryImpl decisionEntryImpl = new DecisionEntryImpl();
 
 		decisionEntryImpl.setUuid(getUuid());
-		decisionEntryImpl.setDecisionId(getDecisionId());
+		decisionEntryImpl.setDecisionEntryId(getDecisionEntryId());
 		decisionEntryImpl.setCompanyId(getCompanyId());
 		decisionEntryImpl.setUserId(getUserId());
 		decisionEntryImpl.setUserName(getUserName());
@@ -700,9 +700,9 @@ public class DecisionEntryModelImpl extends BaseModelImpl<DecisionEntry>
 
 		decisionEntryModelImpl._originalUuid = decisionEntryModelImpl._uuid;
 
-		decisionEntryModelImpl._originalDecisionId = decisionEntryModelImpl._decisionId;
+		decisionEntryModelImpl._originalDecisionEntryId = decisionEntryModelImpl._decisionEntryId;
 
-		decisionEntryModelImpl._setOriginalDecisionId = false;
+		decisionEntryModelImpl._setOriginalDecisionEntryId = false;
 
 		decisionEntryModelImpl._originalCompanyId = decisionEntryModelImpl._companyId;
 
@@ -741,7 +741,7 @@ public class DecisionEntryModelImpl extends BaseModelImpl<DecisionEntry>
 			decisionEntryCacheModel.uuid = null;
 		}
 
-		decisionEntryCacheModel.decisionId = getDecisionId();
+		decisionEntryCacheModel.decisionEntryId = getDecisionEntryId();
 
 		decisionEntryCacheModel.companyId = getCompanyId();
 
@@ -810,8 +810,8 @@ public class DecisionEntryModelImpl extends BaseModelImpl<DecisionEntry>
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
-		sb.append(", decisionId=");
-		sb.append(getDecisionId());
+		sb.append(", decisionEntryId=");
+		sb.append(getDecisionEntryId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -850,8 +850,8 @@ public class DecisionEntryModelImpl extends BaseModelImpl<DecisionEntry>
 		sb.append(getUuid());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>decisionId</column-name><column-value><![CDATA[");
-		sb.append(getDecisionId());
+			"<column><column-name>decisionEntryId</column-name><column-value><![CDATA[");
+		sb.append(getDecisionEntryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -905,9 +905,9 @@ public class DecisionEntryModelImpl extends BaseModelImpl<DecisionEntry>
 		};
 	private String _uuid;
 	private String _originalUuid;
-	private long _decisionId;
-	private long _originalDecisionId;
-	private boolean _setOriginalDecisionId;
+	private long _decisionEntryId;
+	private long _originalDecisionEntryId;
+	private boolean _setOriginalDecisionEntryId;
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;

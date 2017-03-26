@@ -78,12 +78,12 @@ public class CandidateEntryLocalServiceUtil {
 	/**
 	* Creates a new candidate entry with the primary key. Does not add the candidate entry to the database.
 	*
-	* @param entryId the primary key for the new candidate entry
+	* @param candidateEntryId the primary key for the new candidate entry
 	* @return the new candidate entry
 	*/
 	public static com.liferay.micro.maintainance.candidate.model.CandidateEntry createCandidateEntry(
-		long entryId) {
-		return getService().createCandidateEntry(entryId);
+		long candidateEntryId) {
+		return getService().createCandidateEntry(candidateEntryId);
 	}
 
 	/**
@@ -100,19 +100,19 @@ public class CandidateEntryLocalServiceUtil {
 	/**
 	* Deletes the candidate entry with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param entryId the primary key of the candidate entry
+	* @param candidateEntryId the primary key of the candidate entry
 	* @return the candidate entry that was removed
 	* @throws PortalException if a candidate entry with the primary key could not be found
 	*/
 	public static com.liferay.micro.maintainance.candidate.model.CandidateEntry deleteCandidateEntry(
-		long entryId)
+		long candidateEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().deleteCandidateEntry(entryId);
+		return getService().deleteCandidateEntry(candidateEntryId);
 	}
 
 	public static com.liferay.micro.maintainance.candidate.model.CandidateEntry fetchCandidateEntry(
-		long entryId) {
-		return getService().fetchCandidateEntry(entryId);
+		long candidateEntryId) {
+		return getService().fetchCandidateEntry(candidateEntryId);
 	}
 
 	/**
@@ -135,14 +135,14 @@ public class CandidateEntryLocalServiceUtil {
 	/**
 	* Returns the candidate entry with the primary key.
 	*
-	* @param entryId the primary key of the candidate entry
+	* @param candidateEntryId the primary key of the candidate entry
 	* @return the candidate entry
 	* @throws PortalException if a candidate entry with the primary key could not be found
 	*/
 	public static com.liferay.micro.maintainance.candidate.model.CandidateEntry getCandidateEntry(
-		long entryId)
+		long candidateEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCandidateEntry(entryId);
+		return getService().getCandidateEntry(candidateEntryId);
 	}
 
 	/**

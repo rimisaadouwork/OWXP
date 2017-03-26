@@ -1,7 +1,7 @@
-create index IX_C7569E52 on Task_CandidateMaintenance (candidateId, taskId);
-create index IX_4FC32244 on Task_CandidateMaintenance (taskId);
+create index IX_B9E112EA on Task_CandidateMaintenance (candidateEntryId, taskEntryId);
+create index IX_2CBF5AC8 on Task_CandidateMaintenance (taskEntryId);
 create index IX_FE335264 on Task_CandidateMaintenance (uuid_[$COLUMN_LENGTH:75$]);
 
-create index IX_B13E96AD on Task_TaskEntry (taskId);
-create index IX_6471201D on Task_TaskEntry (taskName[$COLUMN_LENGTH:75$]);
+create index IX_25793FFF on Task_TaskEntry (taskEntryId);
+create index IX_B4A6BCEF on Task_TaskEntry (taskEntryName[$COLUMN_LENGTH:75$]);
 create index IX_6CB32CDB on Task_TaskEntry (uuid_[$COLUMN_LENGTH:75$]);

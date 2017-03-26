@@ -78,7 +78,7 @@ public interface DecisionEntryLocalService extends BaseLocalService,
 	*
 	* @param userId: the id of the user who flagged the page
 	* @param analysisData: the gathered votes
-	* @param candidateId: the id of the candidate entry belonging to the
+	* @param candidateEntryId: the id of the candidate entry belonging to the
 	flagged wiki page
 	* @param outcome: the actions to be taken
 	* @param handled: indicates if the actions could be executed
@@ -86,16 +86,16 @@ public interface DecisionEntryLocalService extends BaseLocalService,
 	* @throws PortalException
 	*/
 	public DecisionEntry addDecisionEntry(long userId,
-		java.lang.String analysisData, long candidateId,
+		java.lang.String analysisData, long candidateEntryId,
 		java.lang.String outcome, boolean handled) throws PortalException;
 
 	/**
 	* Creates a new decision entry with the primary key. Does not add the decision entry to the database.
 	*
-	* @param decisionId the primary key for the new decision entry
+	* @param decisionEntryId the primary key for the new decision entry
 	* @return the new decision entry
 	*/
-	public DecisionEntry createDecisionEntry(long decisionId);
+	public DecisionEntry createDecisionEntry(long decisionEntryId);
 
 	/**
 	* Deletes the decision entry from the database. Also notifies the appropriate model listeners.
@@ -109,16 +109,16 @@ public interface DecisionEntryLocalService extends BaseLocalService,
 	/**
 	* Deletes the decision entry with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param decisionId the primary key of the decision entry
+	* @param decisionEntryId the primary key of the decision entry
 	* @return the decision entry that was removed
 	* @throws PortalException if a decision entry with the primary key could not be found
 	*/
 	@Indexable(type = IndexableType.DELETE)
-	public DecisionEntry deleteDecisionEntry(long decisionId)
+	public DecisionEntry deleteDecisionEntry(long decisionEntryId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public DecisionEntry fetchDecisionEntry(long decisionId);
+	public DecisionEntry fetchDecisionEntry(long decisionEntryId);
 
 	/**
 	* Returns the decision entry with the matching UUID and company.
@@ -134,12 +134,12 @@ public interface DecisionEntryLocalService extends BaseLocalService,
 	/**
 	* Returns the decision entry with the primary key.
 	*
-	* @param decisionId the primary key of the decision entry
+	* @param decisionEntryId the primary key of the decision entry
 	* @return the decision entry
 	* @throws PortalException if a decision entry with the primary key could not be found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public DecisionEntry getDecisionEntry(long decisionId)
+	public DecisionEntry getDecisionEntry(long decisionEntryId)
 		throws PortalException;
 
 	/**

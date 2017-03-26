@@ -78,18 +78,18 @@ public interface TaskEntryModel extends BaseModel<TaskEntry> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Returns the task ID of this task entry.
+	 * Returns the task entry ID of this task entry.
 	 *
-	 * @return the task ID of this task entry
+	 * @return the task entry ID of this task entry
 	 */
-	public long getTaskId();
+	public long getTaskEntryId();
 
 	/**
-	 * Sets the task ID of this task entry.
+	 * Sets the task entry ID of this task entry.
 	 *
-	 * @param taskId the task ID of this task entry
+	 * @param taskEntryId the task entry ID of this task entry
 	 */
-	public void setTaskId(long taskId);
+	public void setTaskEntryId(long taskEntryId);
 
 	/**
 	 * Returns the create date of this task entry.
@@ -106,19 +106,19 @@ public interface TaskEntryModel extends BaseModel<TaskEntry> {
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Returns the task name of this task entry.
+	 * Returns the task entry name of this task entry.
 	 *
-	 * @return the task name of this task entry
+	 * @return the task entry name of this task entry
 	 */
 	@AutoEscape
-	public String getTaskName();
+	public String getTaskEntryName();
 
 	/**
-	 * Sets the task name of this task entry.
+	 * Sets the task entry name of this task entry.
 	 *
-	 * @param taskName the task name of this task entry
+	 * @param taskEntryName the task entry name of this task entry
 	 */
-	public void setTaskName(String taskName);
+	public void setTaskEntryName(String taskEntryName);
 
 	@Override
 	public boolean isNew();

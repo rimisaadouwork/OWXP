@@ -58,9 +58,9 @@ public class TaskEntryWrapper implements TaskEntry, ModelWrapper<TaskEntry> {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
-		attributes.put("taskId", getTaskId());
+		attributes.put("taskEntryId", getTaskEntryId());
 		attributes.put("createDate", getCreateDate());
-		attributes.put("taskName", getTaskName());
+		attributes.put("taskEntryName", getTaskEntryName());
 
 		return attributes;
 	}
@@ -73,10 +73,10 @@ public class TaskEntryWrapper implements TaskEntry, ModelWrapper<TaskEntry> {
 			setUuid(uuid);
 		}
 
-		Long taskId = (Long)attributes.get("taskId");
+		Long taskEntryId = (Long)attributes.get("taskEntryId");
 
-		if (taskId != null) {
-			setTaskId(taskId);
+		if (taskEntryId != null) {
+			setTaskEntryId(taskEntryId);
 		}
 
 		Date createDate = (Date)attributes.get("createDate");
@@ -85,10 +85,10 @@ public class TaskEntryWrapper implements TaskEntry, ModelWrapper<TaskEntry> {
 			setCreateDate(createDate);
 		}
 
-		String taskName = (String)attributes.get("taskName");
+		String taskEntryName = (String)attributes.get("taskEntryName");
 
-		if (taskName != null) {
-			setTaskName(taskName);
+		if (taskEntryName != null) {
+			setTaskEntryName(taskEntryName);
 		}
 	}
 
@@ -148,13 +148,13 @@ public class TaskEntryWrapper implements TaskEntry, ModelWrapper<TaskEntry> {
 	}
 
 	/**
-	* Returns the task name of this task entry.
+	* Returns the task entry name of this task entry.
 	*
-	* @return the task name of this task entry
+	* @return the task entry name of this task entry
 	*/
 	@Override
-	public java.lang.String getTaskName() {
-		return _taskEntry.getTaskName();
+	public java.lang.String getTaskEntryName() {
+		return _taskEntry.getTaskEntryName();
 	}
 
 	/**
@@ -198,13 +198,13 @@ public class TaskEntryWrapper implements TaskEntry, ModelWrapper<TaskEntry> {
 	}
 
 	/**
-	* Returns the task ID of this task entry.
+	* Returns the task entry ID of this task entry.
 	*
-	* @return the task ID of this task entry
+	* @return the task entry ID of this task entry
 	*/
 	@Override
-	public long getTaskId() {
-		return _taskEntry.getTaskId();
+	public long getTaskEntryId() {
+		return _taskEntry.getTaskEntryId();
 	}
 
 	@Override
@@ -264,23 +264,23 @@ public class TaskEntryWrapper implements TaskEntry, ModelWrapper<TaskEntry> {
 	}
 
 	/**
-	* Sets the task ID of this task entry.
+	* Sets the task entry ID of this task entry.
 	*
-	* @param taskId the task ID of this task entry
+	* @param taskEntryId the task entry ID of this task entry
 	*/
 	@Override
-	public void setTaskId(long taskId) {
-		_taskEntry.setTaskId(taskId);
+	public void setTaskEntryId(long taskEntryId) {
+		_taskEntry.setTaskEntryId(taskEntryId);
 	}
 
 	/**
-	* Sets the task name of this task entry.
+	* Sets the task entry name of this task entry.
 	*
-	* @param taskName the task name of this task entry
+	* @param taskEntryName the task entry name of this task entry
 	*/
 	@Override
-	public void setTaskName(java.lang.String taskName) {
-		_taskEntry.setTaskName(taskName);
+	public void setTaskEntryName(java.lang.String taskEntryName) {
+		_taskEntry.setTaskEntryName(taskEntryName);
 	}
 
 	/**
