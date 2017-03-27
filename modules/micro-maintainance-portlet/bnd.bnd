@@ -2,13 +2,14 @@ Bundle-SymbolicName: micro.maintainance.portlet
 
 Bundle-Version: 1.0.0.${tstamp}
 
-Import-Package: \
-	javax.portlet;version='[2.0,3)',\
-	javax.servlet;version='[2.5,4)',\
-	*
-
-
-Export-Package: \
-	com.liferay.micro.maintainance.util,\
+Export-Package:\
+	com.liferay.micro.maintainance.actio,\
 	com.liferay.micro.maintainance.task,\
-	com.liferay.micro.maintainance.action
+	com.liferay.micro.maintainance.util
+
+
+Import-Package:\
+	javax.portlet;version='[2.0,3)',\
+	\
+	javax.servlet;version='[2.5,4)',\
+	*n

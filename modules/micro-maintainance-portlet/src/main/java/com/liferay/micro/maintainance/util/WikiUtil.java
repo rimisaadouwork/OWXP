@@ -11,17 +11,21 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.wiki.model.WikiPage;
 import com.liferay.wiki.service.WikiPageLocalServiceUtil;
 
+/**
+ * @author Rimi Saadou
+ * @author Laszlo Hudak
+ */
 public class WikiUtil {
 
-	public static WikiPage getWikiPageByAnalysis(long analysisId) 
+	public static WikiPage getWikiPageByAnalysis(long analysisEntryId)
 		throws PortalException {
 
-		AnalysisEntry analysisEntry = 
-			AnalysisEntryLocalServiceUtil.getAnalysisEntry(analysisId);
+		AnalysisEntry analysisEntry =
+			AnalysisEntryLocalServiceUtil.getAnalysisEntry(analysisEntryId);
 
 		if (Validator.isNotNull(analysisEntry)) {
 			return getWikiPageByCandiadteMaintenacne(
-				analysisEntry.getCanMainId());
+				analysisEntry.getCandidateMaintenanceId());
 		}
 
 		return null;
@@ -29,7 +33,8 @@ public class WikiUtil {
 
 	public static WikiPage getWikiPageByCandiadte(long candidateId)
 		throws PortalException {
-		CandidateEntry candidateEntry = 
+
+		CandidateEntry candidateEntry =
 			CandidateEntryLocalServiceUtil.getCandidateEntry(candidateId);
 
 		if (Validator.isNotNull(candidateEntry)) {
@@ -40,17 +45,19 @@ public class WikiUtil {
 		return null;
 	}
 
-	public static WikiPage getWikiPageByCandiadteMaintenacne(long canMainId)
+	public static WikiPage getWikiPageByCandiadteMaintenacne(long candidateMaintenanceId)
 		throws PortalException {
 
-		CandidateMaintenance canMain = 
-			CandidateMaintenanceLocalServiceUtil
-				.getCandidateMaintenance(canMainId);
+		CandidateMaintenance candidateMaintenance =
+			CandidateMaintenanceLocalServiceUtil.getCandidateMaintenance(
+				candidateMaintenanceId);
 
-		if (Validator.isNotNull(canMain)) {
-			return getWikiPageByCandiadte(canMain.getCandidateId());
+		if (Validator.isNotNull(candidateMaintenance)) {
+			return getWikiPageByCandiadte(
+				candidateMaintenance.getCandidateEntryId());
 		}
 
 		return null;
 	}
+
 }

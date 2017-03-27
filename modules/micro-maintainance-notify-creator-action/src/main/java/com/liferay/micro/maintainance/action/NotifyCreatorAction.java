@@ -1,7 +1,5 @@
 package com.liferay.micro.maintainance.action;
 
-import javax.mail.internet.InternetAddress;
-
 import com.liferay.mail.kernel.model.MailMessage;
 import com.liferay.mail.kernel.service.MailServiceUtil;
 import com.liferay.micro.maintainance.analysis.model.AnalysisEntry;
@@ -13,23 +11,28 @@ import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.wiki.model.WikiPage;
 
+import javax.mail.internet.InternetAddress;
+
+/**
+ * @author Rimi Saadou
+ * @author Laszlo Hudak
+ */
 public class NotifyCreatorAction implements Action {
 
 	@Override
 	public boolean performAction(AnalysisEntry analysisEntry) {
-
 		try {
 			long companyId = CompanyThreadLocal.getCompanyId();
 
 			WikiPage wikiPage = WikiUtil.getWikiPageByAnalysis(
-				analysisEntry.getCanMainId());
+				analysisEntry.getCandidateMaintenanceId());
 
 			User user = UserLocalServiceUtil.getUser(wikiPage.getUserId());
 
 			User sender = UserLocalServiceUtil.getUserByScreenName(
 				companyId, "glados");
 
-			if(Validator.isNull(sender)) {
+			if (Validator.isNull(sender)) {
 				sender = UserLocalServiceUtil.getDefaultUser(companyId);
 			}
 
@@ -38,10 +41,11 @@ public class NotifyCreatorAction implements Action {
 
 			_sendMail(
 				sender.getEmailAddress(), sender.getFullName(),
-				user.getEmailAddress(), SUBJECT, body);
+				user.getEmailAddress(), _SUBJECT, body);
 
 			return true;
-		} catch (Exception px) {
+		}
+		catch (Exception px) {
 		}
 
 		return false;
@@ -49,7 +53,7 @@ public class NotifyCreatorAction implements Action {
 
 	private void _sendMail(
 			String fromAddress, String fromName, String toAddres,
-			String subject, String body) 
+			String subject, String body)
 		throws Exception {
 
 		InternetAddress fromInternetAddress = new InternetAddress(
@@ -58,13 +62,13 @@ public class NotifyCreatorAction implements Action {
 		MailMessage mailMessage = new MailMessage(
 			fromInternetAddress, subject, body, true);
 
-		InternetAddress toInternetAddress = new InternetAddress(
-			toAddres);
+		InternetAddress toInternetAddress = new InternetAddress(toAddres);
 
 		mailMessage.setTo(toInternetAddress);
 
 		MailServiceUtil.sendEmail(mailMessage);
 	}
 
-	private final static String SUBJECT = "Outdated page";
+	private static final String _SUBJECT = "Outdated page";
+
 }

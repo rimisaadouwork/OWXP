@@ -11,6 +11,10 @@ import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
 
+/**
+ * @author Rimi Saadou
+ * @author Laszlo Hudak
+ */
 @Component(
 	immediate = true,
 	property = {
@@ -25,11 +29,12 @@ public class NotifyCreatorActionPortlet extends GenericPortlet {
 
 	@Override
 	protected void doView(RenderRequest request, RenderResponse response)
-		throws PortletException, IOException {
+		throws IOException, PortletException {
 
 		PrintWriter printWriter = response.getWriter();
 
-		printWriter.print("micro-maintainance-notify-creator-action Portlet - Hello World!");
+		printWriter.print(
+			"micro-maintainance-notify-creator-action Portlet - Hello World!");
 	}
 
 }

@@ -1,7 +1,12 @@
 package com.liferay.micro.maintainance.task;
 
+import com.liferay.micro.maintainance.configuration.OutdatedTaskConfiguration;
+import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import java.util.Map;
 
 import javax.portlet.GenericPortlet;
@@ -15,10 +20,10 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Modified;
 
-import com.liferay.micro.maintainance.configuration.OutdatedTaskConfiguration;
-import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
-import com.liferay.portal.kernel.exception.PortalException;
-
+/**
+ * @author Rimi Saadou
+ * @author Laszlo Hudak
+ */
 @Component(
 	immediate = true,
 	property = {
@@ -31,47 +36,50 @@ import com.liferay.portal.kernel.exception.PortalException;
 )
 public class OutdatedTaskPortlet extends GenericPortlet {
 
-	@Override
-	protected void doView(RenderRequest request, RenderResponse response)
-		throws PortletException, IOException {
-
-		PrintWriter printWriter = response.getWriter();
-
-		printWriter.print("micro-maintainance-outdated-task Portlet - Hello World!");
-	}
-
 	@Activate
-	protected void activate(Map<String, Object> properties) throws PortalException {
+	protected void activate(Map<String, Object> properties)
+		throws PortalException {
+
 		_configuration = ConfigurableUtil.createConfigurable(
 			OutdatedTaskConfiguration.class, properties);
 
-		outdatedTask = OutdatedTask.getOutdatedTaskInstance();
+		_outdatedTask = OutdatedTask.getOutdatedTaskInstance();
 
-		configureTask();
+		_configureTask();
 
-		TaskHandler.getTaskHandlerInstance().registerTask(outdatedTask);
+		TaskHandler.getTaskHandlerInstance().registerTask(_outdatedTask);
 	}
-
-	@Modified
-	protected void modified(Map<String,Object> config) {
-		configureTask();
-	}
-
 
 	@Deactivate
 	protected void deactivate() throws PortalException {
-
-		TaskHandler.getTaskHandlerInstance().unregisterTask(outdatedTask);
+		TaskHandler.getTaskHandlerInstance().unregisterTask(_outdatedTask);
 	}
 
-	private void configureTask() {
-		outdatedTask.setRequiredVotingPercentage(
+	@Override
+	protected void doView(RenderRequest request, RenderResponse response)
+		throws IOException, PortletException {
+
+		PrintWriter printWriter = response.getWriter();
+
+		printWriter.print(
+			"micro-maintainance-outdated-task Portlet - Hello World!");
+	}
+
+	@Modified
+	protected void modified(Map<String, Object> config) {
+		_configureTask();
+	}
+
+	private void _configureTask() {
+		_outdatedTask.setRequiredVotingPercentage(
 			_configuration.requiredVotingPercentage());
-		outdatedTask.setRequiredYesVotesPercentage(
+		_outdatedTask.setRequiredYesVotesPercentage(
 			_configuration.requiredYesVotesPercentage());
-		outdatedTask.setVotingPeriodDays(_configuration.votingPeriodDays());
+		_outdatedTask.setVotingPeriodDays(_configuration.votingPeriodDays());
 	}
 
-	private static OutdatedTask outdatedTask;
+	private static OutdatedTask _outdatedTask;
+
 	private volatile OutdatedTaskConfiguration _configuration;
+
 }

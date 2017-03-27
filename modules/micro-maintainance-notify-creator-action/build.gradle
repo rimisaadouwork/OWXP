@@ -2,9 +2,9 @@ dependencies {
 	compile 'com.liferay.portal:portal-service:7.0.0-SNAPSHOT'
 	compile 'javax.portlet:portlet-api:2.0'
 	compile 'org.osgi:org.osgi.compendium:5.0.0'
-	compile project(':modules:micro-maintainance-portlet')
-	compile group: "javax.mail", name: "mail", version: "1.4"
 	compile group: "com.liferay", name: "com.liferay.wiki.api", version: "2.2.0"
+	compile group: "javax.mail", name: "mail", version: "1.4"
+	compile project(':modules:micro-maintainance-portlet')
 }
 
 version = '1.0.0'

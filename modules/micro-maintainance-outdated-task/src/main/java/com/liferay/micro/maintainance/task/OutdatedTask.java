@@ -1,50 +1,49 @@
 package com.liferay.micro.maintainance.task;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import com.liferay.micro.maintainance.action.Action;
 import com.liferay.micro.maintainance.action.NotifyCreatorAction;
 import com.liferay.micro.maintainance.analysis.model.AnalysisEntry;
 import com.liferay.micro.maintainance.task.model.CandidateMaintenance;
 import com.liferay.micro.maintainance.util.VoteCalculations;
 import com.liferay.micro.maintainance.util.VoteConstants;
-import com.liferay.micro.maintainance.util.VotesJSONSerializer;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.util.DateUtil;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+/**
+ * @author Rimi Saadou
+ * @author Laszlo Hudak
+ */
 public class OutdatedTask implements Task {
 
-	protected OutdatedTask() {
-		this.taskId = 0;
-	}
-
 	public static OutdatedTask getOutdatedTaskInstance() {
-		if(outdatedTask == null) {
-			outdatedTask = new OutdatedTask();
+		if (_outdatedTask == null) {
+			_outdatedTask = new OutdatedTask();
 		}
 
-		return outdatedTask;
+		return _outdatedTask;
 	}
 
 	@Override
 	public List<Action> analyze(AnalysisEntry analysisEntry) {
-		List<Action> actions = new ArrayList<Action>();
+		List<Action> actions = new ArrayList<>();
 
-		double percentageYesVotes =VoteCalculations.getVotePercentage(
+		double percentageYesVotes = VoteCalculations.getVotePercentage(
 			analysisEntry.getAnalysisData(), VoteConstants.YES_DESCRIPTION);
 		int totalUsers = UserLocalServiceUtil.getUsersCount();
 		int totalVotedUsers = VoteCalculations.getTotalVotes(
 			analysisEntry.getAnalysisData());
 		double percentageVoted = 0.00;
 
-		if(totalVotedUsers > 0) {
-			percentageVoted = (totalVotedUsers * 100/ totalUsers);
+		if (totalVotedUsers > 0) {
+			percentageVoted = totalVotedUsers * 100 / totalUsers;
 		}
 
-		if(percentageVoted > requiredVotingPercentage && 
-			percentageYesVotes > requiredYesVotesPercentage) {
+		if ((percentageVoted > _requiredVotingPercentage) &&
+			(percentageYesVotes > _requiredYesVotesPercentage)) {
 			actions.add(new NotifyCreatorAction());
 		}
 
@@ -52,26 +51,38 @@ public class OutdatedTask implements Task {
 	}
 
 	@Override
+	public String getOutcome() {
+		return _outcome;
+	}
+
+	public int getRequiredVotingPercentage() {
+		return _requiredVotingPercentage;
+	}
+
+	public int getRequiredYesVotesPercentage() {
+		return _requiredYesVotesPercentage;
+	}
+
+	@Override
 	public long getTaskId() {
-		return taskId;
+		return _taskId;
 	}
 
 	@Override
 	public String getTaskName() {
-		return TASK_NAME;
+		return _TASK_NAME;
+	}
+
+	public int getVotingPeriodDays() {
+		return _votingPeriodDays;
 	}
 
 	@Override
-	public void setTaskId(long taskId) {
-		this.taskId = taskId;
-	}
-
-	@Override
-	public boolean isAnalyseReady(CandidateMaintenance canMain) {
+	public boolean isAnalyseReady(CandidateMaintenance candidateMaintenance) {
 		Date now = new Date();
 
-		if(DateUtil
-			.getDaysBetween(now, canMain.getCreateDate()) > votingPeriodDays) {
+		if (DateUtil.getDaysBetween(now, candidateMaintenance.getCreateDate()) >
+				_votingPeriodDays) {
 
 			return true;
 		}
@@ -79,41 +90,35 @@ public class OutdatedTask implements Task {
 		return false;
 	}
 
-	@Override
-	public String getOutcome() {
-		return outcome;
-	}
-
-	public int getVotingPeriodDays() {
-		return votingPeriodDays;
-	}
-
-	public void setVotingPeriodDays(int votingPeriodDays) {
-		this.votingPeriodDays = votingPeriodDays;
-	}
-
-	public int getRequiredVotingPercentage() {
-		return requiredVotingPercentage;
-	}
-
 	public void setRequiredVotingPercentage(int requiredVotingPercentage) {
-		this.requiredVotingPercentage = requiredVotingPercentage;
-	}
-
-	public int getRequiredYesVotesPercentage() {
-		return requiredYesVotesPercentage;
+		_requiredVotingPercentage = requiredVotingPercentage;
 	}
 
 	public void setRequiredYesVotesPercentage(int requiredYesVotesPercentage) {
-		this.requiredYesVotesPercentage = requiredYesVotesPercentage;
+		_requiredYesVotesPercentage = requiredYesVotesPercentage;
 	}
 
-	private static String TASK_NAME = "Outdated";
-	private long taskId = 0;
-	private static OutdatedTask outdatedTask;
-	private String outcome = "";
+	@Override
+	public void setTaskId(long taskId) {
+		_taskId = taskId;
+	}
 
-	private int votingPeriodDays;
-	private int requiredVotingPercentage;
-	private int requiredYesVotesPercentage;
+	public void setVotingPeriodDays(int votingPeriodDays) {
+		_votingPeriodDays = votingPeriodDays;
+	}
+
+	protected OutdatedTask() {
+		_taskId = 0;
+	}
+
+	private static final String _TASK_NAME = "Outdated";
+
+	private static OutdatedTask _outdatedTask;
+
+	private String _outcome = "";
+	private int _requiredVotingPercentage;
+	private int _requiredYesVotesPercentage;
+	private long _taskId = 0;
+	private int _votingPeriodDays;
+
 }

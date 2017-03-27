@@ -6,30 +6,35 @@ import com.liferay.portal.kernel.scheduler.StorageType;
 import com.liferay.portal.kernel.scheduler.StorageTypeAware;
 import com.liferay.portal.kernel.scheduler.Trigger;
 
-public class StorageTypeAwareSchedulerEntryImpl extends SchedulerEntryImpl implements SchedulerEntry, StorageTypeAware {
+/**
+ * @author Rimi Saadou
+ * @author Laszlo Hudak
+ */
+public class StorageTypeAwareSchedulerEntryImpl
+	extends SchedulerEntryImpl implements SchedulerEntry, StorageTypeAware {
 
 	/**
 	 * StorageTypeAwareSchedulerEntryImpl: Constructor for the class.
-	 * 
+	 *
 	 * @param schedulerEntry
 	 */
-	public StorageTypeAwareSchedulerEntryImpl(final SchedulerEntryImpl schedulerEntry) {
-		super();
+	public StorageTypeAwareSchedulerEntryImpl(
+		final SchedulerEntryImpl schedulerEntry) {
 
 		_schedulerEntry = schedulerEntry;
 
-		// use the same default that Liferay uses.
 		_storageType = StorageType.MEMORY_CLUSTERED;
 	}
 
 	/**
 	 * StorageTypeAwareSchedulerEntryImpl: Constructor for the class.
-	 * 
+	 *
 	 * @param schedulerEntry
 	 * @param storageType
 	 */
-	public StorageTypeAwareSchedulerEntryImpl(final SchedulerEntryImpl schedulerEntry, final StorageType storageType) {
-		super();
+	public StorageTypeAwareSchedulerEntryImpl(
+		final SchedulerEntryImpl schedulerEntry,
+		final StorageType storageType) {
 
 		_schedulerEntry = schedulerEntry;
 		_storageType = storageType;
@@ -59,14 +64,15 @@ public class StorageTypeAwareSchedulerEntryImpl extends SchedulerEntryImpl imple
 		_schedulerEntry.setDescription(description);
 	}
 
-	public void setTrigger(final Trigger trigger) {
-		_schedulerEntry.setTrigger(trigger);
-	}
-
 	public void setEventListenerClass(final String eventListenerClass) {
 		_schedulerEntry.setEventListenerClass(eventListenerClass);
 	}
 
+	public void setTrigger(final Trigger trigger) {
+		_schedulerEntry.setTrigger(trigger);
+	}
+
 	private SchedulerEntryImpl _schedulerEntry;
 	private StorageType _storageType;
+
 }
