@@ -1,5 +1,5 @@
 dependencies {
-	compile 'com.liferay.portal:portal-service:7.0.0-SNAPSHOT'
+	compile group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "2.0.0"
 	compile 'javax.portlet:portlet-api:2.0'
 	compile 'org.osgi:org.osgi.compendium:5.0.0'
 	compile group: "com.liferay", name: "com.liferay.wiki.api", version: "2.2.0"

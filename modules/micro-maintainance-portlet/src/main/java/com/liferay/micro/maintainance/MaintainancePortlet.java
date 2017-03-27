@@ -1,7 +1,6 @@
 package com.liferay.micro.maintainance;
 
-import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
-
+import javax.portlet.GenericPortlet;
 import javax.portlet.Portlet;
 
 import org.osgi.service.component.annotations.Component;
@@ -13,7 +12,7 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	property = {
-		"com.liferay.portlet.display-category=category.sample",
+		"com.liferay.portlet.display-category=category.hidden",
 		"com.liferay.portlet.instanceable=true",
 		"javax.portlet.display-name=micro-maintainance-portlet Portlet",
 		"javax.portlet.init-param.template-path=/",
@@ -23,5 +22,5 @@ import org.osgi.service.component.annotations.Component;
 	},
 	service = Portlet.class
 )
-public class MaintainancePortlet extends MVCPortlet {
+public class MaintainancePortlet extends GenericPortlet {
 }
