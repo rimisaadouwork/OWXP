@@ -1,9 +1,19 @@
 package com.liferay.micro.maintainance.task;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.osgi.service.component.annotations.Activate;
+import org.osgi.service.component.annotations.Component;
+
 import com.liferay.micro.maintainance.analysis.model.AnalysisEntry;
 import com.liferay.micro.maintainance.analysis.model.AnalysisUser;
 import com.liferay.micro.maintainance.analysis.service.AnalysisEntryLocalServiceUtil;
 import com.liferay.micro.maintainance.analysis.service.AnalysisUserLocalServiceUtil;
+import com.liferay.micro.maintainance.api.Task;
+import com.liferay.micro.maintainance.api.TaskHandler;
 import com.liferay.micro.maintainance.candidate.model.CandidateEntry;
 import com.liferay.micro.maintainance.candidate.service.CandidateEntryLocalServiceUtil;
 import com.liferay.micro.maintainance.task.model.CandidateMaintenance;
@@ -16,23 +26,19 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Validator;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
  * @author Rimi Saadou
  * @author Laszlo Hudak
  */
-public class TaskHandler {
+@Component(
+	immediate=true,
+	service=TaskHandler.class
+)
+public class TaskHandlerImpl implements TaskHandler {
 
-	public static TaskHandler getTaskHandlerInstance() {
-		if (_taskHandlerInstance == null) {
-			_taskHandlerInstance = new TaskHandler();
-		}
-
-		return _taskHandlerInstance;
+	@Activate
+	protected void activate() throws PortalException {
+		_registeredTasks = new HashMap<Long, Task>();
 	}
 
 	/**
@@ -43,6 +49,7 @@ public class TaskHandler {
 	 * @param wikiPageId
 	 * @throws PortalException
 	 */
+	@Override
 	public List<Task> getAvailableFlags(long wikiPageId)
 		throws PortalException {
 
@@ -69,10 +76,12 @@ public class TaskHandler {
 		return availableFlags;
 	}
 
+	@Override
 	public Map<Long, Task> getTaskEntries() {
 		return _registeredTasks;
 	}
 
+	@Override
 	public List<Task> getTaskEntryList() {
 		return ListUtil.fromCollection(_registeredTasks.values());
 	}
@@ -87,6 +96,7 @@ public class TaskHandler {
 	 * @return the vote
 	 * @throws PortalException
 	 */
+	@Override
 	public int getVote(long userId, long wikiPageId, long taskId)
 		throws PortalException {
 
@@ -126,6 +136,7 @@ public class TaskHandler {
 	 *
 	 * @param task: the deployed task
 	 */
+	@Override
 	public void registerTask(Task task) throws PortalException {
 		TaskEntry taskEntry = TaskEntryLocalServiceUtil.getTaskEntryByName(
 			task.getTaskName());
@@ -152,6 +163,7 @@ public class TaskHandler {
 	 *
 	 * @param task: the undeployed task
 	 */
+	@Override
 	public void unregisterTask(Task task) throws PortalException {
 		TaskEntryLocalServiceUtil.deleteTaskEntry(task.getTaskId());
 		_registeredTasks.remove(task.getTaskId());
@@ -167,6 +179,7 @@ public class TaskHandler {
 	 * @param vote: the user's decision
 	 * @throws PortalException
 	 */
+	@Override
 	public void vote(long userId, long wikiPageId, long taskId, int vote)
 		throws PortalException {
 
@@ -204,12 +217,6 @@ public class TaskHandler {
 
 		analysisEntry.persist();
 	}
-
-	protected TaskHandler() {
-		_registeredTasks = new HashMap<>();
-	}
-
-	private static TaskHandler _taskHandlerInstance;
 
 	private Map<Long, Task> _registeredTasks;
 

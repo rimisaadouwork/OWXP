@@ -8,4 +8,4 @@ Import-Package:\
 	javax.servlet;version='[2.5,4)',\
 	*
 
-Private-Package: com.liferay.micro.maintainance.action
+Export-Package: com.liferay.micro.maintainance.action

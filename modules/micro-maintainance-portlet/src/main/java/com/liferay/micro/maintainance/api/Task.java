@@ -1,6 +1,5 @@
-package com.liferay.micro.maintainance.task;
+package com.liferay.micro.maintainance.api;
 
-import com.liferay.micro.maintainance.action.Action;
 import com.liferay.micro.maintainance.analysis.model.AnalysisEntry;
 import com.liferay.micro.maintainance.task.model.CandidateMaintenance;
 

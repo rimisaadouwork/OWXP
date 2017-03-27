@@ -1,4 +1,4 @@
-package com.liferay.micro.maintainance.action;
+package com.liferay.micro.maintainance.api;
 
 import com.liferay.micro.maintainance.analysis.model.AnalysisEntry;
 

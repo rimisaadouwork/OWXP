@@ -1,6 +1,7 @@
 package com.liferay.micro.maintainance.action;
 
 import com.liferay.micro.maintainance.analysis.model.AnalysisEntry;
+import com.liferay.micro.maintainance.api.Action;
 
 import java.util.List;
 

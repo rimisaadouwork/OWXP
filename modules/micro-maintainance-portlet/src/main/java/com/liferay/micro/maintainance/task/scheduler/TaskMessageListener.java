@@ -1,14 +1,15 @@
 package com.liferay.micro.maintainance.task.scheduler;
 
-import com.liferay.micro.maintainance.action.Action;
 import com.liferay.micro.maintainance.action.ActionHandler;
 import com.liferay.micro.maintainance.analysis.model.AnalysisEntry;
 import com.liferay.micro.maintainance.analysis.service.AnalysisEntryLocalServiceUtil;
+import com.liferay.micro.maintainance.api.Action;
+import com.liferay.micro.maintainance.api.Task;
+import com.liferay.micro.maintainance.api.TaskHandler;
 import com.liferay.micro.maintainance.candidate.service.CandidateEntryLocalServiceUtil;
 import com.liferay.micro.maintainance.configuration.MicroMaintenanceConfiguration;
 import com.liferay.micro.maintainance.decision.service.DecisionEntryLocalServiceUtil;
-import com.liferay.micro.maintainance.task.Task;
-import com.liferay.micro.maintainance.task.TaskHandler;
+import com.liferay.micro.maintainance.task.TaskHandlerImpl;
 import com.liferay.micro.maintainance.task.model.CandidateMaintenance;
 import com.liferay.micro.maintainance.task.service.CandidateMaintenanceLocalServiceUtil;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
@@ -150,8 +151,7 @@ public class TaskMessageListener extends BaseSchedulerEntryMessageListener {
 			CandidateMaintenanceLocalServiceUtil.getCandidateMaintenances(
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
-		Map<Long, Task> registeredTasks =
-			TaskHandler.getTaskHandlerInstance().getTaskEntries();
+		Map<Long, Task> registeredTasks = _taskHandler.getTaskEntries();
 
 		for (CandidateMaintenance candidateMaintenance : runningVotes) {
 			Task task = registeredTasks
@@ -260,9 +260,15 @@ public class TaskMessageListener extends BaseSchedulerEntryMessageListener {
 	private static final Log _log = LogFactoryUtil.getLog(
 		TaskMessageListener.class);
 
+	@Reference(unbind = "-")
+	protected void setTaskHandler(TaskHandler taskHandler) {
+		_taskHandler = taskHandler;
+	}
+
 	private volatile MicroMaintenanceConfiguration _configuration;
 	private volatile boolean _initialized;
 	private SchedulerEngineHelper _schedulerEngineHelper;
 	private TriggerFactory _triggerFactory;
+	private TaskHandler _taskHandler;
 
 }

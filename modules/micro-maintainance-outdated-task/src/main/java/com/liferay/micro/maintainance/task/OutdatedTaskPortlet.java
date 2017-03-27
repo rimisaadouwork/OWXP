@@ -1,12 +1,7 @@
 package com.liferay.micro.maintainance.task;
 
-import com.liferay.micro.maintainance.configuration.OutdatedTaskConfiguration;
-import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
-import com.liferay.portal.kernel.exception.PortalException;
-
 import java.io.IOException;
 import java.io.PrintWriter;
-
 import java.util.Map;
 
 import javax.portlet.GenericPortlet;
@@ -19,6 +14,12 @@ import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Modified;
+import org.osgi.service.component.annotations.Reference;
+
+import com.liferay.micro.maintainance.api.TaskHandler;
+import com.liferay.micro.maintainance.configuration.OutdatedTaskConfiguration;
+import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * @author Rimi Saadou
@@ -47,12 +48,12 @@ public class OutdatedTaskPortlet extends GenericPortlet {
 
 		_configureTask();
 
-		TaskHandler.getTaskHandlerInstance().registerTask(_outdatedTask);
+		_taskHandler.registerTask(_outdatedTask);
 	}
 
 	@Deactivate
 	protected void deactivate() throws PortalException {
-		TaskHandler.getTaskHandlerInstance().unregisterTask(_outdatedTask);
+		_taskHandler.unregisterTask(_outdatedTask);
 	}
 
 	@Override
@@ -78,8 +79,13 @@ public class OutdatedTaskPortlet extends GenericPortlet {
 		_outdatedTask.setVotingPeriodDays(_configuration.votingPeriodDays());
 	}
 
-	private static OutdatedTask _outdatedTask;
+	@Reference(unbind = "-")
+	protected void setTaskHandler(TaskHandler taskHandler) {
+		_taskHandler = taskHandler;
+	}
 
 	private volatile OutdatedTaskConfiguration _configuration;
+	private static OutdatedTask _outdatedTask;
+	private TaskHandler _taskHandler;
 
 }

@@ -1,8 +1,9 @@
 package com.liferay.micro.maintainance.task;
 
-import com.liferay.micro.maintainance.action.Action;
 import com.liferay.micro.maintainance.action.NotifyCreatorAction;
 import com.liferay.micro.maintainance.analysis.model.AnalysisEntry;
+import com.liferay.micro.maintainance.api.Action;
+import com.liferay.micro.maintainance.api.Task;
 import com.liferay.micro.maintainance.task.model.CandidateMaintenance;
 import com.liferay.micro.maintainance.util.VoteCalculations;
 import com.liferay.micro.maintainance.util.VoteConstants;

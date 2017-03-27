@@ -3,6 +3,7 @@ package com.liferay.micro.maintainance.action;
 import com.liferay.mail.kernel.model.MailMessage;
 import com.liferay.mail.kernel.service.MailServiceUtil;
 import com.liferay.micro.maintainance.analysis.model.AnalysisEntry;
+import com.liferay.micro.maintainance.api.Action;
 import com.liferay.micro.maintainance.util.VoteCalculations;
 import com.liferay.micro.maintainance.util.WikiUtil;
 import com.liferay.portal.kernel.model.User;
