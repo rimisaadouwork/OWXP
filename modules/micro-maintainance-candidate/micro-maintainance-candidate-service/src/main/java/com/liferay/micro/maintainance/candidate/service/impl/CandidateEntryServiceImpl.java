@@ -14,9 +14,11 @@
 
 package com.liferay.micro.maintainance.candidate.service.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
+import com.liferay.micro.maintainance.candidate.model.CandidateEntry;
 import com.liferay.micro.maintainance.candidate.service.base.CandidateEntryServiceBaseImpl;
+import com.liferay.portal.kernel.exception.PortalException;
+
+import aQute.bnd.annotation.ProviderType;
 
 /**
  * The implementation of the candidate entry remote service.
@@ -35,9 +37,12 @@ import com.liferay.micro.maintainance.candidate.service.base.CandidateEntryServi
 @ProviderType
 public class CandidateEntryServiceImpl extends CandidateEntryServiceBaseImpl {
 
-	/**
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Always use {@link com.liferay.micro.maintainance.candidate.service.CandidateEntryServiceUtil} to access the candidate entry remote service.
-	 */
+	@Override
+	public CandidateEntry addCandidateEntry(
+			long userId, long groupId, long wikiPageId, long taskId)
+		throws PortalException {
+
+		return candidateEntryLocalService.addCandidateEntry(
+			userId, groupId, wikiPageId, taskId);
+	}
 }
