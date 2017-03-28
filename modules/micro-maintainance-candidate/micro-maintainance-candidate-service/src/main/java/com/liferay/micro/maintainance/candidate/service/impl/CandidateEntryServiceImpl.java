@@ -34,7 +34,8 @@ import com.liferay.micro.maintainance.candidate.service.base.CandidateEntryServi
  */
 @ProviderType
 public class CandidateEntryServiceImpl extends CandidateEntryServiceBaseImpl {
-	/*
+
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this class directly. Always use {@link com.liferay.micro.maintainance.candidate.service.CandidateEntryServiceUtil} to access the candidate entry remote service.

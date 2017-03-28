@@ -36,8 +36,15 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
+		<finder name="WikiPageId" return-type="CandidateEntry" unique="true">
+			<finder-column name="wikiPageId" />
+		</finder>
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
+		</finder>
+		<finder name="U_cD" return-type="Collection">
+			<finder-column name="userId" />
+			<finder-column name="createDate" />
 		</finder>
 		<finder name="C_ctD" return-type="Collection">
 			<finder-column name="companyId" />
@@ -51,20 +58,13 @@
 			<finder-column name="groupId" />
 			<finder-column name="wikiPageId" />
 		</finder>
-		<finder name="G_U_P" return-type="Collection">
-			<finder-column name="groupId" />
-			<finder-column name="userId" />
-			<finder-column name="wikiPageId" />
-		</finder>
-		<finder name="U_cD" return-type="Collection">
-			<finder-column name="userId" />
-			<finder-column name="createDate" />
-		</finder>
 		<finder name="U_P" return-type="Collection">
 			<finder-column name="userId" />
 			<finder-column name="wikiPageId" />
 		</finder>
-		<finder name="WikiPageId" return-type="CandidateEntry" unique="true">
+		<finder name="G_U_P" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
 			<finder-column name="wikiPageId" />
 		</finder>
 	</entity>

@@ -27,11 +27,13 @@ import aQute.bnd.annotation.ProviderType;
  */
 @ProviderType
 public class CandidateEntryImpl extends CandidateEntryBaseImpl {
-	/*
+
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this class directly. All methods that expect a candidate entry model instance should use the {@link com.liferay.micro.maintainance.candidate.model.CandidateEntry} interface instead.
 	 */
 	public CandidateEntryImpl() {
 	}
+
 }
