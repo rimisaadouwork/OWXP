@@ -1,11 +1,11 @@
 dependencies {
 	compile 'biz.aQute.bnd:biz.aQute.bndlib:3.1.0'
 	compile 'com.liferay.portal:com.liferay.portal.kernel:2.6.0'
+	compile 'com.liferay:com.liferay.portal.spring.extender:2.0.0'
 	compile 'javax.portlet:portlet-api:2.0'
 	compile 'javax.servlet:servlet-api:2.5'
 	compile 'jstl:jstl:1.2'
 	compile 'org.osgi:org.osgi.compendium:5.0.0'
-	compile 'com.liferay:com.liferay.portal.spring.extender:2.0.0'
 	compile group: "com.liferay", name: "com.liferay.portal.configuration.metatype", version: "2.0.7"
 	compile group: "com.liferay", name: "com.liferay.wiki.api", version: "2.2.0"
 	compile group: "com.liferay", name: "com.liferay.wiki.service", version: "1.2.0"

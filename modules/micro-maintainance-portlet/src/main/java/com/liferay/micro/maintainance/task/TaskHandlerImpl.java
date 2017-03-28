@@ -1,13 +1,5 @@
 package com.liferay.micro.maintainance.task;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.osgi.service.component.annotations.Activate;
-import org.osgi.service.component.annotations.Component;
-
 import com.liferay.micro.maintainance.analysis.model.AnalysisEntry;
 import com.liferay.micro.maintainance.analysis.model.AnalysisUser;
 import com.liferay.micro.maintainance.analysis.service.AnalysisEntryLocalServiceUtil;
@@ -26,20 +18,20 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Validator;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.osgi.service.component.annotations.Activate;
+import org.osgi.service.component.annotations.Component;
+
 /**
  * @author Rimi Saadou
  * @author Laszlo Hudak
  */
-@Component(
-	immediate=true,
-	service=TaskHandler.class
-)
+@Component(immediate = true, service = TaskHandler.class)
 public class TaskHandlerImpl implements TaskHandler {
-
-	@Activate
-	protected void activate() throws PortalException {
-		_registeredTasks = new HashMap<Long, Task>();
-	}
 
 	/**
 	 * Returns the list of the maintenance tasks for which the wiki page with
@@ -116,7 +108,8 @@ public class TaskHandlerImpl implements TaskHandler {
 		long analysisEntryId = analysisEntry.getAnalysisEntryId();
 
 		AnalysisUser analysisUser =
-			AnalysisUserLocalServiceUtil.getAnalysisUser(analysisEntryId, userId);
+			AnalysisUserLocalServiceUtil.getAnalysisUser(
+				analysisEntryId, userId);
 
 		if (analysisUser != null) {
 			return analysisUser.getVoted();
@@ -216,6 +209,11 @@ public class TaskHandlerImpl implements TaskHandler {
 		analysisEntry.setAnalysisData(analysisData);
 
 		analysisEntry.persist();
+	}
+
+	@Activate
+	protected void activate() throws PortalException {
+		_registeredTasks = new HashMap<>();
 	}
 
 	private Map<Long, Task> _registeredTasks;

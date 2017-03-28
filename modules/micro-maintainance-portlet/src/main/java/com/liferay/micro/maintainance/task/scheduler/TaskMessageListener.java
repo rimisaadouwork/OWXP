@@ -9,7 +9,6 @@ import com.liferay.micro.maintainance.api.TaskHandler;
 import com.liferay.micro.maintainance.candidate.service.CandidateEntryLocalServiceUtil;
 import com.liferay.micro.maintainance.configuration.MicroMaintenanceConfiguration;
 import com.liferay.micro.maintainance.decision.service.DecisionEntryLocalServiceUtil;
-import com.liferay.micro.maintainance.task.TaskHandlerImpl;
 import com.liferay.micro.maintainance.task.model.CandidateMaintenance;
 import com.liferay.micro.maintainance.task.service.CandidateMaintenanceLocalServiceUtil;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
@@ -249,6 +248,11 @@ public class TaskMessageListener extends BaseSchedulerEntryMessageListener {
 	}
 
 	@Reference(unbind = "-")
+	protected void setTaskHandler(TaskHandler taskHandler) {
+		_taskHandler = taskHandler;
+	}
+
+	@Reference(unbind = "-")
 	protected void setTriggerFactory(TriggerFactory triggerFactory) {
 		_triggerFactory = triggerFactory;
 	}
@@ -260,15 +264,10 @@ public class TaskMessageListener extends BaseSchedulerEntryMessageListener {
 	private static final Log _log = LogFactoryUtil.getLog(
 		TaskMessageListener.class);
 
-	@Reference(unbind = "-")
-	protected void setTaskHandler(TaskHandler taskHandler) {
-		_taskHandler = taskHandler;
-	}
-
 	private volatile MicroMaintenanceConfiguration _configuration;
 	private volatile boolean _initialized;
 	private SchedulerEngineHelper _schedulerEngineHelper;
-	private TriggerFactory _triggerFactory;
 	private TaskHandler _taskHandler;
+	private TriggerFactory _triggerFactory;
 
 }
