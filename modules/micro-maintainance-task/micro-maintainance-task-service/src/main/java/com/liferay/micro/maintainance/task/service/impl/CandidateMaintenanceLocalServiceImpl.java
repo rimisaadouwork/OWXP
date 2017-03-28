@@ -67,11 +67,13 @@ public class CandidateMaintenanceLocalServiceImpl
 		Date now = new Date();
 
 		CandidateMaintenance candidateMaintenance =
-			candidateMaintenancePersistence.create(candidateEntryId);
+			candidateMaintenancePersistence.create(candidateMaintenanceId);
 
 		candidateMaintenance.setCandidateEntryId(candidateEntryId);
 		candidateMaintenance.setTaskEntryId(taskEntryId);
 		candidateMaintenance.setCreateDate(now);
+		
+		candidateMaintenancePersistence.update(candidateMaintenance);
 
 		return candidateMaintenance;
 	}
