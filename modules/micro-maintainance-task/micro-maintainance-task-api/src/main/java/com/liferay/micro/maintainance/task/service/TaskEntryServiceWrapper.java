@@ -32,6 +32,12 @@ public class TaskEntryServiceWrapper implements TaskEntryService,
 		_taskEntryService = taskEntryService;
 	}
 
+	@Override
+	public int getVote(long userId, long wikiPageId, long taskId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _taskEntryService.getVote(userId, wikiPageId, taskId);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*
@@ -40,6 +46,12 @@ public class TaskEntryServiceWrapper implements TaskEntryService,
 	@Override
 	public java.lang.String getOSGiServiceIdentifier() {
 		return _taskEntryService.getOSGiServiceIdentifier();
+	}
+
+	@Override
+	public void vote(long userId, long wikiPageId, long taskId, int vote)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_taskEntryService.vote(userId, wikiPageId, taskId, vote);
 	}
 
 	@Override

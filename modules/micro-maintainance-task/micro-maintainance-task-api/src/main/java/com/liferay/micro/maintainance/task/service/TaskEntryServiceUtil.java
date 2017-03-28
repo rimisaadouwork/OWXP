@@ -41,6 +41,10 @@ public class TaskEntryServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.micro.maintainance.task.service.impl.TaskEntryServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static int getVote(long userId, long wikiPageId, long taskId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getVote(userId, wikiPageId, taskId);
+	}
 
 	/**
 	* Returns the OSGi service identifier.
@@ -49,6 +53,11 @@ public class TaskEntryServiceUtil {
 	*/
 	public static java.lang.String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
+	}
+
+	public static void vote(long userId, long wikiPageId, long taskId, int vote)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		getService().vote(userId, wikiPageId, taskId, vote);
 	}
 
 	public static TaskEntryService getService() {

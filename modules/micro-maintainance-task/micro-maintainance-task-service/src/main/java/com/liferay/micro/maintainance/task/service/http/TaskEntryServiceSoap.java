@@ -16,9 +16,16 @@ package com.liferay.micro.maintainance.task.service.http;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.micro.maintainance.task.service.TaskEntryServiceUtil;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
- * {@link com.liferay.micro.maintainance.task.service.TaskEntryServiceUtil} service utility. The
+ * {@link TaskEntryServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
@@ -53,9 +60,37 @@ import aQute.bnd.annotation.ProviderType;
  * @author Brian Wing Shun Chan
  * @see TaskEntryServiceHttp
  * @see com.liferay.micro.maintainance.task.model.TaskEntrySoap
- * @see com.liferay.micro.maintainance.task.service.TaskEntryServiceUtil
+ * @see TaskEntryServiceUtil
  * @generated
  */
 @ProviderType
 public class TaskEntryServiceSoap {
+	public static int getVote(long userId, long wikiPageId, long taskId)
+		throws RemoteException {
+		try {
+			int returnValue = TaskEntryServiceUtil.getVote(userId, wikiPageId,
+					taskId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void vote(long userId, long wikiPageId, long taskId, int vote)
+		throws RemoteException {
+		try {
+			TaskEntryServiceUtil.vote(userId, wikiPageId, taskId, vote);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(TaskEntryServiceSoap.class);
 }
