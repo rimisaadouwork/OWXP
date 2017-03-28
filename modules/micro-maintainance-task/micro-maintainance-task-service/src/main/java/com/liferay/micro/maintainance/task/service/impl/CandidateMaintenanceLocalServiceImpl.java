@@ -19,8 +19,10 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.micro.maintainance.candidate.service.CandidateEntryLocalServiceUtil;
 import com.liferay.micro.maintainance.task.exception.NoSuchCandidateMaintenanceException;
 import com.liferay.micro.maintainance.task.model.CandidateMaintenance;
+import com.liferay.micro.maintainance.task.model.TaskEntry;
 import com.liferay.micro.maintainance.task.service.base.CandidateMaintenanceLocalServiceBaseImpl;
 import com.liferay.micro.maintainance.task.service.persistence.CandidateMaintenanceUtil;
+import com.liferay.micro.maintainance.task.service.persistence.TaskEntryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
@@ -63,6 +65,8 @@ public class CandidateMaintenanceLocalServiceImpl
 			long candidateEntryId, long taskEntryId)
 		throws PortalException {
 
+		TaskEntry taskEntry = TaskEntryUtil.findByTasksById(taskEntryId);
+
 		long candidateMaintenanceId = counterLocalService.increment();
 		Date now = new Date();
 
@@ -70,7 +74,7 @@ public class CandidateMaintenanceLocalServiceImpl
 			candidateMaintenancePersistence.create(candidateMaintenanceId);
 
 		candidateMaintenance.setCandidateEntryId(candidateEntryId);
-		candidateMaintenance.setTaskEntryId(taskEntryId);
+		candidateMaintenance.setTaskEntryId(taskEntry.getTaskEntryId());
 		candidateMaintenance.setCreateDate(now);
 		
 		candidateMaintenancePersistence.update(candidateMaintenance);
