@@ -35,11 +35,11 @@ public class TaskHandlerUtil {
 		_taskHandler.vote(userId, wikiPageId, taskId, vote);
 	}
 
-	public Map<Long, Task> getTaskEntries() {
+	public static Map<Long, Task> getTaskEntries() {
 		return _taskHandler.getTaskEntries();
 	}
 
-	public List<Task> getTaskEntryList() {
+	public static List<Task> getTaskEntryList() {
 		return _taskHandler.getTaskEntryList();
 	}
 
