@@ -194,9 +194,19 @@ public class TaskHandlerImpl implements TaskHandler {
 		CandidateEntry candidateEntry =
 			CandidateEntryLocalServiceUtil.getCandidateByWikiPageId(wikiPageId);
 
+		if (candidateEntry == null) {
+			throw new com.liferay.micro.maintainance.candidate.exception.
+				NoSuchEntryException();
+		}
+
 		CandidateMaintenance candidateMaintenance =
 			CandidateMaintenanceLocalServiceUtil.getCandidateMaintenaceTask(
 				candidateEntry.getCandidateEntryId(), taskId);
+
+		if (candidateMaintenance == null) {
+			throw new com.liferay.micro.maintainance.task.exception.
+				NoSuchEntryException();
+		}
 
 		AnalysisEntry analysisEntry;
 
@@ -204,11 +214,21 @@ public class TaskHandlerImpl implements TaskHandler {
 			AnalysisEntryLocalServiceUtil.getAnalysisByCandidateMaintenance(
 				candidateMaintenance.getCandidateMaintenanceId());
 
+		if (analysisEntry == null) {
+			throw new com.liferay.micro.maintainance.analysis.exception.
+				NoSuchEntryException();
+		}
+
 		long analysisEntryId = analysisEntry.getAnalysisEntryId();
 
 		AnalysisUser analysisUser =
-			AnalysisUserLocalServiceUtil
-				.getAnalysisUser(analysisEntryId, userId);
+			AnalysisUserLocalServiceUtil.getAnalysisUser(
+				analysisEntryId, userId);
+
+		if (analysisUser == null) {
+			throw new com.liferay.micro.maintainance.analysis.exception.
+				NoSuchUserException();
+		}
 
 		int previousVote = analysisUser.getVoted();
 
