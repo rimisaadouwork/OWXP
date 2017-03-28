@@ -55,8 +55,8 @@ public class TaskHandlerImpl implements TaskHandler {
 		}
 		else {
 			for (Task task : _registeredTasks.values()) {
-				if (CandidateMaintenanceLocalServiceUtil
-						.getCandidateMaintenaceTask(
+				if (CandidateMaintenanceLocalServiceUtil.
+						getCandidateMaintenaceTask(
 							candidateEntry.getCandidateEntryId(),
 							task.getTaskId()) == null) {
 
@@ -95,15 +95,30 @@ public class TaskHandlerImpl implements TaskHandler {
 		CandidateEntry candidateEntry =
 			CandidateEntryLocalServiceUtil.getCandidateByWikiPageId(wikiPageId);
 
+		if (candidateEntry == null) {
+			throw new com.liferay.micro.maintainance.candidate.exception.
+				NoSuchEntryException();
+		}
+
 		CandidateMaintenance candidateMaintenance =
 			CandidateMaintenanceLocalServiceUtil.getCandidateMaintenaceTask(
 				candidateEntry.getCandidateEntryId(), taskId);
+
+		if (candidateMaintenance == null) {
+			throw new com.liferay.micro.maintainance.task.exception.
+				NoSuchEntryException();
+		}
 
 		AnalysisEntry analysisEntry;
 
 		analysisEntry =
 			AnalysisEntryLocalServiceUtil.getAnalysisByCandidateMaintenance(
 				candidateMaintenance.getCandidateMaintenanceId());
+
+		if (analysisEntry == null) {
+			throw new com.liferay.micro.maintainance.analysis.exception.
+				NoSuchEntryException();
+		}
 
 		long analysisEntryId = analysisEntry.getAnalysisEntryId();
 
