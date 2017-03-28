@@ -45,7 +45,8 @@ public class WikiUtil {
 		return null;
 	}
 
-	public static WikiPage getWikiPageByCandiadteMaintenacne(long candidateMaintenanceId)
+	public static WikiPage getWikiPageByCandiadteMaintenacne(
+			long candidateMaintenanceId)
 		throws PortalException {
 
 		CandidateMaintenance candidateMaintenance =

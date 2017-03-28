@@ -1,7 +1,7 @@
 package com.liferay.micro.maintainance.util;
 
 import com.liferay.portal.kernel.json.JSONException;
-import com.liferay.portal.kernel.json.JSONFactory;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 
 /**
@@ -11,7 +11,7 @@ import com.liferay.portal.kernel.json.JSONObject;
 public class VotesJSONSerializer {
 
 	public static String createVotes() {
-		JSONObject jsonObject = _jsonFactory.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 		jsonObject.put("no", 0);
 		jsonObject.put("not_voted", 0);
@@ -24,7 +24,7 @@ public class VotesJSONSerializer {
 			String analysisData, int previousVote, int vote)
 		throws JSONException {
 
-		JSONObject jsonObject = _jsonFactory.createJSONObject(analysisData);
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(analysisData);
 
 		if (previousVote == VoteConstants.NO) {
 			_decreaseVote(jsonObject, "no");
@@ -60,7 +60,5 @@ public class VotesJSONSerializer {
 
 		jsonObject.put(vote, ++votes);
 	}
-
-	private static JSONFactory _jsonFactory;
 
 }
