@@ -77,6 +77,8 @@ public class VotesJSONSerializer {
 				break;
 			case VoteConstants.NOT_VOTED:
 				break;
+			case VoteConstants.NO_PREVIOUS:
+				break;
 			default :
 				throw new NoSuchVoteValueException();
 		}

@@ -133,6 +133,13 @@ public class TaskHandlerImpl implements TaskHandler {
 		AnalysisUserLocalServiceUtil.addAnalysisUser(
 			analysisEntryId, userId, VoteConstants.NOT_VOTED);
 
+		String analysisData = analysisEntry.getAnalysisData();
+
+		analysisData = VotesJSONSerializer.updateVotes(
+			analysisData, VoteConstants.NO_PREVIOUS, VoteConstants.NOT_VOTED);
+
+		analysisEntry.setAnalysisData(analysisData);
+
 		return VoteConstants.NOT_VOTED;
 	}
 
