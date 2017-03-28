@@ -16,9 +16,16 @@ package com.liferay.micro.maintainance.candidate.service.http;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.micro.maintainance.candidate.service.CandidateEntryServiceUtil;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
- * {@link com.liferay.micro.maintainance.candidate.service.CandidateEntryServiceUtil} service utility. The
+ * {@link CandidateEntryServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
@@ -53,9 +60,27 @@ import aQute.bnd.annotation.ProviderType;
  * @author Brian Wing Shun Chan
  * @see CandidateEntryServiceHttp
  * @see com.liferay.micro.maintainance.candidate.model.CandidateEntrySoap
- * @see com.liferay.micro.maintainance.candidate.service.CandidateEntryServiceUtil
+ * @see CandidateEntryServiceUtil
  * @generated
  */
 @ProviderType
 public class CandidateEntryServiceSoap {
+	public static com.liferay.micro.maintainance.candidate.model.CandidateEntrySoap addCandidateEntry(
+		long userId, long groupId, long wikiPageId, long taskId)
+		throws RemoteException {
+		try {
+			com.liferay.micro.maintainance.candidate.model.CandidateEntry returnValue =
+				CandidateEntryServiceUtil.addCandidateEntry(userId, groupId,
+					wikiPageId, taskId);
+
+			return com.liferay.micro.maintainance.candidate.model.CandidateEntrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(CandidateEntryServiceSoap.class);
 }

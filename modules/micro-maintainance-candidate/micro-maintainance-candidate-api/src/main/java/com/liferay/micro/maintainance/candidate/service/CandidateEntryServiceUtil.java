@@ -41,6 +41,12 @@ public class CandidateEntryServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.micro.maintainance.candidate.service.impl.CandidateEntryServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static com.liferay.micro.maintainance.candidate.model.CandidateEntry addCandidateEntry(
+		long userId, long groupId, long wikiPageId, long taskId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCandidateEntry(userId, groupId, wikiPageId, taskId);
+	}
 
 	/**
 	* Returns the OSGi service identifier.

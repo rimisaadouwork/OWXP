@@ -16,6 +16,8 @@ package com.liferay.micro.maintainance.candidate.service;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.micro.maintainance.candidate.model.CandidateEntry;
+
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -49,6 +51,8 @@ public interface CandidateEntryService extends BaseService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CandidateEntryServiceUtil} to access the candidate entry remote service. Add custom service methods to {@link com.liferay.micro.maintainance.candidate.service.impl.CandidateEntryServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public CandidateEntry addCandidateEntry(long userId, long groupId,
+		long wikiPageId, long taskId) throws PortalException;
 
 	/**
 	* Returns the OSGi service identifier.

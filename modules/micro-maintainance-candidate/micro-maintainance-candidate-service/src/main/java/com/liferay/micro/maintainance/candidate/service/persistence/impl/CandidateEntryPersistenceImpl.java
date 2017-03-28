@@ -1992,6 +1992,210 @@ public class CandidateEntryPersistenceImpl extends BasePersistenceImpl<Candidate
 	}
 
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "candidateEntry.groupId = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_WIKIPAGEID = new FinderPath(CandidateEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CandidateEntryModelImpl.FINDER_CACHE_ENABLED,
+			CandidateEntryImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByWikiPageId", new String[] { Long.class.getName() },
+			CandidateEntryModelImpl.WIKIPAGEID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_WIKIPAGEID = new FinderPath(CandidateEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CandidateEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByWikiPageId",
+			new String[] { Long.class.getName() });
+
+	/**
+	 * Returns the candidate entry where wikiPageId = &#63; or throws a {@link NoSuchEntryException} if it could not be found.
+	 *
+	 * @param wikiPageId the wiki page ID
+	 * @return the matching candidate entry
+	 * @throws NoSuchEntryException if a matching candidate entry could not be found
+	 */
+	@Override
+	public CandidateEntry findByWikiPageId(long wikiPageId)
+		throws NoSuchEntryException {
+		CandidateEntry candidateEntry = fetchByWikiPageId(wikiPageId);
+
+		if (candidateEntry == null) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("wikiPageId=");
+			msg.append(wikiPageId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+
+		return candidateEntry;
+	}
+
+	/**
+	 * Returns the candidate entry where wikiPageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param wikiPageId the wiki page ID
+	 * @return the matching candidate entry, or <code>null</code> if a matching candidate entry could not be found
+	 */
+	@Override
+	public CandidateEntry fetchByWikiPageId(long wikiPageId) {
+		return fetchByWikiPageId(wikiPageId, true);
+	}
+
+	/**
+	 * Returns the candidate entry where wikiPageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param wikiPageId the wiki page ID
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching candidate entry, or <code>null</code> if a matching candidate entry could not be found
+	 */
+	@Override
+	public CandidateEntry fetchByWikiPageId(long wikiPageId,
+		boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { wikiPageId };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_WIKIPAGEID,
+					finderArgs, this);
+		}
+
+		if (result instanceof CandidateEntry) {
+			CandidateEntry candidateEntry = (CandidateEntry)result;
+
+			if ((wikiPageId != candidateEntry.getWikiPageId())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_CANDIDATEENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_WIKIPAGEID_WIKIPAGEID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(wikiPageId);
+
+				List<CandidateEntry> list = q.list();
+
+				if (list.isEmpty()) {
+					finderCache.putResult(FINDER_PATH_FETCH_BY_WIKIPAGEID,
+						finderArgs, list);
+				}
+				else {
+					CandidateEntry candidateEntry = list.get(0);
+
+					result = candidateEntry;
+
+					cacheResult(candidateEntry);
+
+					if ((candidateEntry.getWikiPageId() != wikiPageId)) {
+						finderCache.putResult(FINDER_PATH_FETCH_BY_WIKIPAGEID,
+							finderArgs, candidateEntry);
+					}
+				}
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_WIKIPAGEID,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (CandidateEntry)result;
+		}
+	}
+
+	/**
+	 * Removes the candidate entry where wikiPageId = &#63; from the database.
+	 *
+	 * @param wikiPageId the wiki page ID
+	 * @return the candidate entry that was removed
+	 */
+	@Override
+	public CandidateEntry removeByWikiPageId(long wikiPageId)
+		throws NoSuchEntryException {
+		CandidateEntry candidateEntry = findByWikiPageId(wikiPageId);
+
+		return remove(candidateEntry);
+	}
+
+	/**
+	 * Returns the number of candidate entries where wikiPageId = &#63;.
+	 *
+	 * @param wikiPageId the wiki page ID
+	 * @return the number of matching candidate entries
+	 */
+	@Override
+	public int countByWikiPageId(long wikiPageId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_WIKIPAGEID;
+
+		Object[] finderArgs = new Object[] { wikiPageId };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_CANDIDATEENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_WIKIPAGEID_WIKIPAGEID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(wikiPageId);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_WIKIPAGEID_WIKIPAGEID_2 = "candidateEntry.wikiPageId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID =
 		new FinderPath(CandidateEntryModelImpl.ENTITY_CACHE_ENABLED,
 			CandidateEntryModelImpl.FINDER_CACHE_ENABLED,
@@ -2501,6 +2705,586 @@ public class CandidateEntryPersistenceImpl extends BasePersistenceImpl<Candidate
 	}
 
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "candidateEntry.companyId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_U_CD = new FinderPath(CandidateEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CandidateEntryModelImpl.FINDER_CACHE_ENABLED,
+			CandidateEntryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByU_cD",
+			new String[] {
+				Long.class.getName(), Date.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_U_CD = new FinderPath(CandidateEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CandidateEntryModelImpl.FINDER_CACHE_ENABLED,
+			CandidateEntryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByU_cD",
+			new String[] { Long.class.getName(), Date.class.getName() },
+			CandidateEntryModelImpl.USERID_COLUMN_BITMASK |
+			CandidateEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_U_CD = new FinderPath(CandidateEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CandidateEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByU_cD",
+			new String[] { Long.class.getName(), Date.class.getName() });
+
+	/**
+	 * Returns all the candidate entries where userId = &#63; and createDate = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param createDate the create date
+	 * @return the matching candidate entries
+	 */
+	@Override
+	public List<CandidateEntry> findByU_cD(long userId, Date createDate) {
+		return findByU_cD(userId, createDate, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the candidate entries where userId = &#63; and createDate = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param userId the user ID
+	 * @param createDate the create date
+	 * @param start the lower bound of the range of candidate entries
+	 * @param end the upper bound of the range of candidate entries (not inclusive)
+	 * @return the range of matching candidate entries
+	 */
+	@Override
+	public List<CandidateEntry> findByU_cD(long userId, Date createDate,
+		int start, int end) {
+		return findByU_cD(userId, createDate, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the candidate entries where userId = &#63; and createDate = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param userId the user ID
+	 * @param createDate the create date
+	 * @param start the lower bound of the range of candidate entries
+	 * @param end the upper bound of the range of candidate entries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching candidate entries
+	 */
+	@Override
+	public List<CandidateEntry> findByU_cD(long userId, Date createDate,
+		int start, int end, OrderByComparator<CandidateEntry> orderByComparator) {
+		return findByU_cD(userId, createDate, start, end, orderByComparator,
+			true);
+	}
+
+	/**
+	 * Returns an ordered range of all the candidate entries where userId = &#63; and createDate = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param userId the user ID
+	 * @param createDate the create date
+	 * @param start the lower bound of the range of candidate entries
+	 * @param end the upper bound of the range of candidate entries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching candidate entries
+	 */
+	@Override
+	public List<CandidateEntry> findByU_cD(long userId, Date createDate,
+		int start, int end,
+		OrderByComparator<CandidateEntry> orderByComparator,
+		boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_U_CD;
+			finderArgs = new Object[] { userId, createDate };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_U_CD;
+			finderArgs = new Object[] {
+					userId, createDate,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<CandidateEntry> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<CandidateEntry>)finderCache.getResult(finderPath,
+					finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (CandidateEntry candidateEntry : list) {
+					if ((userId != candidateEntry.getUserId()) ||
+							!Objects.equals(createDate,
+								candidateEntry.getCreateDate())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_CANDIDATEENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_U_CD_USERID_2);
+
+			boolean bindCreateDate = false;
+
+			if (createDate == null) {
+				query.append(_FINDER_COLUMN_U_CD_CREATEDATE_1);
+			}
+			else {
+				bindCreateDate = true;
+
+				query.append(_FINDER_COLUMN_U_CD_CREATEDATE_2);
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(CandidateEntryModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				if (bindCreateDate) {
+					qPos.add(new Timestamp(createDate.getTime()));
+				}
+
+				if (!pagination) {
+					list = (List<CandidateEntry>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<CandidateEntry>)QueryUtil.list(q,
+							getDialect(), start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first candidate entry in the ordered set where userId = &#63; and createDate = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param createDate the create date
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching candidate entry
+	 * @throws NoSuchEntryException if a matching candidate entry could not be found
+	 */
+	@Override
+	public CandidateEntry findByU_cD_First(long userId, Date createDate,
+		OrderByComparator<CandidateEntry> orderByComparator)
+		throws NoSuchEntryException {
+		CandidateEntry candidateEntry = fetchByU_cD_First(userId, createDate,
+				orderByComparator);
+
+		if (candidateEntry != null) {
+			return candidateEntry;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("userId=");
+		msg.append(userId);
+
+		msg.append(", createDate=");
+		msg.append(createDate);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchEntryException(msg.toString());
+	}
+
+	/**
+	 * Returns the first candidate entry in the ordered set where userId = &#63; and createDate = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param createDate the create date
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching candidate entry, or <code>null</code> if a matching candidate entry could not be found
+	 */
+	@Override
+	public CandidateEntry fetchByU_cD_First(long userId, Date createDate,
+		OrderByComparator<CandidateEntry> orderByComparator) {
+		List<CandidateEntry> list = findByU_cD(userId, createDate, 0, 1,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last candidate entry in the ordered set where userId = &#63; and createDate = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param createDate the create date
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching candidate entry
+	 * @throws NoSuchEntryException if a matching candidate entry could not be found
+	 */
+	@Override
+	public CandidateEntry findByU_cD_Last(long userId, Date createDate,
+		OrderByComparator<CandidateEntry> orderByComparator)
+		throws NoSuchEntryException {
+		CandidateEntry candidateEntry = fetchByU_cD_Last(userId, createDate,
+				orderByComparator);
+
+		if (candidateEntry != null) {
+			return candidateEntry;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("userId=");
+		msg.append(userId);
+
+		msg.append(", createDate=");
+		msg.append(createDate);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchEntryException(msg.toString());
+	}
+
+	/**
+	 * Returns the last candidate entry in the ordered set where userId = &#63; and createDate = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param createDate the create date
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching candidate entry, or <code>null</code> if a matching candidate entry could not be found
+	 */
+	@Override
+	public CandidateEntry fetchByU_cD_Last(long userId, Date createDate,
+		OrderByComparator<CandidateEntry> orderByComparator) {
+		int count = countByU_cD(userId, createDate);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<CandidateEntry> list = findByU_cD(userId, createDate, count - 1,
+				count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the candidate entries before and after the current candidate entry in the ordered set where userId = &#63; and createDate = &#63;.
+	 *
+	 * @param candidateEntryId the primary key of the current candidate entry
+	 * @param userId the user ID
+	 * @param createDate the create date
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next candidate entry
+	 * @throws NoSuchEntryException if a candidate entry with the primary key could not be found
+	 */
+	@Override
+	public CandidateEntry[] findByU_cD_PrevAndNext(long candidateEntryId,
+		long userId, Date createDate,
+		OrderByComparator<CandidateEntry> orderByComparator)
+		throws NoSuchEntryException {
+		CandidateEntry candidateEntry = findByPrimaryKey(candidateEntryId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CandidateEntry[] array = new CandidateEntryImpl[3];
+
+			array[0] = getByU_cD_PrevAndNext(session, candidateEntry, userId,
+					createDate, orderByComparator, true);
+
+			array[1] = candidateEntry;
+
+			array[2] = getByU_cD_PrevAndNext(session, candidateEntry, userId,
+					createDate, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CandidateEntry getByU_cD_PrevAndNext(Session session,
+		CandidateEntry candidateEntry, long userId, Date createDate,
+		OrderByComparator<CandidateEntry> orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(5 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		query.append(_SQL_SELECT_CANDIDATEENTRY_WHERE);
+
+		query.append(_FINDER_COLUMN_U_CD_USERID_2);
+
+		boolean bindCreateDate = false;
+
+		if (createDate == null) {
+			query.append(_FINDER_COLUMN_U_CD_CREATEDATE_1);
+		}
+		else {
+			bindCreateDate = true;
+
+			query.append(_FINDER_COLUMN_U_CD_CREATEDATE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(CandidateEntryModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(userId);
+
+		if (bindCreateDate) {
+			qPos.add(new Timestamp(createDate.getTime()));
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(candidateEntry);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<CandidateEntry> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the candidate entries where userId = &#63; and createDate = &#63; from the database.
+	 *
+	 * @param userId the user ID
+	 * @param createDate the create date
+	 */
+	@Override
+	public void removeByU_cD(long userId, Date createDate) {
+		for (CandidateEntry candidateEntry : findByU_cD(userId, createDate,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(candidateEntry);
+		}
+	}
+
+	/**
+	 * Returns the number of candidate entries where userId = &#63; and createDate = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param createDate the create date
+	 * @return the number of matching candidate entries
+	 */
+	@Override
+	public int countByU_cD(long userId, Date createDate) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_U_CD;
+
+		Object[] finderArgs = new Object[] { userId, createDate };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_CANDIDATEENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_U_CD_USERID_2);
+
+			boolean bindCreateDate = false;
+
+			if (createDate == null) {
+				query.append(_FINDER_COLUMN_U_CD_CREATEDATE_1);
+			}
+			else {
+				bindCreateDate = true;
+
+				query.append(_FINDER_COLUMN_U_CD_CREATEDATE_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				if (bindCreateDate) {
+					qPos.add(new Timestamp(createDate.getTime()));
+				}
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_U_CD_USERID_2 = "candidateEntry.userId = ? AND ";
+	private static final String _FINDER_COLUMN_U_CD_CREATEDATE_1 = "candidateEntry.createDate IS NULL";
+	private static final String _FINDER_COLUMN_U_CD_CREATEDATE_2 = "candidateEntry.createDate = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_C_CTD = new FinderPath(CandidateEntryModelImpl.ENTITY_CACHE_ENABLED,
 			CandidateEntryModelImpl.FINDER_CACHE_ENABLED,
 			CandidateEntryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
@@ -3834,6 +4618,551 @@ public class CandidateEntryPersistenceImpl extends BasePersistenceImpl<Candidate
 
 	private static final String _FINDER_COLUMN_G_P_GROUPID_2 = "candidateEntry.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_P_WIKIPAGEID_2 = "candidateEntry.wikiPageId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_U_P = new FinderPath(CandidateEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CandidateEntryModelImpl.FINDER_CACHE_ENABLED,
+			CandidateEntryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByU_P",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_U_P = new FinderPath(CandidateEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CandidateEntryModelImpl.FINDER_CACHE_ENABLED,
+			CandidateEntryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByU_P",
+			new String[] { Long.class.getName(), Long.class.getName() },
+			CandidateEntryModelImpl.USERID_COLUMN_BITMASK |
+			CandidateEntryModelImpl.WIKIPAGEID_COLUMN_BITMASK |
+			CandidateEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_U_P = new FinderPath(CandidateEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CandidateEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByU_P",
+			new String[] { Long.class.getName(), Long.class.getName() });
+
+	/**
+	 * Returns all the candidate entries where userId = &#63; and wikiPageId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param wikiPageId the wiki page ID
+	 * @return the matching candidate entries
+	 */
+	@Override
+	public List<CandidateEntry> findByU_P(long userId, long wikiPageId) {
+		return findByU_P(userId, wikiPageId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the candidate entries where userId = &#63; and wikiPageId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param userId the user ID
+	 * @param wikiPageId the wiki page ID
+	 * @param start the lower bound of the range of candidate entries
+	 * @param end the upper bound of the range of candidate entries (not inclusive)
+	 * @return the range of matching candidate entries
+	 */
+	@Override
+	public List<CandidateEntry> findByU_P(long userId, long wikiPageId,
+		int start, int end) {
+		return findByU_P(userId, wikiPageId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the candidate entries where userId = &#63; and wikiPageId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param userId the user ID
+	 * @param wikiPageId the wiki page ID
+	 * @param start the lower bound of the range of candidate entries
+	 * @param end the upper bound of the range of candidate entries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching candidate entries
+	 */
+	@Override
+	public List<CandidateEntry> findByU_P(long userId, long wikiPageId,
+		int start, int end, OrderByComparator<CandidateEntry> orderByComparator) {
+		return findByU_P(userId, wikiPageId, start, end, orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the candidate entries where userId = &#63; and wikiPageId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param userId the user ID
+	 * @param wikiPageId the wiki page ID
+	 * @param start the lower bound of the range of candidate entries
+	 * @param end the upper bound of the range of candidate entries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching candidate entries
+	 */
+	@Override
+	public List<CandidateEntry> findByU_P(long userId, long wikiPageId,
+		int start, int end,
+		OrderByComparator<CandidateEntry> orderByComparator,
+		boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_U_P;
+			finderArgs = new Object[] { userId, wikiPageId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_U_P;
+			finderArgs = new Object[] {
+					userId, wikiPageId,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<CandidateEntry> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<CandidateEntry>)finderCache.getResult(finderPath,
+					finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (CandidateEntry candidateEntry : list) {
+					if ((userId != candidateEntry.getUserId()) ||
+							(wikiPageId != candidateEntry.getWikiPageId())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_CANDIDATEENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_U_P_USERID_2);
+
+			query.append(_FINDER_COLUMN_U_P_WIKIPAGEID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(CandidateEntryModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				qPos.add(wikiPageId);
+
+				if (!pagination) {
+					list = (List<CandidateEntry>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<CandidateEntry>)QueryUtil.list(q,
+							getDialect(), start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first candidate entry in the ordered set where userId = &#63; and wikiPageId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param wikiPageId the wiki page ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching candidate entry
+	 * @throws NoSuchEntryException if a matching candidate entry could not be found
+	 */
+	@Override
+	public CandidateEntry findByU_P_First(long userId, long wikiPageId,
+		OrderByComparator<CandidateEntry> orderByComparator)
+		throws NoSuchEntryException {
+		CandidateEntry candidateEntry = fetchByU_P_First(userId, wikiPageId,
+				orderByComparator);
+
+		if (candidateEntry != null) {
+			return candidateEntry;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("userId=");
+		msg.append(userId);
+
+		msg.append(", wikiPageId=");
+		msg.append(wikiPageId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchEntryException(msg.toString());
+	}
+
+	/**
+	 * Returns the first candidate entry in the ordered set where userId = &#63; and wikiPageId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param wikiPageId the wiki page ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching candidate entry, or <code>null</code> if a matching candidate entry could not be found
+	 */
+	@Override
+	public CandidateEntry fetchByU_P_First(long userId, long wikiPageId,
+		OrderByComparator<CandidateEntry> orderByComparator) {
+		List<CandidateEntry> list = findByU_P(userId, wikiPageId, 0, 1,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last candidate entry in the ordered set where userId = &#63; and wikiPageId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param wikiPageId the wiki page ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching candidate entry
+	 * @throws NoSuchEntryException if a matching candidate entry could not be found
+	 */
+	@Override
+	public CandidateEntry findByU_P_Last(long userId, long wikiPageId,
+		OrderByComparator<CandidateEntry> orderByComparator)
+		throws NoSuchEntryException {
+		CandidateEntry candidateEntry = fetchByU_P_Last(userId, wikiPageId,
+				orderByComparator);
+
+		if (candidateEntry != null) {
+			return candidateEntry;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("userId=");
+		msg.append(userId);
+
+		msg.append(", wikiPageId=");
+		msg.append(wikiPageId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchEntryException(msg.toString());
+	}
+
+	/**
+	 * Returns the last candidate entry in the ordered set where userId = &#63; and wikiPageId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param wikiPageId the wiki page ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching candidate entry, or <code>null</code> if a matching candidate entry could not be found
+	 */
+	@Override
+	public CandidateEntry fetchByU_P_Last(long userId, long wikiPageId,
+		OrderByComparator<CandidateEntry> orderByComparator) {
+		int count = countByU_P(userId, wikiPageId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<CandidateEntry> list = findByU_P(userId, wikiPageId, count - 1,
+				count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the candidate entries before and after the current candidate entry in the ordered set where userId = &#63; and wikiPageId = &#63;.
+	 *
+	 * @param candidateEntryId the primary key of the current candidate entry
+	 * @param userId the user ID
+	 * @param wikiPageId the wiki page ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next candidate entry
+	 * @throws NoSuchEntryException if a candidate entry with the primary key could not be found
+	 */
+	@Override
+	public CandidateEntry[] findByU_P_PrevAndNext(long candidateEntryId,
+		long userId, long wikiPageId,
+		OrderByComparator<CandidateEntry> orderByComparator)
+		throws NoSuchEntryException {
+		CandidateEntry candidateEntry = findByPrimaryKey(candidateEntryId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CandidateEntry[] array = new CandidateEntryImpl[3];
+
+			array[0] = getByU_P_PrevAndNext(session, candidateEntry, userId,
+					wikiPageId, orderByComparator, true);
+
+			array[1] = candidateEntry;
+
+			array[2] = getByU_P_PrevAndNext(session, candidateEntry, userId,
+					wikiPageId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CandidateEntry getByU_P_PrevAndNext(Session session,
+		CandidateEntry candidateEntry, long userId, long wikiPageId,
+		OrderByComparator<CandidateEntry> orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(5 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		query.append(_SQL_SELECT_CANDIDATEENTRY_WHERE);
+
+		query.append(_FINDER_COLUMN_U_P_USERID_2);
+
+		query.append(_FINDER_COLUMN_U_P_WIKIPAGEID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(CandidateEntryModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(userId);
+
+		qPos.add(wikiPageId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(candidateEntry);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<CandidateEntry> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the candidate entries where userId = &#63; and wikiPageId = &#63; from the database.
+	 *
+	 * @param userId the user ID
+	 * @param wikiPageId the wiki page ID
+	 */
+	@Override
+	public void removeByU_P(long userId, long wikiPageId) {
+		for (CandidateEntry candidateEntry : findByU_P(userId, wikiPageId,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(candidateEntry);
+		}
+	}
+
+	/**
+	 * Returns the number of candidate entries where userId = &#63; and wikiPageId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param wikiPageId the wiki page ID
+	 * @return the number of matching candidate entries
+	 */
+	@Override
+	public int countByU_P(long userId, long wikiPageId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_U_P;
+
+		Object[] finderArgs = new Object[] { userId, wikiPageId };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_CANDIDATEENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_U_P_USERID_2);
+
+			query.append(_FINDER_COLUMN_U_P_WIKIPAGEID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				qPos.add(wikiPageId);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_U_P_USERID_2 = "candidateEntry.userId = ? AND ";
+	private static final String _FINDER_COLUMN_U_P_WIKIPAGEID_2 = "candidateEntry.wikiPageId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_U_P = new FinderPath(CandidateEntryModelImpl.ENTITY_CACHE_ENABLED,
 			CandidateEntryModelImpl.FINDER_CACHE_ENABLED,
 			CandidateEntryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
@@ -4419,1335 +5748,6 @@ public class CandidateEntryPersistenceImpl extends BasePersistenceImpl<Candidate
 	private static final String _FINDER_COLUMN_G_U_P_GROUPID_2 = "candidateEntry.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_U_P_USERID_2 = "candidateEntry.userId = ? AND ";
 	private static final String _FINDER_COLUMN_G_U_P_WIKIPAGEID_2 = "candidateEntry.wikiPageId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_U_CD = new FinderPath(CandidateEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CandidateEntryModelImpl.FINDER_CACHE_ENABLED,
-			CandidateEntryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByU_cD",
-			new String[] {
-				Long.class.getName(), Date.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_U_CD = new FinderPath(CandidateEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CandidateEntryModelImpl.FINDER_CACHE_ENABLED,
-			CandidateEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByU_cD",
-			new String[] { Long.class.getName(), Date.class.getName() },
-			CandidateEntryModelImpl.USERID_COLUMN_BITMASK |
-			CandidateEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_U_CD = new FinderPath(CandidateEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CandidateEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByU_cD",
-			new String[] { Long.class.getName(), Date.class.getName() });
-
-	/**
-	 * Returns all the candidate entries where userId = &#63; and createDate = &#63;.
-	 *
-	 * @param userId the user ID
-	 * @param createDate the create date
-	 * @return the matching candidate entries
-	 */
-	@Override
-	public List<CandidateEntry> findByU_cD(long userId, Date createDate) {
-		return findByU_cD(userId, createDate, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
-	}
-
-	/**
-	 * Returns a range of all the candidate entries where userId = &#63; and createDate = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param userId the user ID
-	 * @param createDate the create date
-	 * @param start the lower bound of the range of candidate entries
-	 * @param end the upper bound of the range of candidate entries (not inclusive)
-	 * @return the range of matching candidate entries
-	 */
-	@Override
-	public List<CandidateEntry> findByU_cD(long userId, Date createDate,
-		int start, int end) {
-		return findByU_cD(userId, createDate, start, end, null);
-	}
-
-	/**
-	 * Returns an ordered range of all the candidate entries where userId = &#63; and createDate = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param userId the user ID
-	 * @param createDate the create date
-	 * @param start the lower bound of the range of candidate entries
-	 * @param end the upper bound of the range of candidate entries (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching candidate entries
-	 */
-	@Override
-	public List<CandidateEntry> findByU_cD(long userId, Date createDate,
-		int start, int end, OrderByComparator<CandidateEntry> orderByComparator) {
-		return findByU_cD(userId, createDate, start, end, orderByComparator,
-			true);
-	}
-
-	/**
-	 * Returns an ordered range of all the candidate entries where userId = &#63; and createDate = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param userId the user ID
-	 * @param createDate the create date
-	 * @param start the lower bound of the range of candidate entries
-	 * @param end the upper bound of the range of candidate entries (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of matching candidate entries
-	 */
-	@Override
-	public List<CandidateEntry> findByU_cD(long userId, Date createDate,
-		int start, int end,
-		OrderByComparator<CandidateEntry> orderByComparator,
-		boolean retrieveFromCache) {
-		boolean pagination = true;
-		FinderPath finderPath = null;
-		Object[] finderArgs = null;
-
-		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
-			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_U_CD;
-			finderArgs = new Object[] { userId, createDate };
-		}
-		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_U_CD;
-			finderArgs = new Object[] {
-					userId, createDate,
-					
-					start, end, orderByComparator
-				};
-		}
-
-		List<CandidateEntry> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CandidateEntry>)finderCache.getResult(finderPath,
-					finderArgs, this);
-
-			if ((list != null) && !list.isEmpty()) {
-				for (CandidateEntry candidateEntry : list) {
-					if ((userId != candidateEntry.getUserId()) ||
-							!Objects.equals(createDate,
-								candidateEntry.getCreateDate())) {
-						list = null;
-
-						break;
-					}
-				}
-			}
-		}
-
-		if (list == null) {
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 2));
-			}
-			else {
-				query = new StringBundler(4);
-			}
-
-			query.append(_SQL_SELECT_CANDIDATEENTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_U_CD_USERID_2);
-
-			boolean bindCreateDate = false;
-
-			if (createDate == null) {
-				query.append(_FINDER_COLUMN_U_CD_CREATEDATE_1);
-			}
-			else {
-				bindCreateDate = true;
-
-				query.append(_FINDER_COLUMN_U_CD_CREATEDATE_2);
-			}
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-			else
-			 if (pagination) {
-				query.append(CandidateEntryModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(userId);
-
-				if (bindCreateDate) {
-					qPos.add(new Timestamp(createDate.getTime()));
-				}
-
-				if (!pagination) {
-					list = (List<CandidateEntry>)QueryUtil.list(q,
-							getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CandidateEntry>)QueryUtil.list(q,
-							getDialect(), start, end);
-				}
-
-				cacheResult(list);
-
-				finderCache.putResult(finderPath, finderArgs, list);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	/**
-	 * Returns the first candidate entry in the ordered set where userId = &#63; and createDate = &#63;.
-	 *
-	 * @param userId the user ID
-	 * @param createDate the create date
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching candidate entry
-	 * @throws NoSuchEntryException if a matching candidate entry could not be found
-	 */
-	@Override
-	public CandidateEntry findByU_cD_First(long userId, Date createDate,
-		OrderByComparator<CandidateEntry> orderByComparator)
-		throws NoSuchEntryException {
-		CandidateEntry candidateEntry = fetchByU_cD_First(userId, createDate,
-				orderByComparator);
-
-		if (candidateEntry != null) {
-			return candidateEntry;
-		}
-
-		StringBundler msg = new StringBundler(6);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("userId=");
-		msg.append(userId);
-
-		msg.append(", createDate=");
-		msg.append(createDate);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchEntryException(msg.toString());
-	}
-
-	/**
-	 * Returns the first candidate entry in the ordered set where userId = &#63; and createDate = &#63;.
-	 *
-	 * @param userId the user ID
-	 * @param createDate the create date
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching candidate entry, or <code>null</code> if a matching candidate entry could not be found
-	 */
-	@Override
-	public CandidateEntry fetchByU_cD_First(long userId, Date createDate,
-		OrderByComparator<CandidateEntry> orderByComparator) {
-		List<CandidateEntry> list = findByU_cD(userId, createDate, 0, 1,
-				orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last candidate entry in the ordered set where userId = &#63; and createDate = &#63;.
-	 *
-	 * @param userId the user ID
-	 * @param createDate the create date
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching candidate entry
-	 * @throws NoSuchEntryException if a matching candidate entry could not be found
-	 */
-	@Override
-	public CandidateEntry findByU_cD_Last(long userId, Date createDate,
-		OrderByComparator<CandidateEntry> orderByComparator)
-		throws NoSuchEntryException {
-		CandidateEntry candidateEntry = fetchByU_cD_Last(userId, createDate,
-				orderByComparator);
-
-		if (candidateEntry != null) {
-			return candidateEntry;
-		}
-
-		StringBundler msg = new StringBundler(6);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("userId=");
-		msg.append(userId);
-
-		msg.append(", createDate=");
-		msg.append(createDate);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchEntryException(msg.toString());
-	}
-
-	/**
-	 * Returns the last candidate entry in the ordered set where userId = &#63; and createDate = &#63;.
-	 *
-	 * @param userId the user ID
-	 * @param createDate the create date
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching candidate entry, or <code>null</code> if a matching candidate entry could not be found
-	 */
-	@Override
-	public CandidateEntry fetchByU_cD_Last(long userId, Date createDate,
-		OrderByComparator<CandidateEntry> orderByComparator) {
-		int count = countByU_cD(userId, createDate);
-
-		if (count == 0) {
-			return null;
-		}
-
-		List<CandidateEntry> list = findByU_cD(userId, createDate, count - 1,
-				count, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the candidate entries before and after the current candidate entry in the ordered set where userId = &#63; and createDate = &#63;.
-	 *
-	 * @param candidateEntryId the primary key of the current candidate entry
-	 * @param userId the user ID
-	 * @param createDate the create date
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next candidate entry
-	 * @throws NoSuchEntryException if a candidate entry with the primary key could not be found
-	 */
-	@Override
-	public CandidateEntry[] findByU_cD_PrevAndNext(long candidateEntryId,
-		long userId, Date createDate,
-		OrderByComparator<CandidateEntry> orderByComparator)
-		throws NoSuchEntryException {
-		CandidateEntry candidateEntry = findByPrimaryKey(candidateEntryId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			CandidateEntry[] array = new CandidateEntryImpl[3];
-
-			array[0] = getByU_cD_PrevAndNext(session, candidateEntry, userId,
-					createDate, orderByComparator, true);
-
-			array[1] = candidateEntry;
-
-			array[2] = getByU_cD_PrevAndNext(session, candidateEntry, userId,
-					createDate, orderByComparator, false);
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected CandidateEntry getByU_cD_PrevAndNext(Session session,
-		CandidateEntry candidateEntry, long userId, Date createDate,
-		OrderByComparator<CandidateEntry> orderByComparator, boolean previous) {
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(5 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
-					(orderByComparator.getOrderByFields().length * 3));
-		}
-		else {
-			query = new StringBundler(4);
-		}
-
-		query.append(_SQL_SELECT_CANDIDATEENTRY_WHERE);
-
-		query.append(_FINDER_COLUMN_U_CD_USERID_2);
-
-		boolean bindCreateDate = false;
-
-		if (createDate == null) {
-			query.append(_FINDER_COLUMN_U_CD_CREATEDATE_1);
-		}
-		else {
-			bindCreateDate = true;
-
-			query.append(_FINDER_COLUMN_U_CD_CREATEDATE_2);
-		}
-
-		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
-
-			if (orderByConditionFields.length > 0) {
-				query.append(WHERE_AND);
-			}
-
-			for (int i = 0; i < orderByConditionFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByConditionFields[i]);
-
-				if ((i + 1) < orderByConditionFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN_HAS_NEXT);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN);
-					}
-				}
-			}
-
-			query.append(ORDER_BY_CLAUSE);
-
-			String[] orderByFields = orderByComparator.getOrderByFields();
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC_HAS_NEXT);
-					}
-					else {
-						query.append(ORDER_BY_DESC_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC);
-					}
-					else {
-						query.append(ORDER_BY_DESC);
-					}
-				}
-			}
-		}
-		else {
-			query.append(CandidateEntryModelImpl.ORDER_BY_JPQL);
-		}
-
-		String sql = query.toString();
-
-		Query q = session.createQuery(sql);
-
-		q.setFirstResult(0);
-		q.setMaxResults(2);
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		qPos.add(userId);
-
-		if (bindCreateDate) {
-			qPos.add(new Timestamp(createDate.getTime()));
-		}
-
-		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(candidateEntry);
-
-			for (Object value : values) {
-				qPos.add(value);
-			}
-		}
-
-		List<CandidateEntry> list = q.list();
-
-		if (list.size() == 2) {
-			return list.get(1);
-		}
-		else {
-			return null;
-		}
-	}
-
-	/**
-	 * Removes all the candidate entries where userId = &#63; and createDate = &#63; from the database.
-	 *
-	 * @param userId the user ID
-	 * @param createDate the create date
-	 */
-	@Override
-	public void removeByU_cD(long userId, Date createDate) {
-		for (CandidateEntry candidateEntry : findByU_cD(userId, createDate,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
-			remove(candidateEntry);
-		}
-	}
-
-	/**
-	 * Returns the number of candidate entries where userId = &#63; and createDate = &#63;.
-	 *
-	 * @param userId the user ID
-	 * @param createDate the create date
-	 * @return the number of matching candidate entries
-	 */
-	@Override
-	public int countByU_cD(long userId, Date createDate) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_U_CD;
-
-		Object[] finderArgs = new Object[] { userId, createDate };
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_COUNT_CANDIDATEENTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_U_CD_USERID_2);
-
-			boolean bindCreateDate = false;
-
-			if (createDate == null) {
-				query.append(_FINDER_COLUMN_U_CD_CREATEDATE_1);
-			}
-			else {
-				bindCreateDate = true;
-
-				query.append(_FINDER_COLUMN_U_CD_CREATEDATE_2);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(userId);
-
-				if (bindCreateDate) {
-					qPos.add(new Timestamp(createDate.getTime()));
-				}
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_U_CD_USERID_2 = "candidateEntry.userId = ? AND ";
-	private static final String _FINDER_COLUMN_U_CD_CREATEDATE_1 = "candidateEntry.createDate IS NULL";
-	private static final String _FINDER_COLUMN_U_CD_CREATEDATE_2 = "candidateEntry.createDate = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_U_P = new FinderPath(CandidateEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CandidateEntryModelImpl.FINDER_CACHE_ENABLED,
-			CandidateEntryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByU_P",
-			new String[] {
-				Long.class.getName(), Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_U_P = new FinderPath(CandidateEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CandidateEntryModelImpl.FINDER_CACHE_ENABLED,
-			CandidateEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByU_P",
-			new String[] { Long.class.getName(), Long.class.getName() },
-			CandidateEntryModelImpl.USERID_COLUMN_BITMASK |
-			CandidateEntryModelImpl.WIKIPAGEID_COLUMN_BITMASK |
-			CandidateEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_U_P = new FinderPath(CandidateEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CandidateEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByU_P",
-			new String[] { Long.class.getName(), Long.class.getName() });
-
-	/**
-	 * Returns all the candidate entries where userId = &#63; and wikiPageId = &#63;.
-	 *
-	 * @param userId the user ID
-	 * @param wikiPageId the wiki page ID
-	 * @return the matching candidate entries
-	 */
-	@Override
-	public List<CandidateEntry> findByU_P(long userId, long wikiPageId) {
-		return findByU_P(userId, wikiPageId, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
-	}
-
-	/**
-	 * Returns a range of all the candidate entries where userId = &#63; and wikiPageId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param userId the user ID
-	 * @param wikiPageId the wiki page ID
-	 * @param start the lower bound of the range of candidate entries
-	 * @param end the upper bound of the range of candidate entries (not inclusive)
-	 * @return the range of matching candidate entries
-	 */
-	@Override
-	public List<CandidateEntry> findByU_P(long userId, long wikiPageId,
-		int start, int end) {
-		return findByU_P(userId, wikiPageId, start, end, null);
-	}
-
-	/**
-	 * Returns an ordered range of all the candidate entries where userId = &#63; and wikiPageId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param userId the user ID
-	 * @param wikiPageId the wiki page ID
-	 * @param start the lower bound of the range of candidate entries
-	 * @param end the upper bound of the range of candidate entries (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching candidate entries
-	 */
-	@Override
-	public List<CandidateEntry> findByU_P(long userId, long wikiPageId,
-		int start, int end, OrderByComparator<CandidateEntry> orderByComparator) {
-		return findByU_P(userId, wikiPageId, start, end, orderByComparator, true);
-	}
-
-	/**
-	 * Returns an ordered range of all the candidate entries where userId = &#63; and wikiPageId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CandidateEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param userId the user ID
-	 * @param wikiPageId the wiki page ID
-	 * @param start the lower bound of the range of candidate entries
-	 * @param end the upper bound of the range of candidate entries (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of matching candidate entries
-	 */
-	@Override
-	public List<CandidateEntry> findByU_P(long userId, long wikiPageId,
-		int start, int end,
-		OrderByComparator<CandidateEntry> orderByComparator,
-		boolean retrieveFromCache) {
-		boolean pagination = true;
-		FinderPath finderPath = null;
-		Object[] finderArgs = null;
-
-		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
-			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_U_P;
-			finderArgs = new Object[] { userId, wikiPageId };
-		}
-		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_U_P;
-			finderArgs = new Object[] {
-					userId, wikiPageId,
-					
-					start, end, orderByComparator
-				};
-		}
-
-		List<CandidateEntry> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CandidateEntry>)finderCache.getResult(finderPath,
-					finderArgs, this);
-
-			if ((list != null) && !list.isEmpty()) {
-				for (CandidateEntry candidateEntry : list) {
-					if ((userId != candidateEntry.getUserId()) ||
-							(wikiPageId != candidateEntry.getWikiPageId())) {
-						list = null;
-
-						break;
-					}
-				}
-			}
-		}
-
-		if (list == null) {
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 2));
-			}
-			else {
-				query = new StringBundler(4);
-			}
-
-			query.append(_SQL_SELECT_CANDIDATEENTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_U_P_USERID_2);
-
-			query.append(_FINDER_COLUMN_U_P_WIKIPAGEID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-			else
-			 if (pagination) {
-				query.append(CandidateEntryModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(userId);
-
-				qPos.add(wikiPageId);
-
-				if (!pagination) {
-					list = (List<CandidateEntry>)QueryUtil.list(q,
-							getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CandidateEntry>)QueryUtil.list(q,
-							getDialect(), start, end);
-				}
-
-				cacheResult(list);
-
-				finderCache.putResult(finderPath, finderArgs, list);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	/**
-	 * Returns the first candidate entry in the ordered set where userId = &#63; and wikiPageId = &#63;.
-	 *
-	 * @param userId the user ID
-	 * @param wikiPageId the wiki page ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching candidate entry
-	 * @throws NoSuchEntryException if a matching candidate entry could not be found
-	 */
-	@Override
-	public CandidateEntry findByU_P_First(long userId, long wikiPageId,
-		OrderByComparator<CandidateEntry> orderByComparator)
-		throws NoSuchEntryException {
-		CandidateEntry candidateEntry = fetchByU_P_First(userId, wikiPageId,
-				orderByComparator);
-
-		if (candidateEntry != null) {
-			return candidateEntry;
-		}
-
-		StringBundler msg = new StringBundler(6);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("userId=");
-		msg.append(userId);
-
-		msg.append(", wikiPageId=");
-		msg.append(wikiPageId);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchEntryException(msg.toString());
-	}
-
-	/**
-	 * Returns the first candidate entry in the ordered set where userId = &#63; and wikiPageId = &#63;.
-	 *
-	 * @param userId the user ID
-	 * @param wikiPageId the wiki page ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching candidate entry, or <code>null</code> if a matching candidate entry could not be found
-	 */
-	@Override
-	public CandidateEntry fetchByU_P_First(long userId, long wikiPageId,
-		OrderByComparator<CandidateEntry> orderByComparator) {
-		List<CandidateEntry> list = findByU_P(userId, wikiPageId, 0, 1,
-				orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last candidate entry in the ordered set where userId = &#63; and wikiPageId = &#63;.
-	 *
-	 * @param userId the user ID
-	 * @param wikiPageId the wiki page ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching candidate entry
-	 * @throws NoSuchEntryException if a matching candidate entry could not be found
-	 */
-	@Override
-	public CandidateEntry findByU_P_Last(long userId, long wikiPageId,
-		OrderByComparator<CandidateEntry> orderByComparator)
-		throws NoSuchEntryException {
-		CandidateEntry candidateEntry = fetchByU_P_Last(userId, wikiPageId,
-				orderByComparator);
-
-		if (candidateEntry != null) {
-			return candidateEntry;
-		}
-
-		StringBundler msg = new StringBundler(6);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("userId=");
-		msg.append(userId);
-
-		msg.append(", wikiPageId=");
-		msg.append(wikiPageId);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchEntryException(msg.toString());
-	}
-
-	/**
-	 * Returns the last candidate entry in the ordered set where userId = &#63; and wikiPageId = &#63;.
-	 *
-	 * @param userId the user ID
-	 * @param wikiPageId the wiki page ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching candidate entry, or <code>null</code> if a matching candidate entry could not be found
-	 */
-	@Override
-	public CandidateEntry fetchByU_P_Last(long userId, long wikiPageId,
-		OrderByComparator<CandidateEntry> orderByComparator) {
-		int count = countByU_P(userId, wikiPageId);
-
-		if (count == 0) {
-			return null;
-		}
-
-		List<CandidateEntry> list = findByU_P(userId, wikiPageId, count - 1,
-				count, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the candidate entries before and after the current candidate entry in the ordered set where userId = &#63; and wikiPageId = &#63;.
-	 *
-	 * @param candidateEntryId the primary key of the current candidate entry
-	 * @param userId the user ID
-	 * @param wikiPageId the wiki page ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next candidate entry
-	 * @throws NoSuchEntryException if a candidate entry with the primary key could not be found
-	 */
-	@Override
-	public CandidateEntry[] findByU_P_PrevAndNext(long candidateEntryId,
-		long userId, long wikiPageId,
-		OrderByComparator<CandidateEntry> orderByComparator)
-		throws NoSuchEntryException {
-		CandidateEntry candidateEntry = findByPrimaryKey(candidateEntryId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			CandidateEntry[] array = new CandidateEntryImpl[3];
-
-			array[0] = getByU_P_PrevAndNext(session, candidateEntry, userId,
-					wikiPageId, orderByComparator, true);
-
-			array[1] = candidateEntry;
-
-			array[2] = getByU_P_PrevAndNext(session, candidateEntry, userId,
-					wikiPageId, orderByComparator, false);
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected CandidateEntry getByU_P_PrevAndNext(Session session,
-		CandidateEntry candidateEntry, long userId, long wikiPageId,
-		OrderByComparator<CandidateEntry> orderByComparator, boolean previous) {
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(5 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
-					(orderByComparator.getOrderByFields().length * 3));
-		}
-		else {
-			query = new StringBundler(4);
-		}
-
-		query.append(_SQL_SELECT_CANDIDATEENTRY_WHERE);
-
-		query.append(_FINDER_COLUMN_U_P_USERID_2);
-
-		query.append(_FINDER_COLUMN_U_P_WIKIPAGEID_2);
-
-		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
-
-			if (orderByConditionFields.length > 0) {
-				query.append(WHERE_AND);
-			}
-
-			for (int i = 0; i < orderByConditionFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByConditionFields[i]);
-
-				if ((i + 1) < orderByConditionFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN_HAS_NEXT);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN);
-					}
-				}
-			}
-
-			query.append(ORDER_BY_CLAUSE);
-
-			String[] orderByFields = orderByComparator.getOrderByFields();
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC_HAS_NEXT);
-					}
-					else {
-						query.append(ORDER_BY_DESC_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC);
-					}
-					else {
-						query.append(ORDER_BY_DESC);
-					}
-				}
-			}
-		}
-		else {
-			query.append(CandidateEntryModelImpl.ORDER_BY_JPQL);
-		}
-
-		String sql = query.toString();
-
-		Query q = session.createQuery(sql);
-
-		q.setFirstResult(0);
-		q.setMaxResults(2);
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		qPos.add(userId);
-
-		qPos.add(wikiPageId);
-
-		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(candidateEntry);
-
-			for (Object value : values) {
-				qPos.add(value);
-			}
-		}
-
-		List<CandidateEntry> list = q.list();
-
-		if (list.size() == 2) {
-			return list.get(1);
-		}
-		else {
-			return null;
-		}
-	}
-
-	/**
-	 * Removes all the candidate entries where userId = &#63; and wikiPageId = &#63; from the database.
-	 *
-	 * @param userId the user ID
-	 * @param wikiPageId the wiki page ID
-	 */
-	@Override
-	public void removeByU_P(long userId, long wikiPageId) {
-		for (CandidateEntry candidateEntry : findByU_P(userId, wikiPageId,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
-			remove(candidateEntry);
-		}
-	}
-
-	/**
-	 * Returns the number of candidate entries where userId = &#63; and wikiPageId = &#63;.
-	 *
-	 * @param userId the user ID
-	 * @param wikiPageId the wiki page ID
-	 * @return the number of matching candidate entries
-	 */
-	@Override
-	public int countByU_P(long userId, long wikiPageId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_U_P;
-
-		Object[] finderArgs = new Object[] { userId, wikiPageId };
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_COUNT_CANDIDATEENTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_U_P_USERID_2);
-
-			query.append(_FINDER_COLUMN_U_P_WIKIPAGEID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(userId);
-
-				qPos.add(wikiPageId);
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_U_P_USERID_2 = "candidateEntry.userId = ? AND ";
-	private static final String _FINDER_COLUMN_U_P_WIKIPAGEID_2 = "candidateEntry.wikiPageId = ?";
-	public static final FinderPath FINDER_PATH_FETCH_BY_WIKIPAGEID = new FinderPath(CandidateEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CandidateEntryModelImpl.FINDER_CACHE_ENABLED,
-			CandidateEntryImpl.class, FINDER_CLASS_NAME_ENTITY,
-			"fetchByWikiPageId", new String[] { Long.class.getName() },
-			CandidateEntryModelImpl.WIKIPAGEID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_WIKIPAGEID = new FinderPath(CandidateEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CandidateEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByWikiPageId",
-			new String[] { Long.class.getName() });
-
-	/**
-	 * Returns the candidate entry where wikiPageId = &#63; or throws a {@link NoSuchEntryException} if it could not be found.
-	 *
-	 * @param wikiPageId the wiki page ID
-	 * @return the matching candidate entry
-	 * @throws NoSuchEntryException if a matching candidate entry could not be found
-	 */
-	@Override
-	public CandidateEntry findByWikiPageId(long wikiPageId)
-		throws NoSuchEntryException {
-		CandidateEntry candidateEntry = fetchByWikiPageId(wikiPageId);
-
-		if (candidateEntry == null) {
-			StringBundler msg = new StringBundler(4);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("wikiPageId=");
-			msg.append(wikiPageId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(msg.toString());
-			}
-
-			throw new NoSuchEntryException(msg.toString());
-		}
-
-		return candidateEntry;
-	}
-
-	/**
-	 * Returns the candidate entry where wikiPageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param wikiPageId the wiki page ID
-	 * @return the matching candidate entry, or <code>null</code> if a matching candidate entry could not be found
-	 */
-	@Override
-	public CandidateEntry fetchByWikiPageId(long wikiPageId) {
-		return fetchByWikiPageId(wikiPageId, true);
-	}
-
-	/**
-	 * Returns the candidate entry where wikiPageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param wikiPageId the wiki page ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the matching candidate entry, or <code>null</code> if a matching candidate entry could not be found
-	 */
-	@Override
-	public CandidateEntry fetchByWikiPageId(long wikiPageId,
-		boolean retrieveFromCache) {
-		Object[] finderArgs = new Object[] { wikiPageId };
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = finderCache.getResult(FINDER_PATH_FETCH_BY_WIKIPAGEID,
-					finderArgs, this);
-		}
-
-		if (result instanceof CandidateEntry) {
-			CandidateEntry candidateEntry = (CandidateEntry)result;
-
-			if ((wikiPageId != candidateEntry.getWikiPageId())) {
-				result = null;
-			}
-		}
-
-		if (result == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_SELECT_CANDIDATEENTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_WIKIPAGEID_WIKIPAGEID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(wikiPageId);
-
-				List<CandidateEntry> list = q.list();
-
-				if (list.isEmpty()) {
-					finderCache.putResult(FINDER_PATH_FETCH_BY_WIKIPAGEID,
-						finderArgs, list);
-				}
-				else {
-					CandidateEntry candidateEntry = list.get(0);
-
-					result = candidateEntry;
-
-					cacheResult(candidateEntry);
-
-					if ((candidateEntry.getWikiPageId() != wikiPageId)) {
-						finderCache.putResult(FINDER_PATH_FETCH_BY_WIKIPAGEID,
-							finderArgs, candidateEntry);
-					}
-				}
-			}
-			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_FETCH_BY_WIKIPAGEID,
-					finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		if (result instanceof List<?>) {
-			return null;
-		}
-		else {
-			return (CandidateEntry)result;
-		}
-	}
-
-	/**
-	 * Removes the candidate entry where wikiPageId = &#63; from the database.
-	 *
-	 * @param wikiPageId the wiki page ID
-	 * @return the candidate entry that was removed
-	 */
-	@Override
-	public CandidateEntry removeByWikiPageId(long wikiPageId)
-		throws NoSuchEntryException {
-		CandidateEntry candidateEntry = findByWikiPageId(wikiPageId);
-
-		return remove(candidateEntry);
-	}
-
-	/**
-	 * Returns the number of candidate entries where wikiPageId = &#63;.
-	 *
-	 * @param wikiPageId the wiki page ID
-	 * @return the number of matching candidate entries
-	 */
-	@Override
-	public int countByWikiPageId(long wikiPageId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_WIKIPAGEID;
-
-		Object[] finderArgs = new Object[] { wikiPageId };
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(2);
-
-			query.append(_SQL_COUNT_CANDIDATEENTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_WIKIPAGEID_WIKIPAGEID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(wikiPageId);
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_WIKIPAGEID_WIKIPAGEID_2 = "candidateEntry.wikiPageId = ?";
 
 	public CandidateEntryPersistenceImpl() {
 		setModelClass(CandidateEntry.class);
@@ -5768,13 +5768,13 @@ public class CandidateEntryPersistenceImpl extends BasePersistenceImpl<Candidate
 			new Object[] { candidateEntry.getUuid(), candidateEntry.getGroupId() },
 			candidateEntry);
 
+		finderCache.putResult(FINDER_PATH_FETCH_BY_WIKIPAGEID,
+			new Object[] { candidateEntry.getWikiPageId() }, candidateEntry);
+
 		finderCache.putResult(FINDER_PATH_FETCH_BY_G_P,
 			new Object[] {
 				candidateEntry.getGroupId(), candidateEntry.getWikiPageId()
 			}, candidateEntry);
-
-		finderCache.putResult(FINDER_PATH_FETCH_BY_WIKIPAGEID,
-			new Object[] { candidateEntry.getWikiPageId() }, candidateEntry);
 
 		candidateEntry.resetOriginalValues();
 	}
@@ -5858,6 +5858,13 @@ public class CandidateEntryPersistenceImpl extends BasePersistenceImpl<Candidate
 			finderCache.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
 				candidateEntryModelImpl);
 
+			args = new Object[] { candidateEntryModelImpl.getWikiPageId() };
+
+			finderCache.putResult(FINDER_PATH_COUNT_BY_WIKIPAGEID, args,
+				Long.valueOf(1));
+			finderCache.putResult(FINDER_PATH_FETCH_BY_WIKIPAGEID, args,
+				candidateEntryModelImpl);
+
 			args = new Object[] {
 					candidateEntryModelImpl.getGroupId(),
 					candidateEntryModelImpl.getWikiPageId()
@@ -5866,13 +5873,6 @@ public class CandidateEntryPersistenceImpl extends BasePersistenceImpl<Candidate
 			finderCache.putResult(FINDER_PATH_COUNT_BY_G_P, args,
 				Long.valueOf(1));
 			finderCache.putResult(FINDER_PATH_FETCH_BY_G_P, args,
-				candidateEntryModelImpl);
-
-			args = new Object[] { candidateEntryModelImpl.getWikiPageId() };
-
-			finderCache.putResult(FINDER_PATH_COUNT_BY_WIKIPAGEID, args,
-				Long.valueOf(1));
-			finderCache.putResult(FINDER_PATH_FETCH_BY_WIKIPAGEID, args,
 				candidateEntryModelImpl);
 		}
 		else {
@@ -5890,6 +5890,18 @@ public class CandidateEntryPersistenceImpl extends BasePersistenceImpl<Candidate
 			}
 
 			if ((candidateEntryModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_WIKIPAGEID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						candidateEntryModelImpl.getWikiPageId()
+					};
+
+				finderCache.putResult(FINDER_PATH_COUNT_BY_WIKIPAGEID, args,
+					Long.valueOf(1));
+				finderCache.putResult(FINDER_PATH_FETCH_BY_WIKIPAGEID, args,
+					candidateEntryModelImpl);
+			}
+
+			if ((candidateEntryModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_G_P.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
 						candidateEntryModelImpl.getGroupId(),
@@ -5899,18 +5911,6 @@ public class CandidateEntryPersistenceImpl extends BasePersistenceImpl<Candidate
 				finderCache.putResult(FINDER_PATH_COUNT_BY_G_P, args,
 					Long.valueOf(1));
 				finderCache.putResult(FINDER_PATH_FETCH_BY_G_P, args,
-					candidateEntryModelImpl);
-			}
-
-			if ((candidateEntryModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_WIKIPAGEID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						candidateEntryModelImpl.getWikiPageId()
-					};
-
-				finderCache.putResult(FINDER_PATH_COUNT_BY_WIKIPAGEID, args,
-					Long.valueOf(1));
-				finderCache.putResult(FINDER_PATH_FETCH_BY_WIKIPAGEID, args,
 					candidateEntryModelImpl);
 			}
 		}
@@ -5937,6 +5937,19 @@ public class CandidateEntryPersistenceImpl extends BasePersistenceImpl<Candidate
 			finderCache.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
 		}
 
+		args = new Object[] { candidateEntryModelImpl.getWikiPageId() };
+
+		finderCache.removeResult(FINDER_PATH_COUNT_BY_WIKIPAGEID, args);
+		finderCache.removeResult(FINDER_PATH_FETCH_BY_WIKIPAGEID, args);
+
+		if ((candidateEntryModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_WIKIPAGEID.getColumnBitmask()) != 0) {
+			args = new Object[] { candidateEntryModelImpl.getOriginalWikiPageId() };
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_WIKIPAGEID, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_WIKIPAGEID, args);
+		}
+
 		args = new Object[] {
 				candidateEntryModelImpl.getGroupId(),
 				candidateEntryModelImpl.getWikiPageId()
@@ -5954,19 +5967,6 @@ public class CandidateEntryPersistenceImpl extends BasePersistenceImpl<Candidate
 
 			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_P, args);
 			finderCache.removeResult(FINDER_PATH_FETCH_BY_G_P, args);
-		}
-
-		args = new Object[] { candidateEntryModelImpl.getWikiPageId() };
-
-		finderCache.removeResult(FINDER_PATH_COUNT_BY_WIKIPAGEID, args);
-		finderCache.removeResult(FINDER_PATH_FETCH_BY_WIKIPAGEID, args);
-
-		if ((candidateEntryModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_WIKIPAGEID.getColumnBitmask()) != 0) {
-			args = new Object[] { candidateEntryModelImpl.getOriginalWikiPageId() };
-
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_WIKIPAGEID, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_WIKIPAGEID, args);
 		}
 	}
 
@@ -6215,6 +6215,27 @@ public class CandidateEntryPersistenceImpl extends BasePersistenceImpl<Candidate
 			}
 
 			if ((candidateEntryModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_U_CD.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						candidateEntryModelImpl.getOriginalUserId(),
+						candidateEntryModelImpl.getOriginalCreateDate()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_U_CD, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_U_CD,
+					args);
+
+				args = new Object[] {
+						candidateEntryModelImpl.getUserId(),
+						candidateEntryModelImpl.getCreateDate()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_U_CD, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_U_CD,
+					args);
+			}
+
+			if ((candidateEntryModelImpl.getColumnBitmask() &
 					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_U.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
 						candidateEntryModelImpl.getOriginalCompanyId(),
@@ -6232,6 +6253,27 @@ public class CandidateEntryPersistenceImpl extends BasePersistenceImpl<Candidate
 
 				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_U, args);
 				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_U,
+					args);
+			}
+
+			if ((candidateEntryModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_U_P.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						candidateEntryModelImpl.getOriginalUserId(),
+						candidateEntryModelImpl.getOriginalWikiPageId()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_U_P, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_U_P,
+					args);
+
+				args = new Object[] {
+						candidateEntryModelImpl.getUserId(),
+						candidateEntryModelImpl.getWikiPageId()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_U_P, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_U_P,
 					args);
 			}
 
@@ -6255,48 +6297,6 @@ public class CandidateEntryPersistenceImpl extends BasePersistenceImpl<Candidate
 
 				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_U_P, args);
 				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_U_P,
-					args);
-			}
-
-			if ((candidateEntryModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_U_CD.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						candidateEntryModelImpl.getOriginalUserId(),
-						candidateEntryModelImpl.getOriginalCreateDate()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_U_CD, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_U_CD,
-					args);
-
-				args = new Object[] {
-						candidateEntryModelImpl.getUserId(),
-						candidateEntryModelImpl.getCreateDate()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_U_CD, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_U_CD,
-					args);
-			}
-
-			if ((candidateEntryModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_U_P.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						candidateEntryModelImpl.getOriginalUserId(),
-						candidateEntryModelImpl.getOriginalWikiPageId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_U_P, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_U_P,
-					args);
-
-				args = new Object[] {
-						candidateEntryModelImpl.getUserId(),
-						candidateEntryModelImpl.getWikiPageId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_U_P, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_U_P,
 					args);
 			}
 		}

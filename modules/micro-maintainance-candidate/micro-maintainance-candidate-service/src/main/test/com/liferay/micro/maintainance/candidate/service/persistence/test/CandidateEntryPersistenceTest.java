@@ -201,10 +201,25 @@ public class CandidateEntryPersistenceTest {
 	}
 
 	@Test
+	public void testCountByWikiPageId() throws Exception {
+		_persistence.countByWikiPageId(RandomTestUtil.nextLong());
+
+		_persistence.countByWikiPageId(0L);
+	}
+
+	@Test
 	public void testCountByCompanyId() throws Exception {
 		_persistence.countByCompanyId(RandomTestUtil.nextLong());
 
 		_persistence.countByCompanyId(0L);
+	}
+
+	@Test
+	public void testCountByU_cD() throws Exception {
+		_persistence.countByU_cD(RandomTestUtil.nextLong(),
+			RandomTestUtil.nextDate());
+
+		_persistence.countByU_cD(0L, RandomTestUtil.nextDate());
 	}
 
 	@Test
@@ -232,22 +247,6 @@ public class CandidateEntryPersistenceTest {
 	}
 
 	@Test
-	public void testCountByG_U_P() throws Exception {
-		_persistence.countByG_U_P(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
-
-		_persistence.countByG_U_P(0L, 0L, 0L);
-	}
-
-	@Test
-	public void testCountByU_cD() throws Exception {
-		_persistence.countByU_cD(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextDate());
-
-		_persistence.countByU_cD(0L, RandomTestUtil.nextDate());
-	}
-
-	@Test
 	public void testCountByU_P() throws Exception {
 		_persistence.countByU_P(RandomTestUtil.nextLong(),
 			RandomTestUtil.nextLong());
@@ -256,10 +255,11 @@ public class CandidateEntryPersistenceTest {
 	}
 
 	@Test
-	public void testCountByWikiPageId() throws Exception {
-		_persistence.countByWikiPageId(RandomTestUtil.nextLong());
+	public void testCountByG_U_P() throws Exception {
+		_persistence.countByG_U_P(RandomTestUtil.nextLong(),
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
 
-		_persistence.countByWikiPageId(0L);
+		_persistence.countByG_U_P(0L, 0L, 0L);
 	}
 
 	@Test
@@ -500,13 +500,13 @@ public class CandidateEntryPersistenceTest {
 			ReflectionTestUtil.<Long>invoke(existingCandidateEntry,
 				"getOriginalGroupId", new Class<?>[0]));
 
-		Assert.assertEquals(Long.valueOf(existingCandidateEntry.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(existingCandidateEntry,
-				"getOriginalGroupId", new Class<?>[0]));
 		Assert.assertEquals(Long.valueOf(existingCandidateEntry.getWikiPageId()),
 			ReflectionTestUtil.<Long>invoke(existingCandidateEntry,
 				"getOriginalWikiPageId", new Class<?>[0]));
 
+		Assert.assertEquals(Long.valueOf(existingCandidateEntry.getGroupId()),
+			ReflectionTestUtil.<Long>invoke(existingCandidateEntry,
+				"getOriginalGroupId", new Class<?>[0]));
 		Assert.assertEquals(Long.valueOf(existingCandidateEntry.getWikiPageId()),
 			ReflectionTestUtil.<Long>invoke(existingCandidateEntry,
 				"getOriginalWikiPageId", new Class<?>[0]));

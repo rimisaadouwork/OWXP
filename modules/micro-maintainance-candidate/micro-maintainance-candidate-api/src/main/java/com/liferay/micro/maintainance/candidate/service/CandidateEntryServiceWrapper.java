@@ -33,6 +33,14 @@ public class CandidateEntryServiceWrapper implements CandidateEntryService,
 		_candidateEntryService = candidateEntryService;
 	}
 
+	@Override
+	public com.liferay.micro.maintainance.candidate.model.CandidateEntry addCandidateEntry(
+		long userId, long groupId, long wikiPageId, long taskId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _candidateEntryService.addCandidateEntry(userId, groupId,
+			wikiPageId, taskId);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*
