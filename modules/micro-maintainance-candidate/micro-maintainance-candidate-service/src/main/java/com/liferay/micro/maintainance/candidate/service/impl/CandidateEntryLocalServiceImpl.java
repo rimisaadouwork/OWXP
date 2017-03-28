@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
+import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 
 import java.util.Date;
 
@@ -72,12 +73,11 @@ public class CandidateEntryLocalServiceImpl
 		CandidateEntry candidateEntry = getCandidateByWikiPageId(wikiPageId);
 
 		if (candidateEntry == null) {
-			User user = userPersistence.findByPrimaryKey(userId);
+			User user = UserLocalServiceUtil.getUser(userId);
 			long candidateEntryId = counterLocalService.increment();
 			Date now = new Date();
 
-			candidateEntry = candidateEntryPersistence.create(
-				candidateEntryId);
+			candidateEntry = candidateEntryPersistence.create(candidateEntryId);
 
 			candidateEntry.setGroupId(groupId);
 
@@ -92,13 +92,19 @@ public class CandidateEntryLocalServiceImpl
 			candidateEntryPersistence.update(candidateEntry);
 		}
 
-		CandidateMaintenance candidateMaintenance =
-			CandidateMaintenanceLocalServiceUtil.addCandidateMaintenance(
+		CandidateMaintenance existingCandidateMaintenance =
+			CandidateMaintenanceLocalServiceUtil.getCandidateMaintenaceTask(
 				candidateEntry.getCandidateEntryId(), taskId);
 
-		AnalysisEntry analysisEntry =
-			AnalysisEntryLocalServiceUtil.addAnalysisEntry(
-				userId, candidateMaintenance.getCandidateMaintenanceId());
+		if (existingCandidateMaintenance == null) {
+			CandidateMaintenance candidateMaintenance =
+				CandidateMaintenanceLocalServiceUtil.addCandidateMaintenance(
+					candidateEntry.getCandidateEntryId(), taskId);
+
+			AnalysisEntry analysisEntry =
+				AnalysisEntryLocalServiceUtil.addAnalysisEntry(
+					userId, candidateMaintenance.getCandidateMaintenanceId());
+		}
 
 		return candidateEntry;
 	}
@@ -110,7 +116,6 @@ public class CandidateEntryLocalServiceImpl
 	 * @param candidateEntryId the primary key of the candidate entry
 	 * @return the candidate entry that was removed
 	 * @throws PortalException if there are still votes running on the candidate
-	 *
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
