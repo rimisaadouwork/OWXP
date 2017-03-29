@@ -7,7 +7,6 @@ import com.liferay.micro.maintainance.api.Action;
 import com.liferay.micro.maintainance.util.VoteCalculations;
 import com.liferay.micro.maintainance.util.WikiUtil;
 import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.wiki.model.WikiPage;
@@ -23,14 +22,14 @@ public class NotifyCreatorAction implements Action {
 	@Override
 	public boolean performAction(AnalysisEntry analysisEntry) {
 		try {
-			long companyId = CompanyThreadLocal.getCompanyId();
-
 			WikiPage wikiPage = WikiUtil.getWikiPageByAnalysis(
-				analysisEntry.getCandidateMaintenanceId());
+				analysisEntry.getAnalysisEntryId());
+
+			long companyId = wikiPage.getCompanyId();
 
 			User user = UserLocalServiceUtil.getUser(wikiPage.getUserId());
 
-			User sender = UserLocalServiceUtil.getUserByScreenName(
+			User sender = UserLocalServiceUtil.fetchUserByScreenName(
 				companyId, "glados");
 
 			if (Validator.isNull(sender)) {
