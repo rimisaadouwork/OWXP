@@ -11,12 +11,25 @@ import aQute.bnd.annotation.metatype.Meta;
 )
 public interface OutdatedTaskConfiguration {
 
-	@Meta.AD(deflt = "14", required = false)
-	public int votingPeriodDays();
+	@Meta.AD(deflt = "5", required = false)
+	public int requiredViewCountForAutoFlagging();
 
 	@Meta.AD(deflt = "5", required = false)
 	public int requiredVotingPercentage();
 
 	@Meta.AD(deflt = "5", required = false)
+	public int requiredVotingPercentageAutoFlagged();
+
+	@Meta.AD(deflt = "5", required = false)
 	public int requiredYesVotesPercentage();
+
+	@Meta.AD(deflt = "5", required = false)
+	public int requiredYesVotesPercentageAutoFlagged();
+
+	@Meta.AD(deflt = "14", required = false)
+	public int votingPeriodDays();
+
+	@Meta.AD(deflt = "30", required = false)
+	public int votingPeriodDaysAutoFlagged();
+
 }

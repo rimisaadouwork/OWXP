@@ -83,6 +83,13 @@ public class OutdatedTaskPortlet extends GenericPortlet {
 		_outdatedTask.setRequiredYesVotesPercentage(
 			_configuration.requiredYesVotesPercentage());
 		_outdatedTask.setVotingPeriodDays(_configuration.votingPeriodDays());
+
+		_outdatedTask.setRequiredVotingPercentageAutoFlagged(
+			_configuration.requiredVotingPercentageAutoFlagged());
+		_outdatedTask.setRequiredYesVotesPercentageAutoFlagged(
+			_configuration.requiredYesVotesPercentageAutoFlagged());
+		_outdatedTask.setVotingPeriodDaysAutoFlagged(
+			_configuration.votingPeriodDaysAutoFlagged());
 	}
 
 	private static OutdatedTask _outdatedTask;
