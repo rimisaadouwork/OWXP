@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.liferay.micro.maintainance.analysis.model.AnalysisEntry;
 import com.liferay.micro.maintainance.task.model.CandidateMaintenance;
+import com.liferay.wiki.model.WikiPage;
 
 public interface AutoFlaggable {
 
@@ -13,7 +14,7 @@ public interface AutoFlaggable {
 
 	public String getTaskName();
 
-	public boolean isAutoFlaggable();
+	public boolean isAutoFlaggable(WikiPage wikiPage);
 
 	public boolean isAutoFlaggedAnalyseReady(
 		CandidateMaintenance candidateMaintenance);

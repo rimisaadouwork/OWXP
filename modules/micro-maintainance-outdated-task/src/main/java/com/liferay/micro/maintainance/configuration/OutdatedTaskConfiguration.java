@@ -12,6 +12,9 @@ import aQute.bnd.annotation.metatype.Meta;
 public interface OutdatedTaskConfiguration {
 
 	@Meta.AD(deflt = "5", required = false)
+	public int maxViewCount();
+
+	@Meta.AD(deflt = "5", required = false)
 	public int requiredViewCountForAutoFlagging();
 
 	@Meta.AD(deflt = "5", required = false)
