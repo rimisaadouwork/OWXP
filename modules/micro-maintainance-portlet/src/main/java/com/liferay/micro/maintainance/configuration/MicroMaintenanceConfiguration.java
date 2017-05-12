@@ -13,5 +13,8 @@ public interface MicroMaintenanceConfiguration {
 
 	@Meta.AD(deflt = "1", required = false)
 	public int checkingPeriodHours();
+	
+	@Meta.AD(deflt = "1", required = false)
+	public int checkingPeriodDay();
 
 }
