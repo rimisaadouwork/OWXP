@@ -69,16 +69,14 @@ public class TaskHandlerImpl implements TaskHandler {
 	}
 
 	@Override
-	public List<Task> getRunningVotes(long wikiPageId)
-		throws PortalException {
-
+	public List<Task> getRunningVotes(long wikiPageId) throws PortalException {
 		List<Task> runningVotes = new ArrayList<>();
 
 		CandidateEntry candidateEntry =
 			CandidateEntryLocalServiceUtil.getCandidateByWikiPageId(wikiPageId);
 
 		if (candidateEntry == null) {
-			return runningVotes; 
+			return runningVotes;
 		}
 
 		for (Task task : _registeredTasks.values()) {
@@ -208,7 +206,9 @@ public class TaskHandlerImpl implements TaskHandler {
 	 */
 	@Override
 	public void unregisterTask(Task task) throws PortalException {
+
 		// TaskEntryLocalServiceUtil.deleteTaskEntry(task.getTaskId());
+
 		_registeredTasks.remove(task.getTaskId());
 	}
 

@@ -24,9 +24,17 @@ public class TaskHandlerUtil {
 	}
 
 	public static List<Task> getRunningVotes(long wikiPageId)
-			throws PortalException {
+		throws PortalException {
 
 		return _taskHandler.getRunningVotes(wikiPageId);
+	}
+
+	public static Map<Long, Task> getTaskEntries() {
+		return _taskHandler.getTaskEntries();
+	}
+
+	public static List<Task> getTaskEntryList() {
+		return _taskHandler.getTaskEntryList();
 	}
 
 	public static int getVote(long userId, long wikiPageId, long taskId)
@@ -39,14 +47,6 @@ public class TaskHandlerUtil {
 		throws PortalException {
 
 		_taskHandler.vote(userId, wikiPageId, taskId, vote);
-	}
-
-	public static Map<Long, Task> getTaskEntries() {
-		return _taskHandler.getTaskEntries();
-	}
-
-	public static List<Task> getTaskEntryList() {
-		return _taskHandler.getTaskEntryList();
 	}
 
 	@Reference(unbind = "-")

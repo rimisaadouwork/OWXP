@@ -1,7 +1,6 @@
 package com.liferay.micro.maintainance.util;
 
 import com.liferay.portal.kernel.json.JSONException;
-import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 
@@ -13,7 +12,8 @@ public class VoteCalculations {
 
 	public static int getTotalVotes(String analysisData) {
 		try {
-			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(analysisData);
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
+				analysisData);
 
 			int noVotes = jsonObject.getInt(VoteConstants.NO_DESCRIPTION);
 			int yesVotes = jsonObject.getInt(VoteConstants.YES_DESCRIPTION);
@@ -30,7 +30,8 @@ public class VoteCalculations {
 
 	public static int getVoteCount(String analysisData, String voteConstants) {
 		try {
-			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(analysisData);
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
+				analysisData);
 
 			return jsonObject.getInt(voteConstants);
 		}
