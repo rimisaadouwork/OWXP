@@ -37,8 +37,8 @@ public class GrowUtil {
 		return _grow;
 	}
 
-	private static final String GLADOS_NAME = "glados";
-	private static final String GROW_NAME = "grow";
+	public static final String GLADOS_NAME = "glados";
+	public static final String GROW_NAME = "grow";
 
 	private static User _glados = null;
 	private static WikiNode _grow = null;

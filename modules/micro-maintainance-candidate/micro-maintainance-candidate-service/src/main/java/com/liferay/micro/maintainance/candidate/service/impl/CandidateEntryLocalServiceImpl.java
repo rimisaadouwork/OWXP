@@ -24,6 +24,7 @@ import com.liferay.micro.maintainance.candidate.service.base.CandidateEntryLocal
 import com.liferay.micro.maintainance.candidate.service.persistence.CandidateEntryUtil;
 import com.liferay.micro.maintainance.task.model.CandidateMaintenance;
 import com.liferay.micro.maintainance.task.service.CandidateMaintenanceLocalServiceUtil;
+import com.liferay.micro.maintainance.util.GrowUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.Indexable;
@@ -143,4 +144,17 @@ public class CandidateEntryLocalServiceImpl
 		}
 	}
 
+	@Override
+	public boolean isCandidateAutoFlagged(CandidateEntry candidateEntry)
+			throws PortalException {
+		return candidateEntry.getUserName().equals(GrowUtil.GLADOS_NAME);
+	}
+
+	@Override
+	public boolean isCandidateAutoFlagged(long candidateEntryId)
+		throws PortalException {
+		CandidateEntry candidateEntry = getCandidateEntry(candidateEntryId);
+
+		return isCandidateAutoFlagged(candidateEntry);
+	}
 }
