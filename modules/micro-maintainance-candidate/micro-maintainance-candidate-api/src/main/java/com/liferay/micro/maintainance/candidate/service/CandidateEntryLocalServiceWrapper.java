@@ -34,6 +34,19 @@ public class CandidateEntryLocalServiceWrapper
 		_candidateEntryLocalService = candidateEntryLocalService;
 	}
 
+	@Override
+	public boolean isCandidateAutoFlagged(
+		com.liferay.micro.maintainance.candidate.model.CandidateEntry candidateEntry)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _candidateEntryLocalService.isCandidateAutoFlagged(candidateEntry);
+	}
+
+	@Override
+	public boolean isCandidateAutoFlagged(long candidateEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _candidateEntryLocalService.isCandidateAutoFlagged(candidateEntryId);
+	}
+
 	/**
 	* Adds the candidate entry to the database. Also notifies the appropriate model listeners.
 	*

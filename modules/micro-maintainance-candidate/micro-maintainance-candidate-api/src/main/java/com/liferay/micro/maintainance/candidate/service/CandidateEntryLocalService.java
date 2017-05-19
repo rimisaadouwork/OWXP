@@ -63,6 +63,13 @@ public interface CandidateEntryLocalService extends BaseLocalService,
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CandidateEntryLocalServiceUtil} to access the candidate entry local service. Add custom service methods to {@link com.liferay.micro.maintainance.candidate.service.impl.CandidateEntryLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean isCandidateAutoFlagged(CandidateEntry candidateEntry)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean isCandidateAutoFlagged(long candidateEntryId)
+		throws PortalException;
 
 	/**
 	* Adds the candidate entry to the database. Also notifies the appropriate model listeners.

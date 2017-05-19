@@ -41,6 +41,16 @@ public class CandidateEntryLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.micro.maintainance.candidate.service.impl.CandidateEntryLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static boolean isCandidateAutoFlagged(
+		com.liferay.micro.maintainance.candidate.model.CandidateEntry candidateEntry)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().isCandidateAutoFlagged(candidateEntry);
+	}
+
+	public static boolean isCandidateAutoFlagged(long candidateEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().isCandidateAutoFlagged(candidateEntryId);
+	}
 
 	/**
 	* Adds the candidate entry to the database. Also notifies the appropriate model listeners.
