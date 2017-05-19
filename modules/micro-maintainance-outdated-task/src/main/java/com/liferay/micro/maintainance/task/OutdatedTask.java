@@ -59,8 +59,25 @@ public class OutdatedTask implements Task, AutoFlaggable {
 
 	@Override
 	public List<Action> autoFlaggedAnalyze(AnalysisEntry analysisEntry) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Action> actions = new ArrayList<>();
+
+		double percentageYesVotes = VoteCalculations.getVotePercentage(
+			analysisEntry.getAnalysisData(), VoteConstants.YES_DESCRIPTION);
+		int totalUsers = UserLocalServiceUtil.getUsersCount();
+		int totalVotedUsers = VoteCalculations.getTotalVotes(
+			analysisEntry.getAnalysisData());
+		double percentageVoted = 0.00;
+
+		if (totalVotedUsers > 0) {
+			percentageVoted = totalVotedUsers * 100 / totalUsers;
+		}
+
+		if ((percentageVoted > _requiredVotingPercentageAutoFlagged) &&
+			(percentageYesVotes > _requiredYesVotesPercentageAutoFlagged)) {
+			actions.add(new NotifyCreatorAction());
+		}
+
+		return actions;
 	}
 
 	public int getMaxViewCount() {
