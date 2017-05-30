@@ -27,6 +27,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Laszlo Hudak
  */
 @Component(
+	configurationPid = "com.liferay.micro.maintainance.configuration.OutdatedTaskConfiguration",
 	immediate = true,
 	property = {
 		"com.liferay.portlet.display-category=category.sample",
