@@ -83,6 +83,7 @@ public class OutdatedTaskPortlet extends GenericPortlet {
 		_outdatedTask.setRequiredYesVotesPercentage(
 			_configuration.requiredYesVotesPercentage());
 		_outdatedTask.setVotingPeriodDays(_configuration.votingPeriodDays());
+		_outdatedTask.setMaxViewCount(_configuration.maxViewCount());
 
 		_outdatedTask.setRequiredVotingPercentageAutoFlagged(
 			_configuration.requiredVotingPercentageAutoFlagged());
@@ -90,7 +91,8 @@ public class OutdatedTaskPortlet extends GenericPortlet {
 			_configuration.requiredYesVotesPercentageAutoFlagged());
 		_outdatedTask.setVotingPeriodDaysAutoFlagged(
 			_configuration.votingPeriodDaysAutoFlagged());
-		_outdatedTask.setMaxViewCount(_configuration.maxViewCount());
+		_outdatedTask.setMaxViewCountAutoFlagged(
+			_configuration.requiredViewCountForAutoFlagging());
 	}
 
 	private static OutdatedTask _outdatedTask;

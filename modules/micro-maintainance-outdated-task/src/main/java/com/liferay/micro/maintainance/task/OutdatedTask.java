@@ -142,7 +142,7 @@ public class OutdatedTask implements Task, AutoFlaggable {
 
 			String[] assetTags = assetEntry.getTagNames();
 
-			if (assetEntry.getViewCount() > _maxViewCount) {
+			if (assetEntry.getViewCount() > _maxViewCountAutoFlagged) {
 				return false;
 			}
 
@@ -203,6 +203,10 @@ public class OutdatedTask implements Task, AutoFlaggable {
 	public void setRequiredYesVotesPercentageAutoFlagged(int _requiredYesVotesPercentageAutoFlagged) {
 		this._requiredYesVotesPercentageAutoFlagged = _requiredYesVotesPercentageAutoFlagged;
 	}
+	
+	public void setMaxViewCountAutoFlagged(int maxViewCountAutoFlagged) {
+		this._maxViewCountAutoFlagged = maxViewCountAutoFlagged;
+	}
 
 	protected OutdatedTask() {
 		_taskId = 0;
@@ -221,5 +225,6 @@ public class OutdatedTask implements Task, AutoFlaggable {
 	private long _taskId = 0;
 	private int _votingPeriodDays;
 	private int _votingPeriodDaysAutoFlagged;
+	private int _maxViewCountAutoFlagged;
 
 }
