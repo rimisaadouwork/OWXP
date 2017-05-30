@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.scheduler.StorageType;
 import com.liferay.portal.kernel.scheduler.StorageTypeAware;
 import com.liferay.portal.kernel.scheduler.Trigger;
 import com.liferay.portal.kernel.scheduler.TriggerFactory;
+import com.liferay.wiki.model.WikiNode;
 import com.liferay.wiki.model.WikiPage;
 import com.liferay.wiki.service.WikiPageLocalServiceUtil;
 
@@ -44,7 +45,7 @@ import com.liferay.wiki.service.WikiPageLocalServiceUtil;
 @Component(
 	configurationPid = "com.liferay.micro.maintainance.configuration.MicroMaintenanceConfiguration",
 	immediate = true, property = {"cron.expression=0 0 0 0 * ?"},
-	service = TaskMessageListener.class
+	service = GladosOutdatedTaskListener.class
 )
 public class GladosOutdatedTaskListener
 	extends BaseSchedulerEntryMessageListener {
@@ -68,8 +69,10 @@ public class GladosOutdatedTaskListener
 
 		// extract the cron expression from the properties
 
-		String cronExpression = String.format(
-			"0 0 0 1/%s * ? *", _configuration.checkingPeriodDay());
+//		String cronExpression = String.format(
+//			"0 0 0 1/%s * ? *", _configuration.checkingPeriodDay());
+
+		String cronExpression = "0 0/2 * 1/1 * ? *";
 
 		// create a new trigger definition for the job.
 
@@ -163,8 +166,18 @@ public class GladosOutdatedTaskListener
 		List<Long> wikiPageIds = candidates.stream().map(
 			p -> p.getWikiPageId()).collect(Collectors.toList());
 
+		WikiNode wikiNode = GrowUtil.getGrowNode();
+
+		if(wikiNode == null) {
+			if (_log.isInfoEnabled()) {
+				_log.info("Grow node is not available.");
+			}
+
+			return;
+		}
+
 		List<WikiPage> wikiPages = WikiPageLocalServiceUtil.getPages(
-			GrowUtil.getGrowNode().getNodeId(), true, QueryUtil.ALL_POS,
+			wikiNode.getNodeId(), true, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS);
 
 		for (WikiPage wikiPage : wikiPages) {
@@ -255,8 +268,6 @@ public class GladosOutdatedTaskListener
 	}
 
 	// the default cron expression is to run daily at midnight
-
-	private static final String _DEFAULT_CRON_EXPRESSION = "0 0 0 0 * ?";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		GladosOutdatedTaskListener.class);
